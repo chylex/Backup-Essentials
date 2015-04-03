@@ -13,16 +13,16 @@
         <sys:String x:Key="PathButtonMaximized">M1,2 L1,9 13,9 13,2 z M0,0 L14,0 14,10 0,10 z</sys:String>
         <sys:String x:Key="PathButtonWindowed">M2.5,3.75 L2.5,8.75 10.5,8.75 10.5,3.75 z M1.5,1.75 L11.5,1.75 11.5,9.75 1.5,9.75 z M0,0 L10,0 10,1.25 1,1.25 1,2 1,7 1,8 0,8 z</sys:String>
         <sys:String x:Key="PathButtonMinimize">M0,0 L20,0 L20,3 L0,3 z</sys:String>
+        <Style TargetType="ResizeGrip">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
     </Window.Resources>
-    <Grid Background="#FF2E2E2E">
+    <Grid Background="#FF171717">
 		<Grid.RowDefinitions>
             <RowDefinition Height="36"/>
-            <RowDefinition Height="2"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="2"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="16"/>
 		</Grid.RowDefinitions>
+        
 		<DockPanel x:Name="TitleBar" LastChildFill="False" VerticalAlignment="Top" Width="Auto" Height="36" MouseLeftButtonDown="TitleBarLeftButtonDown">
 			<DockPanel.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -131,116 +131,126 @@
 				<custom:ButtonTitleBar x:Name="ButtonWindowMinimize" CXPathData="{StaticResource PathButtonMinimize}" CXPathWidth="12" CXPathHeight="2" CXPathMargin="0,12,0,0" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowMinimizeClick"/>
 			</WrapPanel>
 		</DockPanel>
-        
-		<Rectangle StrokeThickness="0" VerticalAlignment="Center" Grid.Row="1" Height="2">
-			<Rectangle.Fill>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FF060606" Offset="0"/>
-					<GradientStop Color="#FF6C6C6C" Offset="1"/>
-				</LinearGradientBrush>
-			</Rectangle.Fill>
-		</Rectangle>
-        <Rectangle StrokeThickness="0" VerticalAlignment="Center" Grid.Row="3" Height="1">
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF6C6C6C" Offset="0"/>
-                    <GradientStop Color="#FF060606" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
 
-        <Grid Height="60" Margin="0" Grid.Row="2" VerticalAlignment="Top" Background="#FF1D1D1D">
-			<Grid.Resources>
-                <Style x:Key="ButtonStyleMainMenu" TargetType="{x:Type Button}">
-                    <Setter Property="Foreground" Value="#FFFFFFFF"/>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="#FFAEAEAE" Offset="0"/>
-                                <GradientStop Color="#FF666666" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ButtonBase}">
-                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroup x:Name="CommonStates">
-                                        	<VisualStateGroup.Transitions>
-                                        		<VisualTransition From="Normal" GeneratedDuration="0:0:0.15" To="MouseOver"/>
-                                        		<VisualTransition From="MouseOver" GeneratedDuration="0:0:0.05" To="Pressed"/>
-                                        		<VisualTransition From="Pressed" GeneratedDuration="0:0:0.1" To="Normal"/>
-                                        		<VisualTransition From="MouseOver" GeneratedDuration="0:0:0.1" To="Normal"/>
-                                        	</VisualStateGroup.Transitions>
-                                    		<VisualState x:Name="Normal">
-                                    			<Storyboard>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#FF3C3C3C"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#FF4B4B4B"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="label">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#FFAEAEAE"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    			</Storyboard>
-                                    		</VisualState>
-                                    		<VisualState x:Name="MouseOver">
-                                    			<Storyboard>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#D842B9F0"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#D81D6C8F"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    				<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="label">
-                                    					<EasingColorKeyFrame KeyTime="0" Value="#FFDADADA"/>
-                                    				</ColorAnimationUsingKeyFrames>
-                                    			</Storyboard>
-                                    		</VisualState>
-                                    		<VisualState x:Name="Pressed"/>
-                                    	</VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
-                                    <Grid x:Name="GridBackground" Height="Auto" Width="Auto">
-                                        <Grid.Background>
-                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                <GradientStop Color="#FF42B9F0"/>
-                                            	<GradientStop Color="#FF1D6C8F" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Grid.Background>
-                                        <Label x:Name="label" Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Segoe UI">
-                                        	<Label.Effect>
-                                        		<DropShadowEffect BlurRadius="2" Direction="270" ShadowDepth="0.5" Color="#FF072B3C"/>
-                                        	</Label.Effect>
-                                        </Label>
+        <Grid Background="#FF2E2E2E" Grid.Row="1" Margin="2,0,2,2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="16"/>
+            </Grid.RowDefinitions>
+            
+            <Rectangle StrokeThickness="0" VerticalAlignment="Center" Height="2">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF060606" Offset="0"/>
+                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle StrokeThickness="0" VerticalAlignment="Center" Grid.Row="2" Height="1">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF6C6C6C" Offset="0"/>
+                        <GradientStop Color="#FF060606" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Grid Height="60" Margin="0" Grid.Row="1" VerticalAlignment="Top" Background="#FF1D1D1D">
+                <Grid.Resources>
+                    <Style x:Key="ButtonStyleMainMenu" TargetType="{x:Type Button}">
+                        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFAEAEAE" Offset="0"/>
+                                    <GradientStop Color="#FF666666" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualStateGroup.Transitions>
+                                                    <VisualTransition From="Normal" GeneratedDuration="0:0:0.15" To="MouseOver"/>
+                                                    <VisualTransition From="MouseOver" GeneratedDuration="0:0:0.05" To="Pressed"/>
+                                                    <VisualTransition From="Pressed" GeneratedDuration="0:0:0.1" To="Normal"/>
+                                                    <VisualTransition From="MouseOver" GeneratedDuration="0:0:0.1" To="Normal"/>
+                                                </VisualStateGroup.Transitions>
+                                                <VisualState x:Name="Normal">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#FF3C3C3C"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#FF4B4B4B"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="label">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#FFAEAEAE"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#D842B9F0"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="GridBackground">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#D81D6C8F"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="label">
+                                                            <EasingColorKeyFrame KeyTime="0" Value="#FFDADADA"/>
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed"/>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="GridBackground" Height="Auto" Width="Auto">
+                                            <Grid.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FF42B9F0"/>
+                                                    <GradientStop Color="#FF1D6C8F" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Grid.Background>
+                                            <Label x:Name="label" Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Segoe UI">
+                                                <Label.Effect>
+                                                    <DropShadowEffect BlurRadius="2" Direction="270" ShadowDepth="0.5" Color="#FF072B3C"/>
+                                                </Label.Effect>
+                                            </Label>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="ToggleButton.IsChecked" Value="True"/>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Grid.Resources>
-			<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1"/>
-                <ColumnDefinition Width="1*"/>
-			</Grid.ColumnDefinitions>
-            <custom:ButtonMainMenu Content="Home" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
-            <custom:ButtonMainMenu Content="Backup" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
-            <custom:ButtonMainMenu Content="History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
-            <custom:ButtonMainMenu Content="Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
-            <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
-		</Grid>
-        <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="4" NavigationUIVisibility="Hidden"/>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ToggleButton.IsChecked" Value="True"/>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <custom:ButtonMainMenu Content="Home" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="Backup" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
+            </Grid>
+            <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>
