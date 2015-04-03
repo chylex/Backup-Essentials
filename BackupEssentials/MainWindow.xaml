@@ -114,14 +114,8 @@
 											</Path>
 										</Grid>
 									</Grid>
-									<ControlTemplate.Triggers>
-										<Trigger Property="IsKeyboardFocused" Value="true"/>
-										<Trigger Property="ToggleButton.IsChecked" Value="true"/>
-										<Trigger Property="IsEnabled" Value="false">
-											<Setter Property="Foreground" Value="#ADADAD"/>
-										</Trigger>
-									</ControlTemplate.Triggers>
-								</ControlTemplate>
+                                    <ControlTemplate.Triggers/>
+                                </ControlTemplate>
 							</Setter.Value>
 						</Setter>
 					</Style>
@@ -225,9 +219,7 @@
                                             </Label>
                                         </Grid>
                                     </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="ToggleButton.IsChecked" Value="True"/>
-                                    </ControlTemplate.Triggers>
+                                    <ControlTemplate.Triggers/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
