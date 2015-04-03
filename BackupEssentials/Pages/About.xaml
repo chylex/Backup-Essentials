@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="482" d:DesignWidth="796"
+      d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}"
       Title="About">
 
     <Grid Background="#FF2E2E2E">
