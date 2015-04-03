@@ -4,6 +4,13 @@ using System.Windows.Controls;
 
 namespace BackupEssentials.Controls{
     public class ButtonMainMenu:Button{
+        public static DependencyProperty ClickPageProperty = DependencyProperty.Register("ClickPage",typeof(string),typeof(ButtonMainMenu));
+
+        public string ClickPage {
+            get { return (string)base.GetValue(ClickPageProperty); }
+            set { base.SetValue(ClickPageProperty,(string)value); }
+        }
+
         private bool IsCheckedVar;
 
         public bool IsChecked {

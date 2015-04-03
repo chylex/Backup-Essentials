@@ -7,7 +7,7 @@
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.MainWindow"
-        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" MinWidth="540" MinHeight="240">
+        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" MinWidth="800" MinHeight="600">
     <Window.Resources>
         <sys:String x:Key="PathButtonClose">M7,0 L9,0 9,7 16,7 16,9 9,9 9,16 7,16 7,9 0,9 0,7 7,7 z</sys:String>
         <sys:String x:Key="PathButtonMaximized">M1,2 L1,9 13,9 13,2 z M0,0 L14,0 14,10 0,10 z</sys:String>
@@ -21,7 +21,6 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="2"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2"/>
             <RowDefinition Height="16"/>
 		</Grid.RowDefinitions>
 		<DockPanel x:Name="TitleBar" LastChildFill="False" VerticalAlignment="Top" Width="Auto" Height="36" MouseLeftButtonDown="TitleBarLeftButtonDown">
@@ -242,5 +241,6 @@
             <custom:ButtonMainMenu Content="Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
             <custom:ButtonMainMenu Content="About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
 		</Grid>
-	</Grid>
+        <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="4" NavigationUIVisibility="Hidden"/>
+    </Grid>
 </Window>
