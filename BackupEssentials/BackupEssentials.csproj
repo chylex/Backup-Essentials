@@ -82,6 +82,9 @@
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ButtonMainMenu.cs" />
+    <Compile Include="Pages\BackupLocations.xaml.cs">
+      <DependentUpon>BackupLocations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BackupLocations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
