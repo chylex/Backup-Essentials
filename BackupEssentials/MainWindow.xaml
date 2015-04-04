@@ -169,7 +169,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid x:Name="MainMenuButtonGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualStateGroup.Transitions>

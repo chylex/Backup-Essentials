@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace BackupEssentials.Controls{
     public class ButtonMainMenu:Button{
@@ -19,13 +20,28 @@ namespace BackupEssentials.Controls{
         }
 
         public ButtonMainMenu(){
-            MouseEnter += ResetCheckedState;
-            MouseLeave += ResetCheckedState;
-            SizeChanged += ResetCheckedState;
+            SizeChanged += (sender, args) => {
+                if (IsChecked)VisualStateManager.GoToState(this,"Pressed",false);
+            };
         }
 
-        private void ResetCheckedState(object sender, EventArgs args){
-            if (IsChecked)VisualStateManager.GoToState(this,"Pressed",false);
+        public override void OnApplyTemplate(){
+            base.OnApplyTemplate();
+
+            foreach(VisualStateGroup group in VisualStateManager.GetVisualStateGroups((FrameworkElement)Template.FindName("MainMenuButtonGrid",this))){
+                group.CurrentStateChanging += (sender, args) => {
+                    if (IsChecked && !args.NewState.Name.Equals("Pressed")){
+                        DispatcherTimer timer = new DispatcherTimer();
+                        timer.Interval = new TimeSpan(1);
+
+                        timer.Tick += (sender2, args2) => {
+                            if (IsChecked)VisualStateManager.GoToState(this,"Pressed",false);
+                        };
+
+                        timer.Start();
+                    }
+                };
+            }
         }
     }
 }

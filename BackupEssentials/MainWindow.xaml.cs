@@ -64,7 +64,7 @@ namespace BackupEssentials{
             
             for(int child = 0; child < VisualTreeHelper.GetChildrenCount(btn.Parent); child++){
                 ButtonMainMenu childBtn = VisualTreeHelper.GetChild(btn.Parent,child) as ButtonMainMenu;
-                if (childBtn != null)childBtn.IsChecked = false;
+                if (childBtn != null && childBtn != btn)childBtn.IsChecked = false;
             }
 
             btn.IsChecked = true;
