@@ -88,6 +88,10 @@
     <Compile Include="Pages\BackupLocations.xaml.cs">
       <DependentUpon>BackupLocations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BackupLocationsEdit.xaml.cs">
+      <DependentUpon>BackupLocationsEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IPageShowData.cs" />
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
@@ -110,6 +114,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\BackupLocations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BackupLocationsEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

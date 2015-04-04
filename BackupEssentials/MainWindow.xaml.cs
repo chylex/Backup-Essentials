@@ -1,18 +1,22 @@
 ﻿using BackupEssentials.Controls;
+using BackupEssentials.Pages;
 using System;
-using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace BackupEssentials{
     public partial class MainWindow : Window{
+        public static MainWindow Instance { get; private set; }
+
         private new Rect RestoreBounds = new Rect();
         private bool IsMaximized = false;
 
         public MainWindow(){
             InitializeComponent();
+            Instance = this;
         }
 
         private void ButtonWindowCloseClick(object sender, RoutedEventArgs e){
@@ -68,9 +72,17 @@ namespace BackupEssentials{
             }
 
             btn.IsChecked = true;
+            ShowPage(GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false));
+        }
 
-            Type pageType = GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false);
-            ContentFrame.Navigate(pageType == null ? null : AppPageManager.GetPage(pageType));
+        public void ShowPage(Type pageType){
+            ShowPage(pageType,null);
+        }
+
+        public void ShowPage(Type pageType, object data){
+            Page page = null;
+            ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
+            if (page is IPageShowData)((IPageShowData)page).OnShow(data);
         }
     }
 }
