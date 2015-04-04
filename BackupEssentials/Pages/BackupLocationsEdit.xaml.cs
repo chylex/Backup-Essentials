@@ -1,6 +1,8 @@
 ﻿using BackupEssentials.Backup;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace BackupEssentials.Pages{
     public partial class BackupLocationsEdit : Page, IPageShowData{
@@ -19,7 +21,12 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickSelectDirectory(object sender, RoutedEventArgs e){
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "Select the destination folder for this backup location.";
+            dialog.ShowDialog();
 
+            string path = dialog.SelectedPath;
+            if (path != null)TextBoxDirectory.Text = path;
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){
