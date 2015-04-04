@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace BackupEssentials.Pages{
-    public partial class BackupLocations : Page{
+    public partial class BackupLocations : Page, IPageShowData{
         private int DraggingItemIndex = -1;
         private BackupLocation DraggingItem = null;
 
@@ -18,6 +18,10 @@ namespace BackupEssentials.Pages{
 
             LocationsListView.Items.Clear();
             LocationsListView.ItemsSource = DataStorage.BackupLocationList;
+        }
+
+        void IPageShowData.OnShow(object data){
+            LocationsListView.Items.Refresh();
         }
 
         private void ListStartDragging(object sender, MouseButtonEventArgs e){
