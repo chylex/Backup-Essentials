@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}"
+      d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="About">
 
-    <Grid Background="#FF2E2E2E">
+    <Grid>
         <Grid.Resources>
             <Style TargetType="Hyperlink">
                 <Setter Property="Foreground" Value="#FF77D4FF"></Setter>
