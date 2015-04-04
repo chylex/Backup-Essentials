@@ -47,7 +47,7 @@
             <Button Content="Remove"/>
         </StackPanel>
 
-        <ListView Name="LocationsListView" Grid.Row="1" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove">
+        <ListView Name="LocationsListView" Grid.Row="1" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True">

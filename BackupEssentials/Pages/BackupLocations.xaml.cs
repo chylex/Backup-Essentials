@@ -14,7 +14,6 @@ namespace BackupEssentials.Pages{
 
         private int DraggingItemIndex = -1;
         private object DraggingItem = null;
-        private ListViewItem DraggingItemContainer = null;
 
         public BackupLocations(){
             InitializeComponent();
@@ -28,28 +27,34 @@ namespace BackupEssentials.Pages{
         }
 
         private void ListStartDragging(object sender, MouseButtonEventArgs e){
+            if ((Keyboard.Modifiers & ~ModifierKeys.Control & ~ModifierKeys.Shift) != Keyboard.Modifiers)return;
+
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(1);
 
             timer.Tick += (sender2, args2) => {
                 DraggingItemIndex = LocationsListView.SelectedIndex;
                 DraggingItem = LocationsListView.SelectedItem;
-                DraggingItemContainer = LocationsListView.ItemContainerGenerator.ContainerFromItem(LocationsListView.SelectedItem) as ListViewItem;
+                timer.Stop();
             };
 
             timer.Start();
         }
 
+        private void ListStopDragging(object sender, MouseButtonEventArgs e){
+            DraggingItemIndex = -1;
+            DraggingItem = null;
+        }
+
         private void ListMouseMove(object sender, MouseEventArgs e){
-            if (DraggingItemIndex != -1 && DraggingItemContainer != null){
+            if (DraggingItemIndex != -1 && DraggingItem != null){
                 if (e.LeftButton == MouseButtonState.Released){
                     DraggingItemIndex = -1;
                     DraggingItem = null;
-                    DraggingItemContainer = null;
                     return;
                 }
 
-                double mouseY = e.GetPosition(null).Y, containerY = DraggingItemContainer.TranslatePoint(new Point(),null).Y;
+                double mouseY = e.GetPosition(null).Y, containerY = ((ListViewItem)LocationsListView.ItemContainerGenerator.ContainerFromItem(DraggingItem)).TranslatePoint(new Point(),null).Y;
 
                 if (DraggingItemIndex > 0 && mouseY < containerY){
                     LocationsListView.Items.RemoveAt(DraggingItemIndex);
@@ -63,7 +68,7 @@ namespace BackupEssentials.Pages{
 
                 LocationsListView.Items.Insert(DraggingItemIndex,DraggingItem);
                 LocationsListView.SelectedIndex = DraggingItemIndex;
-                DraggingItemContainer = LocationsListView.ItemContainerGenerator.ContainerFromItem(DraggingItem) as ListViewItem;
+                DraggingItem = LocationsListView.Items[DraggingItemIndex];
             }
         }
     }
