@@ -1,11 +1,10 @@
 ﻿using BackupEssentials.Backup;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace BackupEssentials.Pages{
@@ -13,17 +12,18 @@ namespace BackupEssentials.Pages{
         public readonly ObservableCollection<BackupLocation> BackupLocationsList = new ObservableCollection<BackupLocation>();
 
         private int DraggingItemIndex = -1;
-        private object DraggingItem = null;
+        private BackupLocation DraggingItem = null;
 
         public BackupLocations(){
             InitializeComponent();
 
-            // TODO uncomment once done testing
-            /*
+            LocationsListView.Items.Clear();
+            LocationsListView.ItemsSource = null;
+
             BackupLocationsList.Add(new BackupLocation(){ Name = "Test1", Directory = @"C:\Folder\" });
             BackupLocationsList.Add(new BackupLocation(){ Name = "Test2", Directory = @"C:\Folder\" });
 
-            LocationsListView.ItemsSource = BackupLocationsList;*/
+            LocationsListView.ItemsSource = BackupLocationsList;
         }
 
         private void ListStartDragging(object sender, MouseButtonEventArgs e){
@@ -34,7 +34,7 @@ namespace BackupEssentials.Pages{
 
             timer.Tick += (sender2, args2) => {
                 DraggingItemIndex = LocationsListView.SelectedIndex;
-                DraggingItem = LocationsListView.SelectedItem;
+                DraggingItem = (BackupLocation)LocationsListView.SelectedItem;
                 timer.Stop();
             };
 
@@ -54,22 +54,37 @@ namespace BackupEssentials.Pages{
                     return;
                 }
 
-                double mouseY = e.GetPosition(null).Y, containerY = ((ListViewItem)LocationsListView.ItemContainerGenerator.ContainerFromItem(DraggingItem)).TranslatePoint(new Point(),null).Y;
+                ListViewItem container = ((ListViewItem)LocationsListView.ItemContainerGenerator.ContainerFromItem(DraggingItem));
+                double mouseY = e.GetPosition(null).Y, containerY = container.TranslatePoint(new Point(),null).Y;
 
                 if (DraggingItemIndex > 0 && mouseY < containerY){
-                    LocationsListView.Items.RemoveAt(DraggingItemIndex);
+                    BackupLocationsList.RemoveAt(DraggingItemIndex);
                     --DraggingItemIndex;
                 }
-                else if (DraggingItemIndex < LocationsListView.Items.Count-1 && mouseY > containerY+(double)Resources["LocationListItemHeight"]+7){ // TODO figure out where the 7 came from (margin? padding?)
-                    LocationsListView.Items.RemoveAt(DraggingItemIndex);
+                else if (DraggingItemIndex < LocationsListView.Items.Count-1 && mouseY > containerY+(double)Resources["LocationListItemHeight"]+container.Padding.Top+container.Padding.Bottom-1){
+                    BackupLocationsList.RemoveAt(DraggingItemIndex);
                     ++DraggingItemIndex;
                 }
                 else return;
 
-                LocationsListView.Items.Insert(DraggingItemIndex,DraggingItem);
+                BackupLocationsList.Insert(DraggingItemIndex,DraggingItem);
                 LocationsListView.SelectedIndex = DraggingItemIndex;
-                DraggingItem = LocationsListView.Items[DraggingItemIndex];
+                DraggingItem = (BackupLocation)LocationsListView.Items[DraggingItemIndex];
             }
+        }
+
+        private void LocationAdd(object sender, RoutedEventArgs e){
+            BackupLocationsList.Add(new BackupLocation(){ Name = "Abc", Directory = "Abc" });
+        }
+
+        private void LocationEdit(object sender, RoutedEventArgs e){
+
+        }
+
+        private void LocationRemove(object sender, RoutedEventArgs e){
+            List<object> list = new List<object>();
+            foreach(object obj in LocationsListView.SelectedItems)list.Add(obj); // MS doesn't need generics apparently...
+            foreach(object item in list)BackupLocationsList.Remove((BackupLocation)item);
         }
     }
 }
