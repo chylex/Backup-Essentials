@@ -30,5 +30,9 @@ namespace BackupEssentials.Pages{
         private void ClickCancel(object sender, RoutedEventArgs e){
             MainWindow.Instance.ShowPage(typeof(BackupLocations));
         }
+
+        private void UpdateAdvancedOptionsVisibility(object sender, RoutedEventArgs e){
+            AdvancedOptionsContainer.Visibility = CheckBoxAdvancedOptions.IsChecked == true ? Visibility.Visible : Visibility.Hidden;
+        }
     }
 }
