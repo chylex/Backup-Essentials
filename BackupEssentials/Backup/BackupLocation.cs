@@ -1,9 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace BackupEssentials.Backup{
     public class BackupLocation{
-        public string Name { get; set; }
+        private static readonly Regex NameValidation = new Regex(@"[^\P{Cc}]");
+
+        private string _name;
+
+        public string Name {
+            get { return _name; }
+            set { _name = NameValidation.Replace(value,""); }
+        }
+
         public string Directory { get; set; }
 
         public DirectoryStatus GetDirectoryStatus(){
