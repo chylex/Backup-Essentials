@@ -35,7 +35,10 @@ namespace BackupEssentials.Controls{
                         timer.Interval = new TimeSpan(1);
 
                         timer.Tick += (sender2, args2) => {
-                            if (IsChecked)VisualStateManager.GoToState(this,"Pressed",false);
+                            if (IsChecked){
+                                VisualStateManager.GoToState(this,"Pressed",false);
+                                timer.Stop();
+                            }
                         };
 
                         timer.Start();
