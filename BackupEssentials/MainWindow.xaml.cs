@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Controls;
+﻿using BackupEssentials.Backup;
+using BackupEssentials.Controls;
 using BackupEssentials.Pages;
 using System;
 using System.Windows;
@@ -17,6 +18,10 @@ namespace BackupEssentials{
         public MainWindow(){
             InitializeComponent();
             Instance = this;
+
+            Closed += (args, sender) => {
+                ExplorerIntegration.Refresh(true);
+            };
         }
 
         private void ButtonWindowCloseClick(object sender, RoutedEventArgs e){

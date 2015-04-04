@@ -26,11 +26,12 @@ namespace BackupEssentials.Pages{
             dialog.ShowDialog();
 
             string path = dialog.SelectedPath;
-            if (path != null)TextBoxDirectory.Text = path;
+            if (path != null)TextBoxDirectory.Text = EditLocation.Directory = path;
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){
             TargetLocation.Set(EditLocation);
+            ExplorerIntegration.Refresh();
             MainWindow.Instance.ShowPage(typeof(BackupLocations));
         }
 

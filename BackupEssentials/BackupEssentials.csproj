@@ -81,6 +81,7 @@
     <Compile Include="AppPageManager.cs" />
     <Compile Include="Backup\BackupLocation.cs" />
     <Compile Include="Backup\DataStorage.cs" />
+    <Compile Include="Backup\ExplorerIntegration.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>

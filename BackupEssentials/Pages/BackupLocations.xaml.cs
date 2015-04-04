@@ -1,8 +1,6 @@
 ﻿using BackupEssentials.Backup;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +16,8 @@ namespace BackupEssentials.Pages{
 
             LocationsListView.Items.Clear();
             LocationsListView.ItemsSource = DataStorage.BackupLocationList;
+
+            ExplorerIntegration.InitializeRefreshTimer();
         }
 
         void IPageShowData.OnShow(object data){
@@ -68,6 +68,7 @@ namespace BackupEssentials.Pages{
                 DataStorage.BackupLocationList.Insert(DraggingItemIndex,DraggingItem);
                 LocationsListView.SelectedIndex = DraggingItemIndex;
                 DraggingItem = (BackupLocation)LocationsListView.Items[DraggingItemIndex];
+                ExplorerIntegration.Refresh();
             }
         }
 
@@ -89,6 +90,9 @@ namespace BackupEssentials.Pages{
 
             if (index > 0)LocationsListView.SelectedIndex = index-1;
             else if (LocationsListView.Items.Count > 0)LocationsListView.SelectedIndex = index;
+
+            if (DataStorage.BackupLocationList.Count == 0)ExplorerIntegration.Remove();
+            else ExplorerIntegration.Refresh();
         }
 
         private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){

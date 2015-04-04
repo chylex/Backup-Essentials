@@ -33,7 +33,7 @@
             </WrapPanel>
             <WrapPanel DockPanel.Dock="Right" HorizontalAlignment="Center">
                 <Label Content="Directory:" Style="{StaticResource TitleLabel}" Height="31"/>
-                <TextBox x:Name="TextBoxDirectory" TextWrapping="NoWrap" Text="{Binding Path=Directory}" Width="297" Height="31" Style="{StaticResource TextBoxStyleDefault}"/>
+                <TextBox x:Name="TextBoxDirectory" Text="{Binding Path=Directory}" Width="297" Height="31" TextWrapping="NoWrap" Style="{StaticResource TextBoxStyleDefault}"/>
                 <Button x:Name="ButtonSelectDirectory" Content="Select directory..." FontSize="13" Template="{StaticResource ButtonStyleDefault}" Margin="8,0,0,0" Width="114" Click="ClickSelectDirectory"/>
             </WrapPanel>
         </DockPanel>
