@@ -9,6 +9,8 @@ namespace BackupEssentials.Pages{
         public BackupLocation EditLocation;
         public BackupLocation TargetLocation;
 
+        private string LastWarningDirectory;
+
         public BackupLocationsEdit(){
             InitializeComponent();
         }
@@ -18,6 +20,8 @@ namespace BackupEssentials.Pages{
             EditLocation = TargetLocation.Clone();
             TextBoxName.DataContext = EditLocation;
             TextBoxDirectory.DataContext = EditLocation;
+
+            LastWarningDirectory = null;
         }
 
         private void ClickSelectDirectory(object sender, RoutedEventArgs e){
@@ -30,6 +34,22 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){
+            if (!EditLocation.Directory.Equals(LastWarningDirectory)){
+                BackupLocation.DirectoryStatus status = EditLocation.GetDirectoryStatus();
+                string warning = "";
+
+                if (status == BackupLocation.DirectoryStatus.Empty)warning = "Selected directory is empty, it will not be registered until the issue is fixed.";
+                else if (status == BackupLocation.DirectoryStatus.Invalid)warning = "Selected directory is not a valid Windows path, it will not be registered until the issue is fixed.";
+                else if (status == BackupLocation.DirectoryStatus.NotAbsolute)warning = "Selected directory is not an absolute path, it will not be registered until the issue is fixed.";
+                else if (status == BackupLocation.DirectoryStatus.NotExists)warning = "Selected directory does not exist, it will be created when a first backup is made.";
+
+                if (warning.Length != 0){
+                    LastWarningDirectory = EditLocation.Directory;
+                    System.Windows.MessageBox.Show(warning+" Click Save again to confirm.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             TargetLocation.Set(EditLocation);
             ExplorerIntegration.Refresh();
             MainWindow.Instance.ShowPage(typeof(BackupLocations));

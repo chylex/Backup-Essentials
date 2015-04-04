@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Threading;
+using System.Linq;
 
 namespace BackupEssentials.Backup{
     static class ExplorerIntegration{
@@ -34,7 +35,8 @@ namespace BackupEssentials.Backup{
                 return true;
             }
 
-            if (DataStorage.BackupLocationList.Count == 0)return true;
+            IEnumerable<BackupLocation> valid = DataStorage.BackupLocationList.Where(loc => loc.ShouldRegister());
+            if (valid.Count() == 0)return true;
 
             try{
                 List<string> commandNames = new List<string>();
@@ -49,7 +51,7 @@ namespace BackupEssentials.Backup{
                 string path = Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8); // remove file:///
                 int cmd = 0;
 
-                foreach(BackupLocation loc in DataStorage.BackupLocationList){
+                foreach(BackupLocation loc in valid){
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd;
                     ++cmd;
                     Registry.SetValue(key,null,loc.Name);

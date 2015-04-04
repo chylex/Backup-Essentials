@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Linq;
 
 namespace BackupEssentials.Pages{
     public partial class BackupLocations : Page, IPageShowData{
@@ -91,7 +92,7 @@ namespace BackupEssentials.Pages{
             if (index > 0)LocationsListView.SelectedIndex = index-1;
             else if (LocationsListView.Items.Count > 0)LocationsListView.SelectedIndex = index;
 
-            if (DataStorage.BackupLocationList.Count == 0)ExplorerIntegration.Remove();
+            if (DataStorage.BackupLocationList.Count(loc => loc.ShouldRegister()) == 0)ExplorerIntegration.Remove();
             else ExplorerIntegration.Refresh();
         }
 
