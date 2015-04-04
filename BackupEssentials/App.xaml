@@ -104,6 +104,33 @@
                     </Border>
                 </Grid>
             </ControlTemplate>
+
+            <Style x:Key="ListViewStyleDefault" TargetType="ListView">
+                <Setter Property="Margin" Value="8"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="#FF252525"/>
+                <Setter Property="Background" Value="#FF444444"/>
+            </Style>
+
+            <Storyboard x:Key="ListViewItemStoryboardMouseOver">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                    <DiscreteObjectKeyFrame KeyTime="0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <SolidColorBrush Color="#15FFFFFF"/>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="ListViewItemStoryboardSelected">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+                    <DiscreteObjectKeyFrame KeyTime="0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <SolidColorBrush Color="#FF1b7aa5"/>
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

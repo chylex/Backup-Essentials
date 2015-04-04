@@ -20,15 +20,6 @@
             <RowDefinition Height="18"/>
         </Grid.RowDefinitions>
         
-        <Grid.Resources>
-            <Style TargetType="ListView">
-                <Setter Property="Margin" Value="8,8,8,0"/>
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="BorderBrush" Value="#FF252525"/>
-                <Setter Property="Background" Value="#FF444444"/>
-            </Style>
-        </Grid.Resources>
-        
         <StackPanel Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="Button">
@@ -44,7 +35,7 @@
             <Button Content="Remove" Click="LocationRemove"/>
         </StackPanel>
 
-        <ListView Name="LocationsListView" Grid.Row="1" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging">
+        <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Padding" Value="8,4,8,8"/>
@@ -55,28 +46,8 @@
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
                                             <VisualState x:Name="Normal"/>
-                                            <VisualState x:Name="MouseOver">
-                                                <Storyboard>
-                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
-                                                        <DiscreteObjectKeyFrame KeyTime="0">
-                                                            <DiscreteObjectKeyFrame.Value>
-                                                                <SolidColorBrush Color="#15FFFFFF"/>
-                                                            </DiscreteObjectKeyFrame.Value>
-                                                        </DiscreteObjectKeyFrame>
-                                                    </ObjectAnimationUsingKeyFrames>
-                                                </Storyboard>
-                                            </VisualState>
-                                            <VisualState x:Name="Selected">
-                                                <Storyboard>
-                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
-                                                        <DiscreteObjectKeyFrame KeyTime="0">
-                                                            <DiscreteObjectKeyFrame.Value>
-                                                                <SolidColorBrush Color="#FF1b7aa5"/>
-                                                            </DiscreteObjectKeyFrame.Value>
-                                                        </DiscreteObjectKeyFrame>
-                                                    </ObjectAnimationUsingKeyFrames>
-                                                </Storyboard>
-                                            </VisualState>
+                                            <VisualState x:Name="MouseOver" Storyboard="{StaticResource ListViewItemStoryboardMouseOver}"/>
+                                            <VisualState x:Name="Selected" Storyboard="{StaticResource ListViewItemStoryboardSelected}"/>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                     
