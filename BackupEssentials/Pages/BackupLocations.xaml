@@ -3,10 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}"
       Title="Backup Locations">
+    
+    <Page.Resources>
+        <sys:Double x:Key="LocationListItemHeight">46</sys:Double>
+    </Page.Resources>
 
     <Grid Background="#FF2E2E2E">
         <Grid.RowDefinitions>
@@ -23,6 +28,7 @@
             </Style>
             <Style TargetType="ListViewItem">
                 <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="AllowDrop" Value="True"/>
             </Style>
         </Grid.Resources>
         
@@ -41,24 +47,24 @@
             <Button Content="Remove"/>
         </StackPanel>
 
-        <ListView Name="LocationsListView" Grid.Row="1">
+        <ListView Name="LocationsListView" Grid.Row="1" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Height="46" HorizontalAlignment="Stretch" SnapsToDevicePixels="True">
-                        <TextBlock Foreground="White" Text="{Binding Name}" DockPanel.Dock="Top" VerticalAlignment="Top" FontSize="20"/>
-                        <TextBlock Foreground="White" Text="{Binding Directory}" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" FontSize="16"/>
-                    </DockPanel>
+                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True">
+                        <TextBlock Foreground="White" Text="{Binding Name}" VerticalAlignment="Top" FontSize="20"/>
+                        <TextBlock Foreground="White" Text="{Binding Directory}" VerticalAlignment="Bottom" FontSize="16"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Items>
                 <backup:BackupLocation Name="Test1" Directory="C:\Abc"/>
-                <backup:BackupLocation Name="Test2" Directory="C:\Abcd"/>
-                <backup:BackupLocation Name="Test1" Directory="C:\Abc"/>
-                <backup:BackupLocation Name="Test2" Directory="C:\Abcd"/>
-                <backup:BackupLocation Name="Test1" Directory="C:\Abc"/>
-                <backup:BackupLocation Name="Test2" Directory="C:\Abcd"/>
-                <backup:BackupLocation Name="Test1" Directory="C:\Abc"/>
-                <backup:BackupLocation Name="Test2" Directory="C:\Abcd"/>
+                <backup:BackupLocation Name="Test2" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test3" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test4" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test5" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test6" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test7" Directory="C:\Abc"/>
+                <backup:BackupLocation Name="Test8" Directory="C:\Abc"/>
             </ListView.Items>
         </ListView>
     </Grid>
