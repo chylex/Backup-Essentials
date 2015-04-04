@@ -9,8 +9,6 @@ using System.Windows.Threading;
 
 namespace BackupEssentials.Pages{
     public partial class BackupLocations : Page{
-        public readonly ObservableCollection<BackupLocation> BackupLocationsList = new ObservableCollection<BackupLocation>();
-
         private int DraggingItemIndex = -1;
         private BackupLocation DraggingItem = null;
 
@@ -19,11 +17,7 @@ namespace BackupEssentials.Pages{
 
             LocationsListView.Items.Clear();
             LocationsListView.ItemsSource = null;
-
-            BackupLocationsList.Add(new BackupLocation(){ Name = "Test1", Directory = @"C:\Folder\" });
-            BackupLocationsList.Add(new BackupLocation(){ Name = "Test2", Directory = @"C:\Folder\" });
-
-            LocationsListView.ItemsSource = BackupLocationsList;
+            LocationsListView.ItemsSource = DataStorage.BackupLocationList;
         }
 
         private void ListStartDragging(object sender, MouseButtonEventArgs e){
@@ -58,23 +52,23 @@ namespace BackupEssentials.Pages{
                 double mouseY = e.GetPosition(null).Y, containerY = container.TranslatePoint(new Point(),null).Y;
 
                 if (DraggingItemIndex > 0 && mouseY < containerY){
-                    BackupLocationsList.RemoveAt(DraggingItemIndex);
+                    DataStorage.BackupLocationList.RemoveAt(DraggingItemIndex);
                     --DraggingItemIndex;
                 }
                 else if (DraggingItemIndex < LocationsListView.Items.Count-1 && mouseY > containerY+(double)Resources["LocationListItemHeight"]+container.Padding.Top+container.Padding.Bottom-1){
-                    BackupLocationsList.RemoveAt(DraggingItemIndex);
+                    DataStorage.BackupLocationList.RemoveAt(DraggingItemIndex);
                     ++DraggingItemIndex;
                 }
                 else return;
 
-                BackupLocationsList.Insert(DraggingItemIndex,DraggingItem);
+                DataStorage.BackupLocationList.Insert(DraggingItemIndex,DraggingItem);
                 LocationsListView.SelectedIndex = DraggingItemIndex;
                 DraggingItem = (BackupLocation)LocationsListView.Items[DraggingItemIndex];
             }
         }
 
         private void LocationAdd(object sender, RoutedEventArgs e){
-            BackupLocationsList.Add(new BackupLocation(){ Name = "Abc", Directory = "Abc" });
+            DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = "<new location>", Directory = "" });
         }
 
         private void LocationEdit(object sender, RoutedEventArgs e){
@@ -84,7 +78,7 @@ namespace BackupEssentials.Pages{
         private void LocationRemove(object sender, RoutedEventArgs e){
             List<object> list = new List<object>();
             foreach(object obj in LocationsListView.SelectedItems)list.Add(obj); // MS doesn't need generics apparently...
-            foreach(object item in list)BackupLocationsList.Remove((BackupLocation)item);
+            foreach(object item in list)DataStorage.BackupLocationList.Remove((BackupLocation)item);
         }
     }
 }

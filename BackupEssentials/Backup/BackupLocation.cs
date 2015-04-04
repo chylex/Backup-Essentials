@@ -7,7 +7,5 @@ namespace BackupEssentials.Backup{
     public class BackupLocation{
         public string Name { get; set; }
         public string Directory { get; set; }
-
-
     }
 }
