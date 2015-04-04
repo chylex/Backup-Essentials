@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +17,6 @@ namespace BackupEssentials.Pages{
             InitializeComponent();
 
             LocationsListView.Items.Clear();
-            LocationsListView.ItemsSource = null;
             LocationsListView.ItemsSource = DataStorage.BackupLocationList;
         }
 
@@ -69,16 +69,27 @@ namespace BackupEssentials.Pages{
 
         private void LocationAdd(object sender, RoutedEventArgs e){
             DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = "<new location>", Directory = "" });
+            LocationsListView.SelectedIndex = DataStorage.BackupLocationList.Count-1;
+            MainWindow.Instance.ShowPage(typeof(BackupLocationsEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
         }
 
         private void LocationEdit(object sender, RoutedEventArgs e){
-
+            if (LocationsListView.SelectedIndex != -1)MainWindow.Instance.ShowPage(typeof(BackupLocationsEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
         }
 
         private void LocationRemove(object sender, RoutedEventArgs e){
+            int index = LocationsListView.SelectedIndex;
             List<object> list = new List<object>();
             foreach(object obj in LocationsListView.SelectedItems)list.Add(obj); // MS doesn't need generics apparently...
             foreach(object item in list)DataStorage.BackupLocationList.Remove((BackupLocation)item);
+
+            if (index > 0)LocationsListView.SelectedIndex = index-1;
+            else if (LocationsListView.Items.Count > 0)LocationsListView.SelectedIndex = index;
+        }
+
+        private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){
+            ButtonLocationEdit.IsEnabled = LocationsListView.SelectedItems.Count == 1;
+            ButtonLocationRemove.IsEnabled = LocationsListView.SelectedItems.Count > 0;
         }
     }
 }

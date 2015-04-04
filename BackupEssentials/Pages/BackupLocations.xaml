@@ -6,14 +6,14 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
       mc:Ignorable="d" 
-      d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}"
+      d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="Backup Locations">
     
     <Page.Resources>
         <sys:Double x:Key="LocationListItemHeight">46</sys:Double>
     </Page.Resources>
 
-    <Grid Background="#FF2E2E2E">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -27,15 +27,16 @@
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Width" Value="120"/>
                     <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16"/>
                     <Setter Property="Template" Value="{StaticResource ButtonStyleDefault}"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Add Location" Click="LocationAdd"/>
-            <Button Content="Edit" Click="LocationEdit"/>
-            <Button Content="Remove" Click="LocationRemove"/>
+            <Button x:Name="ButtonLocationAdd" Content="Add Location" Click="LocationAdd"/>
+            <Button x:Name="ButtonLocationEdit" Content="Edit" Click="LocationEdit" IsEnabled="False"/>
+            <Button x:Name="ButtonLocationRemove" Content="Remove" Click="LocationRemove" IsEnabled="False"/>
         </StackPanel>
 
-        <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}">
+        <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Padding" Value="8,4,8,8"/>
