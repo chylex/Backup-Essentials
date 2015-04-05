@@ -43,6 +43,7 @@ namespace BackupEssentials.Pages{
                 else if (status == BackupLocation.DirectoryStatus.NotExists)warning = "Selected directory does not exist, it will be created when a first backup is made.";
 
                 if (warning.Length != 0){
+                    VisualStateManager.GoToState(TextBoxDirectory,"Invalid",true);
                     LastWarningDirectory = EditLocation.Directory;
                     System.Windows.MessageBox.Show(warning+" Click Save again to confirm.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
                     return;
