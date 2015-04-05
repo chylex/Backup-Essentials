@@ -1,53 +1,39 @@
-﻿using System;
+﻿using BackupEssentials.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Shell;
 using System.Linq;
-using BackupEssentials.Utils;
 
 namespace BackupEssentials.Backup{
     public class BackupRunner{
         private BackgroundWorker Worker;
         private Tuple<string,string> WorkerData;
-        private TaskbarItemInfo Taskbar;
 
-        private int ActionCount;
+        public Action<object,ProgressChangedEventArgs> EventProgressUpdate;
+        public Action<object,RunWorkerCompletedEventArgs> EventCompleted;
 
         public BackupRunner(string source, string destFolder){
             WorkerData = new Tuple<string,string>(source,destFolder);
         }
 
-        public void Start(TaskbarItemInfo taskbar){
+        public void Start(){
             if (Worker != null)return;
-
-            this.Taskbar = taskbar;
-            Taskbar.ProgressState = TaskbarItemProgressState.Indeterminate;
 
             Worker = new BackgroundWorker();
             Worker.WorkerReportsProgress = true;
             Worker.WorkerSupportsCancellation = true;
 
-            Worker.ProgressChanged += new ProgressChangedEventHandler(WorkerProgressUpdate);
-            Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCompleted);
+            if (EventProgressUpdate != null)Worker.ProgressChanged += new ProgressChangedEventHandler(EventProgressUpdate);
+            if (EventCompleted != null)Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(EventCompleted);
             Worker.DoWork += new DoWorkEventHandler(WorkerDoWork);
 
             Worker.RunWorkerAsync(WorkerData);
         }
 
-        private void WorkerProgressUpdate(object sender, ProgressChangedEventArgs e){
-            Taskbar.ProgressState = TaskbarItemProgressState.Normal;
-            Taskbar.ProgressValue = e.ProgressPercentage/100D;
-
-            if (e.ProgressPercentage == 0 && e.UserState is int)ActionCount = (int)e.UserState;
-        }
-
-        private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e){
-            if (e.Error != null){
-                Debug.WriteLine(e.Error.ToString());
-                return;
-            }
+        public void Cancel(){
+            if (Worker != null)Worker.CancelAsync();
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs e){
@@ -146,18 +132,21 @@ namespace BackupEssentials.Backup{
                         Debug.WriteLine("Finished: "+entry.ToString());
 
                         worker.ReportProgress((int)Math.Ceiling(((totalActions-actions.Count+indexesToRemove.Count)*100D)/totalActions));
+                        if (worker.CancellationPending)break;
                     }catch(Exception exception){ // if an action failed, it will not be removed
                         Debug.WriteLine("Failed: "+entry.ToString());
                         Debug.WriteLine(exception.Message);
                         // TODO handle special exceptions (security etc)
                     }
+
+                    if (worker.CancellationPending)throw new Exception("Backup canceled.");
                 }
 
                 foreach(int index in indexesToRemove)actions.RemoveAt(index);
                 indexesToRemove.Clear();
             }
 
-            if (attempts == 0)throw new Exception("Ran out of attempts.");
+            if (attempts == 0)throw new Exception("Backup failed: ran out of attempts.");
         }
 
         private enum IOType{

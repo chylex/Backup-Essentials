@@ -7,13 +7,27 @@
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.BackupWindow"
-        Title="Backup in progress..." Height="240" Width="640" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#FF000000" AllowsTransparency="True">
+        Title="Backup in progress..." Height="160" Width="640" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#FF000000" AllowsTransparency="True">
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo/>
     </Window.TaskbarItemInfo>
-    
+
     <Grid Background="#FF171717">
-        <Grid Background="#FF2E2E2E" Grid.Row="1" Margin="2">
-        </Grid>
+        <DockPanel Background="#FF2E2E2E" Margin="2">
+            <Grid Margin="12,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="LabelInfo" Content="Preparing backup..." HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFDDDDDD" FontSize="18"/>
+                <ProgressBar x:Name="ProgressBar" Margin="8,0" Grid.Row="1"/>
+                
+                <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="8" HorizontalAlignment="Right">
+                    <Button x:Name="ButtonEnd" Template="{StaticResource ButtonStyleRedDefault}" Content="Cancel" FontSize="16" Click="ButtonEndClick"/>
+                </WrapPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
