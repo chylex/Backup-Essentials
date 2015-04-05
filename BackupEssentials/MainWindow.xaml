@@ -17,6 +17,7 @@
             <Setter Property="Margin" Value="2"/>
         </Style>
     </Window.Resources>
+    
     <Grid Background="#FF171717">
 		<Grid.RowDefinitions>
             <RowDefinition Height="36"/>
