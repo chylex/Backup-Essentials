@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BackupEssentials.Utils;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
 namespace BackupEssentials.Backup{
-    public class BackupLocation{
+    public class BackupLocation : StringDictionarySerializer.IObjectToDictionary{
         private static readonly Regex NameValidation = new Regex(@"[^\P{Cc}]");
 
         private string _name;
@@ -42,6 +44,16 @@ namespace BackupEssentials.Backup{
 
         public BackupLocation Clone(){
             return new BackupLocation(){ Name = this.Name, Directory = this.Directory };
+        }
+
+        void StringDictionarySerializer.IObjectToDictionary.ToDictionary(SafeDictionary<string,string> dict){
+            dict["Name"] = Name;
+            dict["Dir"] = Directory;
+        }
+
+        void StringDictionarySerializer.IObjectToDictionary.FromDictionary(SafeDictionary<string,string> dict){
+            Name = dict["Name"] ?? "<unknown>";
+            Directory = dict["Dir"] ?? "<unknown>";
         }
 
         public enum DirectoryStatus{

@@ -27,13 +27,13 @@ namespace BackupEssentials.Backup{
             if (File.Exists("DS.Locations.dat")){
                 try{
                     using(StreamReader reader = new StreamReader(new FileStream("DS.Locations.dat",FileMode.Open))){
-                        string data = reader.ReadToEnd();
+                        string line;
 
-                        foreach(string entry in data.Split((char)30)){
-                            if (entry.Length == 0)break;
-
-                            string[] record = entry.Split(new char[]{ (char)31 },2);
-                            if (record.Length == 2)BackupLocationList.Add(new BackupLocation(){ Name = record[0], Directory = record[1] });
+                        while((line = reader.ReadLine()) != null){
+                            if (line.Length == 0)continue;
+                            BackupLocation loc = new BackupLocation();
+                            StringDictionarySerializer.FromString(loc,line);
+                            BackupLocationList.Add(loc);
                         }
                     }
                 }catch(Exception e){
@@ -56,12 +56,7 @@ namespace BackupEssentials.Backup{
                 BackupLocationListChanged = false;
 
                 using(StreamWriter writer = new StreamWriter(new FileStream("DS.Locations.dat",FileMode.Create))){
-                    foreach(BackupLocation loc in BackupLocationList){
-                        writer.Write(loc.Name);
-                        writer.Write((char)31);
-                        writer.Write(loc.Directory);
-                        writer.Write((char)30);
-                    }
+                    foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
                 }
             }
         }
