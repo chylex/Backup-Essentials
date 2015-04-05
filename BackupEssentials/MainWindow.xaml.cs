@@ -19,7 +19,10 @@ namespace BackupEssentials{
             InitializeComponent();
             Instance = this;
 
+            DataStorage.Load();
+
             Closed += (args, sender) => {
+                DataStorage.Save(true);
                 ExplorerIntegration.Refresh(true);
             };
         }
