@@ -32,7 +32,7 @@
             </StackPanel.Resources>
             <Button x:Name="ButtonLocationAdd" Content="Add Location" Click="LocationAdd"/>
             <Button x:Name="ButtonLocationEdit" Content="Edit" Click="LocationEdit" IsEnabled="False"/>
-            <Button x:Name="ButtonLocationRemove" Content="Remove" Click="LocationRemove" IsEnabled="False"/>
+            <Button x:Name="ButtonLocationRemove" Content="Remove" Click="LocationRemove" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}"/>
         </StackPanel>
 
         <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
