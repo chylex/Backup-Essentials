@@ -74,7 +74,7 @@ namespace BackupEssentials.Pages{
         }
 
         private void LocationAdd(object sender, RoutedEventArgs e){
-            DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = "<new location>", Directory = "" });
+            DataStorage.BackupLocationList.Add(new BackupLocation());
             LocationsListView.SelectedIndex = DataStorage.BackupLocationList.Count-1;
             MainWindow.Instance.ShowPage(typeof(BackupLocationsEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
         }

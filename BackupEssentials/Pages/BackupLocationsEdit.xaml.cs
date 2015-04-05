@@ -20,6 +20,9 @@ namespace BackupEssentials.Pages{
             TextBoxName.DataContext = EditLocation;
             TextBoxDirectory.DataContext = EditLocation;
 
+            VisualStateManager.GoToState(TextBoxDirectory,"Unfocused",false);
+            TextBoxName.Focus();
+
             LastWarningDirectory = null;
         }
 
@@ -33,6 +36,12 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){
+            if (EditLocation.Name.Length == 0){
+                VisualStateManager.GoToState(TextBoxName,"Invalid",true);
+                System.Windows.MessageBox.Show("Location name cannot be empty.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                return;
+            }
+
             if (!EditLocation.Directory.Equals(LastWarningDirectory)){
                 BackupLocation.DirectoryStatus status = EditLocation.GetDirectoryStatus();
                 string warning = "";

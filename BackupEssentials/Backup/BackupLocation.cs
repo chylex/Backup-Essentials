@@ -17,6 +17,11 @@ namespace BackupEssentials.Backup{
 
         public string Directory { get; set; }
 
+        public BackupLocation(){
+            Name = "";
+            Directory = "";
+        }
+
         public DirectoryStatus GetDirectoryStatus(){
             if (Directory.Length == 0)return DirectoryStatus.Empty;
 
