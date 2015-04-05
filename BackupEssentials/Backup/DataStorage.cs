@@ -12,9 +12,11 @@ namespace BackupEssentials.Backup{
         });
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
-        private static bool BackupLocationListChanged = false;
+        public static bool BackupLocationListChanged = false;
 
         static DataStorage(){
+            SaveTimer.Start();
+
             BackupLocationList.CollectionChanged += (sender, args) => {
                 BackupLocationListChanged = true;
                 Save();
