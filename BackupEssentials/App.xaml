@@ -56,7 +56,7 @@
                                         <EasingColorKeyFrame KeyTime="0" Value="#FFE0E0E0"/>
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#FF2D3538"/>
+                                        <EasingColorKeyFrame KeyTime="0" Value="#FF303638"/>
                                     </ColorAnimationUsingKeyFrames>
                                 </Storyboard>
                             </VisualState>
@@ -129,7 +129,7 @@
                                         <EasingColorKeyFrame KeyTime="0" Value="#FFE0E0E0"/>
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#FF382D2D"/>
+                                        <EasingColorKeyFrame KeyTime="0" Value="#FF383030"/>
                                     </ColorAnimationUsingKeyFrames>
                                 </Storyboard>
                             </VisualState>
