@@ -52,8 +52,8 @@
                                     </VisualStateManager.VisualStateGroups>
                                     
                                     <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left">
-                                        <TextBlock Foreground="White" Text="{Binding Name}" VerticalAlignment="Top" FontSize="20"/>
-                                        <TextBlock Foreground="White" Text="{Binding Directory}" VerticalAlignment="Bottom" FontSize="16"/>
+                                        <TextBlock Foreground="#FFDDDDDD" Text="{Binding Name}" VerticalAlignment="Top" FontSize="20"/>
+                                        <TextBlock Foreground="#FFCCCCCC" Text="{Binding Directory}" VerticalAlignment="Bottom" FontSize="16"/>
                                     </Grid>
                                 </Border>
                             </ControlTemplate>
@@ -74,7 +74,7 @@
             </ListView.Items>
         </ListView>
 
-        <TextBlock HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFC9C9C9" Margin="12,0,0,0">
+        <TextBlock HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0">
             Hint: Click and drag a location to move it.
         </TextBlock>
     </Grid>

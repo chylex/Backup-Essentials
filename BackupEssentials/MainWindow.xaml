@@ -155,7 +155,7 @@
             <Grid Height="60" Margin="0" Grid.Row="1" VerticalAlignment="Top" Background="#FF1D1D1D">
                 <Grid.Resources>
                     <Style x:Key="ButtonStyleMainMenu" TargetType="{x:Type Button}">
-                        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                        <Setter Property="Foreground" Value="#FFEEEEEE"/>
                         <Setter Property="Background">
                             <Setter.Value>
                                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">

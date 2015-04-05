@@ -100,7 +100,7 @@
                                 <GradientStop Color="#FF3E3E3E" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
-                        <Label x:Name="label" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" TextOptions.TextRenderingMode="ClearType">
+                        <Label x:Name="label" Foreground="#FFDDDDDD" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" TextOptions.TextRenderingMode="ClearType">
                             <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True"/>
                         </Label>
                     </Border>

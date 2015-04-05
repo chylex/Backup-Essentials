@@ -14,8 +14,8 @@
             </Style>
         </Grid.Resources>
 
-        <TextBlock HorizontalAlignment="Left" Margin="12,8,0,0" TextWrapping="Wrap" Text="Backup Essentials" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
-        <TextBlock x:Name="AboutText" HorizontalAlignment="Left" Margin="20,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontSize="16">
+        <TextBlock HorizontalAlignment="Left" Margin="12,8,0,0" TextWrapping="Wrap" Text="Backup Essentials" VerticalAlignment="Top" Foreground="#FFEEEEEE" FontSize="24"/>
+        <TextBlock x:Name="AboutText" HorizontalAlignment="Left" Margin="20,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFDDDDDD" FontSize="16">
             Version <Run x:Name="AboutTextVersion" Text="&lt;unknown&gt;"/>
             <LineBreak/><LineBreak/><LineBreak/>
             Designed and programmed by chylex.<LineBreak/>
