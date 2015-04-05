@@ -78,7 +78,7 @@ namespace BackupEssentials.Backup{
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd;
                     ++cmd;
                     Registry.SetValue(key,null,loc.Name);
-                    Registry.SetValue(key+@"\command",null,path+" \""+loc.Directory+"\" \"%1\"");
+                    Registry.SetValue(key+@"\command",null,path+" -runshell -dest \""+loc.Directory+"\" -src \"%1\"");
                 }
 
                 return true;
