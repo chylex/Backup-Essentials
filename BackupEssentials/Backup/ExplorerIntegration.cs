@@ -6,23 +6,46 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Threading;
 using System.Linq;
+using BackupEssentials.Utils;
 
 namespace BackupEssentials.Backup{
     static class ExplorerIntegration{
-        private static bool NeedsUpdate = false;
+        /*
+        HKCR\*\shell\<appname>
+            - MUIVerb = root command name
+            - SubCommands = semicolon separated list of commands
+
+        HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\<command>
+            - (Default) = command name
+            > command
+              - (Default) = exe link
+         */
+
+        private static readonly ScheduledUpdate RefreshTimer = ScheduledUpdate.Forever(10,() => {
+            Refresh(true);
+        });
 
         public static void InitializeRefreshTimer(){
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0,0,10);
+            RefreshTimer.Start();
+        }
 
-            timer.Tick += (sender, args) => {
-                if (NeedsUpdate){
-                    NeedsUpdate = false;
-                    Refresh(true);
-                }
-            };
+        public static void Load(){ // TODO add into settings or something
+            DataStorage.BackupLocationList.Clear();
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell");
+            int cmd = 0;
 
-            timer.Start();
+            while(true){
+                string name = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd,null,null) as string;
+                if (name == null)break;
+
+                string fullpath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd+@"\command",null,"") as string;
+                int end = fullpath.ToUpper().IndexOf(".EXE")+6; // <...>.EXE "<path>" "%1"
+
+                string path = fullpath.Substring(end,fullpath.IndexOf('"',end)-end);
+                DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = name, Directory = path });
+
+                ++cmd;
+            }
         }
 
         public static void Refresh(){
@@ -31,7 +54,7 @@ namespace BackupEssentials.Backup{
 
         public static bool Refresh(bool force){
             if (!force){
-                NeedsUpdate = true;
+                RefreshTimer.NeedsUpdate = true;
                 return true;
             }
 
