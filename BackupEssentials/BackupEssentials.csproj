@@ -96,6 +96,8 @@
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\SafeDictionary.cs" />
+    <Compile Include="Utils\StringDictionarySerializer.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
     <Compile Include="Utils\WindowsVersion.cs" />
