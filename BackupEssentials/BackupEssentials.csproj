@@ -79,7 +79,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppPageManager.cs" />
+    <Compile Include="BackupWindow.xaml.cs">
+      <DependentUpon>BackupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Backup\BackupLocation.cs" />
+    <Compile Include="Backup\BackupRunner.cs" />
     <Compile Include="Backup\DataStorage.cs" />
     <Compile Include="Backup\ExplorerIntegration.cs" />
     <Compile Include="Pages\About.xaml.cs">
@@ -96,11 +100,16 @@
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\KeyEqualityComparer.cs" />
     <Compile Include="Utils\SafeDictionary.cs" />
     <Compile Include="Utils\StringDictionarySerializer.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
     <Compile Include="Utils\WindowsVersion.cs" />
+    <Page Include="BackupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,0 +1,19 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:custom="clr-namespace:BackupEssentials.Controls"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        mc:Ignorable="d" x:Class="BackupEssentials.BackupWindow"
+        Title="Backup in progress..." Height="240" Width="640" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#FF000000" AllowsTransparency="True">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo/>
+    </Window.TaskbarItemInfo>
+    
+    <Grid Background="#FF171717">
+        <Grid Background="#FF2E2E2E" Grid.Row="1" Margin="2">
+        </Grid>
+    </Grid>
+</Window>

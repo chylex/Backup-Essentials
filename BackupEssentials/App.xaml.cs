@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Backup;
+using BackupEssentials.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -16,7 +17,7 @@ namespace BackupEssentials{
             ProgramArgsParser parser = new ProgramArgsParser(args.Args);
             
             if (parser.HasFlag("runshell")){
-                
+                new BackupWindow(new BackupRunner(parser.GetValue("src",null),parser.GetValue("dest",null))).Show();
             }
             else{
                 Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
@@ -45,8 +46,7 @@ namespace BackupEssentials{
                     }
                 }
 
-                MainWindow window = new MainWindow();
-                window.Show();
+                new MainWindow().Show();
             }
         }
 
