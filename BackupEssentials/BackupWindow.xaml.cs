@@ -11,6 +11,7 @@ namespace BackupEssentials{
         private BackupRunner Runner;
         private int ActionCount;
         private BackupReport Report;
+        private BackupReportWindow ReportWindow;
         private DispatcherTimer CloseTimer;
 
         public BackupWindow(BackupRunner runner){
@@ -91,7 +92,11 @@ namespace BackupEssentials{
                     TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
                 }
 
-                // TODO
+                if (ReportWindow != null)ReportWindow.Close();
+
+                ReportWindow = new BackupReportWindow(Report);
+                ReportWindow.Closed += (sender2, args2) => { ReportWindow = null; };
+                ReportWindow.Show();
             }
         }
     }
