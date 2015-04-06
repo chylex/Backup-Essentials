@@ -26,6 +26,16 @@
                             <SolidColorBrush x:Key="VerticalScrollBarBackground" Color="#5D5D5D"/>
                             <SolidColorBrush x:Key="HorizontalScrollBarBackground" Color="#5D5D5D"/>
                             <SolidColorBrush x:Key="ScrollBarDisabledBackground" Color="#5D5D5D"/>
+                            <Storyboard x:Key="SBStoryboardMouseOver">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF2E2E2E"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="SBStoryboardPressed">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF252525"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
                             <Style x:Key="ScrollBarButtonUP" TargetType="{x:Type RepeatButton}">
                                 <Setter Property="OverridesDefaultStyle" Value="true"/>
                                 <Setter Property="Focusable" Value="false"/>
@@ -33,9 +43,20 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
-                                                <ed:BlockArrow Orientation="Up" Fill="{StaticResource ScrollBarButtonFill}" Width="7" Height="5" Margin="0" ArrowBodySize="0" ArrowheadAngle="0" StrokeThickness="0"/>
-                                            </Border>
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                        		<VisualStateManager.VisualStateGroups>
+                                        			<VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                        				<VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardPressed}"/>
+                                                        <VisualState x:Name="Disabled"/>
+                                        			</VisualStateGroup>
+                                        		</VisualStateManager.VisualStateGroups>
+                                        		<ed:BlockArrow Orientation="Up" Fill="{StaticResource ScrollBarButtonFill}" Width="7" Height="5" Margin="0" ArrowBodySize="0" ArrowheadAngle="0" StrokeThickness="0"/>
+                                        	</Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -47,7 +68,18 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardPressed}"/>
+                                                        <VisualState x:Name="Disabled"/>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
                                                 <ed:BlockArrow Orientation="Down" Fill="{StaticResource ScrollBarButtonFill}" Width="7" Height="5" Margin="0,1,0,0" ArrowBodySize="0" ArrowheadAngle="0" StrokeThickness="0"/>
                                             </Border>
                                         </ControlTemplate>
@@ -61,7 +93,18 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardPressed}"/>
+                                                        <VisualState x:Name="Disabled"/>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
                                                 <ed:BlockArrow Orientation="Left" Fill="{StaticResource ScrollBarButtonFill}" Width="5" Height="7" Margin="0,0,1,0" ArrowBodySize="0" ArrowheadAngle="0" StrokeThickness="0"/>
                                             </Border>
                                         </ControlTemplate>
@@ -75,7 +118,18 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardPressed}"/>
+                                                        <VisualState x:Name="Disabled"/>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
                                                 <ed:BlockArrow Orientation="Right" Fill="{StaticResource ScrollBarButtonFill}" Width="5" Height="7" Margin="0" ArrowBodySize="0" ArrowheadAngle="0" StrokeThickness="0"/>
                                             </Border>
                                         </ControlTemplate>
@@ -95,13 +149,35 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
+                            <Storyboard x:Key="SBStoryboardThumbMouseOver">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF2E2E2E"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="SBStoryboardThumbPressed">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF252525"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
                             <Style x:Key="ScrollBarThumbVertical" TargetType="{x:Type Thumb}">
                                 <Setter Property="OverridesDefaultStyle" Value="true"/>
                                 <Setter Property="IsTabStop" Value="false"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Thumb}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="1,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="17" Background="#FF191919"/>
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                        		<VisualStateManager.VisualStateGroups>
+                                        			<VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                        				<VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardThumbMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardThumbPressed}"/>
+                                        				<VisualState x:Name="Disabled"/>
+                                        			</VisualStateGroup>
+                                        		</VisualStateManager.VisualStateGroups>
+                                        	</Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -112,7 +188,19 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Thumb}">
-                                            <Border BorderBrush="#FF5D5D5D" BorderThickness="0,1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="32" Background="#FF191919" Margin="0,0,-16,0"/>
+                                            <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="0,1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="32" Background="#FF191919" Margin="0,0,-16,0">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualStateGroup.Transitions>
+                                                            <VisualTransition GeneratedDuration="0:0:0.05"/>
+                                                        </VisualStateGroup.Transitions>
+                                                        <VisualState x:Name="Normal"/>
+                                                        <VisualState x:Name="MouseOver" Storyboard="{StaticResource SBStoryboardThumbMouseOver}"/>
+                                                        <VisualState x:Name="Pressed" Storyboard="{StaticResource SBStoryboardThumbPressed}"/>
+                                                        <VisualState x:Name="Disabled"/>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                            </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
