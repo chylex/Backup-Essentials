@@ -1,5 +1,5 @@
 ﻿namespace BackupEssentials.Backup.IO{
-    enum IOType{
+    public enum IOType{
         None, File, Directory
     }
 }

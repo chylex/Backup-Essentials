@@ -1,5 +1,5 @@
 ﻿namespace BackupEssentials.Backup.IO{
-    enum IOAction{
+    public enum IOAction{
         None, Create, Replace, Delete
     }
 }

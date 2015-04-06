@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 
 namespace BackupEssentials.Backup{
-    class BackupReport{
+    public class BackupReport{
         private readonly string _plain;
         private string _parsed;
 
