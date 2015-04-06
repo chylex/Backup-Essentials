@@ -28,7 +28,6 @@ namespace BackupEssentials{
                     foreach(Process process in running){
                         if (process.Id != myId && process.MainWindowHandle != IntPtr.Zero){
                             if (process.Responding){
-                                
                                 SetForegroundWindow(process.MainWindowHandle);
                                 Application.Current.Shutdown();
                                 return;
