@@ -54,6 +54,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
