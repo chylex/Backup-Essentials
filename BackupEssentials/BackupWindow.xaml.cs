@@ -1,13 +1,16 @@
 ﻿using BackupEssentials.Backup;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Shell;
+using System.Windows.Threading;
 
 namespace BackupEssentials{
     public partial class BackupWindow : Window{
         private BackupRunner Runner;
         private int ActionCount;
+        private DispatcherTimer CloseTimer;
 
         public BackupWindow(BackupRunner runner){
             InitializeComponent();
@@ -43,6 +46,7 @@ namespace BackupEssentials{
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e){
             Runner = null;
+            ButtonShowReport.IsEnabled = true;
             ButtonEnd.Content = "Close";
 
             if (e.Error != null){
@@ -55,12 +59,36 @@ namespace BackupEssentials{
             ProgressBar.Value = 100;
             ProgressBar.Value = 99; // progress bar animation hack
             ProgressBar.Value = 100;
+            TaskbarItemInfo.ProgressValue = 100;
+            TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
             LabelInfo.Content = "Finished! Updated "+ActionCount+" files and folders.";
+
+            CloseTimer = new DispatcherTimer();
+            CloseTimer.Interval = new TimeSpan(0,0,0,0,250);
+            CloseTimer.Tick += (sender2, args2) => { 
+                if (TaskbarItemInfo.ProgressValue <= 0)Close();
+                else TaskbarItemInfo.ProgressValue -= 0.02001D;
+            };
+            CloseTimer.Start();
         }
 
         private void ButtonEndClick(object sender, RoutedEventArgs e){
-            if (Runner == null)Close();
+            if (Runner == null){
+                CloseTimer.Stop();
+                Close();
+            }
             else Runner.Cancel();
+        }
+
+        private void ButtonShowReportClick(object sender, RoutedEventArgs e){
+            if (Runner == null){
+                if (CloseTimer != null){
+                    CloseTimer.Stop();
+                    TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
+                }
+
+                // TODO
+            }
         }
     }
 }
