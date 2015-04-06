@@ -1,10 +1,13 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Backup.IO;
+using BackupEssentials.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace BackupEssentials.Backup{
     public class BackupRunner{
@@ -101,6 +104,19 @@ namespace BackupEssentials.Backup{
             int totalActions = actions.Count, attempts = 10;
             string path;
 
+            BackupReport.Builder reportBuilder = new BackupReport.Builder();
+            reportBuilder.Add("= Preparing backup =");
+            reportBuilder.Add("Source: "+src);
+            reportBuilder.Add("Destination: "+destFolder);
+            reportBuilder.Add("Date: "+DateTime.Now.ToString("d")+" "+DateTime.Now.ToString("t"));
+            reportBuilder.Add("");
+            reportBuilder.Add("= Files and folders =");
+            reportBuilder.Add("Added: "+actions.Count((entry) => entry.Action == IOAction.Create));
+            reportBuilder.Add("Updated: "+actions.Count((entry) => entry.Action == IOAction.Replace));
+            reportBuilder.Add("Deleted: "+actions.Count((entry) => entry.Action == IOAction.Delete));
+            reportBuilder.Add("");
+            reportBuilder.Add("= Starting backup =");
+
             while(actions.Count > 0 && --attempts > 0){
                 for(int index = 0; index < actions.Count; index++){
                     IOActionEntry entry = actions[index];
@@ -129,7 +145,7 @@ namespace BackupEssentials.Backup{
                         }
                         
                         indexesToRemove.Add(index-indexesToRemove.Count); // goes from 0 to actions.Count, removing each index will move the structure
-                        Debug.WriteLine("Finished: "+entry.ToString());
+                        reportBuilder.Add(entry.Action,entry.Type,entry.RelativePath);
 
                         worker.ReportProgress((int)Math.Ceiling(((totalActions-actions.Count+indexesToRemove.Count)*100D)/totalActions));
                         if (worker.CancellationPending)break;
@@ -139,22 +155,25 @@ namespace BackupEssentials.Backup{
                         // TODO handle special exceptions (security etc)
                     }
 
-                    if (worker.CancellationPending)throw new Exception("Backup canceled.");
+                    if (worker.CancellationPending){
+                        reportBuilder.Add("= Backup canceled =");
+                        e.Result = reportBuilder.Finish();
+                        throw new Exception("Backup canceled.");
+                    }
                 }
 
                 foreach(int index in indexesToRemove)actions.RemoveAt(index);
                 indexesToRemove.Clear();
             }
 
-            if (attempts == 0)throw new Exception("Backup failed: ran out of attempts.");
-        }
+            if (attempts == 0){
+                reportBuilder.Add("= Backup failed (out of attempts) =");
+                e.Result = reportBuilder.Finish();
+                throw new Exception("Backup failed: ran out of attempts.");
+            }
 
-        private enum IOType{
-            None, File, Directory
-        }
-
-        private enum IOAction{
-            None, Create, Replace, Delete
+            reportBuilder.Add("= Backup finished =");
+            e.Result = reportBuilder.Finish();
         }
 
         private class IOEntry{

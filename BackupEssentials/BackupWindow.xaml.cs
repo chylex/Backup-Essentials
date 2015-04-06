@@ -10,6 +10,7 @@ namespace BackupEssentials{
     public partial class BackupWindow : Window{
         private BackupRunner Runner;
         private int ActionCount;
+        private BackupReport Report;
         private DispatcherTimer CloseTimer;
 
         public BackupWindow(BackupRunner runner){
@@ -48,6 +49,9 @@ namespace BackupEssentials{
             Runner = null;
             ButtonShowReport.IsEnabled = true;
             ButtonEnd.Content = "Close";
+            Report = e.Result as BackupReport;
+
+            Debug.WriteLine(Report.Report);
 
             if (e.Error != null){
                 LabelInfo.Content = e.Error.Message;

@@ -83,9 +83,12 @@
       <DependentUpon>BackupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Backup\BackupLocation.cs" />
+    <Compile Include="Backup\BackupReport.cs" />
     <Compile Include="Backup\BackupRunner.cs" />
     <Compile Include="Backup\DataStorage.cs" />
     <Compile Include="Backup\ExplorerIntegration.cs" />
+    <Compile Include="Backup\IO\IOAction.cs" />
+    <Compile Include="Backup\IO\IOType.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
