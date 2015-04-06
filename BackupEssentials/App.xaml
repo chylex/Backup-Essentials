@@ -325,6 +325,7 @@
                     </DiscreteObjectKeyFrame>
                 </ObjectAnimationUsingKeyFrames>
             </Storyboard>
+            
             <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
             	<GradientStop Color="#ABADB3" Offset="0.05"/>
             	<GradientStop Color="#E2E3EA" Offset="0.07"/>
