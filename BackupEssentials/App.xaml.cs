@@ -50,6 +50,10 @@ namespace BackupEssentials{
         }
 
         private void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e){
+            using(StreamWriter writer = new StreamWriter(new FileStream("exceptions.log",FileMode.Append))){
+                writer.WriteLine(e.ToString());
+            }
+
             // TODO
         }
     }
