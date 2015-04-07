@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace BackupEssentials.Backup{
     public class BackupRunner{
@@ -43,11 +44,8 @@ namespace BackupEssentials.Backup{
             BackgroundWorker worker = (BackgroundWorker)sender;
             Tuple<string,string> data = (Tuple<string,string>)e.Argument;
 
-            string src = data.Item1;
+            string src = data.Item1, fullSrc = src;
             string destFolder = data.Item2;
-
-            // Prepare the destination
-            if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
 
             // Figure out the file and directory lists
             Dictionary<string,IOEntry> srcEntries = new Dictionary<string,IOEntry>(), dstEntries = new Dictionary<string,IOEntry>();
@@ -56,12 +54,25 @@ namespace BackupEssentials.Backup{
                 int srcLen = src.Length;
                 foreach(string dir in Directory.GetDirectories(src,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                 foreach(string file in Directory.GetFiles(src,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
-            }
-            else srcEntries.Add(Path.GetFileName(src),new IOEntry(){ Type = IOType.File, AbsolutePath = src });
+                
+                destFolder = Path.Combine(destFolder,Path.GetFileName(src.TrimEnd(Path.DirectorySeparatorChar)));
+                if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
 
-            int destFolderLen = destFolder.Length;
-            foreach(string dir in Directory.GetDirectories(destFolder,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
-            foreach(string file in Directory.GetFiles(destFolder,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+                int destFolderLen = destFolder.Length;
+                foreach(string dir in Directory.GetDirectories(destFolder,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                foreach(string file in Directory.GetFiles(destFolder,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+            }
+            else{
+                string fname = Path.GetFileName(src);
+                srcEntries.Add(fname,new IOEntry(){ Type = IOType.File, AbsolutePath = src });
+                
+                src = Directory.GetParent(src).FullName;
+
+                string dst = Path.Combine(destFolder,fname);
+                if (File.Exists(dst))dstEntries.Add(fname,new IOEntry{ Type = IOType.File, AbsolutePath = dst });
+
+                if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
+            }
 
             // Generate the IO actions
             List<IOActionEntry> actions = new List<IOActionEntry>();
@@ -102,11 +113,12 @@ namespace BackupEssentials.Backup{
             // Start working
             List<int> indexesToRemove = new List<int>();
             int totalActions = actions.Count, attempts = 10;
+            bool firstAttempt = true;
             string path;
 
             BackupReport.Builder reportBuilder = new BackupReport.Builder();
             reportBuilder.Add("= Preparing backup =");
-            reportBuilder.Add("Source: "+src);
+            reportBuilder.Add("Source: "+fullSrc);
             reportBuilder.Add("Destination: "+destFolder);
             reportBuilder.Add("Date: "+DateTime.Now.ToString("d")+" "+DateTime.Now.ToString("t"));
             reportBuilder.Add("");
@@ -118,6 +130,9 @@ namespace BackupEssentials.Backup{
             reportBuilder.Add("= Starting backup =");
 
             while(actions.Count > 0 && --attempts > 0){
+                if (firstAttempt)firstAttempt = false;
+                else Thread.Sleep(200);
+
                 for(int index = 0; index < actions.Count; index++){
                     IOActionEntry entry = actions[index];
 
