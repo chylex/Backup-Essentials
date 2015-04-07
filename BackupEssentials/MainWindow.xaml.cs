@@ -25,6 +25,8 @@ namespace BackupEssentials{
                 DataStorage.Save(true);
                 ExplorerIntegration.Refresh(true);
             };
+
+            ShowPage(typeof(Home));
         }
 
         private void ButtonWindowCloseClick(object sender, RoutedEventArgs e){
@@ -91,6 +93,11 @@ namespace BackupEssentials{
             Page page = null;
             ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
             if (page is IPageShowData)((IPageShowData)page).OnShow(data);
+
+            if (!page.AllowDrop){
+                page.AllowDrop = true;
+                // TODO handle events
+            }
         }
     }
 }

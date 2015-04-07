@@ -7,7 +7,7 @@
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.MainWindow"
-        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" MinWidth="800" MinHeight="600">
+        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" AllowDrop="True" MinWidth="800" MinHeight="600">
     <Window.Resources>
         <Style TargetType="ResizeGrip">
             <Setter Property="Margin" Value="2"/>
@@ -21,7 +21,10 @@
 		</Grid.RowDefinitions>
 
         <DockPanel x:Name="TitleBar" Style="{StaticResource DockPanelStyleTitleBar}" MouseLeftButtonDown="TitleBarLeftButtonDown">
-            <WrapPanel Style="{StaticResource WrapPanelStyleTitleBar}" Width="120" DockPanel.Dock="Top">
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="#00BBBBBB" FontSize="18" Margin="8,0,0,0">
+                Backup Essentials
+            </TextBlock> <!-- TODO -->
+            <WrapPanel Style="{StaticResource WrapPanelStyleTitleBar}" Width="120" DockPanel.Dock="Right">
                 <custom:ButtonTitleBar x:Name="ButtonWindowClose" CXPathData="{StaticResource PathButtonClose}" CXPathWidth="16" CXPathHeight="16" CXPathMargin="0,2,0,0" CXPathRotation="-45" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowCloseClick"/>
 				<custom:ButtonTitleBar x:Name="ButtonWindowToggle" CXPathData="{StaticResource PathButtonMaximized}" CXPathWidth="14" CXPathHeight="14" CXPathMargin="0,3,0,0" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowToggleClick"/>
 				<custom:ButtonTitleBar x:Name="ButtonWindowMinimize" CXPathData="{StaticResource PathButtonMinimize}" CXPathWidth="12" CXPathHeight="2" CXPathMargin="0,12,0,0" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowMinimizeClick"/>
@@ -140,13 +143,13 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <custom:ButtonMainMenu Content="Home" ClickPage="Pages.Home" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="Home" ClickPage="Pages.Home" IsChecked="True" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="Backup" ClickPage="Pages.BackupLocations" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="Settings" ClickPage="Pages.Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
             </Grid>
-            <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" AllowDrop="True" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>
