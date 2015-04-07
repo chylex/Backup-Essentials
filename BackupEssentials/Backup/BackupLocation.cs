@@ -42,9 +42,9 @@ namespace BackupEssentials.Backup{
             return status == DirectoryStatus.Ok || status == DirectoryStatus.NotExists;
         }
 
-        public void Set(BackupLocation NewData){
-            this.Name = NewData.Name;
-            this.Directory = NewData.Directory;
+        public void Set(BackupLocation newData){
+            this.Name = newData.Name;
+            this.Directory = newData.Directory;
         }
 
         public BackupLocation Clone(){

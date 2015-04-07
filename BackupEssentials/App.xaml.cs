@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace BackupEssentials{
     public partial class App : Application{
         [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static extern bool SetForegroundWindow(IntPtr hwnd);
 
         private void StartApp(object sender, StartupEventArgs args){
             ProgramArgsParser parser = new ProgramArgsParser(args.Args);
@@ -50,9 +50,11 @@ namespace BackupEssentials{
         }
 
         private void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e){
-            using(StreamWriter writer = new StreamWriter(new FileStream("exceptions.log",FileMode.Append))){
-                writer.WriteLine(e.Exception.ToString());
-                writer.WriteLine();
+            using(FileStream fileStream = new FileStream("exceptions.log",FileMode.Append)){
+                using(StreamWriter writer = new StreamWriter(fileStream)){
+                    writer.WriteLine(e.Exception.ToString());
+                    writer.WriteLine();
+                }
             }
 
             // TODO

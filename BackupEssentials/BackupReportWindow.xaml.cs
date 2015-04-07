@@ -6,7 +6,7 @@ namespace BackupEssentials{
     public partial class BackupReportWindow : Window{
         public BackupReportWindow(BackupReport report){
             InitializeComponent();
-            ReportTextBlock.Text = report.Report;
+            ReportTextBlock.Text = report == null || report.Report == null ? "Error fetching report." : report.Report;
         }
 
         private void TitleBarLeftButtonDown(object sender, MouseButtonEventArgs e){

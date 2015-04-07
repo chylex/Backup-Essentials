@@ -33,6 +33,8 @@ namespace BackupEssentials.Pages{
 
             string path = dialog.SelectedPath;
             if (path != null)TextBoxDirectory.Text = EditLocation.Directory = path;
+
+            dialog.Dispose();
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){

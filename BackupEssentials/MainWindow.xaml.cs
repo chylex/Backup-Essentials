@@ -92,7 +92,9 @@ namespace BackupEssentials{
         public void ShowPage(Type pageType, object data){
             Page page = null;
             ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
-            if (page is IPageShowData)((IPageShowData)page).OnShow(data);
+
+            IPageShowData pageDataHandler = page as IPageShowData;
+            if (pageDataHandler != null)pageDataHandler.OnShow(data);
 
             if (!page.AllowDrop){
                 page.AllowDrop = true;

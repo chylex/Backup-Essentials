@@ -120,7 +120,7 @@ namespace BackupEssentials.Backup{
             reportBuilder.Add("= Preparing backup =");
             reportBuilder.Add("Source: "+fullSrc);
             reportBuilder.Add("Destination: "+destFolder);
-            reportBuilder.Add("Date: "+DateTime.Now.ToString("d")+" "+DateTime.Now.ToString("t"));
+            reportBuilder.Add("Date: "+DateTime.Now.ToString("d",CultureInfo.CurrentCulture)+" "+DateTime.Now.ToString("t",CultureInfo.CurrentCulture));
             reportBuilder.Add("");
             reportBuilder.Add("= Files and folders =");
             reportBuilder.Add("Added: "+actions.Count((entry) => entry.Action == IOAction.Create));
@@ -205,7 +205,7 @@ namespace BackupEssentials.Backup{
 
             public IOType Type;
             public IOAction Action;
-            public string RelativePath { get { return _relativePath; } set { _relativePath = value; if (_relativePath.StartsWith("\\"))_relativePath = _relativePath.Substring(1); } }
+            public string RelativePath { get { return _relativePath; } set { _relativePath = value; if (_relativePath.StartsWith("\\",StringComparison.OrdinalIgnoreCase))_relativePath = _relativePath.Substring(1); } }
             
             public override string ToString(){
                 return "{ Type: "+Type.ToString()+", Action: "+Action.ToString()+", RelativePath: "+(RelativePath == null ? "<null>" : RelativePath.ToString())+" }";

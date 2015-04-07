@@ -37,7 +37,7 @@ namespace BackupEssentials.Backup{
                 if (name == null)break;
 
                 string fullpath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd+@"\command",null,"") as string;
-                int end = fullpath.ToUpper().IndexOf(".EXE")+6; // <...>.EXE "<path>" "%1"
+                int end = fullpath.IndexOf(".EXE",StringComparison.OrdinalIgnoreCase)+6; // <...>.EXE "<path>" "%1"
 
                 string path = fullpath.Substring(end,fullpath.IndexOf('"',end)-end);
                 DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = name, Directory = path });

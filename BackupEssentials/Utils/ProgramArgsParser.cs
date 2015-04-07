@@ -26,7 +26,7 @@ namespace BackupEssentials.Utils{
 
             for(int a = 0; a < Args.Length-1; a++){
                 if (Args[a].Equals(flag)){
-                    return Args[a+1].StartsWith("-") ? defaultValue : Args[a+1];
+                    return Args[a+1].StartsWith("-",StringComparison.Ordinal) ? defaultValue : Args[a+1];
                 }
             }
 

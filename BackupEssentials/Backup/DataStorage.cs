@@ -26,14 +26,16 @@ namespace BackupEssentials.Backup{
         public static void Load(){
             if (File.Exists("DS.Locations.dat")){
                 try{
-                    using(StreamReader reader = new StreamReader(new FileStream("DS.Locations.dat",FileMode.Open))){
-                        string line;
+                    using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Open)){
+                        using(StreamReader reader = new StreamReader(fileStream)){
+                            string line;
 
-                        while((line = reader.ReadLine()) != null){
-                            if (line.Length == 0)continue;
-                            BackupLocation loc = new BackupLocation();
-                            StringDictionarySerializer.FromString(loc,line);
-                            BackupLocationList.Add(loc);
+                            while((line = reader.ReadLine()) != null){
+                                if (line.Length == 0)continue;
+                                BackupLocation loc = new BackupLocation();
+                                StringDictionarySerializer.FromString(loc,line);
+                                BackupLocationList.Add(loc);
+                            }
                         }
                     }
                 }catch(Exception e){
@@ -55,8 +57,10 @@ namespace BackupEssentials.Backup{
             if (BackupLocationListChanged){
                 BackupLocationListChanged = false;
 
-                using(StreamWriter writer = new StreamWriter(new FileStream("DS.Locations.dat",FileMode.Create))){
-                    foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
+                using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Create)){
+                    using(StreamWriter writer = new StreamWriter(fileStream)){
+                        foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
+                    }
                 }
             }
         }

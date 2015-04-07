@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace BackupEssentials.Utils{
-    class StringDictionarySerializer{
+    static class StringDictionarySerializer{
         public static string ToString(Dictionary<string,string> dict){
             StringBuilder build = new StringBuilder();
 
