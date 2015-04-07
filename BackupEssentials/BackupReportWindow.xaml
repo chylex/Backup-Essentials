@@ -22,7 +22,7 @@
 
         <Grid Background="#FF2E2E2E" Grid.Row="1" Margin="0,0,1,1">
             <ScrollViewer Margin="0,0,1,1" Template="{StaticResource ScrollViewerTemplate}">
-                <TextBlock x:Name="ReportTextBlock" Padding="6" TextWrapping="Wrap" FontSize="14" Foreground="#FFDDDDDD"/>
+                <TextBox x:Name="ReportTextBlock" Padding="6" TextWrapping="Wrap" FontSize="14" Foreground="#FFDDDDDD" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FFAAAAAA" UndoLimit="1" IsReadOnly="True" BorderThickness="0"/>
             </ScrollViewer>
         </Grid>
     </Grid>
