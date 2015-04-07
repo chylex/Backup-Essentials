@@ -140,10 +140,10 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <custom:ButtonMainMenu Content="Home" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="Home" ClickPage="Pages.Home" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="Backup" ClickPage="Pages.BackupLocations" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="Settings" ClickPage="Pages.Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
             </Grid>
             <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" NavigationUIVisibility="Hidden"/>
