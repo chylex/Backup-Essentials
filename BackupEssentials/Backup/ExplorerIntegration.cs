@@ -1,12 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using BackupEssentials.Utils;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Reflection;
-using System.Windows.Threading;
 using System.Linq;
-using BackupEssentials.Utils;
+using System.Reflection;
 
 namespace BackupEssentials.Backup{
     static class ExplorerIntegration{
@@ -71,7 +69,7 @@ namespace BackupEssentials.Backup{
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","SubCommands",commands);
                 }
 
-                string path = Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8); // remove file:///
+                string path = Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8).Replace('/','\\'); // remove file:///
                 int cmd = 0;
 
                 foreach(BackupLocation loc in valid){
@@ -90,8 +88,10 @@ namespace BackupEssentials.Backup{
         }
 
         public static void Remove(){
-            Registry.ClassesRoot.DeleteSubKey(@"*\shell\BackupEssentials",false);
-            Registry.ClassesRoot.DeleteSubKey(@"Directory\shell\BackupEssentials",false);
+            try{
+                Registry.ClassesRoot.DeleteSubKey(@"*\shell\BackupEssentials",false);
+                Registry.ClassesRoot.DeleteSubKey(@"Directory\shell\BackupEssentials",false);
+            }catch{}
 
             int cmd = 0;
 
