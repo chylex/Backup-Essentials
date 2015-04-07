@@ -42,15 +42,17 @@
                     <ColumnDefinition Width="12"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                
-                <WrapPanel Orientation="Vertical">
+
+                <WrapPanel Orientation="Vertical" UseLayoutRounding="True">
                     <TextBlock Style="{StaticResource TextBlockSubTitle}">
                         1. Context menu
                     </TextBlock>
                     <TextBlock Margin="6,2">
                         Simply right-click a file or a folder, select Backup Essentials and choose the backup destination.
                     </TextBlock>
-                    <Image Source="/BackupEssentials;component/Resources/Guide1.png" UseLayoutRounding="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" Width="356" Height="134" HorizontalAlignment="Left" Margin="6,4"/>
+                    <Border Width="358" Height="136" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="134" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
                 </WrapPanel>
 
                 <WrapPanel Orientation="Vertical" Grid.Column="2">
