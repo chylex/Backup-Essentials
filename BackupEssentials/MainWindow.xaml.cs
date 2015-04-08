@@ -2,11 +2,13 @@
 using BackupEssentials.Controls;
 using BackupEssentials.Pages;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace BackupEssentials{
     public partial class MainWindow : Window{
@@ -19,7 +21,11 @@ namespace BackupEssentials{
             InitializeComponent();
             Instance = this;
 
-            DataStorage.Load();
+            Loaded += (args, sender) => {
+                Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
+                    DataStorage.Load();
+                }));
+            };
 
             Closed += (args, sender) => {
                 DataStorage.Save(true);

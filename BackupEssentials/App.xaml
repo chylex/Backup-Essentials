@@ -8,11 +8,7 @@
     Startup="StartApp"
     DispatcherUnhandledException="HandleException">
     <Application.Resources>
-    	<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Simple Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
+        <ResourceDictionary>
             <sys:String x:Key="PathButtonClose">M7,0 L9,0 9,7 16,7 16,9 9,9 9,16 7,16 7,9 0,9 0,7 7,7 z</sys:String>
             <sys:String x:Key="PathButtonMaximized">M1,2 L1,9 13,9 13,2 z M0,0 L14,0 14,10 0,10 z</sys:String>
             <sys:String x:Key="PathButtonWindowed">M2.5,3.75 L2.5,8.75 10.5,8.75 10.5,3.75 z M1.5,1.75 L11.5,1.75 11.5,9.75 1.5,9.75 z M0,0 L10,0 10,1.25 1,1.25 1,2 1,7 1,8 0,8 z</sys:String>
