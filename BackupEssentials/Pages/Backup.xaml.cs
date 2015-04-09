@@ -8,11 +8,11 @@ using System.Windows.Threading;
 using System.Linq;
 
 namespace BackupEssentials.Pages{
-    public partial class BackupLocations : Page, IPageShowData{
+    public partial class Backup : Page, IPageShowData{
         private int DraggingItemIndex = -1;
         private BackupLocation DraggingItem = null;
 
-        public BackupLocations(){
+        public Backup(){
             InitializeComponent();
 
             LocationsListView.Items.Clear();
@@ -76,11 +76,11 @@ namespace BackupEssentials.Pages{
         private void LocationAdd(object sender, RoutedEventArgs e){
             DataStorage.BackupLocationList.Add(new BackupLocation());
             LocationsListView.SelectedIndex = DataStorage.BackupLocationList.Count-1;
-            MainWindow.Instance.ShowPage(typeof(BackupLocationsEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
+            MainWindow.Instance.ShowPage(typeof(BackupEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
         }
 
         private void LocationEdit(object sender, RoutedEventArgs e){
-            if (LocationsListView.SelectedIndex != -1)MainWindow.Instance.ShowPage(typeof(BackupLocationsEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
+            if (LocationsListView.SelectedIndex != -1)MainWindow.Instance.ShowPage(typeof(BackupEdit),DataStorage.BackupLocationList[LocationsListView.SelectedIndex]);
         }
 
         private void LocationRemove(object sender, RoutedEventArgs e){

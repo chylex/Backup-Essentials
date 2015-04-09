@@ -87,11 +87,11 @@
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ButtonMainMenu.cs" />
-    <Compile Include="Pages\BackupLocations.xaml.cs">
-      <DependentUpon>BackupLocations.xaml</DependentUpon>
+    <Compile Include="Pages\Backup.xaml.cs">
+      <DependentUpon>Backup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BackupLocationsEdit.xaml.cs">
-      <DependentUpon>BackupLocationsEdit.xaml</DependentUpon>
+    <Compile Include="Pages\BackupEdit.xaml.cs">
+      <DependentUpon>BackupEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IPageShowData.cs" />
     <Compile Include="Pages\Home.xaml.cs">
@@ -134,11 +134,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BackupLocations.xaml">
+    <Page Include="Pages\Backup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BackupLocationsEdit.xaml">
+    <Page Include="Pages\BackupEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,13 +4,13 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace BackupEssentials.Pages{
-    public partial class BackupLocationsEdit : Page, IPageShowData{
+    public partial class BackupEdit : Page, IPageShowData{
         public BackupLocation EditLocation;
         public BackupLocation TargetLocation;
 
         private string LastWarningDirectory;
 
-        public BackupLocationsEdit(){
+        public BackupEdit(){
             InitializeComponent();
         }
 
@@ -64,11 +64,11 @@ namespace BackupEssentials.Pages{
             TargetLocation.Set(EditLocation);
             DataStorage.BackupLocationListChanged = true;
             ExplorerIntegration.Refresh();
-            MainWindow.Instance.ShowPage(typeof(BackupLocations));
+            MainWindow.Instance.ShowPage(typeof(Backup));
         }
 
         private void ClickCancel(object sender, RoutedEventArgs e){
-            MainWindow.Instance.ShowPage(typeof(BackupLocations));
+            MainWindow.Instance.ShowPage(typeof(Backup));
         }
 
         private void UpdateAdvancedOptionsVisibility(object sender, RoutedEventArgs e){
