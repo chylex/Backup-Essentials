@@ -90,6 +90,9 @@
     <Compile Include="Pages\Backup.xaml.cs">
       <DependentUpon>Backup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BackupDrop.xaml.cs">
+      <DependentUpon>BackupDrop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BackupEdit.xaml.cs">
       <DependentUpon>BackupEdit.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Backup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BackupDrop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
