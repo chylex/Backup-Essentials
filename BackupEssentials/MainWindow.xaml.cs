@@ -17,6 +17,8 @@ namespace BackupEssentials{
         private new Rect RestoreBounds = new Rect();
         private bool IsMaximized = false;
 
+        private string[] DropData = null;
+
         public MainWindow(){
             InitializeComponent();
             Instance = this;
@@ -91,6 +93,24 @@ namespace BackupEssentials{
             ShowPage(GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false));
         }
 
+        private void OnDragEnter(object sender, System.Windows.DragEventArgs e){
+            if (DropData == null && e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))DropData = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
+            else e.Effects = System.Windows.DragDropEffects.None;
+
+            e.Handled = true;
+        }
+
+        private void OnDragLeave(object sender, System.Windows.DragEventArgs e){
+            DropData = null;
+        }
+
+        private void OnDragDrop(object sender, System.Windows.DragEventArgs e){
+            if (DropData != null){
+                // TODO display backup page
+                DropData = null;
+            }
+        }
+
         public void ShowPage(Type pageType){
             ShowPage(pageType,null);
         }
@@ -104,7 +124,9 @@ namespace BackupEssentials{
 
             if (!page.AllowDrop){
                 page.AllowDrop = true;
-                // TODO handle events
+                page.DragEnter += new System.Windows.DragEventHandler(OnDragEnter);
+                page.DragLeave += new System.Windows.DragEventHandler(OnDragLeave);
+                page.Drop += new System.Windows.DragEventHandler(OnDragDrop);
             }
         }
     }

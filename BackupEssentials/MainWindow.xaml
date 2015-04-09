@@ -7,7 +7,7 @@
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.MainWindow"
-        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" AllowDrop="True" MinWidth="800" MinHeight="600">
+        Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" AllowDrop="True" MinWidth="800" MinHeight="600" DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop">
     <Window.Resources>
         <Style TargetType="ResizeGrip">
             <Setter Property="Margin" Value="2"/>
