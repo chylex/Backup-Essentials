@@ -2,10 +2,8 @@
 using BackupEssentials.Controls;
 using BackupEssentials.Pages;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -58,7 +56,7 @@ namespace BackupEssentials{
                 RestoreBounds.Width = Width;
                 RestoreBounds.Height = Height;
 
-                Screen screen = Screen.FromPoint(new System.Drawing.Point((int)Math.Round(Left+Width/2),(int)Math.Round(Top+Height/2)));
+                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromPoint(new System.Drawing.Point((int)Math.Round(Left+Width/2),(int)Math.Round(Top+Height/2)));
                 Left = screen.WorkingArea.X;
                 Top = screen.WorkingArea.Y;
                 Width = screen.WorkingArea.Width;
@@ -93,20 +91,25 @@ namespace BackupEssentials{
             ShowPage(GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false));
         }
 
-        private void OnDragEnter(object sender, System.Windows.DragEventArgs e){
-            if (DropData == null && e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))DropData = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
-            else e.Effects = System.Windows.DragDropEffects.None;
+        private void OnDragEnter(object sender, DragEventArgs e){
+            if (DropData == null && e.Data.GetDataPresent(DataFormats.FileDrop)){
+                DropData = e.Data.GetData(DataFormats.FileDrop) as string[];
+                DropOverlayLabel.Visibility = Visibility.Visible;
+            }
+            else e.Effects = DragDropEffects.None;
 
             e.Handled = true;
         }
 
-        private void OnDragLeave(object sender, System.Windows.DragEventArgs e){
+        private void OnDragLeave(object sender, DragEventArgs e){
             DropData = null;
+            DropOverlayLabel.Visibility = Visibility.Hidden;
         }
 
-        private void OnDragDrop(object sender, System.Windows.DragEventArgs e){
+        private void OnDragDrop(object sender, DragEventArgs e){
             if (DropData != null){
-                // TODO display backup page
+                ShowPage(typeof(BackupDrop),DropData);
+                DropOverlayLabel.Visibility = Visibility.Hidden;
                 DropData = null;
             }
         }
@@ -124,9 +127,9 @@ namespace BackupEssentials{
 
             if (!page.AllowDrop){
                 page.AllowDrop = true;
-                page.DragEnter += new System.Windows.DragEventHandler(OnDragEnter);
-                page.DragLeave += new System.Windows.DragEventHandler(OnDragLeave);
-                page.Drop += new System.Windows.DragEventHandler(OnDragDrop);
+                page.DragEnter += new DragEventHandler(OnDragEnter);
+                page.DragLeave += new DragEventHandler(OnDragLeave);
+                page.Drop += new DragEventHandler(OnDragDrop);
             }
         }
     }

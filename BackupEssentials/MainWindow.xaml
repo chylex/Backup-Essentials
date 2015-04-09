@@ -151,5 +151,11 @@
             </Grid>
             <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" AllowDrop="True" NavigationUIVisibility="Hidden"/>
         </Grid>
+        
+        <Grid Grid.Row="1">
+            <Label x:Name="DropOverlayLabel" Background="#99151515" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden">
+                <TextBlock x:Name="DropOverlayTextBlock" Foreground="#FFDDDDDD" FontSize="48" Margin="0,0,0,36">Drop to backup</TextBlock>
+            </Label>
+        </Grid>
     </Grid>
 </Window>
