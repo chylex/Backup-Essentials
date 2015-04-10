@@ -35,7 +35,7 @@
             <Button x:Name="ButtonLocationRemove" Content="Remove" Click="LocationRemove" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}"/>
         </StackPanel>
 
-        <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" PreviewMouseLeftButtonDown="ListStartDragging" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
+        <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Padding" Value="8,4,8,8"/>
@@ -50,8 +50,8 @@
                                             <VisualState x:Name="Selected" Storyboard="{StaticResource ListViewItemStoryboardSelected}"/>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    
-                                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left">
+
+                                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left" PreviewMouseLeftButtonDown="ListStartDragging">
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding Name}" VerticalAlignment="Top" FontSize="20"/>
                                         <TextBlock Foreground="#FFCCCCCC" Text="{Binding Directory}" VerticalAlignment="Bottom" FontSize="16"/>
                                     </Grid>
