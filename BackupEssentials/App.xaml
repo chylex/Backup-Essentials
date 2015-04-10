@@ -572,7 +572,7 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Thumb}">
-                                                    <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1,0" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="17" Background="#FF191919">
+                                                    <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="1,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="17" Height="Auto" Background="#FF191919">
                                                         <VisualStateManager.VisualStateGroups>
                                                             <VisualStateGroup x:Name="CommonStates">
                                                                 <VisualStateGroup.Transitions>
@@ -595,7 +595,7 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Thumb}">
-                                                    <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="0,1" HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="32" Background="#FF191919" Margin="0,0,-16,0">
+                                                    <Border x:Name="border" BorderBrush="#FF5D5D5D" BorderThickness="0,1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="Auto" Height="17" Background="#FF191919" Margin="0,0,-16,0">
                                                         <VisualStateManager.VisualStateGroups>
                                                             <VisualStateGroup x:Name="CommonStates">
                                                                 <VisualStateGroup.Transitions>
@@ -638,7 +638,7 @@
                                                     <Grid x:Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
-                                                            <RowDefinition Height="0.00001*"/>
+                                                            <RowDefinition Height="*"/>
                                                             <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
                                                         </Grid.RowDefinitions>
                                                         <RepeatButton Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButtonUP}"/>
@@ -676,7 +676,7 @@
                                                             <Grid x:Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
-                                                                    <ColumnDefinition Width="0.00001*"/>
+                                                                    <ColumnDefinition Width="*"/>
                                                                     <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <RepeatButton Command="{x:Static ScrollBar.LineLeftCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButtonLEFT}" Themes:ScrollChrome.ScrollGlyph="LeftArrow"/>
