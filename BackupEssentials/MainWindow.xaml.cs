@@ -12,6 +12,11 @@ namespace BackupEssentials{
     public partial class MainWindow : Window{
         public static MainWindow Instance { get; private set; }
 
+        /// <summary>
+        /// Use this to not call OnShow(data) when changing the page. Only use when showing 'overlay' windows that do not modify any data.
+        /// </summary>
+        public static readonly object IgnoreShowData = new object();
+
         private new Rect RestoreBounds = new Rect();
         private bool IsMaximized = false;
 
@@ -123,7 +128,7 @@ namespace BackupEssentials{
             ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
 
             IPageShowData pageDataHandler = page as IPageShowData;
-            if (pageDataHandler != null && data != IPageShowData.IgnoreShowData)pageDataHandler.OnShow(data);
+            if (pageDataHandler != null && data != IgnoreShowData)pageDataHandler.OnShow(data);
 
             if (!page.AllowDrop){
                 page.AllowDrop = true;
