@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BackupEssentials.Utils{
@@ -29,6 +30,27 @@ namespace BackupEssentials.Utils{
             }
 
             return defaultValue;
+        }
+
+        /// <summary>
+        /// Returns all arguments after a flag (-&lt;flag&gt;) until it hits another flag. The dash in front is handled automatically.
+        /// </summary>
+        public string[] GetMultiValue(string flag){
+            flag = "-"+flag;
+            List<string> list = new List<string>();
+
+            for(int a = 0; a < Args.Length-1; a++){
+                if (Args[a].Equals(flag)){
+                    for(int index = a+1; index < Args.Length; index++){
+                        if (Args[index].StartsWith("-",StringComparison.Ordinal))break;
+                        else list.Add(Args[index]);
+                    }
+
+                    break;
+                }
+            }
+
+            return list.ToArray();
         }
     }
 }

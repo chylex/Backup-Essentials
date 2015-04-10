@@ -18,7 +18,7 @@ namespace BackupEssentials{
         /// =================
         /// -runshell = switch to backup runner
         ///     [ required -src and either -dest or -locid ]
-        ///     -src = backup source (folder or file)
+        ///     -src = backup source (folder or file, supports multiple entries)
         ///     -dest = backup destination (folder)
         ///     -locid = backup location id
         /// </summary>
@@ -37,8 +37,8 @@ namespace BackupEssentials{
                     }
                 }
 
-                if (dest.Length > 0)Application.Current.Shutdown();
-                else new BackupWindow(new BackupRunner(parser.GetValue("src",null),dest)).Show();
+                if (dest.Length > 0)new BackupWindow(new BackupRunner(parser.GetValue("src",null),dest)).Show();
+                else Application.Current.Shutdown();
             }
             else{
                 Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
