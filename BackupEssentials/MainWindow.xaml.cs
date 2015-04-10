@@ -2,6 +2,7 @@
 using BackupEssentials.Controls;
 using BackupEssentials.Pages;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -100,6 +101,7 @@ namespace BackupEssentials{
             if (DropData == null && e.Data.GetDataPresent(DataFormats.FileDrop)){
                 DropData = e.Data.GetData(DataFormats.FileDrop) as string[];
                 DropOverlayLabel.Visibility = Visibility.Visible;
+                App.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
             }
             else e.Effects = DragDropEffects.None;
 
@@ -113,8 +115,8 @@ namespace BackupEssentials{
 
         private void OnDragDrop(object sender, DragEventArgs e){
             if (DropData != null){
-                ShowPage(typeof(BackupDrop),DropData);
                 DropOverlayLabel.Visibility = Visibility.Hidden;
+                ShowPage(typeof(BackupDrop),new object[]{ DropData, ContentFrame.Content == null ? null : (ContentFrame.Content as Page).GetType() });
                 DropData = null;
             }
         }
@@ -130,7 +132,7 @@ namespace BackupEssentials{
             IPageShowData pageDataHandler = page as IPageShowData;
             if (pageDataHandler != null && data != IgnoreShowData)pageDataHandler.OnShow(data);
 
-            if (!page.AllowDrop){
+            if (page != null && !page.AllowDrop){
                 page.AllowDrop = true;
                 page.DragEnter += new DragEventHandler(OnDragEnter);
                 page.DragLeave += new DragEventHandler(OnDragLeave);
