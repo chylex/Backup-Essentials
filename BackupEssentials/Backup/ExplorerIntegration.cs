@@ -74,9 +74,9 @@ namespace BackupEssentials.Backup{
 
                 foreach(BackupLocation loc in valid){
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd;
-                    ++cmd;
                     Registry.SetValue(key,null,loc.Name);
-                    Registry.SetValue(key+@"\command",null,path+" -runshell -dest \""+loc.Directory+"\" -src \"%1\"");
+                    Registry.SetValue(key+@"\command",null,path+" -runshell -locid "+cmd+" -src \"%1\"");
+                    ++cmd;
                 }
 
                 return true;

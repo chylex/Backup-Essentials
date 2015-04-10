@@ -13,11 +13,32 @@ namespace BackupEssentials{
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hwnd);
 
+        /// <summary>
+        /// List of arguments
+        /// =================
+        /// -runshell = switch to backup runner
+        ///     [ required -src and either -dest or -locid ]
+        ///     -src = backup source (folder or file)
+        ///     -dest = backup destination (folder)
+        ///     -locid = backup location id
+        /// </summary>
         private void StartApp(object sender, StartupEventArgs args){
             ProgramArgsParser parser = new ProgramArgsParser(args.Args);
             
             if (parser.HasFlag("runshell")){
-                new BackupWindow(new BackupRunner(parser.GetValue("src",null),parser.GetValue("dest",null))).Show();
+                int locid = -1;
+                string dest = parser.GetValue("dest","");
+
+                if (int.TryParse(parser.GetValue("locid","-1"),out locid) && locid >= 0){
+                    DataStorage.Load(DataStorage.Type.Locations);
+
+                    if (locid < DataStorage.BackupLocationList.Count){
+                        dest = DataStorage.BackupLocationList[locid].Directory;
+                    }
+                }
+
+                if (dest.Length > 0)Application.Current.Shutdown();
+                else new BackupWindow(new BackupRunner(parser.GetValue("src",null),dest)).Show();
             }
             else{
                 Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
