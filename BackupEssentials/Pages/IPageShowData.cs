@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BackupEssentials.Pages{
+﻿namespace BackupEssentials.Pages{
     interface IPageShowData{
+        /// <summary>
+        /// Use this to not call OnShow(data) when changing the page. Only use when showing 'overlay' windows that do not modify any data.
+        /// </summary>
+        public static readonly object IgnoreShowData = new object();
+
         void OnShow(object data);
     }
 }
