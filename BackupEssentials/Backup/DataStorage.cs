@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace BackupEssentials.Backup{
     class DataStorage{
+        public enum Type{
+            Locations
+        }
+
         private static readonly ScheduledUpdate SaveTimer = ScheduledUpdate.Forever(10,() => {
             Save(true);
         });
+
+        private static Dictionary<Type,bool> LoadedData = new Dictionary<Type,bool>();
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
         public static bool BackupLocationListChanged = false;
@@ -21,10 +28,20 @@ namespace BackupEssentials.Backup{
                 BackupLocationListChanged = true;
                 Save();
             };
+
+            foreach(Type type in Enum.GetValues(typeof(Type))){
+                LoadedData[type] = false;
+            }
         }
 
-        public static void Load(){
-            if (File.Exists("DS.Locations.dat")){
+        static bool ShouldLoad(Type[] types, Type type){
+            return types.Length == 0 || types.Contains(type);
+        }
+
+        public static void Load(params Type[] types){
+            if (File.Exists("DS.Locations.dat") && ShouldLoad(types,Type.Locations)){
+                LoadedData[Type.Locations] = true;
+
                 try{
                     using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Open)){
                         using(StreamReader reader = new StreamReader(fileStream)){
@@ -54,7 +71,7 @@ namespace BackupEssentials.Backup{
                 return;
             }
 
-            if (BackupLocationListChanged){
+            if (BackupLocationListChanged && LoadedData[Type.Locations]){
                 BackupLocationListChanged = false;
 
                 using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Create)){
