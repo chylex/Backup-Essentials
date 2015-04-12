@@ -18,7 +18,7 @@ namespace BackupEssentials.Backup{
                         if (line.Length == 0)continue;
 
                         if (line[0] == 'I')build.Append(line.Substring(1)).Append(Environment.NewLine);
-                        else if (line[0] == 'A' && line.Length > 3)build.Append(GetFullNameAction(line[1])).Append(' ').Append(GetFullNameType(line[2])).Append(' ').Append(line.Substring(3)).Append(Environment.NewLine);
+                        else if (line[0] == 'A' && line.Length > 3)build.Append(GetFullNameAction(line[1])).Append(' ').Append(GetFullNameType(line[2])).Append(": ").Append(line.Substring(3)).Append(Environment.NewLine);
                     }
 
                     _parsed = build.ToString();
@@ -65,7 +65,7 @@ namespace BackupEssentials.Backup{
         }
 
         private static string GetFullNameType(char key){
-            return key == 'F' ? "File" : key == 'D' ? "Folder" : "(unknown type)";
+            return key == 'F' ? "File" : key == 'D' ? "Folder (and files inside)" : "(unknown type)";
         }
 
         private static IEnumerable<string> SplitByLine(string str){
