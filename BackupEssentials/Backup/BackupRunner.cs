@@ -12,14 +12,16 @@ using System.Threading;
 
 namespace BackupEssentials.Backup{
     public class BackupRunner{
+        private static readonly bool DEBUG = false;
+
         private BackgroundWorker Worker;
-        private Tuple<string,string> WorkerData;
+        private BackupRunInfo WorkerData;
 
         public Action<object,ProgressChangedEventArgs> EventProgressUpdate;
         public Action<object,RunWorkerCompletedEventArgs> EventCompleted;
 
-        public BackupRunner(string source, string destFolder){
-            WorkerData = new Tuple<string,string>(source,destFolder);
+        public BackupRunner(BackupRunInfo info){
+            WorkerData = info;
         }
 
         public void Start(){
@@ -42,37 +44,41 @@ namespace BackupEssentials.Backup{
 
         private void WorkerDoWork(object sender, DoWorkEventArgs e){
             BackgroundWorker worker = (BackgroundWorker)sender;
-            Tuple<string,string> data = (Tuple<string,string>)e.Argument;
+            BackupRunInfo data = (BackupRunInfo)e.Argument;
 
-            string src = data.Item1, fullSrc = src;
-            string destFolder = data.Item2;
+            string[] src = data.source;
+            string srcParent = Directory.GetParent(src[0]).FullName, fullSrc = string.Join(", ",src);
+            string destFolder = data.destination;
 
             // Figure out the file and directory lists
             Dictionary<string,IOEntry> srcEntries = new Dictionary<string,IOEntry>(), dstEntries = new Dictionary<string,IOEntry>();
+            string[] updatedSrc = new string[src.Length];
 
-            if (File.GetAttributes(src).HasFlag(FileAttributes.Directory)){
-                int srcLen = src.Length;
-                foreach(string dir in Directory.GetDirectories(src,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
-                foreach(string file in Directory.GetFiles(src,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+            int destFolderLen = destFolder.Length+1;
+            foreach(string dir in Directory.GetDirectories(destFolder,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+            foreach(string file in Directory.GetFiles(destFolder,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+
+            for(int a = 0; a < src.Length; a++){
+                string srcEntry = src[a];
+
+                if (File.GetAttributes(srcEntry).HasFlag(FileAttributes.Directory)){
+                    int srcLen = srcParent.Length+1;
+                    srcEntries.Add(srcEntry.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = srcEntry });
+
+                    foreach(string dir in Directory.GetDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                    foreach(string file in Directory.GetFiles(srcEntry,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+                }
+                else{
+                    string fname = Path.GetFileName(srcEntry);
+                    srcEntries.Add(fname,new IOEntry(){ Type = IOType.File, AbsolutePath = srcEntry });
                 
-                destFolder = Path.Combine(destFolder,Path.GetFileName(src.TrimEnd(Path.DirectorySeparatorChar)));
-                if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
+                    updatedSrc[a] = Directory.GetParent(srcEntry).FullName;
 
-                int destFolderLen = destFolder.Length;
-                foreach(string dir in Directory.GetDirectories(destFolder,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
-                foreach(string file in Directory.GetFiles(destFolder,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+                    if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
+                }
             }
-            else{
-                string fname = Path.GetFileName(src);
-                srcEntries.Add(fname,new IOEntry(){ Type = IOType.File, AbsolutePath = src });
-                
-                src = Directory.GetParent(src).FullName;
 
-                string dst = Path.Combine(destFolder,fname);
-                if (File.Exists(dst))dstEntries.Add(fname,new IOEntry{ Type = IOType.File, AbsolutePath = dst });
-
-                if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
-            }
+            src = updatedSrc;
 
             // Generate the IO actions
             List<IOActionEntry> actions = new List<IOActionEntry>();
@@ -83,6 +89,7 @@ namespace BackupEssentials.Backup{
             IEnumerable<string> ioIntersecting = srcEntries.Keys.Intersect(dstEntries.Keys);
             
             foreach(KeyValuePair<string,IOEntry> deleted in ioDeleted){
+                if (deleted.Key.IndexOf(Path.DirectorySeparatorChar) == -1)continue; // ignore everything in root folder
                 actions.Add(new IOActionEntry(){ Type = deleted.Value.Type, Action = IOAction.Delete, RelativePath = deleted.Key });
             }
 
@@ -117,6 +124,13 @@ namespace BackupEssentials.Backup{
             string path;
 
             BackupReport.Builder reportBuilder = new BackupReport.Builder();
+
+            if (DEBUG){
+                reportBuilder.Add("= Caution =");
+                reportBuilder.Add("Backup Essentials is running in debug mode, all actions will be logged into the report but will not actually modify any files or folders!");
+                reportBuilder.Add("");
+            }
+
             reportBuilder.Add("= Preparing backup =");
             reportBuilder.Add("Source: "+fullSrc);
             reportBuilder.Add("Destination: "+destFolder);
@@ -137,30 +151,47 @@ namespace BackupEssentials.Backup{
                     IOActionEntry entry = actions[index];
 
                     try{
+                        bool ignoreEntry = false;
+
                         if (entry.Action == IOAction.Delete){
                             path = Path.Combine(destFolder,entry.RelativePath);
 
                             if (entry.Type == IOType.File){
-                                if (File.Exists(path))File.Delete(path);
+                                if (File.Exists(path)){
+                                    if (DEBUG)reportBuilder.Add("[D] Deleting file: "+path);
+                                    else File.Delete(path);
+                                }
+                                else ignoreEntry = true;
                             }
                             else if (entry.Type == IOType.Directory){
-                                if (Directory.Exists(path))Directory.Delete(path,true);
+                                if (Directory.Exists(path)){
+                                    if (DEBUG)reportBuilder.Add("[D] Deleting directory: "+path);
+                                    else Directory.Delete(path,true);
+                                }
+                                else ignoreEntry = true;
                             }
                         }
                         else if (entry.Action == IOAction.Create){
                             path = Path.Combine(destFolder,entry.RelativePath);
 
-                            if (entry.Type == IOType.File)File.Copy(Path.Combine(src,entry.RelativePath),path,false);
+                            if (entry.Type == IOType.File){
+                                if (DEBUG)reportBuilder.Add("[D] Copying file: "+Path.Combine(srcParent,entry.RelativePath)+" --> "+path);
+                                else File.Copy(Path.Combine(srcParent,entry.RelativePath),path,false);
+                            }
                             else if (entry.Type == IOType.Directory){
-                                if (!Directory.Exists(path))Directory.CreateDirectory(path);
+                                if (!Directory.Exists(path)){
+                                    if (DEBUG)reportBuilder.Add("[D] Creating directory: "+path);
+                                    else Directory.CreateDirectory(path);
+                                }
                             }
                         }
                         else if (entry.Action == IOAction.Replace){
-                            File.Copy(Path.Combine(src,entry.RelativePath),Path.Combine(destFolder,entry.RelativePath),true);
+                            if (DEBUG)reportBuilder.Add("[D] Replacing file: "+Path.Combine(srcParent,entry.RelativePath)+" --> "+Path.Combine(destFolder,entry.RelativePath));
+                            else File.Copy(Path.Combine(srcParent,entry.RelativePath),Path.Combine(destFolder,entry.RelativePath),true);
                         }
                         
                         indexesToRemove.Add(index-indexesToRemove.Count); // goes from 0 to actions.Count, removing each index will move the structure
-                        reportBuilder.Add(entry.Action,entry.Type,entry.RelativePath);
+                        if (!ignoreEntry)reportBuilder.Add(entry.Action,entry.Type,entry.RelativePath);
 
                         worker.ReportProgress((int)Math.Ceiling(((totalActions-actions.Count+indexesToRemove.Count)*100D)/totalActions));
                         if (worker.CancellationPending)break;

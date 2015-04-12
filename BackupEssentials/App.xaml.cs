@@ -37,7 +37,10 @@ namespace BackupEssentials{
                     }
                 }
 
-                if (dest.Length > 0)new BackupWindow(new BackupRunner(parser.GetValue("src",null),dest)).Show();
+                if (dest.Length > 0){
+                    BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),dest);
+                    new BackupWindow(new BackupRunner(info)).Show();
+                }
                 else Application.Current.Shutdown();
             }
             else{

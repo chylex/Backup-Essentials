@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Backup\BackupLocation.cs" />
     <Compile Include="Backup\BackupReport.cs" />
+    <Compile Include="Backup\BackupRunInfo.cs" />
     <Compile Include="Backup\BackupRunner.cs" />
     <Compile Include="Backup\DataStorage.cs" />
     <Compile Include="Backup\ExplorerIntegration.cs" />
