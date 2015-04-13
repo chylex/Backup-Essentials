@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup;
+using BackupEssentials.Pages;
 using BackupEssentials.Utils;
 using System;
 using System.Diagnostics;
@@ -42,6 +43,11 @@ namespace BackupEssentials{
                     new BackupWindow(new BackupRunner(info)).Show();
                 }
                 else Application.Current.Shutdown();
+            }
+            else if (parser.HasFlag("runcompat")){
+                MainWindow window = new MainWindow();
+                window.ShowPage(typeof(BackupDrop),new object[]{ parser.GetMultiValue("src"), null, true });
+                window.Show();
             }
             else{
                 Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));

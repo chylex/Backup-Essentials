@@ -10,6 +10,7 @@ namespace BackupEssentials.Pages{
     public partial class BackupDrop : Page, IPageShowData{
         private Type PrevPageType;
         private string[] FileList;
+        private bool CompatMode;
         private bool Running;
 
         public BackupDrop(){
@@ -20,8 +21,12 @@ namespace BackupEssentials.Pages{
         }
 
         void IPageShowData.OnShow(object data){
-            FileList = (string[])((Object[])data)[0];
-            PrevPageType = (Type)((Object[])data)[1];
+            Object[] array = (Object[])data;
+            FileList = (string[])array[0];
+            PrevPageType = (Type)array[1];
+            CompatMode = array.Length >= 3 && (bool)array[2];
+
+            if (CompatMode)ButtonCancel.Visibility = Visibility.Collapsed;
         }
 
         private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){
@@ -36,6 +41,11 @@ namespace BackupEssentials.Pages{
             newProcess.StartInfo.FileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
             newProcess.EnableRaisingEvents = true;
             newProcess.Start();
+
+            if (CompatMode){
+                MainWindow.Instance.Close();
+                return;
+            }
 
             newProcess.Exited += (sender2, args2) => {
                 if (newProcess.ExitCode == 0){

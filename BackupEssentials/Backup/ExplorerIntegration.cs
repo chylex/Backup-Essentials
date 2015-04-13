@@ -60,6 +60,9 @@ namespace BackupEssentials.Backup{
             if (valid.Count() == 0)return true;
 
             try{
+                string path = Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8).Replace('/','\\'); // remove file:///
+                int cmd = 0;
+
                 List<string> commandNames = new List<string>();
                 for(int a = 0; a < DataStorage.BackupLocationList.Count; a++)commandNames.Add("BackupEssentials"+a);
                 string commands = String.Join(";",commandNames);
@@ -67,10 +70,8 @@ namespace BackupEssentials.Backup{
                 foreach(string target in new string[]{ "*", "Directory" }){
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","MUIVerb","Backup Essentials");
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","SubCommands",commands);
+                    Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials\command",null,path+" -runcompat -src \"%1\""); // TODO test on win xp
                 }
-
-                string path = Assembly.GetExecutingAssembly().GetName().CodeBase.Substring(8).Replace('/','\\'); // remove file:///
-                int cmd = 0;
 
                 foreach(BackupLocation loc in valid){
                     string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd;
