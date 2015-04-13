@@ -92,6 +92,8 @@ namespace BackupEssentials{
 
         private void ButtonMainMenuClick(object sender, RoutedEventArgs e){
             ButtonMainMenu btn = (ButtonMainMenu)sender;
+
+            if (!ShowPage(GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false)))return;
             
             for(int child = 0; child < VisualTreeHelper.GetChildrenCount(btn.Parent); child++){
                 ButtonMainMenu childBtn = VisualTreeHelper.GetChild(btn.Parent,child) as ButtonMainMenu;
@@ -99,7 +101,6 @@ namespace BackupEssentials{
             }
 
             btn.IsChecked = true;
-            ShowPage(GetType().Assembly.GetType("BackupEssentials."+btn.ClickPage,false));
         }
 
         private void OnDragEnter(object sender, DragEventArgs e){
@@ -126,13 +127,13 @@ namespace BackupEssentials{
             }
         }
 
-        public void ShowPage(Type pageType){
-            ShowPage(pageType,null);
+        public bool ShowPage(Type pageType){
+            return ShowPage(pageType,null);
         }
 
-        public void ShowPage(Type pageType, object data){
+        public bool ShowPage(Type pageType, object data){
             IPageSwitchHandler switchHandler = ContentFrame.Content as IPageSwitchHandler;
-            if (switchHandler != null && switchHandler.OnSwitch())return;
+            if (switchHandler != null && switchHandler.OnSwitch())return false;
 
             Page page = null;
             ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
@@ -147,6 +148,8 @@ namespace BackupEssentials{
                 page.DragLeave += new DragEventHandler(OnDragLeave);
                 page.Drop += new DragEventHandler(OnDragDrop);
             }
+
+            return true;
         }
     }
 }
