@@ -27,13 +27,18 @@ namespace BackupEssentials{
             InitializeComponent();
             Instance = this;
 
-            Loaded += (args, sender) => {
+            Loaded += (sender, args) => {
                 Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
                     DataStorage.Load();
                 }));
             };
 
-            Closed += (args, sender) => {
+            Closing += (sender, args) => {
+                IPageSwitchHandler switchHandler = ContentFrame.Content as IPageSwitchHandler;
+                if (switchHandler != null && switchHandler.OnSwitch())args.Cancel = true;
+            };
+
+            Closed += (sender, args) => {
                 DataStorage.Save(true);
                 ExplorerIntegration.Refresh(true);
             };
@@ -126,6 +131,9 @@ namespace BackupEssentials{
         }
 
         public void ShowPage(Type pageType, object data){
+            IPageSwitchHandler switchHandler = ContentFrame.Content as IPageSwitchHandler;
+            if (switchHandler != null && switchHandler.OnSwitch())return;
+
             Page page = null;
             ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
             if (ContentFrame.NavigationService.CanGoBack)ContentFrame.NavigationService.RemoveBackEntry();
