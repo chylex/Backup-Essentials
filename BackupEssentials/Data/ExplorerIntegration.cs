@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace BackupEssentials.Backup{
+namespace BackupEssentials.Backup.Data{
     static class ExplorerIntegration{
         /*
         HKCR\*\shell\<appname>

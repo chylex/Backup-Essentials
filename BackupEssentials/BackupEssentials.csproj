@@ -80,8 +80,8 @@
     <Compile Include="Backup\BackupReport.cs" />
     <Compile Include="Backup\BackupRunInfo.cs" />
     <Compile Include="Backup\BackupRunner.cs" />
-    <Compile Include="Backup\DataStorage.cs" />
-    <Compile Include="Backup\ExplorerIntegration.cs" />
+    <Compile Include="Data\DataStorage.cs" />
+    <Compile Include="Data\ExplorerIntegration.cs" />
     <Compile Include="Backup\IO\IOAction.cs" />
     <Compile Include="Backup\IO\IOType.cs" />
     <Compile Include="Pages\About.xaml.cs">

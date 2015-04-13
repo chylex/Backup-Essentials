@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace BackupEssentials.Backup{
+namespace BackupEssentials.Backup.Data{
     class DataStorage{
         public enum Type{
             Locations
