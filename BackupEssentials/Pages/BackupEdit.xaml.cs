@@ -40,7 +40,7 @@ namespace BackupEssentials.Pages{
         private void ClickSave(object sender, RoutedEventArgs e){
             if (EditLocation.Name.Length == 0){
                 VisualStateManager.GoToState(TextBoxName,"Invalid",true);
-                System.Windows.MessageBox.Show("Location name cannot be empty.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(App.Window,"Location name cannot be empty.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace BackupEssentials.Pages{
                 if (warning.Length != 0){
                     VisualStateManager.GoToState(TextBoxDirectory,"Invalid",true);
                     LastWarningDirectory = EditLocation.Directory;
-                    System.Windows.MessageBox.Show(warning+" Click Save again to confirm.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show(App.Window,warning+" Click Save again to confirm.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
                     return;
                 }
             }
