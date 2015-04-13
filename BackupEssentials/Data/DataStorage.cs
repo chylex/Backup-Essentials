@@ -10,7 +10,7 @@ using System.Linq;
 namespace BackupEssentials.Backup.Data{
     class DataStorage{
         public enum Type{
-            Locations
+            Locations, History
         }
 
         private static readonly ScheduledUpdate SaveTimer = ScheduledUpdate.Forever(10,() => {
@@ -21,11 +21,14 @@ namespace BackupEssentials.Backup.Data{
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
         public static readonly ChangeTracker BackupLocationListTracker = new ChangeTracker();
+        public static readonly ObservableCollection<HistoryEntry> HistoryEntryList = new ObservableCollection<HistoryEntry>(new List<HistoryEntry>(32));
+        public static readonly ChangeTracker HistoryEntryListTracker = new ChangeTracker();
 
         static DataStorage(){
             SaveTimer.Start();
 
             BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker);
+            HistoryEntryList.CollectionChanged += Tracker(HistoryEntryListTracker);
 
             foreach(Type type in Enum.GetValues(typeof(Type))){
                 LoadedData[type] = false;
