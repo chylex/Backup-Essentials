@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Properties;
+using BackupEssentials.Utils;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,8 @@ namespace BackupEssentials.Backup{
                 RefreshTimer.NeedsUpdate = true;
                 return true;
             }
+
+            if (!Settings.Default.IntegrateWindowsExplorer)return true;
 
             IEnumerable<BackupLocation> valid = DataStorage.BackupLocationList.Where(loc => loc.ShouldRegister());
             if (valid.Count() == 0)return true;
