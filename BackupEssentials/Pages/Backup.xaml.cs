@@ -24,6 +24,9 @@ namespace BackupEssentials.Pages{
 
         void IPageShowData.OnShow(object data){
             LocationsListView.Items.Refresh();
+
+            int count = DataStorage.BackupLocationList.Count;
+            if (count > 0 && DataStorage.BackupLocationList[count-1].Name.Length == 0)DataStorage.BackupLocationList.RemoveAt(count-1);
         }
 
         private void ListStartDragging(object sender, MouseButtonEventArgs e){
