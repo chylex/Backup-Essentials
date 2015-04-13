@@ -1,8 +1,9 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Backup.History;
+using BackupEssentials.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 
@@ -19,19 +20,24 @@ namespace BackupEssentials.Backup.Data{
         private static Dictionary<Type,bool> LoadedData = new Dictionary<Type,bool>();
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
-        public static bool BackupLocationListChanged = false;
+        public static readonly ChangeTracker BackupLocationListTracker = new ChangeTracker();
 
         static DataStorage(){
             SaveTimer.Start();
 
-            BackupLocationList.CollectionChanged += (sender, args) => {
-                BackupLocationListChanged = true;
-                Save();
-            };
+            BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker);
 
             foreach(Type type in Enum.GetValues(typeof(Type))){
                 LoadedData[type] = false;
             }
+        }
+
+        public class ChangeTracker{
+            public bool Changed;
+        }
+
+        static NotifyCollectionChangedEventHandler Tracker(ChangeTracker tracker){
+            return new NotifyCollectionChangedEventHandler((sender, args) => { tracker.Changed = true; Save(); });
         }
 
         static bool ShouldLoad(Type[] types, Type type){
@@ -42,22 +48,12 @@ namespace BackupEssentials.Backup.Data{
             if (File.Exists("DS.Locations.dat") && ShouldLoad(types,Type.Locations)){
                 LoadedData[Type.Locations] = true;
 
-                try{
-                    using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Open)){
-                        using(StreamReader reader = new StreamReader(fileStream)){
-                            string line;
-
-                            while((line = reader.ReadLine()) != null){
-                                if (line.Length == 0)continue;
-                                BackupLocation loc = new BackupLocation();
-                                StringDictionarySerializer.FromString(loc,line);
-                                BackupLocationList.Add(loc);
-                            }
-                        }
-                    }
-                }catch(Exception e){
-                    Debug.WriteLine(e.ToString());
-                }
+                FileUtils.ReadFile("DS.Locations.dat",FileMode.Open,(line) => {
+                    if (line.Length == 0)return;
+                    BackupLocation loc = new BackupLocation();
+                    StringDictionarySerializer.FromString(loc,line);
+                    BackupLocationList.Add(loc);
+                });
             }
         }
 
@@ -71,14 +67,12 @@ namespace BackupEssentials.Backup.Data{
                 return;
             }
 
-            if (BackupLocationListChanged && LoadedData[Type.Locations]){
-                BackupLocationListChanged = false;
+            if (BackupLocationListTracker.Changed && LoadedData[Type.Locations]){
+                BackupLocationListTracker.Changed = false;
 
-                using(FileStream fileStream = new FileStream("DS.Locations.dat",FileMode.Create)){
-                    using(StreamWriter writer = new StreamWriter(fileStream)){
-                        foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
-                    }
-                }
+                FileUtils.WriteFile("DS.Locations.dat",FileMode.Create,(writer) => {
+                    foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
+                });
             }
         }
     }

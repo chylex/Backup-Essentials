@@ -63,7 +63,7 @@ namespace BackupEssentials.Pages{
             }
 
             TargetLocation.Set(EditLocation);
-            DataStorage.BackupLocationListChanged = true;
+            DataStorage.BackupLocationListTracker.Changed = true;
             ExplorerIntegration.Refresh();
             MainWindow.Instance.ShowPage(typeof(Backup));
         }

@@ -108,6 +108,7 @@
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\KeyEqualityComparer.cs" />
     <Compile Include="Utils\SafeDictionary.cs" />
     <Compile Include="Utils\StringDictionarySerializer.cs" />
