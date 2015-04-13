@@ -93,7 +93,9 @@ namespace BackupEssentials.Backup{
 
         public static void Remove(){
             try{
+                Registry.ClassesRoot.DeleteSubKey(@"*\shell\BackupEssentials\command",false);
                 Registry.ClassesRoot.DeleteSubKey(@"*\shell\BackupEssentials",false);
+                Registry.ClassesRoot.DeleteSubKey(@"Directory\shell\BackupEssentials\command",false);
                 Registry.ClassesRoot.DeleteSubKey(@"Directory\shell\BackupEssentials",false);
             }catch{}
 
