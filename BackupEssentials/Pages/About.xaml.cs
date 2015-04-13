@@ -19,7 +19,7 @@ namespace BackupEssentials.Pages{
             build.Append("You are using ").Append(WindowsVersion.Get()).Append(' ');
             build.Append(Environment.Is64BitOperatingSystem ? "x64" : "x86").Append(' ');
             build.Append(os.ServicePack.Replace("Service Pack ","SP")).Append(' ');
-            build.Append(os.Version.Major >= 6 ? "(supported)." : "(not supported).");
+            build.Append(WindowsVersion.IsFullySupported() ? "(supported)." : "(not supported).");
             
             AboutTextOS.Text = build.ToString();
         }

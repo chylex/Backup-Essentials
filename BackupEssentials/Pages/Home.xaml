@@ -53,6 +53,9 @@
                     <Border Width="358" Height="136" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="134" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <TextBlock x:Name="TextBlockContextMenuWarning" Margin="6,2" FontSize="12" Foreground="#FFDDDDDD" Opacity="0">
+                        Warning: Expanding menu is only available on Windows 7 and newer, your system will only show the Backup Essentials item. If you click it, you will be able to select the backup destination.
+                    </TextBlock>
                 </WrapPanel>
 
                 <WrapPanel Orientation="Vertical" Grid.Column="2">

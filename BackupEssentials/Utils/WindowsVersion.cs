@@ -40,5 +40,13 @@ namespace BackupEssentials.Utils{
 
             return null;
         }
+
+        /// <summary>
+        /// Full support is only available on Windows 7 and newer. Returns true if the used OS version has full support.
+        /// </summary>
+        public static bool IsFullySupported(){
+            Version version = Environment.OSVersion.Version;
+            return version.Major > 6 || (version.Major == 6 && version.Minor >= 1);
+        }
     }
 }
