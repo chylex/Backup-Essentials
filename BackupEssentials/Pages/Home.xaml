@@ -23,10 +23,6 @@
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="TextWrapping" Value="Wrap"/>
                 </Style>
-                <Style TargetType="Label">
-                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
-                    <Setter Property="FontSize" Value="14"/>
-                </Style>
             </WrapPanel.Resources>
             
             <TextBlock Style="{StaticResource TextBlockTitle}">
