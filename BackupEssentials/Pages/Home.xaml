@@ -62,9 +62,12 @@
                     <TextBlock Style="{StaticResource TextBlockSubTitle}">
                         2. Drag and Drop
                     </TextBlock>
-                    <TextBlock Margin="6,0">
+                    <TextBlock Margin="6,2">
                         Select one or more files or folders, and drag them into this window. This requires the program to be running.
                     </TextBlock>
+                    <Border Width="358" Height="252" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/BackupEssentials;component/Resources/Guide2.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
                 </WrapPanel>
             </Grid>
         </WrapPanel>
