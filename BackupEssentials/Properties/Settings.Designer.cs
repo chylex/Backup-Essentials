@@ -22,5 +22,18 @@ namespace BackupEssentials.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool IntegrateWindowsExplorer {
+            get {
+                return ((bool)(this["IntegrateWindowsExplorer"]));
+            }
+            set {
+                this["IntegrateWindowsExplorer"] = value;
+            }
+        }
     }
 }

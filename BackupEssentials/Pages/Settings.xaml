@@ -2,12 +2,75 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:properties="clr-namespace:BackupEssentials.Properties"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="Settings">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="18"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" VerticalAlignment="Center" Margin="32,0" HorizontalAlignment="Right">
+            <WrapPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </WrapPanel.Resources>
+
+            <Button x:Name="ButtonSave" Content="Save settings" IsEnabled="False" FontSize="16" Width="130" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
+            <Button x:Name="ButtonCancel" Content="Cancel" IsEnabled="False" FontSize="16" Width="80" Template="{StaticResource ButtonStyleRedDefault}" Margin="0,0,10,0" Click="ClickCancel"/>
+            <Button x:Name="ButtonReset" Content="Reset to default" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
+        </WrapPanel>
+
+        <Grid x:Name="GridContainer" Grid.Row="1" Margin="24,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Margin" Value="8"/>
+                </Style>
+                <Style x:Key="StackPanelSub" TargetType="StackPanel">
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+                <Style x:Key="TextBlockSubTitle" TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                    <Setter Property="FontSize" Value="18"/>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                </Style>
+                <Style TargetType="CheckBox">
+                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+
+                <properties:Settings x:Key="Settings" />
+            </Grid.Resources>
+            
+            <StackPanel>
+                <TextBlock Style="{StaticResource TextBlockSubTitle}">
+                    General settings
+                </TextBlock>
+                <StackPanel Style="{StaticResource StackPanelSub}">
+                    <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.IntegrateWindowsExplorer}">Integrate with Windows Explorer</CheckBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0">
+            Hint: Move your cursor over an option to see a detailed description
+        </TextBlock>
     </Grid>
 </Page>
