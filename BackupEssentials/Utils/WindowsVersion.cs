@@ -3,13 +3,17 @@ using System;
 
 namespace BackupEssentials.Utils{
     static class WindowsVersion{
+        private static string CachedVersionName;
+
         public static string Get(){
+            if (CachedVersionName != null)return CachedVersionName;
+
             try{
                 RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-                if (key != null)return (string)key.GetValue("ProductName");
+                if (key != null)return CachedVersionName = (string)key.GetValue("ProductName");
             }catch{}
 
-            return GetFromEnvironment() ?? "(unknown)";
+            return CachedVersionName = (GetFromEnvironment() ?? "(unknown)");
         }
 
         private static string GetFromEnvironment(){
