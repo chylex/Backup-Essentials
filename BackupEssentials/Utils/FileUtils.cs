@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace BackupEssentials.Utils{
     static class FileUtils{
@@ -28,6 +30,41 @@ namespace BackupEssentials.Utils{
                 using(FileStream fileStream = new FileStream(filename,mode)){
                     using(StreamWriter writer = new StreamWriter(fileStream)){
                         writeAction.Invoke(writer);
+                    }
+                }
+
+                return true;
+            }catch(Exception e){
+                Debug.WriteLine(e.ToString());
+                return false;
+            }
+        }
+
+        public static string ReadFileCompressed(string filename, FileMode mode){
+            try{
+                string data;
+
+                using(FileStream fileStream = new FileStream(filename,mode)){
+                    using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Decompress)){
+                        using(StreamReader reader = new StreamReader(compressed)){
+                            data = reader.ReadToEnd();
+                        }
+                    }
+                }
+
+                return data;
+            }catch(Exception e){
+                Debug.WriteLine(e.ToString());
+                return null;
+            }
+        }
+
+        public static bool WriteFileCompressed(string filename, FileMode mode, string data){
+            try{
+                using(FileStream fileStream = new FileStream(filename,mode)){
+                    using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Compress)){
+                        byte[] bytes = Encoding.UTF8.GetBytes(data);
+                        compressed.Write(bytes,0,bytes.Length);
                     }
                 }
 
