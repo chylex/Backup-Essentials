@@ -9,12 +9,19 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Runcompat|Any CPU = Runcompat|Any CPU
+		Runshell|Any CPU = Runshell|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Runcompat|Any CPU.ActiveCfg = Runcompat|Any CPU
+		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Runcompat|Any CPU.Build.0 = Runcompat|Any CPU
+		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Runshell|Any CPU.ActiveCfg = Debug (Args)|Any CPU
+		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Runshell|Any CPU.Build.0 = Debug (Args)|Any CPU
+		{AC2547A3-2ED8-4B76-88D7-5C72AE840EE2}.Runshell|Any CPU.Deploy.0 = Debug (Args)|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
