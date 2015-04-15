@@ -53,7 +53,7 @@ namespace BackupEssentials.Backup.Data{
         }
 
         public static void Load(params Type[] types){
-            if (ShouldLoad(types,Type.Locations) && File.Exists("DS.Locations.dat")){
+            if (ShouldLoad(types,Type.Locations)){
                 LoadedData[Type.Locations] = true;
 
                 FileUtils.ReadFile("DS.Locations.dat",FileMode.Open,(line) => {

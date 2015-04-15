@@ -7,6 +7,8 @@ using System.Text;
 namespace BackupEssentials.Utils{
     static class FileUtils{
         public static bool ReadFile(string filename, FileMode mode, Action<string> lineAction){
+            if (!File.Exists(filename))return false;
+
             try{
                 using(FileStream fileStream = new FileStream(filename,mode)){
                     using(StreamReader reader = new StreamReader(fileStream)){
@@ -43,6 +45,8 @@ namespace BackupEssentials.Utils{
         }
 
         public static string ReadFileCompressed(string filename, FileMode mode){
+            if (!File.Exists(filename))return null;
+
             try{
                 string data;
 
