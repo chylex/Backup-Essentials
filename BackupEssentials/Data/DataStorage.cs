@@ -13,9 +13,7 @@ namespace BackupEssentials.Backup.Data{
             Locations, History
         }
 
-        private static readonly ScheduledUpdate SaveTimer = ScheduledUpdate.Forever(10,() => {
-            Save(true);
-        });
+        private static ScheduledUpdate SaveTimer;
 
         private static Dictionary<Type,bool> LoadedData = new Dictionary<Type,bool>();
 
@@ -24,7 +22,22 @@ namespace BackupEssentials.Backup.Data{
         public static readonly ObservableCollection<HistoryEntry> HistoryEntryList = new ObservableCollection<HistoryEntry>(new List<HistoryEntry>(32));
         public static readonly ChangeTracker HistoryEntryListTracker = new ChangeTracker();
 
-        static DataStorage(){
+        public class ChangeTracker{
+            public bool Changed;
+        }
+
+        static NotifyCollectionChangedEventHandler Tracker(ChangeTracker tracker){
+            return new NotifyCollectionChangedEventHandler((sender, args) => { tracker.Changed = true; Save(); });
+        }
+
+        /// <summary>
+        /// Run this to allow data saving (loading is available automatically).
+        /// </summary>
+        public static void SetupForSaving(){
+            SaveTimer = ScheduledUpdate.Forever(10,() => {
+                Save(true);
+            });
+
             SaveTimer.Start();
 
             BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker);
@@ -35,20 +48,12 @@ namespace BackupEssentials.Backup.Data{
             }
         }
 
-        public class ChangeTracker{
-            public bool Changed;
-        }
-
-        static NotifyCollectionChangedEventHandler Tracker(ChangeTracker tracker){
-            return new NotifyCollectionChangedEventHandler((sender, args) => { tracker.Changed = true; Save(); });
-        }
-
         static bool ShouldLoad(Type[] types, Type type){
             return types.Length == 0 || types.Contains(type);
         }
 
         public static void Load(params Type[] types){
-            if (File.Exists("DS.Locations.dat") && ShouldLoad(types,Type.Locations)){
+            if (ShouldLoad(types,Type.Locations) && File.Exists("DS.Locations.dat")){
                 LoadedData[Type.Locations] = true;
 
                 FileUtils.ReadFile("DS.Locations.dat",FileMode.Open,(line) => {
@@ -65,6 +70,8 @@ namespace BackupEssentials.Backup.Data{
         }
 
         public static void Save(bool force){
+            if (SaveTimer == null)throw new NotSupportedException("DataStorage was not initialized for saving!");
+
             if (!force){
                 SaveTimer.NeedsUpdate = true;
                 return;
