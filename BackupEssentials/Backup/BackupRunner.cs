@@ -50,35 +50,53 @@ namespace BackupEssentials.Backup{
             string srcParent = Directory.GetParent(src[0]).FullName, fullSrc = string.Join(", ",src);
             string destFolder = data.destination;
 
-            // Figure out the file and directory lists
+            // Figure out the source file and directory lists
+            HashSet<string> rootSrcEntries = new HashSet<string>();
             Dictionary<string,IOEntry> srcEntries = new Dictionary<string,IOEntry>(), dstEntries = new Dictionary<string,IOEntry>();
             string[] updatedSrc = new string[src.Length];
-
-            int destFolderLen = destFolder.Length+1;
-            foreach(string dir in Directory.GetDirectories(destFolder,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
-            foreach(string file in Directory.GetFiles(destFolder,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
 
             for(int a = 0; a < src.Length; a++){
                 string srcEntry = src[a];
 
                 if (File.GetAttributes(srcEntry).HasFlag(FileAttributes.Directory)){
                     int srcLen = srcParent.Length+1;
-                    srcEntries.Add(srcEntry.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = srcEntry });
+                    string dname = srcEntry.Remove(0,srcLen);
+
+                    rootSrcEntries.Add(dname);
+                    srcEntries.Add(dname,new IOEntry(){ Type = IOType.Directory, AbsolutePath = srcEntry });
 
                     foreach(string dir in Directory.GetDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                     foreach(string file in Directory.GetFiles(srcEntry,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
                 }
                 else{
                     string fname = Path.GetFileName(srcEntry);
+
+                    rootSrcEntries.Add(fname);
                     srcEntries.Add(fname,new IOEntry(){ Type = IOType.File, AbsolutePath = srcEntry });
                 
                     updatedSrc[a] = Directory.GetParent(srcEntry).FullName;
-
-                    if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
                 }
             }
 
             src = updatedSrc;
+
+            // Figure out the destination info
+            if (!Directory.Exists(destFolder))Directory.CreateDirectory(destFolder);
+            
+            int destFolderLen = destFolder.Length+1;
+
+            foreach(string entry in Directory.GetFileSystemEntries(destFolder,"*",SearchOption.TopDirectoryOnly)){
+                string entryName = entry.Remove(0,destFolderLen);
+
+                if (rootSrcEntries.Remove(entryName)){
+                    if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory)){
+                        dstEntries.Add(entryName,new IOEntry(){ Type = IOType.Directory, AbsolutePath = entry });
+                        foreach(string dir in Directory.GetDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                        foreach(string file in Directory.GetFiles(entry,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
+                    }
+                    else dstEntries.Add(entryName,new IOEntry(){ Type = IOType.File, AbsolutePath = entry });
+                }
+            }
 
             // Generate the IO actions
             List<IOActionEntry> actions = new List<IOActionEntry>();
