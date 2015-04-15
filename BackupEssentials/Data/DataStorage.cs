@@ -22,7 +22,7 @@ namespace BackupEssentials.Backup.Data{
         public static readonly ObservableCollection<HistoryEntry> HistoryEntryList = new ObservableCollection<HistoryEntry>(new List<HistoryEntry>(32));
         public static readonly ChangeTracker HistoryEntryListTracker = new ChangeTracker();
 
-        public struct ChangeTracker{
+        public class ChangeTracker{
             public bool Changed;
         }
 
