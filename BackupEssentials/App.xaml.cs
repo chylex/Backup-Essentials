@@ -34,6 +34,7 @@ namespace BackupEssentials{
                 string dest = parser.GetValue("dest","");
 
                 if (int.TryParse(parser.GetValue("locid","-1"),out locid) && locid >= 0){
+                    Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                     DataStorage.Load(DataStorage.Type.Locations);
 
                     if (locid < DataStorage.BackupLocationList.Count){
@@ -45,9 +46,10 @@ namespace BackupEssentials{
                     BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),dest);
                     new BackupWindow(new BackupRunner(info)).Show();
                 }
-                else Application.Current.Shutdown();
+                else throw new ArgumentException("Backup could not begin, destination is empty. Program arguments: "+string.Join(" ",args.Args));
             }
             else if (parser.HasFlag("runcompat")){
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                 MainWindow window = new MainWindow();
                 window.ShowPage(typeof(BackupDrop),new object[]{ parser.GetMultiValue("src"), null, true });
                 window.Show();
