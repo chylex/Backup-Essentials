@@ -85,14 +85,18 @@ namespace BackupEssentials{
         }
 
         private void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e){
+            LogException(e.Exception);
+
+            // TODO
+        }
+
+        public static void LogException(Exception e){
             using(FileStream fileStream = new FileStream("exceptions.log",FileMode.Append)){
                 using(StreamWriter writer = new StreamWriter(fileStream)){
-                    writer.WriteLine(e.Exception.ToString());
+                    writer.WriteLine(e.ToString());
                     writer.WriteLine();
                 }
             }
-
-            // TODO
         }
     }
 }

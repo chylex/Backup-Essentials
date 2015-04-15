@@ -21,6 +21,7 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
+                App.LogException(e);
                 return false;
             }
         }
@@ -36,6 +37,7 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
+                App.LogException(e);
                 return false;
             }
         }
@@ -55,6 +57,7 @@ namespace BackupEssentials.Utils{
                 return data;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
+                App.LogException(e);
                 return null;
             }
         }
@@ -71,6 +74,7 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
+                App.LogException(e);
                 return false;
             }
         }
