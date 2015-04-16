@@ -48,6 +48,19 @@ namespace BackupEssentials.Backup{
             return defaultValue;
         }
 
+        public int TryFindValue(string key, int defaultValue){
+            key = key+'=';
+
+            foreach(string line in SplitByLine(_plain)){
+                if (line.Length > 0 && line[0] == 'V' && line.Substring(1).StartsWith(key)){
+                    int value;
+                    return int.TryParse(line.Substring(key.Length+1),out value) ? value : defaultValue;
+                }
+            }
+
+            return defaultValue;
+        }
+
         public override string ToString(){
             return Report;
         }
