@@ -150,14 +150,14 @@ namespace BackupEssentials.Backup{
             }
 
             reportBuilder.Add("= Preparing backup =");
-            reportBuilder.Add("Source: "+fullSrc);
-            reportBuilder.Add("Destination: "+destFolder);
-            reportBuilder.Add("Date: "+DateTime.Now.ToString("d",CultureInfo.CurrentCulture)+" "+DateTime.Now.ToString("t",CultureInfo.CurrentCulture));
+            reportBuilder.Add("Source",fullSrc);
+            reportBuilder.Add("Destination",destFolder);
+            reportBuilder.Add("Date",DateTime.Now.ToString("d",CultureInfo.CurrentCulture)+" "+DateTime.Now.ToString("t",CultureInfo.CurrentCulture));
             reportBuilder.Add("");
             reportBuilder.Add("= Files and folders =");
-            reportBuilder.Add("Added: "+actions.Count((entry) => entry.Action == IOAction.Create));
-            reportBuilder.Add("Updated: "+actions.Count((entry) => entry.Action == IOAction.Replace));
-            reportBuilder.Add("Deleted: "+actions.Count((entry) => entry.Action == IOAction.Delete));
+            reportBuilder.Add("Added",actions.Count((entry) => entry.Action == IOAction.Create).ToString());
+            reportBuilder.Add("Updated",actions.Count((entry) => entry.Action == IOAction.Replace).ToString());
+            reportBuilder.Add("Deleted",actions.Count((entry) => entry.Action == IOAction.Delete).ToString());
             reportBuilder.Add("");
             reportBuilder.Add("= Starting backup =");
 
