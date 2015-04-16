@@ -30,7 +30,7 @@ namespace BackupEssentials{
 
             Loaded += (sender, args) => {
                 Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
-                    DataStorage.SetupForSaving();
+                    DataStorage.SetupForSaving(true);
                     DataStorage.Load();
                 }));
             };

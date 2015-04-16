@@ -14,6 +14,7 @@ namespace BackupEssentials.Backup.Data{
         }
 
         private static ScheduledUpdate SaveTimer;
+        private static bool IsSetupForSaving = false;
 
         private static Dictionary<Type,bool> LoadedData = new Dictionary<Type,bool>();
 
@@ -33,18 +34,22 @@ namespace BackupEssentials.Backup.Data{
         /// <summary>
         /// Run this to allow data saving (loading is available automatically).
         /// </summary>
-        public static void SetupForSaving(){
-            SaveTimer = ScheduledUpdate.Forever(10,() => {
-                Save(true);
-            });
-
-            SaveTimer.Start();
+        public static void SetupForSaving(bool scheduled){
+            IsSetupForSaving = true;
 
             BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker);
             HistoryEntryList.CollectionChanged += Tracker(HistoryEntryListTracker);
 
             foreach(Type type in Enum.GetValues(typeof(Type))){
                 LoadedData[type] = false;
+            }
+            
+            if (scheduled){
+                SaveTimer = ScheduledUpdate.Forever(10,() => {
+                    Save(true);
+                });
+
+                SaveTimer.Start();
             }
         }
 
@@ -81,7 +86,8 @@ namespace BackupEssentials.Backup.Data{
         }
 
         public static void Save(bool force){
-            if (SaveTimer == null)throw new NotSupportedException("DataStorage was not initialized for saving!");
+            if (!IsSetupForSaving)throw new NotSupportedException("DataStorage was not initialized for saving!");
+            else if (SaveTimer == null && !force)throw new NotSupportedException("DataStorage was not initialized for scheduled saving!");
 
             if (!force){
                 SaveTimer.NeedsUpdate = true;
