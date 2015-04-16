@@ -31,7 +31,7 @@ namespace BackupEssentials{
 
             Closing += (sender, args) => {
                 if (HistoryGenWorker != null){
-                    if (MessageBox.Show(App.Window,"History entry is generating","The history entry has not been generated yet, do you want to close the window anyways?",MessageBoxButton.YesNo) == MessageBoxResult.No){
+                    if (MessageBox.Show(App.Window,"The history entry has not been generated yet, do you want to close the window anyways?","History entry is generating",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.No){
                         args.Cancel = true;
                     }
                 }
