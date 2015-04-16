@@ -37,12 +37,12 @@ namespace BackupEssentials.Backup.History{
                     EntriesRemoved = report.TryFindValue("Removed",0)
                 };
 
-                DataStorage.HistoryEntryList.Add(entry);
+                DataStorage.HistoryEntryList.Insert(0,entry);
 
-                if (!Directory.Exists("History"))Directory.CreateDirectory("History");
+                if (!Directory.Exists(HistoryEntry.Directory))Directory.CreateDirectory(HistoryEntry.Directory);
 
                 string filename = entry.LocationName+'_'+entry.BackupTime.ToString("yyyy-MM-dd_HH-mm-ss",CultureInfo.InvariantCulture)+".log";
-                if (FileUtils.WriteFileCompressed("History/"+filename,FileMode.Create,report.UnparsedReport))entry.Filename = filename;
+                if (FileUtils.WriteFileCompressed(Path.Combine(HistoryEntry.Directory,filename),FileMode.Create,report.UnparsedReport))entry.Filename = filename;
 
                 DataStorage.Save(true);
                 args.Result = "";

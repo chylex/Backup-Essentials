@@ -90,6 +90,7 @@
     <Compile Include="Backup\BackupRunInfo.cs" />
     <Compile Include="Backup\BackupRunner.cs" />
     <Compile Include="Backup\History\HistoryEntry.cs" />
+    <Compile Include="Backup\History\HistoryGenerator.cs" />
     <Compile Include="Data\DataStorage.cs" />
     <Compile Include="Data\ExplorerIntegration.cs" />
     <Compile Include="Backup\IO\IOAction.cs" />

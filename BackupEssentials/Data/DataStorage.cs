@@ -20,7 +20,7 @@ namespace BackupEssentials.Backup.Data{
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
         public static readonly ChangeTracker BackupLocationListTracker = new ChangeTracker();
-        public static readonly ObservableCollection<HistoryEntry> HistoryEntryList = new ObservableCollection<HistoryEntry>(new List<HistoryEntry>(32));
+        public static readonly ObservableCollection<HistoryEntry> HistoryEntryList = new ObservableCollection<HistoryEntry>(new LinkedList<HistoryEntry>());
         public static readonly ChangeTracker HistoryEntryListTracker = new ChangeTracker();
 
         public class ChangeTracker{

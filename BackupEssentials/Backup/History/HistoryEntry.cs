@@ -3,6 +3,8 @@ using System;
 
 namespace BackupEssentials.Backup.History{
     public class HistoryEntry : StringDictionarySerializer.IObjectToDictionary{
+        public static readonly string Directory = "History";
+
         public string LocationName { get; set; }
         public DateTime BackupTime { get; set; }
         public int EntriesAdded { get; set; }
