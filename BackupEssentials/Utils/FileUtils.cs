@@ -44,27 +44,25 @@ namespace BackupEssentials.Utils{
             }
         }
 
-        public static bool ReadFileCompressed(string filename, FileMode mode, Action<string> lineAction){
-            if (!File.Exists(filename))return false;
+        public static string ReadFileCompressed(string filename, FileMode mode){
+            if (!File.Exists(filename))return null;
 
             try{
+                string data;
+
                 using(FileStream fileStream = new FileStream(filename,mode)){
                     using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Decompress)){
                         using(StreamReader reader = new StreamReader(compressed)){
-                            string line;
-
-                            while((line = reader.ReadLine()) != null){
-                                lineAction.Invoke(line);
-                            }
+                            data = reader.ReadToEnd();
                         }
                     }
                 }
 
-                return true;
+                return data;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
                 App.LogException(e);
-                return false;
+                return null;
             }
         }
 
