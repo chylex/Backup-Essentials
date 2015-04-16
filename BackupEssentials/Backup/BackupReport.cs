@@ -77,7 +77,7 @@ namespace BackupEssentials.Backup{
             }
 
             public void Add(string key, string value){
-                Build.Append('V').Append(key).Append('=').Append(value);
+                Build.Append('V').Append(key).Append('=').Append(value).Append(Environment.NewLine);
             }
 
             public BackupReport Finish(){
