@@ -145,7 +145,7 @@
                 </Grid.ColumnDefinitions>
                 <custom:ButtonMainMenu Content="Home" ClickPage="Pages.Home" IsChecked="True" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="Backup" ClickPage="Pages.Backup" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="History" ClickPage="Pages.History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="Settings" ClickPage="Pages.Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
                 <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
             </Grid>

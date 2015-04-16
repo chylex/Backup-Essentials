@@ -34,7 +34,7 @@ namespace BackupEssentials.Backup{
             }
         }
 
-        private BackupReport(string report){
+        public BackupReport(string report){
             this._plain = report;
         }
 
