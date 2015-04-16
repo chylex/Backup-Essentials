@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup;
+using BackupEssentials.Backup.History;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace BackupEssentials{
         private BackupReport Report;
         private BackupReportWindow ReportWindow;
         private DispatcherTimer CloseTimer;
+        private BackgroundWorker HistoryGenWorker;
 
         public BackupWindow(BackupRunner runner){
             InitializeComponent();
@@ -26,6 +28,14 @@ namespace BackupEssentials{
             runner.Start();
 
             this.Runner = runner;
+
+            Closing += (sender, args) => {
+                if (HistoryGenWorker != null){
+                    if (MessageBox.Show(App.Window,"History entry is generating","The history entry has not been generated yet, do you want to close the window anyways?",MessageBoxButton.YesNo) == MessageBoxResult.No){
+                        args.Cancel = true;
+                    }
+                }
+            };
         }
 
         private void WorkerProgressUpdate(object sender, ProgressChangedEventArgs e){
@@ -52,7 +62,13 @@ namespace BackupEssentials{
             ButtonEnd.Content = "Close";
             Report = e.Result as BackupReport;
 
-            Debug.WriteLine(Report.Report);
+            HistoryGenWorker = HistoryGenerator.FromReport(Report).GenerateAsync((sender2, historyArgs) => {
+                HistoryGenWorker = null;
+
+                if (historyArgs.Result == null){
+                    App.LogException(historyArgs.Error == null ? new Exception("History generation failed (no stack trace)") : new Exception("History generation failed",historyArgs.Error));
+                }
+            });
 
             if (e.Error != null){
                 LabelInfo.Content = e.Error.Message;
@@ -71,9 +87,12 @@ namespace BackupEssentials{
             CloseTimer = new DispatcherTimer();
             CloseTimer.Interval = new TimeSpan(0,0,0,0,250);
             CloseTimer.Tick += (sender2, args2) => { 
-                if (TaskbarItemInfo.ProgressValue <= 0)Close();
+                if (TaskbarItemInfo.ProgressValue <= 0){
+                    if (HistoryGenWorker == null)Close();
+                }
                 else TaskbarItemInfo.ProgressValue -= 0.02001D;
             };
+
             CloseTimer.Start();
         }
 
