@@ -27,8 +27,8 @@ namespace BackupEssentials.Backup.Data{
             public bool Changed;
         }
 
-        static NotifyCollectionChangedEventHandler Tracker(ChangeTracker tracker){
-            return new NotifyCollectionChangedEventHandler((sender, args) => { tracker.Changed = true; Save(); });
+        static NotifyCollectionChangedEventHandler Tracker(ChangeTracker tracker, bool scheduled){
+            return new NotifyCollectionChangedEventHandler((sender, args) => { tracker.Changed = true; if (scheduled)Save(); });
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace BackupEssentials.Backup.Data{
         public static void SetupForSaving(bool scheduled){
             IsSetupForSaving = true;
 
-            BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker);
-            HistoryEntryList.CollectionChanged += Tracker(HistoryEntryListTracker);
+            BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker,scheduled);
+            HistoryEntryList.CollectionChanged += Tracker(HistoryEntryListTracker,scheduled);
 
             foreach(Type type in Enum.GetValues(typeof(Type))){
                 LoadedData[type] = false;
