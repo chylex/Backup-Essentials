@@ -63,6 +63,17 @@ namespace BackupEssentials.Backup.Data{
                     BackupLocationList.Add(loc);
                 });
             }
+
+            if (ShouldLoad(types,Type.History)){
+                LoadedData[Type.History] = true;
+
+                FileUtils.ReadFile("DS.History.dat",FileMode.Open,(line) => {
+                    if (line.Length == 0)return;
+                    HistoryEntry entry = new HistoryEntry();
+                    StringDictionarySerializer.FromString(entry,line);
+                    HistoryEntryList.Add(entry);
+                });
+            }
         }
 
         public static void Save(){
@@ -82,6 +93,14 @@ namespace BackupEssentials.Backup.Data{
 
                 FileUtils.WriteFile("DS.Locations.dat",FileMode.Create,(writer) => {
                     foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
+                });
+            }
+
+            if (HistoryEntryListTracker.Changed && LoadedData[Type.History]){
+                HistoryEntryListTracker.Changed = false;
+
+                FileUtils.WriteFile("DS.History.dat",FileMode.Create,(writer) => {
+                    foreach(HistoryEntry entry in HistoryEntryList)writer.WriteLine(StringDictionarySerializer.ToString(entry));
                 });
             }
         }
