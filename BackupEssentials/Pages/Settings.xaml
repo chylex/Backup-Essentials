@@ -32,47 +32,83 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
             <Grid.Resources>
                 <Style TargetType="StackPanel">
-                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Margin" Value="12,4"/>
                 </Style>
                 <Style x:Key="StackPanelSub" TargetType="StackPanel">
-                    <Setter Property="Margin" Value="6"/>
-                </Style>
-                <Style x:Key="TextBlockSubTitle" TargetType="TextBlock">
-                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
-                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Margin" Value="4"/>
                 </Style>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="#FFDDDDDD"/>
-                    <Setter Property="FontSize" Value="14"/>
                     <Setter Property="TextWrapping" Value="NoWrap"/>
                 </Style>
                 <Style TargetType="CheckBox">
                     <Setter Property="Foreground" Value="#FFDDDDDD"/>
-                    <Setter Property="FontSize" Value="14"/>
                 </Style>
+                <Style TargetType="GroupBox">
+                    <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                    <Setter Property="BorderBrush" Value="#FF404040"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Margin" Value="0,0,0,20"/>
+                </Style>
+                
                 <Thickness x:Key="Item">0,0,0,6</Thickness>
                 <properties:Settings x:Key="Settings" />
             </Grid.Resources>
-            
-            <StackPanel>
-                <TextBlock Style="{StaticResource TextBlockSubTitle}">
-                    General settings
-                </TextBlock>
-                <StackPanel Style="{StaticResource StackPanelSub}">
-                    <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                        <TextBlock ToolTip="Language of the user interface and reports." HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,8,0">Language:</TextBlock>
-                        <ComboBox>
-                            <ComboBoxItem IsSelected="True">English</ComboBoxItem>
-                        </ComboBox>
-                    </DockPanel>
 
-                    <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.IntegrateWindowsExplorer}">Integrate with Windows Explorer</CheckBox>
-                </StackPanel>
+            <StackPanel>
+                <GroupBox Header="User Interface">
+                    <StackPanel Style="{StaticResource StackPanelSub}">
+                        <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
+                            <TextBlock ToolTip="Language of the user interface and reports." VerticalAlignment="Center" Margin="0,0,8,0">Language:</TextBlock>
+                            <ComboBox>
+                                <ComboBoxItem IsSelected="True">English</ComboBoxItem>
+                            </ComboBox>
+                        </DockPanel>
+                        <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
+                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
+                            <ComboBox>
+                                <ComboBoxItem IsSelected="True">17.4.2015 23:19</ComboBoxItem>
+                            </ComboBox>
+                        </DockPanel>
+                        <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
+                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Theme:</TextBlock>
+                            <ComboBox>
+                                <ComboBoxItem IsSelected="True">Dark</ComboBoxItem>
+                                <ComboBoxItem>Bright</ComboBoxItem>
+                            </ComboBox>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Advanced Settings">
+                    <StackPanel Style="{StaticResource StackPanelSub}">
+                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.IntegrateWindowsExplorer}">Integrate with Windows Explorer</CheckBox>
+                        <CheckBox ToolTip="Loads the program silently when Windows start to speed up first load.">Preload on Windows start</CheckBox>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <GroupBox Header="Backup">
+                    <StackPanel Style="{StaticResource StackPanelSub}">
+                        <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
+                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Close the backup window:</TextBlock>
+                            <ComboBox>
+                                <ComboBoxItem>Immediately</ComboBoxItem>
+                                <ComboBoxItem>After 5 seconds</ComboBoxItem>
+                                <ComboBoxItem IsSelected="True">After 10 seconds</ComboBoxItem>
+                                <ComboBoxItem>After 30 seconds</ComboBoxItem>
+                                <ComboBoxItem>Never</ComboBoxItem>
+                            </ComboBox>
+                        </DockPanel>
+                        
+                        <CheckBox ToolTip="" IsChecked="False">Save history entries with no file/folder changes</CheckBox>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
         </Grid>
 
