@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BackupEssentials.Pages{
     public partial class History : Page{
@@ -21,10 +22,7 @@ namespace BackupEssentials.Pages{
 
         private void ClickShowReport(object sender, RoutedEventArgs e){
             HistoryEntry entry = HistoryListView.SelectedItem as HistoryEntry;
-            if (entry == null)return;
-
-            BackupReportWindow reportWindow = new BackupReportWindow(entry);
-            reportWindow.Show();
+            if (entry != null)new BackupReportWindow(entry).Show();
         }
 
         private void ClickRemove(object sender, RoutedEventArgs e){
@@ -39,6 +37,15 @@ namespace BackupEssentials.Pages{
                     App.LogException(ex);
                     MessageBox.Show(App.Window,"Failed deleting the entry file: "+ex.Message,"Error deleting history entry",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void ClickHistoryEntry(object sender, MouseButtonEventArgs e){
+            if (e.ClickCount == 2){
+                HistoryEntry entry = HistoryListView.SelectedItem as HistoryEntry;
+                if (entry != null)new BackupReportWindow(entry).Show();
+
+                e.Handled = true; // required to not have the main window steal focus
             }
         }
     }
