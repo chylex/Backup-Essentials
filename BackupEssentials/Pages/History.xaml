@@ -50,7 +50,7 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
 
-                                    <Grid Width="740" Height="{StaticResource EntryListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left">
+                                    <Grid Width="Auto" Height="{StaticResource EntryListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Stretch">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="90"/>
