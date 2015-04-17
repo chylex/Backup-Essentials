@@ -10,7 +10,7 @@
       Title="Backup History">
 
     <Page.Resources>
-        <sys:Double x:Key="LocationListItemHeight">46</sys:Double>
+        <sys:Double x:Key="EntryListItemHeight">46</sys:Double>
     </Page.Resources>
 
     <Grid>
@@ -50,8 +50,9 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
 
-                                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left">
+                                    <Grid Width="740" Height="{StaticResource EntryListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left">
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding LocationName}" VerticalAlignment="Top" FontSize="20"/>
+                                        <TextBlock Foreground="#FFDDDDDD" Text="{Binding Path=BackupTime, StringFormat={StaticResource LangDateTimeFormat}}" VerticalAlignment="Bottom" FontSize="14"/>
                                     </Grid>
                                 </Border>
                             </ControlTemplate>
@@ -61,7 +62,7 @@
             </ListView.Resources>
 
             <ListView.Items>
-                <history:HistoryEntry LocationName="Dropbox"/>
+                <history:HistoryEntry LocationName="Dropbox" BackupTime="2015-4-17 17:26:00"/>
             </ListView.Items>
         </ListView>
 
