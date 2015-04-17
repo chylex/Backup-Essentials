@@ -31,19 +31,20 @@ namespace BackupEssentials{
             
             if (parser.HasFlag("runshell")){
                 int locid = -1;
-                string dest = parser.GetValue("dest","");
+                string dest = parser.GetValue("dest",""), name = "(Manual)";
 
                 if (int.TryParse(parser.GetValue("locid","-1"),out locid) && locid >= 0){
                     Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                     DataStorage.Load(DataStorage.Type.Locations);
 
                     if (locid < DataStorage.BackupLocationList.Count){
+                        name = DataStorage.BackupLocationList[locid].Name;
                         dest = DataStorage.BackupLocationList[locid].Directory;
                     }
                 }
 
                 if (dest.Length > 0){
-                    BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),dest);
+                    BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),name,dest);
                     new BackupWindow(new BackupRunner(info)).Show();
                 }
                 else throw new ArgumentException("Backup could not begin, destination is empty. Program arguments: "+string.Join(" ",args.Args));

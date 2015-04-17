@@ -15,13 +15,13 @@ namespace BackupEssentials.Backup{
         private static readonly bool DEBUG = false;
 
         private BackgroundWorker Worker;
-        private BackupRunInfo WorkerData;
+        public readonly BackupRunInfo RunInfo;
 
         public Action<object,ProgressChangedEventArgs> EventProgressUpdate;
         public Action<object,RunWorkerCompletedEventArgs> EventCompleted;
 
         public BackupRunner(BackupRunInfo info){
-            WorkerData = info;
+            RunInfo = info;
         }
 
         public void Start(){
@@ -35,7 +35,7 @@ namespace BackupEssentials.Backup{
             if (EventCompleted != null)Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(EventCompleted);
             Worker.DoWork += new DoWorkEventHandler(WorkerDoWork);
 
-            Worker.RunWorkerAsync(WorkerData);
+            Worker.RunWorkerAsync(RunInfo);
         }
 
         public void Cancel(){
@@ -46,9 +46,9 @@ namespace BackupEssentials.Backup{
             BackgroundWorker worker = (BackgroundWorker)sender;
             BackupRunInfo data = (BackupRunInfo)e.Argument;
 
-            string[] src = data.source;
+            string[] src = data.Source;
             string srcParent = Directory.GetParent(src[0]).FullName, fullSrc = string.Join(", ",src);
-            string destFolder = data.destination;
+            string destFolder = data.Destination;
 
             // Figure out the source file and directory lists
             HashSet<string> rootSrcEntries = new HashSet<string>();

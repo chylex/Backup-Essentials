@@ -1,11 +1,13 @@
 ﻿namespace BackupEssentials.Backup{
-    public class BackupRunInfo{
-        public readonly string[] source;
-        public readonly string destination;
+    public struct BackupRunInfo{
+        public readonly string[] Source;
+        public readonly string Name;
+        public readonly string Destination;
 
-        public BackupRunInfo(string[] source, string destination){
-            this.source = source;
-            this.destination = destination;
+        public BackupRunInfo(string[] source, string name, string destination){
+            this.Source = source;
+            this.Name = name;
+            this.Destination = destination;
         }
     }
 }
