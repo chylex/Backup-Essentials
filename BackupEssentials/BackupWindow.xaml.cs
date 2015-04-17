@@ -57,18 +57,19 @@ namespace BackupEssentials{
         }
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e){
-            Runner = null;
             ButtonShowReport.IsEnabled = true;
             ButtonEnd.Content = "Close";
             Report = e.Result as BackupReport;
 
-            HistoryGenWorker = HistoryGenerator.FromReport(Report).GenerateAsync((sender2, historyArgs) => {
+            HistoryGenWorker = HistoryGenerator.FromReport(Runner.RunInfo,Report).GenerateAsync((sender2, historyArgs) => {
                 HistoryGenWorker = null;
 
                 if (historyArgs.Result == null){
                     App.LogException(historyArgs.Error == null ? new Exception("History generation failed (no stack trace)") : new Exception("History generation failed",historyArgs.Error));
                 }
             });
+
+            Runner = null;
 
             if (e.Error != null){
                 LabelInfo.Content = e.Error.Message;
