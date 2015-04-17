@@ -21,7 +21,8 @@
 		</Grid.RowDefinitions>
 
         <DockPanel x:Name="TitleBar" Style="{StaticResource DockPanelStyleTitleBar}" MouseLeftButtonDown="TitleBarLeftButtonDown">
-            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="#00BBBBBB" FontSize="18" Margin="8,0,0,0">
+            <Image DockPanel.Dock="Left" Source="/BackupEssentials;component/Resources/Icon.ico" Margin="4,4,4,2"/>
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="#FFBBBBBB" FontSize="18" Margin="0,2,0,0">
                 Backup Essentials
             </TextBlock> <!-- TODO -->
             <WrapPanel Style="{StaticResource WrapPanelStyleTitleBar}" Width="120" DockPanel.Dock="Right">
