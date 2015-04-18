@@ -28,7 +28,7 @@
             <Button x:Name="ButtonReset" Content="Reset to default" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
         </WrapPanel>
 
-        <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0">
+        <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -50,9 +50,46 @@
                 </Style>
                 <Style TargetType="GroupBox">
                     <Setter Property="Foreground" Value="#FFDDDDDD"/>
-                    <Setter Property="BorderBrush" Value="#FF404040"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="Margin" Value="0,0,0,20"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GroupBox">
+                                <Grid SnapsToDevicePixels="True" RenderOptions.EdgeMode="Aliased">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="6"/>
+                                    </Grid.RowDefinitions>
+                                    <Border BorderBrush="Transparent" BorderThickness="1" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="0" Grid.Row="1" Grid.RowSpan="3"/>
+                                    <Border BorderBrush="#FF9C9C9C" Grid.ColumnSpan="4" CornerRadius="0" Grid.Row="1" Grid.RowSpan="3" BorderThickness="1">
+                                        <Border.OpacityMask>
+                                            <MultiBinding ConverterParameter="7" UpdateSourceTrigger="Default">
+                                                <MultiBinding.Converter>
+                                                    <BorderGapMaskConverter/>
+                                                </MultiBinding.Converter>
+                                                <Binding ElementName="Header" Path="ActualWidth"/>
+                                                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                                <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Border.OpacityMask>
+                                        <Border CornerRadius="0" BorderBrush="#FF9C9C9C" BorderThickness="1"/>
+                                    </Border>
+                                    <Border x:Name="Header" Grid.Column="1" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2">
+                                        <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <ContentPresenter Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="{TemplateBinding Padding}" Grid.Row="2"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
                 
                 <Thickness x:Key="Item">0,0,0,6</Thickness>
