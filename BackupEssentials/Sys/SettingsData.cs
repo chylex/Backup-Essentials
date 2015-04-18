@@ -13,5 +13,13 @@ namespace BackupEssentials.Sys{
         };
 
         public static DateFormat[] DateFormatList { get { return _dateFormatList; } }
+
+        public static DateFormat FindDateFormat(string format){
+            foreach(DateFormat df in DateFormatList){
+                if (df.Format.Equals(format))return df;
+            }
+
+            return DateFormatList[0];
+        }
     }
 }

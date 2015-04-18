@@ -27,6 +27,8 @@ namespace BackupEssentials{
         ///     -locid = backup location id
         /// </summary>
         private void StartApp(object sender, StartupEventArgs args){
+            Sys.Settings.Default.Load();
+
             ProgramArgsParser parser = new ProgramArgsParser(args.Args);
             
             if (parser.HasFlag("runshell")){
