@@ -54,6 +54,7 @@ namespace BackupEssentials.Pages{
             AppSettings.Load();
             Changed = false;
             UpdateButtons();
+            UpdateUI();
         }
 
         private void ClickReset(object sender, RoutedEventArgs e){
@@ -62,11 +63,18 @@ namespace BackupEssentials.Pages{
                 SaveAndUpdate();
                 Changed = false;
                 UpdateButtons();
+                UpdateUI();
             }
         }
 
         private void UpdateButtons(){
             ButtonSave.IsEnabled = ButtonCancel.IsEnabled = Changed;
+        }
+
+        private void UpdateUI(){
+            object prevContext = GridContainer.DataContext;
+            GridContainer.DataContext = null;
+            GridContainer.DataContext = prevContext;
         }
 
         private void SaveAndUpdate(){
