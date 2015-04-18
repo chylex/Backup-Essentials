@@ -1,12 +1,14 @@
 ﻿using BackupEssentials.Backup.Data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace BackupEssentials.Pages{
     public partial class Settings : Page, IPageShowData, IPageSwitchHandler{
-        private Properties.Settings AppSettings { get { return Properties.Settings.Default; } }
+        private Sys.Settings AppSettings { get { return Sys.Settings.Default; } }
 
         private bool Changed = false;
         private Dictionary<string,bool> PropertiesChanged = new Dictionary<string,bool>(); // use dictionary in order to get an exception if a key is wrong
@@ -14,8 +16,8 @@ namespace BackupEssentials.Pages{
         public Settings(){
             InitializeComponent();
 
-            foreach(SettingsProperty prop in AppSettings.Properties){
-                PropertiesChanged.Add(prop.Name,false);
+            foreach(string prop in AppSettings.Properties){
+                PropertiesChanged.Add(prop,false);
             }
 
             AppSettings.PropertyChanged += (sender, args) => {
@@ -36,7 +38,7 @@ namespace BackupEssentials.Pages{
 
                 if (result == MessageBoxResult.Cancel)return true;
                 else if (result == MessageBoxResult.Yes)SaveAndUpdate();
-                else AppSettings.Reload();
+                else AppSettings.Load();
             }
 
             return false;
@@ -49,14 +51,14 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickCancel(object sender, RoutedEventArgs e){
-            AppSettings.Reload();
+            AppSettings.Load();
             Changed = false;
             UpdateButtons();
         }
 
         private void ClickReset(object sender, RoutedEventArgs e){
             if (MessageBox.Show(App.Window,"Are you sure? This action cannot be taken back!","Reset settings",MessageBoxButton.YesNo) == MessageBoxResult.Yes){
-                AppSettings.Reset();
+                AppSettings.SetToDefault();
                 Changed = false;
                 UpdateButtons();
             }
@@ -70,7 +72,7 @@ namespace BackupEssentials.Pages{
             AppSettings.Save();
 
             if (PropertiesChanged["IntegrateWindowsExplorer"]){
-                if (AppSettings.IntegrateWindowsExplorer)ExplorerIntegration.Refresh(true);
+                if (AppSettings.ExplorerIntegration)ExplorerIntegration.Refresh(true);
                 else ExplorerIntegration.Remove();
             }
 

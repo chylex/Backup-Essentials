@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:properties="clr-namespace:BackupEssentials.Properties"
+      xmlns:settings="clr-namespace:BackupEssentials.Sys"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="Settings">
@@ -93,7 +93,7 @@
                 </Style>
                 
                 <Thickness x:Key="Item">0,0,0,6</Thickness>
-                <properties:Settings x:Key="Settings" />
+                <settings:Settings x:Key="Settings"/>
             </Grid.Resources>
 
             <StackPanel>
@@ -107,9 +107,7 @@
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
-                            <ComboBox>
-                                <ComboBoxItem IsSelected="True">17.4.2015 23:19</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding Source={StaticResource Settings}, Path=Default.DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Theme:</TextBlock>
@@ -123,7 +121,7 @@
 
                 <GroupBox Header="Advanced Settings">
                     <StackPanel Style="{StaticResource StackPanelSub}">
-                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.IntegrateWindowsExplorer}">Integrate with Windows Explorer</CheckBox>
+                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
                         <CheckBox ToolTip="Loads the program silently when Windows start to speed up first load.">Preload on Windows start</CheckBox>
                     </StackPanel>
                 </GroupBox>

@@ -1,4 +1,4 @@
-﻿using BackupEssentials.Properties;
+﻿using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using Microsoft.Win32;
 using System;
@@ -57,7 +57,7 @@ namespace BackupEssentials.Backup.Data{
                 return true;
             }
 
-            if (!Settings.Default.IntegrateWindowsExplorer)return true;
+            if (!Settings.Default.ExplorerIntegration)return true;
 
             IEnumerable<BackupLocation> valid = DataStorage.BackupLocationList.Where(loc => loc.ShouldRegister());
             if (valid.Count() == 0)return true;

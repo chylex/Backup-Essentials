@@ -122,11 +122,15 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sys\Settings.cs" />
+    <Compile Include="Sys\SettingsData.cs" />
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sys\UI\DateFormat.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\KeyEqualityComparer.cs" />
+    <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\SafeDictionary.cs" />
     <Compile Include="Utils\StringDictionarySerializer.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
@@ -200,19 +204,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
