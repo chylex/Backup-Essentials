@@ -93,7 +93,6 @@
                 </Style>
                 
                 <Thickness x:Key="Item">0,0,0,6</Thickness>
-                <settings:Settings x:Key="Settings"/>
             </Grid.Resources>
 
             <StackPanel>
@@ -107,7 +106,7 @@
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
-                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding Source={StaticResource Settings}, Path=Default.DateFormat}" DisplayMemberPath="Display"/>
+                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Theme:</TextBlock>
@@ -121,7 +120,7 @@
 
                 <GroupBox Header="Advanced Settings">
                     <StackPanel Style="{StaticResource StackPanelSub}">
-                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={StaticResource Settings}, Path=Default.ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
+                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
                         <CheckBox ToolTip="Loads the program silently when Windows start to speed up first load.">Preload on Windows start</CheckBox>
                     </StackPanel>
                 </GroupBox>
