@@ -55,7 +55,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="GroupBox">
-                                <Grid SnapsToDevicePixels="True" RenderOptions.EdgeMode="Aliased">
+                                <Grid SnapsToDevicePixels="True">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="6"/>
                                         <ColumnDefinition Width="Auto"/>
