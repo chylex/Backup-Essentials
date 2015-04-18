@@ -59,6 +59,7 @@ namespace BackupEssentials.Pages{
         private void ClickReset(object sender, RoutedEventArgs e){
             if (MessageBox.Show(App.Window,"Are you sure? This action cannot be taken back!","Reset settings",MessageBoxButton.YesNo) == MessageBoxResult.Yes){
                 AppSettings.SetToDefault();
+                SaveAndUpdate();
                 Changed = false;
                 UpdateButtons();
             }
@@ -71,7 +72,7 @@ namespace BackupEssentials.Pages{
         private void SaveAndUpdate(){
             AppSettings.Save();
 
-            if (PropertiesChanged["IntegrateWindowsExplorer"]){
+            if (PropertiesChanged["ExplorerIntegration"]){
                 if (AppSettings.ExplorerIntegration)ExplorerIntegration.Refresh(true);
                 else ExplorerIntegration.Remove();
             }
