@@ -131,16 +131,10 @@
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Close the backup window:</TextBlock>
-                            <ComboBox>
-                                <ComboBoxItem>Immediately</ComboBoxItem>
-                                <ComboBoxItem>After 5 seconds</ComboBoxItem>
-                                <ComboBoxItem IsSelected="True">After 10 seconds</ComboBoxItem>
-                                <ComboBoxItem>After 30 seconds</ComboBoxItem>
-                                <ComboBoxItem>Never</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
-                        
-                        <CheckBox ToolTip="" IsChecked="False">Save history entries with no file/folder changes</CheckBox>
+
+                        <CheckBox ToolTip="" IsChecked="{Binding SaveHistoryWithNoEntries}">Save history entries with no file/folder changes</CheckBox>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
