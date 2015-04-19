@@ -1,5 +1,6 @@
 ﻿using BackupEssentials.Backup;
 using BackupEssentials.Backup.History;
+using BackupEssentials.Sys;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -28,6 +29,13 @@ namespace BackupEssentials{
             runner.Start();
 
             this.Runner = runner;
+
+            Loaded += (sender, args) => {
+                // workaround WindowStartupLocation and WindowState.Minimized conflicting
+                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.FromPoint(new System.Drawing.Point((int)Math.Round(Left+Width/2),(int)Math.Round(Top+Height/2)));
+                Left = screen.WorkingArea.X+screen.WorkingArea.Width/2-Width/2;
+                Top = screen.WorkingArea.Y+screen.WorkingArea.Height/2-Height/2;
+            };
 
             Closing += (sender, args) => {
                 if (HistoryGenWorker != null){
