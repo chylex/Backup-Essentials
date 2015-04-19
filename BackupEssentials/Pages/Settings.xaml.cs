@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace BackupEssentials.Pages{
     public partial class Settings : Page, IPageShowData, IPageSwitchHandler{
-        private Sys.Settings AppSettings { get { return Sys.Settings.Default; } }
+        private static Sys.Settings AppSettings { get { return Sys.Settings.Default; } }
 
         private bool Changed = false;
         private Dictionary<string,bool> PropertiesChanged = new Dictionary<string,bool>(); // use dictionary in order to get an exception if a key is wrong

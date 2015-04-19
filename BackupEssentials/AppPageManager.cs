@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace BackupEssentials{
-    class AppPageManager{
+    static class AppPageManager{
         private static Dictionary<Type,Page> cached = new Dictionary<Type,Page>();
 
         public static T GetPage<T>() where T : Page, new(){

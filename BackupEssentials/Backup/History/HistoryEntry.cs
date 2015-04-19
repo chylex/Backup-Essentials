@@ -11,12 +11,13 @@ namespace BackupEssentials.Backup.History{
         public int EntriesAdded { get; set; }
         public int EntriesUpdated { get; set; }
         public int EntriesDeleted { get; set; }
-        public string Filename = "";
+        public string Filename { get; set; }
 
         public HistoryEntry(){
             LocationName = "";
             BackupTime = DateTime.MinValue;
             EntriesAdded = EntriesUpdated = EntriesDeleted = 0;
+            Filename = "";
         }
 
         void StringDictionarySerializer.IObjectToDictionary.ToDictionary(SafeDictionary<string,string> dict){
