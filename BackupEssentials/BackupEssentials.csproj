@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Sys\Settings.cs" />
     <Compile Include="Sys\SettingsData.cs" />
+    <Compile Include="Sys\UI\DisplaySetting.cs" />
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
