@@ -236,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icon.ico" />
+    <Resource Include="Resources\SplashScreen.png" />
     <Content Include="Resources\Guide1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

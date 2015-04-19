@@ -82,7 +82,9 @@ namespace BackupEssentials{
                     }
                 }
 
-                new MainWindow().Show();
+                SplashScreen splash = new SplashScreen("Resources/SplashScreen.png");
+                splash.Show(false,false);
+                new MainWindow(splash).Show();
             }
         }
 

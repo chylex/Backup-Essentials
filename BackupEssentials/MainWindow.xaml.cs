@@ -24,11 +24,15 @@ namespace BackupEssentials{
 
         private string[] DropData = null;
 
-        public MainWindow(){
+        public MainWindow() : this(null){}
+
+        public MainWindow(SplashScreen splashScreen){
             InitializeComponent();
             Instance = this;
 
             Loaded += (sender, args) => {
+                if (splashScreen != null)splashScreen.Close(new TimeSpan());
+
                 Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
                     DataStorage.SetupForSaving(true);
                     DataStorage.Load();
