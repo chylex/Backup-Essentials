@@ -80,6 +80,7 @@ namespace BackupEssentials{
             }
 
             Runner = null;
+            TaskbarItemInfo.ProgressValue = 100;
 
             if (e.Error != null){
                 LabelInfo.Content = e.Error.Message;
@@ -91,7 +92,6 @@ namespace BackupEssentials{
             ProgressBar.Value = 100;
             ProgressBar.Value = 99; // progress bar animation hack
             ProgressBar.Value = 100;
-            TaskbarItemInfo.ProgressValue = 100;
             LabelInfo.Content = "Finished! Updated "+ActionCount+" files and folders.";
             
             int closeTime = Settings.Default.WindowCloseTime.Value;
