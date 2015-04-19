@@ -69,13 +69,15 @@ namespace BackupEssentials{
             ButtonEnd.Content = "Close";
             Report = e.Result as BackupReport;
 
-            HistoryGenWorker = HistoryGenerator.FromReport(Runner.RunInfo,Report).GenerateAsync((sender2, historyArgs) => {
-                HistoryGenWorker = null;
+            if (!(Report.TryFindValue(BackupReport.Constants.EntriesAdded,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesUpdated,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesDeleted,0) == 0) || Settings.Default.SaveHistoryWithNoEntries){
+                HistoryGenWorker = HistoryGenerator.FromReport(Runner.RunInfo,Report).GenerateAsync((sender2, historyArgs) => {
+                    HistoryGenWorker = null;
 
-                if (historyArgs.Result == null){
-                    App.LogException(historyArgs.Error == null ? new Exception("History generation failed (no stack trace)") : new Exception("History generation failed",historyArgs.Error));
-                }
-            });
+                    if (historyArgs.Result == null){
+                        App.LogException(historyArgs.Error == null ? new Exception("History generation failed (no stack trace)") : new Exception("History generation failed",historyArgs.Error));
+                    }
+                });
+            }
 
             Runner = null;
 
