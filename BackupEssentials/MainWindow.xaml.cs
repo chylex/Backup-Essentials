@@ -32,8 +32,9 @@ namespace BackupEssentials{
 
             Loaded += (sender, args) => {
                 if (splashScreen != null)splashScreen.Close(new TimeSpan());
-
+                
                 Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
+                    ShowPage(typeof(Home));
                     DataStorage.SetupForSaving(true);
                     DataStorage.Load();
                 }));
@@ -48,8 +49,6 @@ namespace BackupEssentials{
                 DataStorage.Save(true);
                 ExplorerIntegration.Refresh(true);
             };
-
-            ShowPage(typeof(Home));
         }
 
         private void ButtonWindowCloseClick(object sender, RoutedEventArgs e){
