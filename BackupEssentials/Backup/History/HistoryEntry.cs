@@ -9,13 +9,13 @@ namespace BackupEssentials.Backup.History{
         public DateTime BackupTime { get; set; }
         public int EntriesAdded { get; set; }
         public int EntriesUpdated { get; set; }
-        public int EntriesRemoved { get; set; }
+        public int EntriesDeleted { get; set; }
         public string Filename = "";
 
         public HistoryEntry(){
             LocationName = "";
             BackupTime = DateTime.MinValue;
-            EntriesAdded = EntriesUpdated = EntriesRemoved = 0;
+            EntriesAdded = EntriesUpdated = EntriesDeleted = 0;
         }
 
         void StringDictionarySerializer.IObjectToDictionary.ToDictionary(SafeDictionary<string,string> dict){
@@ -23,7 +23,7 @@ namespace BackupEssentials.Backup.History{
             dict["Time"] = NumberSerialization.WriteLong(BackupTime.ToBinary());
             dict["EnA"] = EntriesAdded.ToString();
             dict["EnU"] = EntriesUpdated.ToString();
-            dict["EnR"] = EntriesRemoved.ToString();
+            dict["EnR"] = EntriesDeleted.ToString();
             dict["File"] = Filename;
         }
 
@@ -37,7 +37,7 @@ namespace BackupEssentials.Backup.History{
             int.TryParse(dict["EnR"] ?? "0",out enRem);
             EntriesAdded = enAdd;
             EntriesUpdated = enUpd;
-            EntriesRemoved = enRem;
+            EntriesDeleted = enRem;
 
             Filename = dict["File"] ?? "";
         }

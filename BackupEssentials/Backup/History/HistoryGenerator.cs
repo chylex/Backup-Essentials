@@ -34,9 +34,9 @@ namespace BackupEssentials.Backup.History{
                 HistoryEntry entry = new HistoryEntry(){
                     LocationName = data.Item1.Name,
                     BackupTime = DateTime.Now,
-                    EntriesAdded = data.Item2.TryFindValue("Added",0),
-                    EntriesUpdated = data.Item2.TryFindValue("Updated",0),
-                    EntriesRemoved = data.Item2.TryFindValue("Removed",0)
+                    EntriesAdded = data.Item2.TryFindValue(BackupReport.Constants.EntriesAdded,0),
+                    EntriesUpdated = data.Item2.TryFindValue(BackupReport.Constants.EntriesUpdated,0),
+                    EntriesDeleted = data.Item2.TryFindValue(BackupReport.Constants.EntriesDeleted,0)
                 };
 
                 DataStorage.HistoryEntryList.Insert(0,entry);

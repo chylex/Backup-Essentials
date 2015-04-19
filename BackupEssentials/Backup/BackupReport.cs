@@ -23,7 +23,7 @@ namespace BackupEssentials.Backup{
                         else if (line[0] == 'I')build.Append(line.Substring(1)).Append(Environment.NewLine);
                         else if (line[0] == 'V'){
                             string[] split = line.Substring(1).Split(new char[]{ '=' },2);
-                            if (split.Length == 2)build.Append(split[0]).Append(": ").Append(split[1]).Append(Environment.NewLine);
+                            if (split.Length == 2)build.Append(Constants.Translate(split[0])).Append(": ").Append(split[1]).Append(Environment.NewLine);
                         }
                     }
 
@@ -107,6 +107,27 @@ namespace BackupEssentials.Backup{
 
                 while((line = reader.ReadLine()) != null){
                     yield return line;
+                }
+            }
+        }
+
+        public static class Constants{
+            public const string Source = "SRC";
+            public const string Destination = "DEST";
+            public const string Date = "DT";
+            public const string EntriesAdded = "ENA";
+            public const string EntriesUpdated = "ENU";
+            public const string EntriesDeleted = "END";
+
+            public static string Translate(string constant){
+                switch(constant){
+                    case Source: return "Source";
+                    case Destination: return "Destination";
+                    case Date: return "Date";
+                    case EntriesAdded: return "Added";
+                    case EntriesUpdated: return "Updated";
+                    case EntriesDeleted: return "Deleted";
+                    default: return "";
                 }
             }
         }

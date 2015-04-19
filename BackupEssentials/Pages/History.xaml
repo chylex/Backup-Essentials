@@ -63,13 +63,13 @@
                                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0">
                                             <TextBlock Text="Added:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
                                             <TextBlock Text="Updated:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
-                                            <TextBlock Text="Removed:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="Deleted:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
                                         </StackPanel>
 
                                         <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding EntriesAdded}" Foreground="#FFDDDDDD" FontSize="11"/>
                                             <TextBlock Text="{Binding EntriesUpdated}" Foreground="#FFDDDDDD" FontSize="11"/>
-                                            <TextBlock Text="{Binding EntriesRemoved}" Foreground="#FFDDDDDD" FontSize="11"/>
+                                            <TextBlock Text="{Binding EntriesDeleted}" Foreground="#FFDDDDDD" FontSize="11"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -80,7 +80,7 @@
             </ListView.Resources>
 
             <ListView.Items>
-                <history:HistoryEntry LocationName="Dropbox" BackupTime="2015-4-17 17:26:00" EntriesAdded="2600" EntriesRemoved="125"/>
+                <history:HistoryEntry LocationName="Dropbox" BackupTime="2015-4-17 17:26:00" EntriesAdded="2600" EntriesDeleted="125"/>
             </ListView.Items>
         </ListView>
 
