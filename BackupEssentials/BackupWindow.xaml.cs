@@ -82,24 +82,36 @@ namespace BackupEssentials{
             ProgressBar.Value = 99; // progress bar animation hack
             ProgressBar.Value = 100;
             TaskbarItemInfo.ProgressValue = 100;
-            TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
             LabelInfo.Content = "Finished! Updated "+ActionCount+" files and folders.";
+            
+            int closeTime = Settings.Default.WindowCloseTime.Value;
+            if (closeTime == -1)return;
 
             CloseTimer = new DispatcherTimer();
-            CloseTimer.Interval = new TimeSpan(0,0,0,0,250);
-            CloseTimer.Tick += (sender2, args2) => { 
-                if (TaskbarItemInfo.ProgressValue <= 0){
+            CloseTimer.Interval = new TimeSpan(0,0,0,0,100);
+
+            if (closeTime == 0){
+                CloseTimer.Tick += (sender2, args2) => {
                     if (HistoryGenWorker == null)Close();
-                }
-                else TaskbarItemInfo.ProgressValue -= 0.02001D;
-            };
+                };
+            }
+            else{
+                TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Paused;
+
+                CloseTimer.Tick += (sender2, args2) => { 
+                    if (TaskbarItemInfo.ProgressValue <= 0){
+                        if (HistoryGenWorker == null)Close();
+                    }
+                    else TaskbarItemInfo.ProgressValue -= 0.00001D+(0.1D/Settings.Default.WindowCloseTime.Value);
+                };
+            }
 
             CloseTimer.Start();
         }
 
         private void ButtonEndClick(object sender, RoutedEventArgs e){
             if (Runner == null){
-                CloseTimer.Stop();
+                if (CloseTimer != null)CloseTimer.Stop();
                 Close();
             }
             else Runner.Cancel();
