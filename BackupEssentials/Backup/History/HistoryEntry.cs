@@ -1,5 +1,6 @@
 ﻿using BackupEssentials.Utils;
 using System;
+using System.Globalization;
 
 namespace BackupEssentials.Backup.History{
     public class HistoryEntry : StringDictionarySerializer.IObjectToDictionary{
@@ -21,9 +22,9 @@ namespace BackupEssentials.Backup.History{
         void StringDictionarySerializer.IObjectToDictionary.ToDictionary(SafeDictionary<string,string> dict){
             dict["Name"] = LocationName;
             dict["Time"] = NumberSerialization.WriteLong(BackupTime.ToBinary());
-            dict["EnA"] = EntriesAdded.ToString();
-            dict["EnU"] = EntriesUpdated.ToString();
-            dict["EnR"] = EntriesDeleted.ToString();
+            dict["EnA"] = EntriesAdded.ToString(CultureInfo.InvariantCulture);
+            dict["EnU"] = EntriesUpdated.ToString(CultureInfo.InvariantCulture);
+            dict["EnD"] = EntriesDeleted.ToString(CultureInfo.InvariantCulture);
             dict["File"] = Filename;
         }
 
@@ -31,13 +32,13 @@ namespace BackupEssentials.Backup.History{
             LocationName = dict["Name"] ?? "";
             BackupTime = DateTime.FromBinary(NumberSerialization.ReadLong(dict["Time"] ?? ""));
 
-            int enAdd = 0, enUpd = 0, enRem = 0;
-            int.TryParse(dict["EnA"] ?? "0",out enAdd);
-            int.TryParse(dict["EnU"] ?? "0",out enUpd);
-            int.TryParse(dict["EnR"] ?? "0",out enRem);
+            int enAdd = 0, enUpd = 0, enDel = 0;
+            if (!int.TryParse(dict["EnA"] ?? "0",out enAdd))enAdd = 0;
+            if (!int.TryParse(dict["EnU"] ?? "0",out enUpd))enUpd = 0;
+            if (!int.TryParse(dict["EnD"] ?? "0",out enDel))enDel = 0;
             EntriesAdded = enAdd;
             EntriesUpdated = enUpd;
-            EntriesDeleted = enRem;
+            EntriesDeleted = enDel;
 
             Filename = dict["File"] ?? "";
         }
