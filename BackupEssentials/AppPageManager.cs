@@ -21,5 +21,9 @@ namespace BackupEssentials{
             cached[type] = page;
             return page;
         }
+
+        public static void ResetCache(){
+            cached.Clear();
+        }
     }
 }

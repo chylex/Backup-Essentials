@@ -79,6 +79,7 @@ namespace BackupEssentials.Pages{
 
         private void SaveAndUpdate(){
             AppSettings.Save();
+            AppPageManager.ResetCache();
 
             if (PropertiesChanged["ExplorerIntegration"]){
                 if (AppSettings.ExplorerIntegration)ExplorerIntegration.Refresh(true);
