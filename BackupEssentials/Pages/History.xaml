@@ -58,7 +58,7 @@
                                         </Grid.ColumnDefinitions>
                                         
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding LocationName}" VerticalAlignment="Top" FontSize="20"/>
-                                        <TextBlock Foreground="#FFDDDDDD" Text="{Binding Path=BackupTime, StringFormat={StaticResource LangDateTimeFormat}}" VerticalAlignment="Bottom" FontSize="14"/>
+                                        <TextBlock Foreground="#FFDDDDDD" Text="{Binding BackupTimeParsed}" VerticalAlignment="Bottom" FontSize="14"/>
                                         
                                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0">
                                             <TextBlock Text="Added:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>

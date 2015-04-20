@@ -8,11 +8,17 @@ namespace BackupEssentials.Sys{
         private static DateFormat[] _dateFormatList = new DateFormat[]{
             new DateFormat.Detect(),
             new DateFormat("d.M.yyyy HH:mm"),
+            new DateFormat("d.M.yyyy hh:mm tt"),
             new DateFormat("dd.MM.yyyy HH:mm"),
+            new DateFormat("dd.MM.yyyy hh:mm tt"),
+            new DateFormat("d/M/yyyy HH:mm"),
+            new DateFormat("d/M/yyyy hh:mm tt"),
+            new DateFormat("M/d/yyyy HH:mm"),
+            new DateFormat("M/d/yyyy hh:mm tt"),
             new DateFormat("yyyy-MM-dd HH:mm"),
-            new DateFormat("yyyy-M-d HH:mm"),
+            new DateFormat("yyyy-MM-dd hh:mm tt"),
             new DateFormat("yyyy-dd-MM HH:mm"),
-            new DateFormat("yyyy-MM-dd HH:mm")
+            new DateFormat("yyyy-dd-MM hh:mm tt")
         };
 
         public static DateFormat[] DateFormatList { get { return _dateFormatList; } }

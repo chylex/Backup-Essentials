@@ -15,8 +15,6 @@
             <sys:String x:Key="PathButtonWindowed">M2.5,3.75 L2.5,8.75 10.5,8.75 10.5,3.75 z M1.5,1.75 L11.5,1.75 11.5,9.75 1.5,9.75 z M0,0 L10,0 10,1.25 1,1.25 1,2 1,7 1,8 0,8 z</sys:String>
             <sys:String x:Key="PathButtonMinimize">M0,0 L20,0 L20,3 L0,3 z</sys:String>
             
-            <sys:String x:Key="LangDateTimeFormat">dd.MM.yyyy HH:mm:ss</sys:String> <!-- TODO update automatically from code -->
-            
             <sys:Double x:Key="PageWidth">796</sys:Double>
             <sys:Double x:Key="PageHeight">482</sys:Double>
             <SolidColorBrush x:Key="PageBackground">#FF2E2E2E</SolidColorBrush>

@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Sys;
+using BackupEssentials.Utils;
 using System;
 using System.Globalization;
 
@@ -8,6 +9,7 @@ namespace BackupEssentials.Backup.History{
 
         public string LocationName { get; set; }
         public DateTime BackupTime { get; set; }
+        public string BackupTimeParsed { get { return Settings.Default.DateFormat.ParseDate(BackupTime); } }
         public int EntriesAdded { get; set; }
         public int EntriesUpdated { get; set; }
         public int EntriesDeleted { get; set; }

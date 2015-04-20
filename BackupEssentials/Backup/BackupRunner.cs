@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup.IO;
+using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,7 @@ namespace BackupEssentials.Backup{
             reportBuilder.Add("= Preparing backup =");
             reportBuilder.Add(BackupReport.Constants.Source,fullSrc);
             reportBuilder.Add(BackupReport.Constants.Destination,destFolder);
-            reportBuilder.Add(BackupReport.Constants.Date,DateTime.Now.ToString("d",CultureInfo.CurrentCulture)+" "+DateTime.Now.ToString("t",CultureInfo.CurrentCulture));
+            reportBuilder.Add(BackupReport.Constants.Date,Settings.Default.DateFormat.ParseDate(DateTime.Now));
             reportBuilder.Add("");
             reportBuilder.Add("= Files and folders =");
             reportBuilder.Add(BackupReport.Constants.EntriesAdded,actions.Count((entry) => entry.Action == IOAction.Create).ToString());

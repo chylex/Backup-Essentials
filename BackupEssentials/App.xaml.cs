@@ -8,6 +8,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace BackupEssentials{
@@ -29,6 +30,8 @@ namespace BackupEssentials{
         private void StartApp(object sender, StartupEventArgs args){
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             Sys.Settings.Default.Load();
+
+            Timeline.DesiredFrameRateProperty.OverrideMetadata(typeof(Timeline),new FrameworkPropertyMetadata(){ DefaultValue = 30 });
 
             ProgramArgsParser parser = new ProgramArgsParser(args.Args);
             

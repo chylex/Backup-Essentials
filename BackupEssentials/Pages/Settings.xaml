@@ -105,7 +105,7 @@
                             </ComboBox>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
+                            <TextBlock ToolTip="The format of displayed dates. Warning: the option affects the History screen, but not existing reports." VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
@@ -121,7 +121,7 @@
                 <GroupBox Header="Advanced Settings">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
-                        <CheckBox ToolTip="Loads the program silently when Windows start to speed up first load.">Preload on Windows start</CheckBox>
+                        <CheckBox ToolTip="Loads the program silently when Windows starts. Tick this if the program loads too slowly.">Preload on Windows start</CheckBox>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
@@ -141,7 +141,7 @@
         </Grid>
 
         <TextBlock HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0">
-            Hint: Move your cursor over an option to see a detailed description
+            Hint: Move your cursor over an option label to see a detailed description
         </TextBlock>
     </Grid>
 </Page>
