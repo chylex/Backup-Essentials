@@ -45,12 +45,12 @@ namespace BackupEssentials.Backup.History{
                 int entriesKept = Settings.Default.HistoryEntriesKept.Value, index;
 
                 if (entriesKept != -1){
-                    while(DataStorage.HistoryEntryList.Count > entriesKept){
+                    while(DataStorage.HistoryEntryList.Count > entriesKept){ // TODO test
                         string file = DataStorage.HistoryEntryList[index = DataStorage.HistoryEntryList.Count-1].Filename;
                         DataStorage.HistoryEntryList.RemoveAt(index);
 
                         try{
-                            if (File.Exists(file))File.Delete(file);
+                            if (File.Exists(file))File.Delete(Path.Combine(HistoryEntry.Directory,entry.Filename));
                         }catch(Exception e){
                             App.LogException(e);
                         }
