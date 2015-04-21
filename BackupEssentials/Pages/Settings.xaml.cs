@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup.Data;
+using BackupEssentials.Backup.History;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -86,7 +87,16 @@ namespace BackupEssentials.Pages{
                 else ExplorerIntegration.Remove();
             }
 
+            if (PropertiesChanged["HistoryEntriesKept"]){
+                HistoryUtils.TryRemoveOldEntries();
+            }
+
             foreach(string key in new List<string>(PropertiesChanged.Keys))PropertiesChanged[key] = false;
+        }
+
+        private void HistoryEntriesKeptChanged(object sender, SelectionChangedEventArgs e){
+            int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
+            if (kept != -1 && kept < existing)MessageBox.Show(App.Window,"There are currently "+existing+" history entries, saving the settings will delete last "+(existing-kept)+" entries.","Caution!",MessageBoxButton.OK,MessageBoxImage.Exclamation);
         }
     }
 }
