@@ -65,6 +65,13 @@ namespace BackupEssentials.Sys{
             });
         }
 
+        // Utility methods
+
+        public void Reload(){
+            SetToDefault();
+            Load();
+        }
+
         // List of settings
 
         public bool ExplorerIntegration {

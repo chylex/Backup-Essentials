@@ -38,7 +38,7 @@ namespace BackupEssentials.Pages{
 
                 if (result == MessageBoxResult.Cancel)return true;
                 else if (result == MessageBoxResult.Yes)SaveAndUpdate();
-                else AppSettings.Load();
+                else AppSettings.Reload();
             }
 
             return false;
@@ -51,7 +51,7 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickCancel(object sender, RoutedEventArgs e){
-            AppSettings.Load();
+            AppSettings.Reload();
             Changed = false;
             UpdateButtons();
             UpdateUI();
