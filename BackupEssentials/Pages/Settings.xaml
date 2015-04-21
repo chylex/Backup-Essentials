@@ -133,7 +133,10 @@
                             <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Close the backup window:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
-
+                        <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
+                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">History entries kept:</TextBlock>
+                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display"/>
+                        </DockPanel>
                         <CheckBox ToolTip="" IsChecked="{Binding SaveHistoryWithNoEntries}">Save history entries with no file/folder changes</CheckBox>
                     </StackPanel>
                 </GroupBox>

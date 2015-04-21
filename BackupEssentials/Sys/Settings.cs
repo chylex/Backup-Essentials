@@ -28,7 +28,8 @@ namespace BackupEssentials.Sys{
 
             ExplorerIntegration = true;
             DateFormat = SettingsData.DateFormatList[0];
-            WindowCloseTime = SettingsData.WindowCloseList[2];
+            WindowCloseTime = SettingsData.FindWindowCloseTime(10);
+            HistoryEntriesKept = SettingsData.FindHistoryEntryCount(500);
             SaveHistoryWithNoEntries = false;
             
             Data.PauseObservation = false;
@@ -46,6 +47,7 @@ namespace BackupEssentials.Sys{
                     case "EX": ExplorerIntegration = data.Equals("1"); break;
                     case "DF": DateFormat = SettingsData.FindDateFormat(data); break;
                     case "CT": WindowCloseTime = SettingsData.FindWindowCloseTime(NumberSerialization.ReadInt(data)); break;
+                    case "HE": HistoryEntriesKept = SettingsData.FindHistoryEntryCount(NumberSerialization.ReadInt(data)); break;
                     case "H0": SaveHistoryWithNoEntries = data.Equals("1"); break;
                 }
             });
@@ -58,6 +60,7 @@ namespace BackupEssentials.Sys{
                 writer.Write("EX"); writer.WriteLine(ExplorerIntegration ? "1" : "0");
                 writer.Write("DF"); writer.WriteLine(DateFormat.Format);
                 writer.Write("CT"); writer.WriteLine(NumberSerialization.WriteInt(WindowCloseTime.Value));
+                writer.Write("HE"); writer.WriteLine(NumberSerialization.WriteInt(HistoryEntriesKept.Value));
                 writer.Write("H0"); writer.WriteLine(SaveHistoryWithNoEntries ? "1" : "0");
             });
         }
@@ -77,6 +80,11 @@ namespace BackupEssentials.Sys{
         public DisplaySetting<int> WindowCloseTime {
             get { return (DisplaySetting<int>)Data["WindowCloseTime"]; }
             set { Data["WindowCloseTime"] = (DisplaySetting<int>)value; }
+        }
+
+        public DisplaySetting<int> HistoryEntriesKept {
+            get { return (DisplaySetting<int>)Data["HistoryEntriesKept"]; }
+            set { Data["HistoryEntriesKept"] = (DisplaySetting<int>)value; }
         }
 
         public bool SaveHistoryWithNoEntries {

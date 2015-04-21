@@ -42,5 +42,24 @@ namespace BackupEssentials.Sys{
         public static DisplaySetting<int> FindWindowCloseTime(int value){
             return WindowCloseList.FirstOrDefault(setting => setting.Value == value) ?? WindowCloseList[2];
         }
+
+        // History entry count
+
+        private static DisplaySetting<int>[] _historyKeptList = new DisplaySetting<int>[]{
+            new DisplaySetting<int>(0,"None"),
+            new DisplaySetting<int>(25,"25"),
+            new DisplaySetting<int>(50,"50"),
+            new DisplaySetting<int>(100,"100"),
+            new DisplaySetting<int>(250,"250"),
+            new DisplaySetting<int>(500,"500"),
+            new DisplaySetting<int>(1000,"1000"),
+            new DisplaySetting<int>(-1,"All")
+        };
+
+        public static DisplaySetting<int>[] HistoryKeptList { get { return _historyKeptList; } }
+
+        public static DisplaySetting<int> FindHistoryEntryCount(int value){
+            return HistoryKeptList.FirstOrDefault(setting => setting.Value == value) ?? HistoryKeptList[5];
+        }
     }
 }
