@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup.Data;
+using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using System;
 using System.ComponentModel;
@@ -40,6 +41,21 @@ namespace BackupEssentials.Backup.History{
                 };
 
                 DataStorage.HistoryEntryList.Insert(0,entry);
+
+                int entriesKept = Settings.Default.HistoryEntriesKept.Value, index;
+
+                if (entriesKept != -1){
+                    while(DataStorage.HistoryEntryList.Count > entriesKept){
+                        string file = DataStorage.HistoryEntryList[index = DataStorage.HistoryEntryList.Count-1].Filename;
+                        DataStorage.HistoryEntryList.RemoveAt(index);
+
+                        try{
+                            if (File.Exists(file))File.Delete(file);
+                        }catch(Exception e){
+                            App.LogException(e);
+                        }
+                    }
+                }
 
                 if (!Directory.Exists(HistoryEntry.Directory))Directory.CreateDirectory(HistoryEntry.Directory);
 
