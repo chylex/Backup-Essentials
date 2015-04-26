@@ -103,7 +103,7 @@
                 <GroupBox Header="User Interface">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="Language of the user interface and reports." Style="{StaticResource LabelBlock}">Language:</TextBlock>
+                            <TextBlock ToolTip="Language of the user interface and backup reports." Style="{StaticResource LabelBlock}">Language:</TextBlock>
                             <ComboBox>
                                 <ComboBoxItem IsSelected="True">English</ComboBoxItem>
                             </ComboBox>
@@ -113,7 +113,7 @@
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">Theme:</TextBlock>
+                            <TextBlock ToolTip="Color style of the user interface." Style="{StaticResource LabelBlock}">Theme:</TextBlock>
                             <ComboBox>
                                 <ComboBoxItem IsSelected="True">Dark</ComboBoxItem>
                                 <ComboBoxItem>Bright</ComboBoxItem>
@@ -138,14 +138,14 @@
                 <GroupBox Header="Backup">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">Close the backup window:</TextBlock>
+                            <TextBlock ToolTip="Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report." Style="{StaticResource LabelBlock}">Close the backup window:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">History entries kept:</TextBlock>
+                            <TextBlock ToolTip="Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report." Style="{StaticResource LabelBlock}">Backup reports kept:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display" SelectionChanged="HistoryEntriesKeptChanged"/>
                         </DockPanel>
-                        <CheckBox ToolTip="" IsChecked="{Binding SaveHistoryWithNoEntries}">Save history entries with no file/folder changes</CheckBox>
+                        <CheckBox ToolTip="If checked, backup reports that did not modify any files and folders are kept." IsChecked="{Binding SaveHistoryWithNoEntries}">Save backup reports with no file/folder changes</CheckBox>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
