@@ -45,6 +45,10 @@
                     <Setter Property="Foreground" Value="#FFDDDDDD"/>
                     <Setter Property="TextWrapping" Value="NoWrap"/>
                 </Style>
+                <Style TargetType="TextBlock" x:Key="LabelBlock">
+                    <Setter Property="Margin" Value="0,0,8,0"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
                 <Style TargetType="CheckBox">
                     <Setter Property="Foreground" Value="#FFDDDDDD"/>
                 </Style>
@@ -99,17 +103,17 @@
                 <GroupBox Header="User Interface">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="Language of the user interface and reports." VerticalAlignment="Center" Margin="0,0,8,0">Language:</TextBlock>
+                            <TextBlock ToolTip="Language of the user interface and reports." Style="{StaticResource LabelBlock}">Language:</TextBlock>
                             <ComboBox>
                                 <ComboBoxItem IsSelected="True">English</ComboBoxItem>
                             </ComboBox>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="The format of displayed dates. Warning: the option affects the History screen, but not existing reports." VerticalAlignment="Center" Margin="0,0,8,0">Date format:</TextBlock>
+                            <TextBlock ToolTip="The format of displayed dates. Warning: the option affects the History screen, but not existing reports." Style="{StaticResource LabelBlock}">Date format:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Theme:</TextBlock>
+                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">Theme:</TextBlock>
                             <ComboBox>
                                 <ComboBoxItem IsSelected="True">Dark</ComboBoxItem>
                                 <ComboBoxItem>Bright</ComboBoxItem>
@@ -130,11 +134,11 @@
                 <GroupBox Header="Backup">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">Close the backup window:</TextBlock>
+                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">Close the backup window:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="" VerticalAlignment="Center" Margin="0,0,8,0">History entries kept:</TextBlock>
+                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">History entries kept:</TextBlock>
                             <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display" SelectionChanged="HistoryEntriesKeptChanged"/>
                         </DockPanel>
                         <CheckBox ToolTip="" IsChecked="{Binding SaveHistoryWithNoEntries}">Save history entries with no file/folder changes</CheckBox>
