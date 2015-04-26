@@ -71,7 +71,7 @@ namespace BackupEssentials{
 
             Settings settings = Settings.Default;
 
-            if ((settings.HistoryEntriesKept.Value > 0 || settings.HistoryEntriesKept.Value == -1) && (!(Report.TryFindValue(BackupReport.Constants.EntriesAdded,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesUpdated,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesDeleted,0) == 0) || settings.SaveHistoryWithNoEntries)){
+            if ((settings.HistoryEntriesKept.Value > 0 || settings.HistoryEntriesKept.Value == -1) && !Runner.RunInfo.DisableHistory && (!(Report.TryFindValue(BackupReport.Constants.EntriesAdded,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesUpdated,0) == 0 && Report.TryFindValue(BackupReport.Constants.EntriesDeleted,0) == 0) || settings.SaveHistoryWithNoEntries)){
                 HistoryGenWorker = HistoryGenerator.FromReport(Runner.RunInfo,Report).GenerateAsync((sender2, historyArgs) => {
                     HistoryGenWorker = null;
 
