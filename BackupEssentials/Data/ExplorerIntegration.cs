@@ -71,7 +71,7 @@ namespace BackupEssentials.Backup.Data{
                 string commands = String.Join(";",commandNames);
 
                 foreach(string target in new string[]{ "*", "Directory" }){
-                    Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","MUIVerb","Backup Essentials");
+                    Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","MUIVerb",Settings.Default.ExplorerLabel);
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","SubCommands",commands);
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials\command",null,path+" -runcompat -src \"%1\""); // TODO test on win xp
                 }

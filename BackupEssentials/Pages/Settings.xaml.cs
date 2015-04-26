@@ -87,6 +87,10 @@ namespace BackupEssentials.Pages{
                 else ExplorerIntegration.Remove();
             }
 
+            if (PropertiesChanged["ExplorerLabel"]){
+                ExplorerIntegration.Refresh(true);
+            }
+
             if (PropertiesChanged["HistoryEntriesKept"]){
                 HistoryUtils.TryRemoveOldEntries();
             }

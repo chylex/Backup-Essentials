@@ -27,6 +27,7 @@ namespace BackupEssentials.Sys{
             Data.PauseObservation = true;
 
             ExplorerIntegration = true;
+            ExplorerLabel = "Backup Essentials";
             DateFormat = SettingsData.DateFormatList[0];
             WindowCloseTime = SettingsData.FindWindowCloseTime(10);
             HistoryEntriesKept = SettingsData.FindHistoryEntryCount(500);
@@ -45,6 +46,7 @@ namespace BackupEssentials.Sys{
 
                 switch(key){
                     case "EX": ExplorerIntegration = data.Equals("1"); break;
+                    case "EL": ExplorerLabel = data; break;
                     case "DF": DateFormat = SettingsData.FindDateFormat(data); break;
                     case "CT": WindowCloseTime = SettingsData.FindWindowCloseTime(NumberSerialization.ReadInt(data)); break;
                     case "HE": HistoryEntriesKept = SettingsData.FindHistoryEntryCount(NumberSerialization.ReadInt(data)); break;
@@ -58,6 +60,7 @@ namespace BackupEssentials.Sys{
         public void Save(){
             FileUtils.WriteFile(Filename,FileMode.Create,(writer) => {
                 writer.Write("EX"); writer.WriteLine(ExplorerIntegration ? "1" : "0");
+                writer.Write("EL"); writer.WriteLine(ExplorerLabel);
                 writer.Write("DF"); writer.WriteLine(DateFormat.Format);
                 writer.Write("CT"); writer.WriteLine(NumberSerialization.WriteInt(WindowCloseTime.Value));
                 writer.Write("HE"); writer.WriteLine(NumberSerialization.WriteInt(HistoryEntriesKept.Value));
@@ -77,6 +80,11 @@ namespace BackupEssentials.Sys{
         public bool ExplorerIntegration {
             get { return (bool)Data["ExplorerIntegration"]; }
             set { Data["ExplorerIntegration"] = (bool)value; }
+        }
+
+        public string ExplorerLabel {
+            get { return (string)Data["ExplorerLabel"]; }
+            set { Data["ExplorerLabel"] = (string)value; }
         }
 
         public DateFormat DateFormat {

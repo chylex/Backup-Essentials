@@ -124,8 +124,12 @@
 
                 <GroupBox Header="Advanced Settings">
                     <StackPanel Style="{StaticResource StackPanelSub}">
-                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
                         <CheckBox ToolTip="Loads the program silently when Windows starts. Tick this if the program loads too slowly.">Preload on Windows start</CheckBox>
+                        <CheckBox ToolTip="Allows right-clicking on files/folders and starting a backup from the context menu." IsChecked="{Binding ExplorerIntegration}">Integrate with Windows Explorer</CheckBox>
+                        <DockPanel LastChildFill="True" Margin="0,4,0,0">
+                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}">Windows Explorer label:</TextBlock>
+                            <TextBox Text="{Binding ExplorerLabel, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </DockPanel>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
