@@ -49,9 +49,7 @@ namespace BackupEssentials{
                 }
 
                 if (dest.Length > 0){
-                    BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),name,dest);
-                    if (parser.HasFlag("noreport"))info.SetDisableHistory();
-
+                    BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),name,dest,parser.HasFlag("noreport"));
                     new BackupWindow(new BackupRunner(info)).Show();
                 }
                 else throw new ArgumentException("Backup could not begin, destination is empty. Program arguments: "+string.Join(" ",args.Args));

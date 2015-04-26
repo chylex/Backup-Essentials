@@ -3,16 +3,13 @@
         public readonly string[] Source;
         public readonly string Name;
         public readonly string Destination;
-        public bool DisableHistory { get; private set; }
+        public readonly bool DisableHistory;
 
-        public BackupRunInfo(string[] source, string name, string destination){
+        public BackupRunInfo(string[] source, string name, string destination, bool disableHistory){
             this.Source = source;
             this.Name = name;
             this.Destination = destination;
-        }
-
-        public void SetDisableHistory(){
-            DisableHistory = true;
+            this.DisableHistory = disableHistory;
         }
     }
 }
