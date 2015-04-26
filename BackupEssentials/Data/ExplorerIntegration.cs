@@ -28,25 +28,6 @@ namespace BackupEssentials.Backup.Data{
             RefreshTimer.Start();
         }
 
-        public static void Load(){ // TODO add into settings or something
-            DataStorage.BackupLocationList.Clear();
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell");
-            int cmd = 0;
-
-            while(true){
-                string name = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd,null,null) as string;
-                if (name == null)break;
-
-                string fullpath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\BackupEssentials"+cmd+@"\command",null,"") as string;
-                int end = fullpath.IndexOf(".EXE",StringComparison.OrdinalIgnoreCase)+6; // <...>.EXE "<path>" "%1"
-
-                string path = fullpath.Substring(end,fullpath.IndexOf('"',end)-end);
-                DataStorage.BackupLocationList.Add(new BackupLocation(){ Name = name, Directory = path });
-
-                ++cmd;
-            }
-        }
-
         public static void Refresh(){
             Refresh(false);
         }
@@ -73,7 +54,7 @@ namespace BackupEssentials.Backup.Data{
                 foreach(string target in new string[]{ "*", "Directory" }){
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","MUIVerb",Settings.Default.ExplorerLabel);
                     Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials","SubCommands",commands);
-                    Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials\command",null,path+" -runcompat -src \"%1\""); // TODO test on win xp
+                    Registry.SetValue(@"HKEY_CLASSES_ROOT\"+target+@"\shell\BackupEssentials\command",null,path+" -runcompat -src \"%1\"");
                 }
 
                 foreach(BackupLocation loc in valid){
