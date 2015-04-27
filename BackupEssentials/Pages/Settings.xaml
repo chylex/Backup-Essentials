@@ -3,8 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:settings="clr-namespace:BackupEssentials.Sys"
-      mc:Ignorable="d" 
+      xmlns:sys="clr-namespace:BackupEssentials.Sys"
+      mc:Ignorable="d"
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="Settings">
 
@@ -28,7 +28,7 @@
             <Button x:Name="ButtonReset" Content="Reset to default" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
         </WrapPanel>
 
-        <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0" SnapsToDevicePixels="True" DataContext="{Binding Source={x:Static settings:Settings.Default}}">
+        <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0" SnapsToDevicePixels="True" DataContext="{Binding Source={x:Static sys:Settings.Default}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -100,7 +100,7 @@
             </Grid.Resources>
 
             <StackPanel>
-                <GroupBox Header="User Interface">
+                <GroupBox Header="{Binding Language[Settings.Group.UI]}">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="Language of the user interface and backup reports." Style="{StaticResource LabelBlock}">Language:</TextBlock>
@@ -110,7 +110,7 @@
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="The format of displayed dates. Warning: the option affects the History screen, but not existing reports." Style="{StaticResource LabelBlock}">Date format:</TextBlock>
-                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
+                            <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="Color style of the user interface." Style="{StaticResource LabelBlock}">Theme:</TextBlock>
@@ -139,11 +139,11 @@
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report." Style="{StaticResource LabelBlock}">Close the backup window:</TextBlock>
-                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
+                            <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report." Style="{StaticResource LabelBlock}">Backup reports kept:</TextBlock>
-                            <ComboBox ItemsSource="{Binding Source={x:Static settings:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display" SelectionChanged="HistoryEntriesKeptChanged"/>
+                            <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display" SelectionChanged="HistoryEntriesKeptChanged"/>
                         </DockPanel>
                         <CheckBox ToolTip="If checked, backup reports that did not modify any files and folders are kept." IsChecked="{Binding SaveHistoryWithNoEntries}">Save backup reports with no file/folder changes</CheckBox>
                     </StackPanel>
