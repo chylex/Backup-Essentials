@@ -1,9 +1,7 @@
 ﻿using BackupEssentials.Backup.Data;
 using BackupEssentials.Backup.History;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Globalization;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,11 +19,7 @@ namespace BackupEssentials.Pages{
                 PropertiesChanged.Add(prop,false);
             }
 
-            AppSettings.PropertyChanged += (sender, args) => {
-                Changed = true;
-                PropertiesChanged[args.PropertyName] = true;
-                UpdateButtons();
-            };
+            AppSettings.PropertyChanged += new PropertyChangedEventHandler(OnPropertyChanged);
         }
 
         void IPageShowData.OnShow(object data){
@@ -78,6 +72,16 @@ namespace BackupEssentials.Pages{
             GridContainer.DataContext = prevContext;
         }
 
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs args){
+            Changed = true;
+            PropertiesChanged[args.PropertyName] = true;
+            UpdateButtons();
+
+            if (PropertiesChanged["Language"]){
+                UpdateUI();
+            }
+        }
+
         private void SaveAndUpdate(){
             AppSettings.Save();
             AppPageManager.ResetCache();
@@ -93,6 +97,10 @@ namespace BackupEssentials.Pages{
 
             if (PropertiesChanged["HistoryEntriesKept"]){
                 HistoryUtils.TryRemoveOldEntries();
+            }
+
+            if (PropertiesChanged["Language"]){
+                AppPageManager.ResetCache();
             }
 
             foreach(string key in new List<string>(PropertiesChanged.Keys))PropertiesChanged[key] = false;
