@@ -104,9 +104,7 @@
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="Language of the user interface and backup reports." Style="{StaticResource LabelBlock}">Language:</TextBlock>
-                            <ComboBox>
-                                <ComboBoxItem IsSelected="True">English</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.LanguageList}}" SelectedItem="{Binding Language}" DisplayMemberPath="LangName"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
                             <TextBlock ToolTip="The format of displayed dates. Warning: the option affects the History screen, but not existing reports." Style="{StaticResource LabelBlock}">Date format:</TextBlock>
