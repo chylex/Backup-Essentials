@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Sys.UI;
+﻿using BackupEssentials.Data;
+using BackupEssentials.Sys.UI;
 using System;
 using System.Linq;
 
@@ -12,6 +13,15 @@ namespace BackupEssentials.Sys{
             T val = array.FirstOrDefault(checkFunc);
             return val == null && defaultFunc != null ? array.First(defaultFunc) : val; // cannot use ??
         }
+
+        // Languages
+
+        private static Language[] _languageList = new Language[]{
+            new Language("en","English"),
+            new Language("cs","Czech (Čeština)")
+        };
+
+        public static Language[] LanguageList { get { return _languageList; } }
 
         // Date format
 

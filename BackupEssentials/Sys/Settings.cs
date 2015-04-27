@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Sys.UI;
+﻿using BackupEssentials.Data;
+using BackupEssentials.Sys.UI;
 using BackupEssentials.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace BackupEssentials.Sys{
         public void SetToDefault(){
             Data.PauseObservation = true;
 
+            Language = SettingsData.LanguageList[0];
             ExplorerIntegration = true;
             ExplorerLabel = "Backup Essentials";
             DateFormat = SettingsData.DateFormatList[0];
@@ -45,6 +47,7 @@ namespace BackupEssentials.Sys{
                 string key = line.Substring(0,2), data = line.Substring(2);
 
                 switch(key){
+                    case "LG": Language = SettingsData.LanguageList.FindObj(var => var.File.Equals(data)); break;
                     case "EX": ExplorerIntegration = data.Equals("1"); break;
                     case "EL": ExplorerLabel = data; break;
                     case "DF": DateFormat = SettingsData.DateFormatList.FindObj(var => var.Format.Equals(data),var => true); break;
@@ -59,6 +62,7 @@ namespace BackupEssentials.Sys{
 
         public void Save(){
             FileUtils.WriteFile(Filename,FileMode.Create,(writer) => {
+                writer.Write("LG"); writer.WriteLine(Language.File);
                 writer.Write("EX"); writer.WriteLine(ExplorerIntegration ? "1" : "0");
                 writer.Write("EL"); writer.WriteLine(ExplorerLabel);
                 writer.Write("DF"); writer.WriteLine(DateFormat.Format);
@@ -76,6 +80,11 @@ namespace BackupEssentials.Sys{
         }
 
         // List of settings
+
+        public Language Language {
+            get { return (Language)Data["Language"]; }
+            set { Data["Language"] = (Language)value; }
+        }
 
         public bool ExplorerIntegration {
             get { return (bool)Data["ExplorerIntegration"]; }
