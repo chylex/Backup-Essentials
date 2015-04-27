@@ -1,8 +1,18 @@
 ﻿using BackupEssentials.Sys.UI;
+using System;
 using System.Linq;
 
 namespace BackupEssentials.Sys{
     public static class SettingsData{
+        public static T FindObj<T>(this T[] array, Func<T,bool> checkFunc){
+            return array.First(checkFunc);
+        }
+
+        public static T FindObj<T>(this T[] array, Func<T,bool> checkFunc, Func<T,bool> defaultFunc){
+            T val = array.FirstOrDefault(checkFunc);
+            return val == null && defaultFunc != null ? array.First(defaultFunc) : val; // cannot use ??
+        }
+
         // Date format
 
         private static DateFormat[] _dateFormatList = new DateFormat[]{
@@ -23,10 +33,6 @@ namespace BackupEssentials.Sys{
 
         public static DateFormat[] DateFormatList { get { return _dateFormatList; } }
 
-        public static DateFormat FindDateFormat(string format){
-            return DateFormatList.FirstOrDefault(fmt => fmt.Format.Equals(format)) ?? DateFormatList[0];
-        }
-
         // Backup window close time
 
         private static DisplaySetting<int>[] _windowCloseList = new DisplaySetting<int>[]{
@@ -38,10 +44,6 @@ namespace BackupEssentials.Sys{
         };
 
         public static DisplaySetting<int>[] WindowCloseList { get { return _windowCloseList; } }
-
-        public static DisplaySetting<int> FindWindowCloseTime(int value){
-            return WindowCloseList.FirstOrDefault(setting => setting.Value == value) ?? WindowCloseList[2];
-        }
 
         // History entry count
 
@@ -57,9 +59,5 @@ namespace BackupEssentials.Sys{
         };
 
         public static DisplaySetting<int>[] HistoryKeptList { get { return _historyKeptList; } }
-
-        public static DisplaySetting<int> FindHistoryEntryCount(int value){
-            return HistoryKeptList.FirstOrDefault(setting => setting.Value == value) ?? HistoryKeptList[5];
-        }
     }
 }

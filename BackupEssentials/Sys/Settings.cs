@@ -29,8 +29,8 @@ namespace BackupEssentials.Sys{
             ExplorerIntegration = true;
             ExplorerLabel = "Backup Essentials";
             DateFormat = SettingsData.DateFormatList[0];
-            WindowCloseTime = SettingsData.FindWindowCloseTime(10);
-            HistoryEntriesKept = SettingsData.FindHistoryEntryCount(500);
+            WindowCloseTime = SettingsData.WindowCloseList.FindObj(var => var.Value == 10);
+            HistoryEntriesKept = SettingsData.HistoryKeptList.FindObj(var => var.Value == 500);
             SaveHistoryWithNoEntries = false;
             
             Data.PauseObservation = false;
@@ -47,9 +47,9 @@ namespace BackupEssentials.Sys{
                 switch(key){
                     case "EX": ExplorerIntegration = data.Equals("1"); break;
                     case "EL": ExplorerLabel = data; break;
-                    case "DF": DateFormat = SettingsData.FindDateFormat(data); break;
-                    case "CT": WindowCloseTime = SettingsData.FindWindowCloseTime(NumberSerialization.ReadInt(data)); break;
-                    case "HE": HistoryEntriesKept = SettingsData.FindHistoryEntryCount(NumberSerialization.ReadInt(data)); break;
+                    case "DF": DateFormat = SettingsData.DateFormatList.FindObj(var => var.Format.Equals(data),var => true); break;
+                    case "CT": int valueCT = NumberSerialization.ReadInt(data); WindowCloseTime = SettingsData.WindowCloseList.FindObj(var => var.Value == valueCT,var => var.Value == 10); break;
+                    case "HE": int valueHE = NumberSerialization.ReadInt(data); HistoryEntriesKept = SettingsData.HistoryKeptList.FindObj(var => var.Value == valueHE,var => var.Value == 500); break;
                     case "H0": SaveHistoryWithNoEntries = data.Equals("1"); break;
                 }
             });
