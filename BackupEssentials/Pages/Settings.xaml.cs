@@ -110,7 +110,7 @@ namespace BackupEssentials.Pages{
             int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
 
             if (kept != -1 && kept < existing){
-                MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Page.Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],"Caution!",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Page.Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],AppSettings.Language["Page.Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
         }
     }
