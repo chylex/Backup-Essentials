@@ -1,1 +1,13 @@
-Settings.Group.UI = Uživatelské rozhraní
+#==============#
+# GENERAL - UI #
+#==============#
+General.UI.MenuButton.Home = Domů
+General.UI.MenuButton.Backup = Zálohy
+General.UI.MenuButton.History = Historie
+General.UI.MenuButton.Settings = Nastavení
+General.UI.MenuButton.About = O programu
+
+#=================#
+# PAGE - SETTINGS #
+#=================#
+Page.Settings.Group.UI = Uživatelské rozhraní
