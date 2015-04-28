@@ -10,12 +10,20 @@ namespace BackupEssentials.Data{
         public string File { get; private set; }
         public string LangName { get; private set; }
 
-        public string this[string key]{
+        public string this[string key] {
             get {
                 if (Data.Count == 0)LoadLanguage();
 
                 string res;
                 return Data.TryGetValue(key,out res) ? res : key;
+            }
+        }
+
+        public string this[string key, params object[] data] {
+            get {
+                string text = this[key];
+                for(int a = data.Length-1; a >= 0; a--)text = text.Replace("$"+a,data[a].ToString());
+                return text;
             }
         }
 
@@ -27,6 +35,8 @@ namespace BackupEssentials.Data{
 
         private void LoadLanguage(){
             FileUtils.ReadFile(Path.Combine("Resources/Lang",File),FileMode.Open,(line) => {
+                if (line.Length == 0 || line[0] == '#')return;
+
                 string[] data = line.Split(new string[]{ " = " },2,StringSplitOptions.None);
                 if (data.Length == 2)Data.Add(data[0],data[1]);
             });
