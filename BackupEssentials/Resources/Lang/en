@@ -7,6 +7,16 @@ Page.Settings.Button.Save = Save settings
 Page.Settings.Button.Cancel = Cancel
 Page.Settings.Button.Reset = Reset to default
 
+Page.Settings.Message.ChangedWarning.Title = Changed settings
+Page.Settings.Message.ChangedWarning = You have changed the settings, do you want to save them?
+Page.Settings.Message.ResetWarning.Title = Reset settings
+Page.Settings.Message.ResetWarning = Are you sure? This action cannot be taken back!
+Page.Settings.Message.HistoryWarning.Title = Caution!
+Page.Settings.Message.HistoryWarning.PartOne.* = There are currently $0 history entries,
+Page.Settings.Message.HistoryWarning.PartOne.1 = There is currently one history entry,
+Page.Settings.Message.HistoryWarning.PartTwo.* =  saving the settings will delete last $0 entries.
+Page.Settings.Message.HistoryWarning.PartTwo.1 =  saving the settings will delete the last entry.
+
 Page.Settings.Group.UserInterface = User Interface
 Page.Settings.Group.Advanced = Advanced Settings
 Page.Settings.Group.Backup = Backup

@@ -29,7 +29,7 @@ namespace BackupEssentials.Pages{
 
         bool IPageSwitchHandler.OnSwitch(){
             if (Changed){
-                MessageBoxResult result = MessageBox.Show(App.Window,"You have changed the settings, do you want to save them?","Changed settings",MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.ChangedWarning"],AppSettings.Language["Page.Settings.Message.ChangedWarning.Title"],MessageBoxButton.YesNoCancel,MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Cancel)return true;
                 else if (result == MessageBoxResult.Yes)SaveAndUpdate();
@@ -53,7 +53,7 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickReset(object sender, RoutedEventArgs e){
-            if (MessageBox.Show(App.Window,"Are you sure? This action cannot be taken back!","Reset settings",MessageBoxButton.YesNo) == MessageBoxResult.Yes){
+            if (MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.ResetWarning"],AppSettings.Language["Page.Settings.Message.ResetWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
                 AppSettings.SetToDefault();
                 SaveAndUpdate();
                 Changed = false;
@@ -108,7 +108,10 @@ namespace BackupEssentials.Pages{
 
         private void HistoryEntriesKeptChanged(object sender, SelectionChangedEventArgs e){
             int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
-            if (kept != -1 && kept < existing)MessageBox.Show(App.Window,"There are currently "+existing+" history entries, saving the settings will delete last "+(existing-kept)+" entries.","Caution!",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+
+            if (kept != -1 && kept < existing){
+                MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Page.Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],"Caution!",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+            }
         }
     }
 }
