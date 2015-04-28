@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
+        xmlns:system="clr-namespace:BackupEssentials.Sys"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.MainWindow"
         Title="Backup" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF000000" AllowsTransparency="True" AllowDrop="True" MinWidth="800" MinHeight="600" DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop">
@@ -58,7 +59,7 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Grid Height="60" Margin="0" Grid.Row="1" VerticalAlignment="Top" Background="#FF1D1D1D">
+            <Grid Height="60" Margin="0" Grid.Row="1" VerticalAlignment="Top" Background="#FF1D1D1D" DataContext="{Binding Source={x:Static system:Settings.Default}}">
                 <Grid.Resources>
                     <Style x:Key="ButtonStyleMainMenu" TargetType="{x:Type Button}">
                         <Setter Property="Foreground" Value="#FFEEEEEE"/>
@@ -133,6 +134,7 @@
                         </Setter>
                     </Style>
                 </Grid.Resources>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1"/>
@@ -144,11 +146,12 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <custom:ButtonMainMenu Content="Home" ClickPage="Pages.Home" IsChecked="True" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="Backup" ClickPage="Pages.Backup" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="History" ClickPage="Pages.History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="Settings" ClickPage="Pages.Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
-                <custom:ButtonMainMenu Content="About" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
+
+                <custom:ButtonMainMenu Content="{Binding Language[General.UI.MenuButton.Home]}" ClickPage="Pages.Home" IsChecked="True" Click="ButtonMainMenuClick" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="{Binding Language[General.UI.MenuButton.Backup]}" ClickPage="Pages.Backup" Click="ButtonMainMenuClick" Grid.Column="2" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="{Binding Language[General.UI.MenuButton.History]}" ClickPage="Pages.History" Click="ButtonMainMenuClick" Grid.Column="4" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="{Binding Language[General.UI.MenuButton.Settings]}" ClickPage="Pages.Settings" Click="ButtonMainMenuClick" Grid.Column="6" Style="{DynamicResource ButtonStyleMainMenu}"/>
+                <custom:ButtonMainMenu Content="{Binding Language[General.UI.MenuButton.About]}" ClickPage="Pages.About" Click="ButtonMainMenuClick" Grid.Column="8" Style="{DynamicResource ButtonStyleMainMenu}"/>
             </Grid>
             <Frame x:Name="ContentFrame" Content="" Margin="0" Grid.Row="3" AllowDrop="True" NavigationUIVisibility="Hidden"/>
         </Grid>

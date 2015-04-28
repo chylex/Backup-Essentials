@@ -1,3 +1,12 @@
+#==============#
+# GENERAL - UI #
+#==============#
+General.UI.MenuButton.Home = Home
+General.UI.MenuButton.Backup = Backup
+General.UI.MenuButton.History = History
+General.UI.MenuButton.Settings = Settings
+General.UI.MenuButton.About = About
+
 #=================#
 # PAGE - SETTINGS #
 #=================#
