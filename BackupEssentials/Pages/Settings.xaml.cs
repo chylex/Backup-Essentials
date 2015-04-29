@@ -49,7 +49,7 @@ namespace BackupEssentials.Pages{
             AppSettings.Reload();
             Changed = false;
             UpdateButtons();
-            UpdateUI();
+            AppPageManager.ResetUI();
         }
 
         private void ClickReset(object sender, RoutedEventArgs e){
@@ -58,18 +58,12 @@ namespace BackupEssentials.Pages{
                 SaveAndUpdate();
                 Changed = false;
                 UpdateButtons();
-                UpdateUI();
+                AppPageManager.ResetUI();
             }
         }
 
         private void UpdateButtons(){
             ButtonSave.IsEnabled = ButtonCancel.IsEnabled = Changed;
-        }
-
-        private void UpdateUI(){
-            object prevContext = GridContainer.DataContext;
-            GridContainer.DataContext = null;
-            GridContainer.DataContext = prevContext;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs args){
@@ -78,13 +72,12 @@ namespace BackupEssentials.Pages{
             UpdateButtons();
 
             if (PropertiesChanged["Language"]){
-                UpdateUI();
+                AppPageManager.ResetUI();
             }
         }
 
         private void SaveAndUpdate(){
             AppSettings.Save();
-            AppPageManager.ResetCache();
 
             if (PropertiesChanged["ExplorerIntegration"]){
                 if (AppSettings.ExplorerIntegration)ExplorerIntegration.Refresh(true);
@@ -95,12 +88,12 @@ namespace BackupEssentials.Pages{
                 ExplorerIntegration.Refresh(true);
             }
 
-            if (PropertiesChanged["HistoryEntriesKept"]){
-                HistoryUtils.TryRemoveOldEntries();
+            if (PropertiesChanged["Language"] || PropertiesChanged["DateFormat"]){
+                AppPageManager.ResetUI();
             }
 
-            if (PropertiesChanged["Language"]){
-                AppPageManager.ResetCache();
+            if (PropertiesChanged["HistoryEntriesKept"]){
+                HistoryUtils.TryRemoveOldEntries();
             }
 
             foreach(string key in new List<string>(PropertiesChanged.Keys))PropertiesChanged[key] = false;

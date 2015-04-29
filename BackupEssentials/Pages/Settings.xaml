@@ -8,7 +8,7 @@
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="Settings">
 
-    <Grid DataContext="{Binding Source={x:Static sys:Settings.Default}}">
+    <Grid x:Name="MainGrid" DataContext="{Binding Source={x:Static sys:Settings.Default}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>

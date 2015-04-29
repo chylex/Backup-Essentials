@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BackupEssentials.Pages{
-    public partial class History : Page{
+    public partial class History : Page, IPageResetUI{
         public History(){
             InitializeComponent();
 
@@ -47,6 +47,10 @@ namespace BackupEssentials.Pages{
 
                 e.Handled = true; // required to not have the main window steal focus
             }
+        }
+
+        void IPageResetUI.OnReset(){
+            HistoryListView.Items.Refresh();
         }
     }
 }
