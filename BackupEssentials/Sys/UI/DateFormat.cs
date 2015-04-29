@@ -44,7 +44,7 @@ namespace BackupEssentials.Sys.UI{
         }
 
         public class Detect : DateFormat{
-            public new string Display { get { return Settings.Default.Language["Page.Settings.Option.DateFormat.Detect",_example]; } }
+            public new string Display { get { return Settings.Default.Language["Settings.Option.DateFormat.Detect",_example]; } }
 
             public Detect() : base(CultureInfo.CurrentCulture){}
         }

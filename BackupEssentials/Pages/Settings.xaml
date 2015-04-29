@@ -23,9 +23,9 @@
                 </Style>
             </WrapPanel.Resources>
 
-            <Button x:Name="ButtonSave" Content="{Binding Language[Page.Settings.Button.Save]}" IsEnabled="False" FontSize="16" Width="130" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
-            <Button x:Name="ButtonCancel" Content="{Binding Language[Page.Settings.Button.Cancel]}" IsEnabled="False" FontSize="16" Width="80" Template="{StaticResource ButtonStyleRedDefault}" Margin="0,0,10,0" Click="ClickCancel"/>
-            <Button x:Name="ButtonReset" Content="{Binding Language[Page.Settings.Button.Reset]}" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
+            <Button x:Name="ButtonSave" Content="{Binding Language[Settings.Button.Save]}" IsEnabled="False" FontSize="16" Width="130" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
+            <Button x:Name="ButtonCancel" Content="{Binding Language[Settings.Button.Cancel]}" IsEnabled="False" FontSize="16" Width="80" Template="{StaticResource ButtonStyleRedDefault}" Margin="0,0,10,0" Click="ClickCancel"/>
+            <Button x:Name="ButtonReset" Content="{Binding Language[Settings.Button.Reset]}" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
         </WrapPanel>
 
         <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0" SnapsToDevicePixels="True">
@@ -100,18 +100,18 @@
             </Grid.Resources>
 
             <StackPanel>
-                <GroupBox Header="{Binding Language[Page.Settings.Group.UserInterface]}">
+                <GroupBox Header="{Binding Language[Settings.Group.UserInterface]}">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="{Binding Language[Page.Settings.Label.Language.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.Language]}"/>
+                            <TextBlock ToolTip="{Binding Language[Settings.Label.Language.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.Language]}"/>
                             <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.LanguageList}}" SelectedItem="{Binding Language}" DisplayMemberPath="LangName"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="{Binding Language[Page.Settings.Label.DateFormat.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.DateFormat]}"/>
+                            <TextBlock ToolTip="{Binding Language[Settings.Label.DateFormat.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.DateFormat]}"/>
                             <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.DateFormatList}}" SelectedItem="{Binding DateFormat}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="{Binding Language[Page.Settings.Label.Theme.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.Theme]}"/>
+                            <TextBlock ToolTip="{Binding Language[Settings.Label.Theme.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.Theme]}"/>
                             <ComboBox>
                                 <ComboBoxItem IsSelected="True">Dark</ComboBoxItem>
                                 <ComboBoxItem>Bright</ComboBoxItem>
@@ -120,12 +120,12 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Header="{Binding Language[Page.Settings.Group.Advanced]}">
+                <GroupBox Header="{Binding Language[Settings.Group.Advanced]}">
                     <StackPanel Style="{StaticResource StackPanelSub}">
-                        <CheckBox ToolTip="{Binding Language[Page.Settings.Check.Preload.Tooltip]}" Content="{Binding Language[Page.Settings.Check.Preload]}"/>
-                        <CheckBox ToolTip="{Binding Language[Page.Settings.Check.ExplorerIntegration.Tooltip]}" IsChecked="{Binding ExplorerIntegration}" Content="{Binding Language[Page.Settings.Check.ExplorerIntegration]}"/>
+                        <CheckBox ToolTip="{Binding Language[Settings.Check.Preload.Tooltip]}" Content="{Binding Language[Settings.Check.Preload]}"/>
+                        <CheckBox ToolTip="{Binding Language[Settings.Check.ExplorerIntegration.Tooltip]}" IsChecked="{Binding ExplorerIntegration}" Content="{Binding Language[Settings.Check.ExplorerIntegration]}"/>
                         <DockPanel LastChildFill="True" Margin="0,4,0,0">
-                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.ExplorerLabel]}"/>
+                            <TextBlock ToolTip="" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.ExplorerLabel]}"/>
                             <TextBox Text="{Binding ExplorerLabel, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         </DockPanel>
                     </StackPanel>
@@ -133,22 +133,22 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <GroupBox Header="{Binding Language[Page.Settings.Group.Backup]}">
+                <GroupBox Header="{Binding Language[Settings.Group.Backup]}">
                     <StackPanel Style="{StaticResource StackPanelSub}">
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="{Binding Language[Page.Settings.Label.WindowClose.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.WindowClose]}"/>
+                            <TextBlock ToolTip="{Binding Language[Settings.Label.WindowClose.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.WindowClose]}"/>
                             <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.WindowCloseList}}" SelectedItem="{Binding WindowCloseTime}" DisplayMemberPath="Display"/>
                         </DockPanel>
                         <DockPanel LastChildFill="True" Margin="{StaticResource Item}">
-                            <TextBlock ToolTip="{Binding Language[Page.Settings.Label.ReportsKept.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Page.Settings.Label.ReportsKept]}"/>
+                            <TextBlock ToolTip="{Binding Language[Settings.Label.ReportsKept.Tooltip]}" Style="{StaticResource LabelBlock}" Text="{Binding Language[Settings.Label.ReportsKept]}"/>
                             <ComboBox ItemsSource="{Binding Source={x:Static sys:SettingsData.HistoryKeptList}}" SelectedItem="{Binding HistoryEntriesKept}" DisplayMemberPath="Display" SelectionChanged="HistoryEntriesKeptChanged"/>
                         </DockPanel>
-                        <CheckBox ToolTip="{Binding Language[Page.Settings.Check.SaveEmptyReports.Tooltip]}" IsChecked="{Binding SaveHistoryWithNoEntries}" Content="{Binding Language[Page.Settings.Check.SaveEmptyReports]}"/>
+                        <CheckBox ToolTip="{Binding Language[Settings.Check.SaveEmptyReports.Tooltip]}" IsChecked="{Binding SaveHistoryWithNoEntries}" Content="{Binding Language[Settings.Check.SaveEmptyReports]}"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
         </Grid>
 
-        <TextBlock Text="{Binding Language[Page.Settings.Hint]}" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0"/>
+        <TextBlock Text="{Binding Language[Settings.Hint]}" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0"/>
     </Grid>
 </Page>

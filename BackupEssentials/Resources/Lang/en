@@ -10,53 +10,53 @@ General.UI.MenuButton.About = About
 #=================#
 # PAGE - SETTINGS #
 #=================#
-Page.Settings.Hint = Hint: Move your cursor over an option label to see a detailed description
+Settings.Hint = Hint: Move your cursor over an option label to see a detailed description
 
-Page.Settings.Button.Save = Save settings
-Page.Settings.Button.Cancel = Cancel
-Page.Settings.Button.Reset = Reset to default
+Settings.Button.Save = Save settings
+Settings.Button.Cancel = Cancel
+Settings.Button.Reset = Reset to default
 
-Page.Settings.Message.ChangedWarning.Title = Changed settings
-Page.Settings.Message.ChangedWarning = You have changed the settings, do you want to save them?
-Page.Settings.Message.ResetWarning.Title = Reset settings
-Page.Settings.Message.ResetWarning = Are you sure? This action cannot be taken back!
-Page.Settings.Message.HistoryWarning.Title = Caution!
-Page.Settings.Message.HistoryWarning.PartOne.* = There are currently $0 history entries,
-Page.Settings.Message.HistoryWarning.PartOne.1 = There is currently one history entry,
-Page.Settings.Message.HistoryWarning.PartTwo.* =  saving the settings will delete last $0 entries.
-Page.Settings.Message.HistoryWarning.PartTwo.1 =  saving the settings will delete the last entry.
+Settings.Message.ChangedWarning.Title = Changed settings
+Settings.Message.ChangedWarning = You have changed the settings, do you want to save them?
+Settings.Message.ResetWarning.Title = Reset settings
+Settings.Message.ResetWarning = Are you sure? This action cannot be taken back!
+Settings.Message.HistoryWarning.Title = Caution!
+Settings.Message.HistoryWarning.PartOne.* = There are currently $0 history entries,
+Settings.Message.HistoryWarning.PartOne.1 = There is currently one history entry,
+Settings.Message.HistoryWarning.PartTwo.* =  saving the settings will delete last $0 entries.
+Settings.Message.HistoryWarning.PartTwo.1 =  saving the settings will delete the last entry.
 
-Page.Settings.Group.UserInterface = User Interface
-Page.Settings.Group.Advanced = Advanced Settings
-Page.Settings.Group.Backup = Backup
+Settings.Group.UserInterface = User Interface
+Settings.Group.Advanced = Advanced Settings
+Settings.Group.Backup = Backup
 
-Page.Settings.Label.Language = Language:
-Page.Settings.Label.Language.Tooltip = Language of the user interface and backup reports.
-Page.Settings.Label.DateFormat = Date Format:
-Page.Settings.Label.DateFormat.Tooltip = The format of displayed dates. Warning: the option affects the History screen, but not existing reports.
-Page.Settings.Label.Theme = Theme:
-Page.Settings.Label.Theme.Tooltip = Color style of the user interface.
-Page.Settings.Label.WindowClose = Close the backup window:
-Page.Settings.Label.WindowClose.Tooltip = Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report.
-Page.Settings.Label.ReportsKept = Backup reports kept:
-Page.Settings.Label.ReportsKept.Tooltip = Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report.
-Page.Settings.Label.ExplorerLabel = Windows Explorer label:
-Page.Settings.Label.ExplorerLabel.Tooltip = 
+Settings.Label.Language = Language:
+Settings.Label.Language.Tooltip = Language of the user interface and backup reports.
+Settings.Label.DateFormat = Date Format:
+Settings.Label.DateFormat.Tooltip = The format of displayed dates. Warning: the option affects the History screen, but not existing reports.
+Settings.Label.Theme = Theme:
+Settings.Label.Theme.Tooltip = Color style of the user interface.
+Settings.Label.WindowClose = Close the backup window:
+Settings.Label.WindowClose.Tooltip = Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report.
+Settings.Label.ReportsKept = Backup reports kept:
+Settings.Label.ReportsKept.Tooltip = Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report.
+Settings.Label.ExplorerLabel = Windows Explorer label:
+Settings.Label.ExplorerLabel.Tooltip = 
 
-Page.Settings.Check.Preload = Preload on Windows start
-Page.Settings.Check.Preload.Tooltip = Loads the program silently when Windows starts. Tick this if the program loads too slowly.
-Page.Settings.Check.ExplorerIntegration = Integrate with Windows Explorer
-Page.Settings.Check.ExplorerIntegration.Tooltip = Allows right-clicking on files/folders and starting a backup from the context menu.
-Page.Settings.Check.SaveEmptyReports = Save backup reporst with no file/folder changes
-Page.Settings.Check.SaveEmptyReports.Tooltip = If checked, backup reports that did not modify any files and folders are kept.
+Settings.Check.Preload = Preload on Windows start
+Settings.Check.Preload.Tooltip = Loads the program silently when Windows starts. Tick this if the program loads too slowly.
+Settings.Check.ExplorerIntegration = Integrate with Windows Explorer
+Settings.Check.ExplorerIntegration.Tooltip = Allows right-clicking on files/folders and starting a backup from the context menu.
+Settings.Check.SaveEmptyReports = Save backup reporst with no file/folder changes
+Settings.Check.SaveEmptyReports.Tooltip = If checked, backup reports that did not modify any files and folders are kept.
 
-Page.Settings.Option.WindowClose.Immediately = Immediately
-Page.Settings.Option.WindowClose.5 = After 5 seconds
-Page.Settings.Option.WindowClose.10 = After 10 seconds
-Page.Settings.Option.WindowClose.30 = After 30 seconds
-Page.Settings.Option.WindowClose.Never = Never
+Settings.Option.WindowClose.Immediately = Immediately
+Settings.Option.WindowClose.5 = After 5 seconds
+Settings.Option.WindowClose.10 = After 10 seconds
+Settings.Option.WindowClose.30 = After 30 seconds
+Settings.Option.WindowClose.Never = Never
 
-Page.Settings.Option.ReportsKept.None = None
-Page.Settings.Option.ReportsKept.All = All
+Settings.Option.ReportsKept.None = None
+Settings.Option.ReportsKept.All = All
 
-Page.Settings.Option.DateFormat.Detect = Detect ($0)
+Settings.Option.DateFormat.Detect = Detect ($0)

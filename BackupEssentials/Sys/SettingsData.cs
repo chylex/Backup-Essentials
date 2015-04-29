@@ -46,11 +46,11 @@ namespace BackupEssentials.Sys{
         // Backup window close time
 
         private static DisplaySetting<int>[] _windowCloseList = new DisplaySetting<int>[]{
-            new DisplaySetting<int>(0,"Page.Settings.Option.WindowClose.Immediately"),
-            new DisplaySetting<int>(5,"Page.Settings.Option.WindowClose.5"),
-            new DisplaySetting<int>(10,"Page.Settings.Option.WindowClose.10"),
-            new DisplaySetting<int>(30,"Page.Settings.Option.WindowClose.30"),
-            new DisplaySetting<int>(-1,"Page.Settings.Option.WindowClose.Never")
+            new DisplaySetting<int>(0,"Settings.Option.WindowClose.Immediately"),
+            new DisplaySetting<int>(5,"Settings.Option.WindowClose.5"),
+            new DisplaySetting<int>(10,"Settings.Option.WindowClose.10"),
+            new DisplaySetting<int>(30,"Settings.Option.WindowClose.30"),
+            new DisplaySetting<int>(-1,"Settings.Option.WindowClose.Never")
         };
 
         public static DisplaySetting<int>[] WindowCloseList { get { return _windowCloseList; } }
@@ -58,14 +58,14 @@ namespace BackupEssentials.Sys{
         // History entry count
 
         private static DisplaySetting<int>[] _historyKeptList = new DisplaySetting<int>[]{
-            new DisplaySetting<int>(0,"Page.Settings.Option.ReportsKept.None"),
+            new DisplaySetting<int>(0,"Settings.Option.ReportsKept.None"),
             new DisplaySetting<int>(25,"25"),
             new DisplaySetting<int>(50,"50"),
             new DisplaySetting<int>(100,"100"),
             new DisplaySetting<int>(250,"250"),
             new DisplaySetting<int>(500,"500"),
             new DisplaySetting<int>(1000,"1000"),
-            new DisplaySetting<int>(-1,"Page.Settings.Option.ReportsKept.All")
+            new DisplaySetting<int>(-1,"Settings.Option.ReportsKept.All")
         };
 
         public static DisplaySetting<int>[] HistoryKeptList { get { return _historyKeptList; } }

@@ -10,4 +10,4 @@ General.UI.MenuButton.About = O programu
 #=================#
 # PAGE - SETTINGS #
 #=================#
-Page.Settings.Group.UI = Uživatelské rozhraní
+Settings.Group.UI = Uživatelské rozhraní

@@ -29,7 +29,7 @@ namespace BackupEssentials.Pages{
 
         bool IPageSwitchHandler.OnSwitch(){
             if (Changed){
-                MessageBoxResult result = MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.ChangedWarning"],AppSettings.Language["Page.Settings.Message.ChangedWarning.Title"],MessageBoxButton.YesNoCancel,MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.ChangedWarning"],AppSettings.Language["Settings.Message.ChangedWarning.Title"],MessageBoxButton.YesNoCancel,MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Cancel)return true;
                 else if (result == MessageBoxResult.Yes)SaveAndUpdate();
@@ -53,7 +53,7 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickReset(object sender, RoutedEventArgs e){
-            if (MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.ResetWarning"],AppSettings.Language["Page.Settings.Message.ResetWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
+            if (MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.ResetWarning"],AppSettings.Language["Settings.Message.ResetWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
                 AppSettings.SetToDefault();
                 SaveAndUpdate();
                 Changed = false;
@@ -103,7 +103,7 @@ namespace BackupEssentials.Pages{
             int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
 
             if (kept != -1 && kept < existing){
-                MessageBox.Show(App.Window,AppSettings.Language["Page.Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Page.Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],AppSettings.Language["Page.Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],AppSettings.Language["Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
         }
     }
