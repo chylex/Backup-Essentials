@@ -36,6 +36,10 @@ namespace BackupEssentials.Pages{
         private void ClickBackup(object sender, RoutedEventArgs e){
             if (FileList.Length == 0 || Running)return;
 
+            for(int a = 0; a < FileList.Length; a++){
+                if (FileList[a][FileList[a].Length-1] == '\\')FileList[a] += '\\';
+            }
+
             Process newProcess = new Process();
             newProcess.StartInfo.Arguments = "-runshell -locid "+LocationsListView.SelectedIndex+" -src \""+string.Join("\" \"",FileList)+"\"";
             newProcess.StartInfo.FileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
