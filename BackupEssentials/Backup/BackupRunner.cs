@@ -5,10 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace BackupEssentials.Backup{
@@ -48,8 +46,32 @@ namespace BackupEssentials.Backup{
             BackupRunInfo data = (BackupRunInfo)e.Argument;
 
             string[] src = data.Source;
-            string srcParent = Directory.GetParent(src[0]).FullName, fullSrc = string.Join(", ",src);
+            string fullSrc = string.Join(", ",src);
             string destFolder = data.Destination;
+            string srcParent = null;
+
+            if (src[0].EndsWith(@":\")){
+                if (src.Length == 1){
+                    srcParent = src[0];
+
+                    List<string> newSrc = new List<string>();
+                    foreach(string dir in GetVisibleDirectories(src[0],"*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],dir));
+                    foreach(string file in Directory.GetFiles(src[0],"*.*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],file));
+                    src = newSrc.ToArray();
+                }
+            }
+            else srcParent = Directory.GetParent(src[0]).FullName;
+
+            // Verify source files
+            if (srcParent == null){
+                throw new Exception("Cannot backup multiple locations!");
+            }
+
+            for(int a = 1; a < src.Length; a++){
+                if (!Directory.GetParent(src[a]).FullName.Equals(srcParent))throw new Exception("Cannot backup multiple locations!");
+            }
+
+            if (srcParent[srcParent.Length-1] == '\\')srcParent = srcParent.Substring(0,srcParent.Length-1);
 
             // Figure out the source file and directory lists
             HashSet<string> rootSrcEntries = new HashSet<string>();
@@ -66,7 +88,7 @@ namespace BackupEssentials.Backup{
                     rootSrcEntries.Add(dname);
                     srcEntries.Add(dname,new IOEntry(){ Type = IOType.Directory, AbsolutePath = srcEntry });
 
-                    foreach(string dir in Directory.GetDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                    foreach(string dir in GetVisibleDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                     foreach(string file in Directory.GetFiles(srcEntry,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
                 }
                 else{
@@ -92,7 +114,7 @@ namespace BackupEssentials.Backup{
                 if (rootSrcEntries.Remove(entryName)){
                     if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory)){
                         dstEntries.Add(entryName,new IOEntry(){ Type = IOType.Directory, AbsolutePath = entry });
-                        foreach(string dir in Directory.GetDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                        foreach(string dir in GetVisibleDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                         foreach(string file in Directory.GetFiles(entry,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
                     }
                     else dstEntries.Add(entryName,new IOEntry(){ Type = IOType.File, AbsolutePath = entry });
@@ -239,6 +261,12 @@ namespace BackupEssentials.Backup{
 
             reportBuilder.Add("= Backup finished =");
             e.Result = reportBuilder.Finish();
+        }
+
+        private static IEnumerable<string> GetVisibleDirectories(string path, string searchPattern, SearchOption searchOption){
+            foreach(string dir in Directory.EnumerateDirectories(path,searchPattern,searchOption)){
+                if (!File.GetAttributes(dir).HasFlag(FileAttributes.Hidden))yield return dir;
+            }
         }
 
         private class IOEntry{
