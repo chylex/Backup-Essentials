@@ -50,7 +50,10 @@ namespace BackupEssentials{
 
                 if (dest.Length > 0){
                     BackupRunInfo info = new BackupRunInfo(parser.GetMultiValue("src"),name,dest,parser.HasFlag("noreport"));
-                    new BackupWindow(new BackupRunner(info)).Show();
+
+                    BackupWindow window = new BackupWindow(new BackupRunner(info));
+                    if (parser.HasFlag("nohide"))window.WindowState = WindowState.Normal;
+                    window.Show();
                 }
                 else throw new ArgumentException("Backup could not begin, destination is empty. Program arguments: "+string.Join(" ",args.Args));
             }

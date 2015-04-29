@@ -45,7 +45,7 @@ namespace BackupEssentials.Pages{
             }
 
             Process newProcess = new Process();
-            newProcess.StartInfo.Arguments = "-runshell -locid "+LocationsListView.SelectedIndex+" -src \""+string.Join("\" \"",FileList)+"\"";
+            newProcess.StartInfo.Arguments = "-runshell -nohide -locid "+LocationsListView.SelectedIndex+" -src \""+string.Join("\" \"",FileList)+"\"";
             newProcess.StartInfo.FileName = Path.GetFileName(Assembly.GetExecutingAssembly().CodeBase);
             newProcess.EnableRaisingEvents = true;
             newProcess.Start();
