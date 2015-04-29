@@ -140,6 +140,7 @@
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
     <Compile Include="Utils\WindowsVersion.cs" />
+    <Compile Include="Utils\WpfExtensions.cs" />
     <Page Include="BackupReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
