@@ -60,3 +60,17 @@ Settings.Option.ReportsKept.None = None
 Settings.Option.ReportsKept.All = All
 
 Settings.Option.DateFormat.Detect = Detect ($0)
+
+#==============#
+# PAGE - ABOUT #
+#==============#
+About.Version = Version
+About.Version.Unknown = <unknown>
+About.Author = Designed and programmed by chylex.
+About.License = Product license information
+
+About.Support = Support:
+About.Support.Link = Issues on GitHub
+About.OfficialWebsite = Visit the official website:
+About.SourceCode = View the source code:
+About.Twitter = Follow me on Twitter:

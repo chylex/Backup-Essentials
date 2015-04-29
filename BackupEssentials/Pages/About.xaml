@@ -1,8 +1,9 @@
 ﻿<Page x:Class="BackupEssentials.Pages.About"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:system="clr-namespace:BackupEssentials.Sys"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
       Title="About">
@@ -15,19 +16,19 @@
         </Grid.Resources>
 
         <TextBlock HorizontalAlignment="Left" Margin="12,8,0,0" TextWrapping="Wrap" Text="Backup Essentials" VerticalAlignment="Top" Foreground="#FFEEEEEE" FontSize="24"/>
-        <TextBlock x:Name="AboutText" HorizontalAlignment="Left" Margin="20,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFDDDDDD" FontSize="16">
-            Version <Run x:Name="AboutTextVersion" Text="&lt;unknown&gt;"/>
+        <TextBlock x:Name="AboutText" HorizontalAlignment="Left" Margin="20,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFDDDDDD" FontSize="16" DataContext="{Binding Source={x:Static system:Settings.Default}}">
+            <Run Text="{Binding Language[About.Version], Mode=OneWay}"/> <Run x:Name="AboutTextVersion" Text="{Binding Language[About.Version.Unknown], Mode=OneWay}"/>
             <LineBreak/><LineBreak/><LineBreak/>
-            Designed and programmed by chylex.<LineBreak/>
+            <Run Text="{Binding Language[About.Author], Mode=OneWay}"/><LineBreak/>
             <LineBreak/>
-            Support: <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials/issues" RequestNavigate="ClickLink">Issues on GitHub</Hyperlink><LineBreak/>
+            <Run Text="{Binding Language[About.Support], Mode=OneWay}"/> <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials/issues" RequestNavigate="ClickLink"><Run Text="{Binding Language[About.Support.Link], Mode=OneWay}"/></Hyperlink><LineBreak/>
             <Run x:Name="AboutTextOS" Text="&lt;OS support info&gt;"/><LineBreak/>
             <LineBreak/>
-            Visit the official website: <Hyperlink NavigateUri="http://chylex.com" RequestNavigate="ClickLink">http://chylex.com</Hyperlink><LineBreak/>
-            View the source code: <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials" RequestNavigate="ClickLink">GitHub/chylex/Backup-Essentials</Hyperlink><LineBreak/>
-            Follow me on Twitter: <Hyperlink NavigateUri="https://twitter.com/chylexMC" RequestNavigate="ClickLink">@chylexMC</Hyperlink><LineBreak/>
+            <Run Text="{Binding Language[About.OfficialWebsite], Mode=OneWay}"/> <Hyperlink NavigateUri="http://chylex.com" RequestNavigate="ClickLink">http://chylex.com</Hyperlink><LineBreak/>
+            <Run Text="{Binding Language[About.SourceCode], Mode=OneWay}"/> <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials" RequestNavigate="ClickLink">GitHub/chylex/Backup-Essentials</Hyperlink><LineBreak/>
+            <Run Text="{Binding Language[About.Twitter], Mode=OneWay}"/> <Hyperlink NavigateUri="https://twitter.com/chylexMC" RequestNavigate="ClickLink">@chylexMC</Hyperlink><LineBreak/>
             <LineBreak/><LineBreak/>
-            <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials/blob/master/LICENSE" RequestNavigate="ClickLink">Product license information</Hyperlink>
+            <Hyperlink NavigateUri="https://github.com/chylex/Backup-Essentials/blob/master/LICENSE" RequestNavigate="ClickLink"><Run Text="{Binding Language[About.License], Mode=OneWay}"/></Hyperlink>
         </TextBlock>
     </Grid>
 </Page>
