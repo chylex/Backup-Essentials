@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BackupEssentials.Pages;
+using BackupEssentials.Utils;
+using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -22,8 +24,15 @@ namespace BackupEssentials{
             return page;
         }
 
-        public static void ResetCache(){
-            cached.Clear();
+        public static void ResetUI(){
+            App.Current.MainWindow.UpdateBindings();
+
+            foreach(Page page in cached.Values){
+                page.UpdateBindings();
+
+                IPageResetUI reset = page as IPageResetUI;
+                if (reset != null)reset.OnReset();
+            }
         }
     }
 }

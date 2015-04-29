@@ -116,6 +116,7 @@
     <Compile Include="Pages\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IPageResetUI.cs" />
     <Compile Include="Pages\IPageShowData.cs" />
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
