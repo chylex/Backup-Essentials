@@ -33,7 +33,7 @@ namespace BackupEssentials.Pages{
 
                 if (result == MessageBoxResult.Cancel)return true;
                 else if (result == MessageBoxResult.Yes)SaveAndUpdate();
-                else AppSettings.Reload();
+                else ClickCancel(this,new RoutedEventArgs());
             }
 
             return false;
