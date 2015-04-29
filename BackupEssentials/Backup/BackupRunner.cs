@@ -50,6 +50,8 @@ namespace BackupEssentials.Backup{
             string destFolder = data.Destination;
             string srcParent = null;
 
+            bool ignoreRoot = false;
+
             if (src[0].EndsWith(@":\")){
                 if (src.Length == 1){
                     srcParent = src[0];
@@ -58,6 +60,8 @@ namespace BackupEssentials.Backup{
                     foreach(string dir in GetVisibleDirectories(src[0],"*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],dir));
                     foreach(string file in Directory.GetFiles(src[0],"*.*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],file));
                     src = newSrc.ToArray();
+
+                    ignoreRoot = true;
                 }
             }
             else srcParent = Directory.GetParent(src[0]).FullName;
@@ -111,7 +115,7 @@ namespace BackupEssentials.Backup{
             foreach(string entry in Directory.GetFileSystemEntries(destFolder,"*",SearchOption.TopDirectoryOnly)){
                 string entryName = entry.Remove(0,destFolderLen);
 
-                if (rootSrcEntries.Remove(entryName)){
+                if (ignoreRoot || rootSrcEntries.Remove(entryName)){
                     if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory)){
                         dstEntries.Add(entryName,new IOEntry(){ Type = IOType.Directory, AbsolutePath = entry });
                         foreach(string dir in GetVisibleDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
@@ -130,7 +134,7 @@ namespace BackupEssentials.Backup{
             IEnumerable<string> ioIntersecting = srcEntries.Keys.Intersect(dstEntries.Keys);
             
             foreach(KeyValuePair<string,IOEntry> deleted in ioDeleted){
-                if (deleted.Key.IndexOf(Path.DirectorySeparatorChar) == -1)continue; // ignore everything in root folder
+                if (!ignoreRoot && deleted.Key.IndexOf(Path.DirectorySeparatorChar) == -1)continue; // ignore everything in root folder
                 actions.Add(new IOActionEntry(){ Type = deleted.Value.Type, Action = IOAction.Delete, RelativePath = deleted.Key });
             }
 
