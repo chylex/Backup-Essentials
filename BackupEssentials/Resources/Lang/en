@@ -7,6 +7,21 @@ General.UI.MenuButton.History = History
 General.UI.MenuButton.Settings = Settings
 General.UI.MenuButton.About = About
 
+#================#
+# PAGE - HISTORY #
+#================#
+History.Button.Show = Show report
+History.Button.Remove = Remove
+
+History.Deletion.Confirmation.Title = Confirm deletion
+History.Deletion.Confirmation = Are you sure you want to delete the history entry? This action cannot be taken back.
+History.Deletion.Failure.Title = Error deleting history entry
+History.Deletion.Failure = Failed deleting the entry file: $0
+
+History.Entry.Added = Added:
+History.Entry.Updated = Updated:
+History.Entry.Deleted = Deleted:
+
 #=================#
 # PAGE - SETTINGS #
 #=================#

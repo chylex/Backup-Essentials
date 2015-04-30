@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:BackupEssentials.Sys"
       xmlns:history="clr-namespace:BackupEssentials.Backup.History"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
@@ -20,7 +21,7 @@
             <RowDefinition Height="18"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={x:Static system:Settings.Default}}">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="8,8,0,0"/>
@@ -28,8 +29,8 @@
                     <Setter Property="Template" Value="{StaticResource ButtonStyleDefault}"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="ButtonShowReport" Content="Show Report" IsEnabled="False" Click="ClickShowReport"/>
-            <Button x:Name="ButtonRemove" Content="Remove" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickRemove"/>
+            <Button x:Name="ButtonShowReport" Content="{Binding Language[History.Button.Show]}" IsEnabled="False" Click="ClickShowReport"/>
+            <Button x:Name="ButtonRemove" Content="{Binding Language[History.Button.Remove]}" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickRemove"/>
         </StackPanel>
 
         <ListView x:Name="HistoryListView" Grid.Row="1" Margin="8,8,8,0" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
@@ -51,20 +52,20 @@
                                     <Grid Width="Auto" Height="{StaticResource EntryListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Stretch">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="90"/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding LocationName}" VerticalAlignment="Top" FontSize="20"/>
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding BackupTimeParsed}" VerticalAlignment="Bottom" FontSize="14"/>
                                         
-                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0">
-                                            <TextBlock Text="Added:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
-                                            <TextBlock Text="Updated:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
-                                            <TextBlock Text="Deleted:" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" DataContext="{Binding Source={x:Static system:Settings.Default}}">
+                                            <TextBlock Text="{Binding Language[History.Entry.Added]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="{Binding Language[History.Entry.Updated]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="{Binding Language[History.Entry.Deleted]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="36">
                                             <TextBlock Text="{Binding EntriesAdded}" Foreground="#FFDDDDDD" FontSize="11"/>
                                             <TextBlock Text="{Binding EntriesUpdated}" Foreground="#FFDDDDDD" FontSize="11"/>
                                             <TextBlock Text="{Binding EntriesDeleted}" Foreground="#FFDDDDDD" FontSize="11"/>

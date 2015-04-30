@@ -28,14 +28,14 @@ namespace BackupEssentials.Pages{
         private void ClickRemove(object sender, RoutedEventArgs e){
             HistoryEntry entry = HistoryListView.SelectedItem as HistoryEntry;
 
-            if (entry != null && MessageBox.Show(App.Window,"Are you sure you want to delete the history entry? This action cannot be taken back.","Confirm deletion",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
+            if (entry != null && MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Confirmation"],Sys.Settings.Default.Language["History.Deletion.Confirmation.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
                 DataStorage.HistoryEntryList.Remove(entry);
 
                 try{
                     File.Delete(Path.Combine(HistoryEntry.Directory,entry.Filename));
                 }catch(Exception ex){
                     App.LogException(ex);
-                    MessageBox.Show(App.Window,"Failed deleting the entry file: "+ex.Message,"Error deleting history entry",MessageBoxButton.OK,MessageBoxImage.Error);
+                    MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Failure",ex.Message],Sys.Settings.Default.Language["History.Deletion.Failure.Title"],MessageBoxButton.OK,MessageBoxImage.Error);
                 }
             }
         }
