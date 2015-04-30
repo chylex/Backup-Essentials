@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:BackupEssentials.Sys"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
@@ -19,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={x:Static system:Settings.Default}}">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="8,8,0,0"/>
@@ -27,8 +28,8 @@
                     <Setter Property="Template" Value="{StaticResource ButtonStyleDefault}"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="ButtonBackup" Content="Backup" IsEnabled="False" Click="ClickBackup"/>
-            <Button x:Name="ButtonCancel" Content="Cancel" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickCancel"/>
+            <Button x:Name="ButtonBackup" Content="{Binding Language[BackupDrop.Button.Run]}" IsEnabled="False" Click="ClickBackup"/>
+            <Button x:Name="ButtonCancel" Content="{Binding Language[BackupDrop.Button.Cancel]}" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickCancel"/>
         </StackPanel>
 
         <ListView Name="LocationsListView" Grid.Row="1" Margin="8" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">

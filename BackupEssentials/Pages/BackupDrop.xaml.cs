@@ -37,7 +37,7 @@ namespace BackupEssentials.Pages{
             if (FileList.Length == 0 || Running)return;
 
             if (FileList.Length == 1 && FileList[0].EndsWith(@":\",StringComparison.Ordinal)){
-                if (MessageBox.Show(App.Window,"When backing up a drive, the contents of "+Path.GetFileName(DataStorage.BackupLocationList[LocationsListView.SelectedIndex].Directory)+" will match the contents of the drive, which means that any unwanted files and folders will be deleted. Do you want to proceed?","Drive backup warning",MessageBoxButton.YesNo,MessageBoxImage.Asterisk) != MessageBoxResult.Yes)return;
+                if (MessageBox.Show(App.Window,Sys.Settings.Default.Language["BackupDrop.DriveBackupWarning",Path.GetFileName(DataStorage.BackupLocationList[LocationsListView.SelectedIndex].Directory)],Sys.Settings.Default.Language["BackupDrop.DriveBackupWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Asterisk) != MessageBoxResult.Yes)return;
             }
 
             for(int a = 0; a < FileList.Length; a++){

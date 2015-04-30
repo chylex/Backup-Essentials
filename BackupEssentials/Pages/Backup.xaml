@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:BackupEssentials.Sys"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
@@ -20,7 +21,7 @@
             <RowDefinition Height="18"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={x:Static system:Settings.Default}}">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="8,8,0,0"/>
@@ -28,9 +29,9 @@
                     <Setter Property="Template" Value="{StaticResource ButtonStyleDefault}"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="ButtonLocationAdd" Content="Add Location" Click="LocationAdd"/>
-            <Button x:Name="ButtonLocationEdit" Content="Edit" Click="LocationEdit" IsEnabled="False"/>
-            <Button x:Name="ButtonLocationRemove" Content="Remove" Click="LocationRemove" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}"/>
+            <Button x:Name="ButtonLocationAdd" Content="{Binding Language[Backup.Button.Add]}" Click="LocationAdd"/>
+            <Button x:Name="ButtonLocationEdit" Content="{Binding Language[Backup.Button.Edit]}" Click="LocationEdit" IsEnabled="False"/>
+            <Button x:Name="ButtonLocationRemove" Content="{Binding Language[Backup.Button.Remove]}" Click="LocationRemove" IsEnabled="False" Template="{StaticResource ButtonStyleRedDefault}"/>
         </StackPanel>
 
         <ListView Name="LocationsListView" Grid.Row="1" Margin="8,8,8,0" MouseMove="ListMouseMove" PreviewMouseLeftButtonUp="ListStopDragging" Style="{StaticResource ListViewStyleDefault}" SelectionChanged="ListViewSelectionChanged">
@@ -72,8 +73,6 @@
             </ListView.Items>
         </ListView>
 
-        <TextBlock HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0">
-            Hint: Click and drag a location to move it.
-        </TextBlock>
+        <TextBlock Text="{Binding Language[Backup.Hint], Source={x:Static system:Settings.Default}}" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Foreground="#FFB9B9B9" Margin="12,0,0,0"/>
     </Grid>
 </Page>

@@ -7,6 +7,29 @@ General.UI.MenuButton.History = History
 General.UI.MenuButton.Settings = Settings
 General.UI.MenuButton.About = About
 
+#===============#
+# PAGE - BACKUP #
+#===============#
+Backup.Hint = Hint: Click and drag a location to move it.
+
+Backup.Button.Add = Add location
+Backup.Button.Edit = Edit
+Backup.Button.Remove = Remove
+
+BackupEdit.Label.Name = Name:
+BackupEdit.Label.Directory = Directory:
+BackupEdit.Label.AdvancedSettings = Show advanced settings
+
+BackupEdit.Button.DirectorySelect = Select directory...
+BackupEdit.Button.Save = Save
+BackupEdit.Button.Cancel = Cancel
+
+BackupDrop.Button.Run = Backup
+BackupDrop.Button.Cancel = Cancel
+
+BackupDrop.DriveBackupWarning = When backing up a drive, the contents of $0 will match the contents of the drive, which means that any unwanted files and folders will be deleted. Do you want to proceed?
+BackupDrop.DriveBackupWarning.Title = Drive backup warning
+
 #================#
 # PAGE - HISTORY #
 #================#

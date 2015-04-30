@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:system="clr-namespace:BackupEssentials.Sys"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource PageWidth}" d:DesignHeight="{StaticResource PageHeight}" Background="{StaticResource PageBackground}"
@@ -32,18 +33,18 @@
             </Grid.ColumnDefinitions>
             
             <DockPanel LastChildFill="True">
-                <Label Content="Name:" Style="{StaticResource TitleLabel}" VerticalAlignment="Center"/>
+                <Label Content="{Binding Language[BackupEdit.Label.Name], Source={x:Static system:Settings.Default}}" Style="{StaticResource TitleLabel}" VerticalAlignment="Center"/>
                 <TextBox x:Name="TextBoxName" Text="{Binding Path=Name}" Padding="2,0" TextWrapping="NoWrap" Style="{StaticResource TextBoxStyleDefault}"/>
             </DockPanel>
 
             <DockPanel Grid.Column="1" Margin="8,0,0,0" LastChildFill="True">
-                <Label Content="Directory:" Style="{StaticResource TitleLabel}"/>
-                <Button DockPanel.Dock="Right" x:Name="ButtonSelectDirectory" Content="Select directory..." FontSize="16" Template="{StaticResource ButtonStyleDefault}" Margin="8,0,0,0" Click="ClickSelectDirectory"/>
+                <Label Content="{Binding Language[BackupEdit.Label.Directory], Source={x:Static system:Settings.Default}}" Style="{StaticResource TitleLabel}"/>
+                <Button DockPanel.Dock="Right" x:Name="ButtonSelectDirectory" Content="{Binding Language[BackupEdit.Button.DirectorySelect], Source={x:Static system:Settings.Default}}" FontSize="16" Template="{StaticResource ButtonStyleDefault}" Margin="8,0,0,0" Click="ClickSelectDirectory"/>
                 <TextBox x:Name="TextBoxDirectory" Text="{Binding Path=Directory}" Padding="2,0" TextWrapping="NoWrap" Style="{StaticResource TextBoxStyleDefault}"/>
             </DockPanel>
         </Grid>
 
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="32,0" HorizontalAlignment="Right">
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" Margin="32,0" HorizontalAlignment="Right" DataContext="{Binding Source={x:Static system:Settings.Default}}">
             <WrapPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Height" Value="40"/>
@@ -51,12 +52,12 @@
                 </Style>
             </WrapPanel.Resources>
 
-            <Button x:Name="ButtonSave" Content="Save" FontSize="16" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
-            <Button x:Name="ButtonCancel" Content="Cancel" FontSize="16" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickCancel"/>
+            <Button x:Name="ButtonSave" Content="{Binding Language[BackupEdit.Button.Save]}" FontSize="16" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
+            <Button x:Name="ButtonCancel" Content="{Binding Language[BackupEdit.Button.Cancel]}" FontSize="16" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickCancel"/>
         </WrapPanel>
 
         <DockPanel Grid.Row="2" Margin="32,0">
-            <Expander Header="Show advanced settings" Foreground="#FFDDDDDD" FontSize="14" Style="{DynamicResource ExpanderStyleDefault}">
+            <Expander Header="{Binding Language[BackupEdit.Label.AdvancedSettings], Source={x:Static system:Settings.Default}}" Foreground="#FFDDDDDD" FontSize="14" Style="{DynamicResource ExpanderStyleDefault}">
                 <Grid x:Name="AdvancedOptionsContainer" Grid.Row="3" Margin="24,8">
 
                 </Grid>
