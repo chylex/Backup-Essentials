@@ -6,8 +6,8 @@ using System.Windows.Forms;
 
 namespace BackupEssentials.Pages{
     public partial class BackupEdit : Page, IPageShowData{
-        public BackupLocation EditLocation;
-        public BackupLocation TargetLocation;
+        public BackupLocation EditLocation { get; private set; }
+        public BackupLocation TargetLocation { get; private set; }
 
         private string LastWarningDirectory;
 

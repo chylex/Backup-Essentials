@@ -5,7 +5,7 @@ using System.Windows.Threading;
 
 namespace BackupEssentials.Controls{
     public class ButtonMainMenu:Button{
-        public static DependencyProperty ClickPageProperty = DependencyProperty.Register("ClickPage",typeof(string),typeof(ButtonMainMenu));
+        public static readonly DependencyProperty ClickPageProperty = DependencyProperty.Register("ClickPage",typeof(string),typeof(ButtonMainMenu));
 
         public string ClickPage {
             get { return (string)base.GetValue(ClickPageProperty); }

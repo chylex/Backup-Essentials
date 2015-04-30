@@ -42,7 +42,7 @@ namespace BackupEssentials.Backup{
             key = key+'=';
 
             foreach(string line in SplitByLine(_plain)){
-                if (line.Length > 0 && line[0] == 'V' && line.Substring(1).StartsWith(key))return line.Substring(key.Length+1);
+                if (line.Length > 0 && line[0] == 'V' && line.Substring(1).StartsWith(key,StringComparison.Ordinal))return line.Substring(key.Length+1);
             }
 
             return defaultValue;
@@ -52,7 +52,7 @@ namespace BackupEssentials.Backup{
             key = key+'=';
 
             foreach(string line in SplitByLine(_plain)){
-                if (line.Length > 0 && line[0] == 'V' && line.Substring(1).StartsWith(key)){
+                if (line.Length > 0 && line[0] == 'V' && line.Substring(1).StartsWith(key,StringComparison.Ordinal)){
                     int value;
                     return int.TryParse(line.Substring(key.Length+1),out value) ? value : defaultValue;
                 }

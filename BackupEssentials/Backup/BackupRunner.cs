@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -52,7 +53,7 @@ namespace BackupEssentials.Backup{
 
             bool ignoreRoot = false;
 
-            if (src[0].EndsWith(@":\")){
+            if (src[0].EndsWith(@":\",StringComparison.Ordinal)){
                 if (src.Length == 1){
                     srcParent = src[0];
 
@@ -182,9 +183,9 @@ namespace BackupEssentials.Backup{
             reportBuilder.Add(BackupReport.Constants.Date,Settings.Default.DateFormat.ParseDate(DateTime.Now));
             reportBuilder.Add("");
             reportBuilder.Add("= Files and folders =");
-            reportBuilder.Add(BackupReport.Constants.EntriesAdded,actions.Count((entry) => entry.Action == IOAction.Create).ToString());
-            reportBuilder.Add(BackupReport.Constants.EntriesUpdated,actions.Count((entry) => entry.Action == IOAction.Replace).ToString());
-            reportBuilder.Add(BackupReport.Constants.EntriesDeleted,actions.Count((entry) => entry.Action == IOAction.Delete).ToString());
+            reportBuilder.Add(BackupReport.Constants.EntriesAdded,actions.Count((entry) => entry.Action == IOAction.Create).ToString(CultureInfo.InvariantCulture));
+            reportBuilder.Add(BackupReport.Constants.EntriesUpdated,actions.Count((entry) => entry.Action == IOAction.Replace).ToString(CultureInfo.InvariantCulture));
+            reportBuilder.Add(BackupReport.Constants.EntriesDeleted,actions.Count((entry) => entry.Action == IOAction.Delete).ToString(CultureInfo.InvariantCulture));
             reportBuilder.Add("");
             reportBuilder.Add("= Starting backup =");
 

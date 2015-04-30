@@ -3,11 +3,11 @@ using System.Windows.Controls;
 
 namespace BackupEssentials.Controls{
     public class ButtonTitleBar:Button{
-        public static DependencyProperty PathDataProperty = DependencyProperty.Register("CXPathData",typeof(string),typeof(ButtonTitleBar));
-        public static DependencyProperty PathWidthProperty = DependencyProperty.Register("CXPathWidth",typeof(string),typeof(ButtonTitleBar));
-        public static DependencyProperty PathHeightProperty = DependencyProperty.Register("CXPathHeight",typeof(string),typeof(ButtonTitleBar));
-        public static DependencyProperty PathMarginProperty = DependencyProperty.Register("CXPathMargin",typeof(string),typeof(ButtonTitleBar));
-        public static DependencyProperty PathRotationProperty = DependencyProperty.Register("CXPathRotation",typeof(double),typeof(ButtonTitleBar));
+        public static readonly DependencyProperty PathDataProperty = DependencyProperty.Register("CXPathData",typeof(string),typeof(ButtonTitleBar));
+        public static readonly DependencyProperty PathWidthProperty = DependencyProperty.Register("CXPathWidth",typeof(string),typeof(ButtonTitleBar));
+        public static readonly DependencyProperty PathHeightProperty = DependencyProperty.Register("CXPathHeight",typeof(string),typeof(ButtonTitleBar));
+        public static readonly DependencyProperty PathMarginProperty = DependencyProperty.Register("CXPathMargin",typeof(string),typeof(ButtonTitleBar));
+        public static readonly DependencyProperty PathRotationProperty = DependencyProperty.Register("CXPathRotation",typeof(double),typeof(ButtonTitleBar));
 
         public string CXPathData{
             get { return (string)base.GetValue(PathDataProperty); }

@@ -36,7 +36,7 @@ namespace BackupEssentials.Pages{
         private void ClickBackup(object sender, RoutedEventArgs e){
             if (FileList.Length == 0 || Running)return;
 
-            if (FileList.Length == 1 && FileList[0].EndsWith(@":\")){
+            if (FileList.Length == 1 && FileList[0].EndsWith(@":\",StringComparison.Ordinal)){
                 if (MessageBox.Show(App.Window,"When backing up a drive, the contents of "+Path.GetFileName(DataStorage.BackupLocationList[LocationsListView.SelectedIndex].Directory)+" will match the contents of the drive, which means that any unwanted files and folders will be deleted. Do you want to proceed?","Drive backup warning",MessageBoxButton.YesNo,MessageBoxImage.Asterisk) != MessageBoxResult.Yes)return;
             }
 

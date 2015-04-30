@@ -2,6 +2,7 @@
 using BackupEssentials.Backup.History;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -103,7 +104,7 @@ namespace BackupEssentials.Pages{
             int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
 
             if (kept != -1 && kept < existing){
-                MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString()]+AppSettings.Language["Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString()],AppSettings.Language["Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString(CultureInfo.CurrentCulture)]+AppSettings.Language["Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString(CultureInfo.CurrentCulture)],AppSettings.Language["Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
         }
     }

@@ -29,7 +29,7 @@ namespace BackupEssentials.Data{
         public string this[string key, params string[] data] {
             get {
                 string text = this[key];
-                for(int a = data.Length-1; a >= 0; a--)text = text.Replace("$"+a,data[a]);
+                for(int a = data == null ? -1 : data.Length-1; a >= 0; a--)text = text.Replace("$"+a,data[a]);
                 return text;
             }
         }
