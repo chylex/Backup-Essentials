@@ -29,7 +29,7 @@ namespace BackupEssentials.Pages{
 
         private void ClickSelectDirectory(object sender, RoutedEventArgs e){
             FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "Select the destination folder for this backup location.";
+            dialog.Description = Sys.Settings.Default.Language["BackupEdit.Button.DirectorySelect.DialogTitle"];
             dialog.ShowDialog();
 
             string path = dialog.SelectedPath;
@@ -41,7 +41,7 @@ namespace BackupEssentials.Pages{
         private void ClickSave(object sender, RoutedEventArgs e){
             if (EditLocation.Name.Length == 0){
                 VisualStateManager.GoToState(TextBoxName,"Invalid",true);
-                System.Windows.MessageBox.Show(App.Window,"Location name cannot be empty.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(App.Window,Sys.Settings.Default.Language["BackupEdit.SaveWarning.NameEmpty"],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
                 return;
             }
 
@@ -49,15 +49,15 @@ namespace BackupEssentials.Pages{
                 BackupLocation.DirectoryStatus status = EditLocation.GetDirectoryStatus();
                 string warning = "";
 
-                if (status == BackupLocation.DirectoryStatus.Empty)warning = "Selected directory is empty, it will not be registered until the issue is fixed.";
-                else if (status == BackupLocation.DirectoryStatus.Invalid)warning = "Selected directory is not a valid Windows path, it will not be registered until the issue is fixed.";
-                else if (status == BackupLocation.DirectoryStatus.NotAbsolute)warning = "Selected directory is not an absolute path, it will not be registered until the issue is fixed.";
-                else if (status == BackupLocation.DirectoryStatus.NotExists)warning = "Selected directory does not exist, it will be created when a first backup is made.";
+                if (status == BackupLocation.DirectoryStatus.Empty)warning = "BackupEdit.SaveWarning.DirectoryEmpty";
+                else if (status == BackupLocation.DirectoryStatus.Invalid)warning = "BackupEdit.SaveWarning.DirectoryInvalid";
+                else if (status == BackupLocation.DirectoryStatus.NotAbsolute)warning = "BackupEdit.SaveWarning.DirectoryNotAbsolute";
+                else if (status == BackupLocation.DirectoryStatus.NotExists)warning = "BackupEdit.SaveWarning.DirectoryNotExists";
 
                 if (warning.Length != 0){
                     VisualStateManager.GoToState(TextBoxDirectory,"Invalid",true);
                     LastWarningDirectory = EditLocation.Directory;
-                    System.Windows.MessageBox.Show(App.Window,warning+" Click Save again to confirm.","Caution!",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    System.Windows.MessageBox.Show(App.Window,Sys.Settings.Default.Language[warning],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
                     return;
                 }
             }
