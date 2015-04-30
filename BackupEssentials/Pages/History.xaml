@@ -58,8 +58,8 @@
                                         
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding LocationName}" VerticalAlignment="Top" FontSize="20"/>
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding BackupTimeParsed}" VerticalAlignment="Bottom" FontSize="14"/>
-                                        
-                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0">
+
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" DataContext="{Binding Source={x:Static system:Settings.Default}}">
                                             <TextBlock Text="{Binding Language[History.Entry.Added]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
                                             <TextBlock Text="{Binding Language[History.Entry.Updated]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
                                             <TextBlock Text="{Binding Language[History.Entry.Deleted]}" Foreground="#FFDDDDDD" FontSize="11" HorizontalAlignment="Right"/>
