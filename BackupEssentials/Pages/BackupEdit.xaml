@@ -56,7 +56,7 @@
         </WrapPanel>
 
         <DockPanel Grid.Row="2" Margin="32,0">
-            <Expander Header="Show advanced settings" Foreground="#FFDDDDDD" FontSize="14">
+            <Expander Header="Show advanced settings" Foreground="#FFDDDDDD" FontSize="14" Style="{DynamicResource ExpanderStyleDefault}">
                 <Grid x:Name="AdvancedOptionsContainer" Grid.Row="3" Margin="24,8">
 
                 </Grid>
