@@ -10,6 +10,8 @@ General.UI.MenuButton.About = About
 #================#
 # PAGE - HISTORY #
 #================#
+History.Hint = Hint: Double-click an entry to show the report.
+
 History.Button.Show = Show report
 History.Button.Remove = Remove
 
