@@ -23,9 +23,9 @@
                 </Style>
             </WrapPanel.Resources>
 
-            <Button x:Name="ButtonSave" Content="{Binding Language[Settings.Button.Save]}" IsEnabled="False" FontSize="16" Width="130" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
-            <Button x:Name="ButtonCancel" Content="{Binding Language[Settings.Button.Cancel]}" IsEnabled="False" FontSize="16" Width="80" Template="{StaticResource ButtonStyleRedDefault}" Margin="0,0,10,0" Click="ClickCancel"/>
-            <Button x:Name="ButtonReset" Content="{Binding Language[Settings.Button.Reset]}" FontSize="16" Width="140" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
+            <Button x:Name="ButtonSave" Content="{Binding Language[Settings.Button.Save]}" IsEnabled="False" FontSize="16" Template="{StaticResource ButtonStyleDefault}" Margin="0,0,10,0" Click="ClickSave"/>
+            <Button x:Name="ButtonCancel" Content="{Binding Language[Settings.Button.Cancel]}" IsEnabled="False" FontSize="16" Template="{StaticResource ButtonStyleRedDefault}" Margin="0,0,10,0" Click="ClickCancel"/>
+            <Button x:Name="ButtonReset" Content="{Binding Language[Settings.Button.Reset]}" FontSize="16" Template="{StaticResource ButtonStyleRedDefault}" Click="ClickReset"/>
         </WrapPanel>
 
         <Grid x:Name="GridContainer" Grid.Row="1" Margin="28,0" SnapsToDevicePixels="True">
