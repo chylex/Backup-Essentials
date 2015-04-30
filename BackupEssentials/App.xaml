@@ -152,7 +152,7 @@
             </Storyboard>
 
             <ControlTemplate x:Key="ButtonStyleDefault" TargetType="{x:Type ButtonBase}">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True">
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualStateGroup.Transitions>
@@ -218,14 +218,14 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <Label x:Name="label" Foreground="#FFDDDDDD" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" TextOptions.TextRenderingMode="ClearType">
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True"/>
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="10,0" RecognizesAccessKey="True" SnapsToDevicePixels="True"/>
                         </Label>
                     </Border>
                 </Grid>
             </ControlTemplate>
 
             <ControlTemplate x:Key="ButtonStyleRedDefault" TargetType="{x:Type ButtonBase}">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True">
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualStateGroup.Transitions>
@@ -291,7 +291,7 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <Label x:Name="label" Foreground="#FFDDDDDD" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" TextOptions.TextRenderingMode="ClearType">
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True"/>
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="10,0" RecognizesAccessKey="True" SnapsToDevicePixels="True"/>
                         </Label>
                     </Border>
                 </Grid>
@@ -401,7 +401,7 @@
                                         <GradientStop Color="#FF383838" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Themes:ListBoxChrome.Background>
-                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
             				</Themes:ListBoxChrome>
             				<ControlTemplate.Triggers>
             					<Trigger Property="IsEnabled" Value="false">
