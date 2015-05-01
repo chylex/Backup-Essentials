@@ -1,0 +1,57 @@
+﻿<Page x:Class="BackupEssentials.Pages.HomePages.BackupGuide"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignWidth="{StaticResource HomePageWidth}" d:DesignHeight="{StaticResource HomePageHeight}" Background="{StaticResource PageBackground}"
+	  Title="BackupGuide">
+
+    <WrapPanel Orientation="Vertical">
+        <WrapPanel.Resources>
+            <Style x:Key="TextBlockTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
+            <Style x:Key="TextBlockSubTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+        </WrapPanel.Resources>
+
+        <TextBlock Style="{StaticResource TextBlockTitle}"><Run Text="Backup guide"/></TextBlock>
+
+        <TextBlock Margin="6,2"><Run Text="Before you start backing up important files and folders, click "/><Bold><Run Text="Backup"/></Bold><Run Text=" in the menu and setup the locations where the files will be stored. Once that is done, there are two ways you can initiate a backup:"/></TextBlock>
+
+        <Grid Margin="6,12,6,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <WrapPanel Orientation="Vertical" UseLayoutRounding="True">
+                <TextBlock Style="{StaticResource TextBlockSubTitle}"><Run Text="1. Context menu"/></TextBlock>
+                <TextBlock Margin="6,2"><Run Text="Simply right-click a file or a folder, select Backup Essentials and choose the backup destination."/></TextBlock>
+                <Border Width="358" Height="136" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="134" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <TextBlock x:Name="TextBlockContextMenuWarning" Margin="6,2" FontSize="12" Foreground="#FFDDDDDD" Opacity="0"><Run Text="Warning: Expanding menu is only available on Windows 7 and newer, your system will only show the Backup Essentials item. If you click it, you will be able to select the backup destination."/></TextBlock>
+            </WrapPanel>
+
+            <WrapPanel Orientation="Vertical" Grid.Column="2">
+                <TextBlock Style="{StaticResource TextBlockSubTitle}"><Run Text="2. Drag and Drop"/></TextBlock>
+                <TextBlock Margin="6,2"><Run Text="Select one or more files or folders, and drag them into this window. This requires the program to be running."/></TextBlock>
+
+                <Border Width="358" Height="252" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/BackupEssentials;component/Resources/Guide2.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </WrapPanel>
+        </Grid>
+    </WrapPanel>
+</Page>

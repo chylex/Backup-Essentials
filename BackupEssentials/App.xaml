@@ -17,6 +17,8 @@
             
             <sys:Double x:Key="PageWidth">796</sys:Double>
             <sys:Double x:Key="PageHeight">482</sys:Double>
+            <sys:Double x:Key="HomePageWidth">636</sys:Double>
+            <sys:Double x:Key="HomePageHeight">466</sys:Double>
             <SolidColorBrush x:Key="PageBackground">#FF2E2E2E</SolidColorBrush>
             
             <Style x:Key="DockPanelStyleTitleBar" TargetType="{x:Type DockPanel}">
