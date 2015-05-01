@@ -148,14 +148,17 @@ namespace BackupEssentials{
             IPageShowData pageDataHandler = page as IPageShowData;
             if (pageDataHandler != null && data != IgnoreShowData)pageDataHandler.OnShow(data);
 
-            if (page != null && !page.AllowDrop){
+            if (page != null)SetupPageDropEvents(page);
+            return true;
+        }
+
+        public void SetupPageDropEvents(Page page){
+            if (!page.AllowDrop){
                 page.AllowDrop = true;
                 page.DragEnter += new DragEventHandler(OnDragEnter);
                 page.DragLeave += new DragEventHandler(OnDragLeave);
                 page.Drop += new DragEventHandler(OnDragDrop);
             }
-
-            return true;
         }
     }
 }
