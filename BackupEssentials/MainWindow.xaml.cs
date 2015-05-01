@@ -29,6 +29,8 @@ namespace BackupEssentials{
         public MainWindow(SplashScreen splashScreen){
             InitializeComponent();
             Instance = this;
+            
+            ContentFrame.Navigated += (sender2, args2) => { ContentFrame.NavigationService.RemoveBackEntry(); };
 
             Loaded += (sender, args) => {
                 if (splashScreen != null)splashScreen.Close(new TimeSpan());
@@ -141,8 +143,7 @@ namespace BackupEssentials{
             if (switchHandler != null && switchHandler.OnSwitch())return false;
 
             Page page = null;
-            ContentFrame.Navigate(pageType == null ? null : page = AppPageManager.GetPage(pageType));
-            if (ContentFrame.NavigationService.CanGoBack)ContentFrame.NavigationService.RemoveBackEntry();
+            ContentFrame.Content = pageType == null ? null : page = AppPageManager.GetPage(pageType);
 
             IPageShowData pageDataHandler = page as IPageShowData;
             if (pageDataHandler != null && data != IgnoreShowData)pageDataHandler.OnShow(data);
