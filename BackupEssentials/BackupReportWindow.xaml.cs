@@ -1,5 +1,6 @@
 ﻿using BackupEssentials.Backup;
 using BackupEssentials.Backup.History;
+using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using System;
 using System.ComponentModel;
@@ -14,12 +15,12 @@ namespace BackupEssentials{
     public partial class BackupReportWindow : Window{
         public BackupReportWindow(BackupReport report){
             InitializeComponent();
-            ReportTextBlock.Text = report == null || report.Report == null ? "Error fetching report." : report.Report;
+            ReportTextBlock.Text = report == null || report.Report == null ? Settings.Default.Language["Report.FetchError"] : report.Report;
         }
 
         public BackupReportWindow(HistoryEntry entry){
             InitializeComponent();
-            ReportTextBlock.Text = "Fetching report...";
+            ReportTextBlock.Text = Settings.Default.Language["Report.Fetching"];
 
             Thread thread = new Thread(new ParameterizedThreadStart(LoadReportFileAsync));
             thread.Start(entry);
@@ -29,7 +30,7 @@ namespace BackupEssentials{
             BackupReport finalReport = null;
             string data = FileUtils.ReadFileCompressed(Path.Combine(HistoryEntry.Directory,((HistoryEntry)entry).Filename),FileMode.Open);
             
-            if (data == null)data = "Failed fetching report.";
+            if (data == null)data = Settings.Default.Language["Report.FetchError"];
             else{
                 finalReport = new BackupReport(data);
                 string _unused = finalReport.Report; // init and cache

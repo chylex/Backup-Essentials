@@ -76,11 +76,11 @@ namespace BackupEssentials{
                                 return;
                             }
                             else{
-                                if (MessageBox.Show(MainWindow,"The application is already running, but is not responding. Do you want to force close it?","Application is already running",MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes){
+                                if (MessageBox.Show(MainWindow,Sys.Settings.Default.Language["General.App.AlreadyRunning"],Sys.Settings.Default.Language["General.App.AlreadyRunning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes){
                                     try{
                                         process.Kill();
                                     }catch(Exception e){
-                                        MessageBox.Show(MainWindow,"Could not close the application: "+e.Message);
+                                        MessageBox.Show(MainWindow,Sys.Settings.Default.Language["General.App.CannotClose",e.Message],Sys.Settings.Default.Language["General.App.CannotClose.Title"],MessageBoxButton.OK,MessageBoxImage.Error);
                                     }
                                 }
                             }

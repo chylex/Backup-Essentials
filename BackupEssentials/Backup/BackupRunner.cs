@@ -172,22 +172,22 @@ namespace BackupEssentials.Backup{
             BackupReport.Builder reportBuilder = new BackupReport.Builder();
 
             if (DEBUG){
-                reportBuilder.Add("= Caution =");
-                reportBuilder.Add("Backup Essentials is running in debug mode, all actions will be logged into the report but will not actually modify any files or folders!");
-                reportBuilder.Add("");
+                reportBuilder.Add("Report.Title.Debug");
+                reportBuilder.Add("Report.Info.Debug");
+                reportBuilder.AddLine();
             }
 
-            reportBuilder.Add("= Preparing backup =");
+            reportBuilder.Add("Report.Title.PreparingBackup");
             reportBuilder.Add(BackupReport.Constants.Source,fullSrc);
             reportBuilder.Add(BackupReport.Constants.Destination,destFolder);
             reportBuilder.Add(BackupReport.Constants.Date,Settings.Default.DateFormat.ParseDate(DateTime.Now));
-            reportBuilder.Add("");
-            reportBuilder.Add("= Files and folders =");
+            reportBuilder.AddLine();
+            reportBuilder.Add("Report.Title.FilesAndFolders");
             reportBuilder.Add(BackupReport.Constants.EntriesAdded,actions.Count((entry) => entry.Action == IOAction.Create).ToString(CultureInfo.InvariantCulture));
             reportBuilder.Add(BackupReport.Constants.EntriesUpdated,actions.Count((entry) => entry.Action == IOAction.Replace).ToString(CultureInfo.InvariantCulture));
             reportBuilder.Add(BackupReport.Constants.EntriesDeleted,actions.Count((entry) => entry.Action == IOAction.Delete).ToString(CultureInfo.InvariantCulture));
-            reportBuilder.Add("");
-            reportBuilder.Add("= Starting backup =");
+            reportBuilder.AddLine();
+            reportBuilder.Add("Report.Title.StartingBackup");
 
             while(actions.Count > 0 && --attempts > 0){
                 if (firstAttempt)firstAttempt = false;
@@ -238,7 +238,7 @@ namespace BackupEssentials.Backup{
                         
                         indexesToRemove.Add(index-indexesToRemove.Count); // goes from 0 to actions.Count, removing each index will move the structure
                         if (!ignoreEntry)reportBuilder.Add(entry.Action,entry.Type,entry.RelativePath);
-
+                        
                         worker.ReportProgress((int)Math.Ceiling(((totalActions-actions.Count+indexesToRemove.Count)*100D)/totalActions));
                         if (worker.CancellationPending)break;
                     }catch(Exception exception){ // if an action failed, it will not be removed
@@ -248,9 +248,9 @@ namespace BackupEssentials.Backup{
                     }
 
                     if (worker.CancellationPending){
-                        reportBuilder.Add("= Backup canceled =");
+                        reportBuilder.Add("Report.Title.BackupCanceled");
                         e.Result = reportBuilder.Finish();
-                        throw new Exception("Backup canceled.");
+                        throw new Exception(Settings.Default.Language["Report.Error.Canceled"]);
                     }
                 }
 
@@ -259,12 +259,12 @@ namespace BackupEssentials.Backup{
             }
 
             if (attempts == 0){
-                reportBuilder.Add("= Backup failed (out of attempts) =");
+                reportBuilder.Add("Report.Title.BackupFailed");
                 e.Result = reportBuilder.Finish();
-                throw new Exception("Backup failed: ran out of attempts.");
+                throw new Exception(Settings.Default.Language["Report.Error.Failed"]);
             }
 
-            reportBuilder.Add("= Backup finished =");
+            reportBuilder.Add("Report.Title.BackupFinished");
             e.Result = reportBuilder.Finish();
         }
 

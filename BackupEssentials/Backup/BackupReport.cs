@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup.IO;
+using BackupEssentials.Sys;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,8 @@ namespace BackupEssentials.Backup{
                         if (line.Length == 0)continue;
 
                         if (line[0] == 'A' && line.Length > 3)build.Append(GetFullNameAction(line[1])).Append(' ').Append(GetFullNameType(line[2])).Append(": ").Append(line.Substring(3)).Append(Environment.NewLine);
-                        else if (line[0] == 'I')build.Append(line.Substring(1)).Append(Environment.NewLine);
+                        else if (line[0] == 'I')build.Append(Settings.Default.Language[line.Substring(1)]).Append(Environment.NewLine);
+                        else if (line[0] == 'N')build.Append(Environment.NewLine);
                         else if (line[0] == 'V'){
                             string[] split = line.Substring(1).Split(new char[]{ '=' },2);
                             if (split.Length == 2)build.Append(Constants.Translate(split[0])).Append(": ").Append(split[1]).Append(Environment.NewLine);
@@ -72,12 +74,16 @@ namespace BackupEssentials.Backup{
                 Build.Append('A').Append(GetShortName(action)).Append(GetShortName(type)).Append(path).Append(Environment.NewLine);
             }
 
-            public void Add(string message){
-                Build.Append('I').Append(message).Append(Environment.NewLine);
+            public void Add(string translationKey){
+                Build.Append('I').Append(translationKey).Append(Environment.NewLine);
             }
 
             public void Add(string key, string value){
                 Build.Append('V').Append(key).Append('=').Append(value).Append(Environment.NewLine);
+            }
+
+            public void AddLine(){
+                Build.Append('N').Append(Environment.NewLine);
             }
 
             public BackupReport Finish(){
@@ -90,7 +96,7 @@ namespace BackupEssentials.Backup{
         }
 
         private static string GetFullNameAction(char key){
-            return key == 'C' ? "Added" : key == 'D' ? "Deleted" : key == 'R' ? "Updated" : "(unknown action)";
+            return Settings.Default.Language[key == 'C' ? "Report.Name.Action.Added" : key == 'D' ? "Report.Name.Action.Deleted" : key == 'R' ? "Report.Name.Action.Updated" : "Report.Name.Action.Unknown"];
         }
 
         private static char GetShortName(IOType type){
@@ -98,7 +104,7 @@ namespace BackupEssentials.Backup{
         }
 
         private static string GetFullNameType(char key){
-            return key == 'F' ? "File" : key == 'D' ? "Folder (and files inside)" : "(unknown type)";
+            return Settings.Default.Language[key == 'F' ? "Report.Name.Type.File" : key == 'D' ? "Report.Name.Type.Directory" : "Report.Name.Type.Unknown"];
         }
 
         private static IEnumerable<string> SplitByLine(string str){
@@ -120,6 +126,10 @@ namespace BackupEssentials.Backup{
             public const string EntriesDeleted = "END";
 
             public static string Translate(string constant){
+                return Settings.Default.Language["Report.Label."+GetTranslationKey(constant)];
+            }
+
+            private static string GetTranslationKey(string constant){
                 switch(constant){
                     case Source: return "Source";
                     case Destination: return "Destination";

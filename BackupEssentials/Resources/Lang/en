@@ -1,6 +1,11 @@
-#==============#
-# GENERAL - UI #
-#==============#
+#=========#
+# GENERAL #
+#=========#
+General.App.AlreadyRunning = The application is already running, but is not responding. Do you want to force close it?
+General.App.AlreadyRunning.Title = Application is already running
+General.App.CannotClose = Could not close the application: $0
+General.App.CannotClose.Title = Error closing application
+
 General.UI.MenuButton.Home = Home
 General.UI.MenuButton.Backup = Backup
 General.UI.MenuButton.History = History
@@ -122,3 +127,42 @@ About.Support.Link = Issues on GitHub
 About.OfficialWebsite = Visit the official website:
 About.SourceCode = View the source code:
 About.Twitter = Follow me on Twitter:
+
+#=================#
+# BACKUP - WINDOW #
+#=================#
+
+
+#==================#
+# BACKUP - REPORTS #
+#==================#
+Report.Fetching = Fetching report...
+Report.FetchError = Failed fetching report.
+
+Report.Title.PreparingBackup = = Preparing backup =
+Report.Title.FilesAndFolders = = Files and folders =
+Report.Title.StartingBackup = = Starting backup =
+Report.Title.BackupCanceled = = Backup canceled =
+Report.Title.BackupFailed = = Backup failed (out of attempts) =
+Report.Title.BackupFinished = = Backup finished =
+
+Report.Title.Debug = = Caution =
+Report.Info.Debug = Backup Essentials is running in debug mode, all actions will be logged into the report but will not actually modify any files or folders!
+
+Report.Error.Canceled = Backup canceled.
+Report.Error.Failed = Backup failed: out of attempts.
+
+Report.Label.Source = Source
+Report.Label.Destination = Destination
+Report.Label.Date = Date
+Report.Label.EntriesAdded = Added
+Report.Label.EntriesUpdated = Updated
+Report.Label.EntriesDeleted = Deleted
+
+Report.Name.Action.Added = Added
+Report.Name.Action.Updated = Updated
+Report.Name.Action.Deleted = Deleted
+Report.Name.Action.Unknown = (unknown action)
+Report.Name.Type.File = File
+Report.Name.Type.Directory = Folder
+Report.Name.Type.Unknown = (unknown type)
