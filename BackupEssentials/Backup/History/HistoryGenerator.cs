@@ -46,7 +46,7 @@ namespace BackupEssentials.Backup.History{
 
                 if (!Directory.Exists(HistoryEntry.Directory))Directory.CreateDirectory(HistoryEntry.Directory);
 
-                string filename = entry.LocationName+'_'+entry.BackupTime.ToString("yyyy-MM-dd_HH-mm-ss",CultureInfo.InvariantCulture)+".log";
+                string filename = WindowsFileUtils.ReplaceInvalidFileCharacters(entry.LocationName,'_')+'_'+entry.BackupTime.ToString("yyyy-MM-dd_HH-mm-ss",CultureInfo.InvariantCulture)+".log";
                 if (FileUtils.WriteFileCompressed(Path.Combine(HistoryEntry.Directory,filename),FileMode.Create,data.Item2.UnparsedReport))entry.Filename = filename;
 
                 DataStorage.Save(true);

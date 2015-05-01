@@ -140,6 +140,7 @@
     <Compile Include="Utils\StringDictionarySerializer.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
+    <Compile Include="Utils\WindowsFileUtils.cs" />
     <Compile Include="Utils\WindowsVersion.cs" />
     <Compile Include="Utils\WpfExtensions.cs" />
     <Page Include="BackupReportWindow.xaml">
