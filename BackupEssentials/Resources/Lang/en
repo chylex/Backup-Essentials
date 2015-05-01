@@ -5,6 +5,10 @@ General.App.AlreadyRunning = The application is already running, but is not resp
 General.App.AlreadyRunning.Title = Application is already running
 General.App.CannotClose = Could not close the application: $0
 General.App.CannotClose.Title = Error closing application
+General.App.DestinationMissing = Backup could not begin, destination is empty. Program arguments: $0
+
+General.Storage.ErrorSaving = DataStorage was not initialized for saving!
+General.Storage.ErrorScheduledSaving = DataStorage was not initialized for scheduled saving!
 
 General.UI.MenuButton.Home = Home
 General.UI.MenuButton.Backup = Backup
@@ -20,6 +24,9 @@ Backup.Hint = Hint: Click and drag a location to move it.
 Backup.Button.Add = Add location
 Backup.Button.Edit = Edit
 Backup.Button.Remove = Remove
+
+Backup.Location.UnknownName = (unknown)
+Backup.Location.UnknownDirectory = (unknown)
 
 BackupEdit.Label.Name = Name:
 BackupEdit.Label.Directory = Directory:
@@ -118,9 +125,14 @@ Settings.Option.DateFormat.Detect = Detect ($0)
 # PAGE - ABOUT #
 #==============#
 About.Version = Version
-About.Version.Unknown = <unknown>
+About.Version.Unknown = (unknown)
 About.Author = Designed and programmed by chylex.
 About.License = Product license information
+
+About.WinVersion.Using = You are using $0
+About.WinVersion.Supported = (supported).
+About.WinVersion.Unsupported (not supported).
+About.WinVersion.Unknown = (unknown)
 
 About.Support = Support:
 About.Support.Link = Issues on GitHub
@@ -131,7 +143,21 @@ About.Twitter = Follow me on Twitter:
 #=================#
 # BACKUP - WINDOW #
 #=================#
+BackupWindow.Button.ShowReport = Show report
+BackupWindow.Button.Cancel = Cancel
+BackupWindow.Button.Close = Close
 
+BackupWindow.Run.Preparing = Preparing backup...
+BackupWindow.Run.Processing = Processing the files and folders...
+BackupWindow.Run.Finished.* = Finished! Updated $0 files and folder.
+BackupWindow.Run.Finished.1 = Finished! Updated 1 file or folder.
+
+BackupWindow.Error.MultipleLocations = Cannot backup multiple locations in different folders!
+BackupWindow.Error.HistoryGenFailed = History generation failed
+BackupWindow.Error.HistoryGenFailedNoTrace = History generation failed (unknown error)
+
+BackupWindow.HistoryGenWarning.Title = History entry is generating
+BackupWindow.HistoryGenWarning = The history entry has not been generated yet, do you want to close the window anyways?
 
 #==================#
 # BACKUP - REPORTS #

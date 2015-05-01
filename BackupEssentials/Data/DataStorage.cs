@@ -1,4 +1,5 @@
 ﻿using BackupEssentials.Backup.History;
+using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using System;
 using System.Collections.Generic;
@@ -86,8 +87,8 @@ namespace BackupEssentials.Backup.Data{
         }
 
         public static void Save(bool force){
-            if (!IsSetupForSaving)throw new NotSupportedException("DataStorage was not initialized for saving!");
-            else if (SaveTimer == null && !force)throw new NotSupportedException("DataStorage was not initialized for scheduled saving!");
+            if (!IsSetupForSaving)throw new NotSupportedException(Settings.Default.Language["General.Storage.ErrorSaving"]);
+            else if (SaveTimer == null && !force)throw new NotSupportedException(Settings.Default.Language["General.Storage.ErrorScheduledSaving"]);
 
             if (!force){
                 SaveTimer.NeedsUpdate = true;

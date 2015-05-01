@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using BackupEssentials.Sys;
+using Microsoft.Win32;
 using System;
 
 namespace BackupEssentials.Utils{
@@ -13,7 +14,7 @@ namespace BackupEssentials.Utils{
                 if (key != null)return CachedVersionName = (string)key.GetValue("ProductName");
             }catch{}
 
-            return CachedVersionName = (GetFromEnvironment() ?? "(unknown)");
+            return CachedVersionName = (GetFromEnvironment() ?? Settings.Default.Language["About.WinVersion.Unknown"]);
         }
 
         private static string GetFromEnvironment(){

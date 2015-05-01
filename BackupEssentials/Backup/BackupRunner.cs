@@ -69,11 +69,11 @@ namespace BackupEssentials.Backup{
 
             // Verify source files
             if (srcParent == null){
-                throw new Exception("Cannot backup multiple locations!");
+                throw new Exception(Settings.Default.Language["BackupWindow.Error.MultipleLocations"]);
             }
 
             for(int a = 1; a < src.Length; a++){
-                if (!Directory.GetParent(src[a]).FullName.Equals(srcParent))throw new Exception("Cannot backup multiple locations!");
+                if (!Directory.GetParent(src[a]).FullName.Equals(srcParent))throw new Exception(Settings.Default.Language["BackupWindow.Error.MultipleLocations"]);
             }
 
             if (srcParent[srcParent.Length-1] == '\\')srcParent = srcParent.Substring(0,srcParent.Length-1);

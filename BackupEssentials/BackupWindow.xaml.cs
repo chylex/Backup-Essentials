@@ -4,6 +4,7 @@ using BackupEssentials.Sys;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Shell;
 using System.Windows.Threading;
@@ -22,7 +23,7 @@ namespace BackupEssentials{
 
             TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
             ProgressBar.IsIndeterminate = true;
-            LabelInfo.Content = "Preparing backup...";
+            LabelInfo.Content = Settings.Default.Language["BackupWindow.Run.Preparing"];
 
             runner.EventProgressUpdate = WorkerProgressUpdate;
             runner.EventCompleted = WorkerCompleted;
@@ -39,7 +40,7 @@ namespace BackupEssentials{
 
             Closing += (sender, args) => {
                 if (HistoryGenWorker != null){
-                    if (MessageBox.Show(App.Window,"The history entry has not been generated yet, do you want to close the window anyways?","History entry is generating",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.No){
+                    if (MessageBox.Show(App.Window,Settings.Default.Language["BackupWindow.HistoryGenWarning"],Settings.Default.Language["BackupWindow.HistoryGenWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) != MessageBoxResult.Yes){
                         args.Cancel = true;
                     }
                 }
@@ -56,7 +57,7 @@ namespace BackupEssentials{
                 ProgressBar.Value = e.ProgressPercentage;
             }
 
-            LabelInfo.Content = "Processing the files and folders...";
+            LabelInfo.Content = Settings.Default.Language["BackupWindow.Run.Processing"];
 
             if (e.ProgressPercentage == 0 && e.UserState is int){
                 ActionCount = (int)e.UserState;
@@ -66,7 +67,7 @@ namespace BackupEssentials{
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e){
             ButtonShowReport.IsEnabled = true;
-            ButtonEnd.Content = "Close";
+            ButtonEnd.Content = Settings.Default.Language["BackupWindow.Button.Close"];
             Report = e.Result as BackupReport;
 
             Settings settings = Settings.Default;
@@ -76,7 +77,7 @@ namespace BackupEssentials{
                     HistoryGenWorker = null;
 
                     if (historyArgs.Result == null){
-                        App.LogException(historyArgs.Error == null ? new Exception("History generation failed (no stack trace)") : new Exception("History generation failed",historyArgs.Error));
+                        App.LogException(historyArgs.Error == null ? new Exception(Settings.Default.Language["BackupWindow.Error.HistoryGenFailedNoTrace"]) : new Exception(Settings.Default.Language["History generation failed"],historyArgs.Error));
                     }
                 });
             }
@@ -94,7 +95,7 @@ namespace BackupEssentials{
             ProgressBar.Value = 100;
             ProgressBar.Value = 99; // progress bar animation hack
             ProgressBar.Value = 100;
-            LabelInfo.Content = "Finished! Updated "+ActionCount+" files and folders.";
+            LabelInfo.Content = Settings.Default.Language["BackupWindow.Run.Finished.",ActionCount,ActionCount.ToString(CultureInfo.InvariantCulture)];
             
             int closeTime = Settings.Default.WindowCloseTime.Value;
             if (closeTime == -1)return;

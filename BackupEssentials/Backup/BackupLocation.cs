@@ -1,4 +1,5 @@
-﻿using BackupEssentials.Utils;
+﻿using BackupEssentials.Sys;
+using BackupEssentials.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -57,8 +58,8 @@ namespace BackupEssentials.Backup{
         }
 
         void StringDictionarySerializer.IObjectToDictionary.FromDictionary(SafeDictionary<string,string> dict){
-            Name = dict["Name"] ?? "<unknown>";
-            Directory = dict["Dir"] ?? "<unknown>";
+            Name = dict["Name"] ?? Settings.Default.Language["Backup.Location.UnknownName"];
+            Directory = dict["Dir"] ?? Settings.Default.Language["Backup.Location.UnknownDirectory"];
         }
 
         public enum DirectoryStatus{

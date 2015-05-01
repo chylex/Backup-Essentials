@@ -16,10 +16,12 @@ namespace BackupEssentials.Pages{
             StringBuilder build = new StringBuilder();
             OperatingSystem os = Environment.OSVersion;
 
-            build.Append("You are using ").Append(WindowsVersion.Get()).Append(' ');
-            build.Append(Environment.Is64BitOperatingSystem ? "x64" : "x86").Append(' ');
-            build.Append(os.ServicePack.Replace("Service Pack ","SP")).Append(' ');
-            build.Append(WindowsVersion.IsFullySupported() ? "(supported)." : "(not supported).");
+            build.Append(WindowsVersion.Get()).Append(' ').Append(Environment.Is64BitOperatingSystem ? "x64" : "x86").Append(' ').Append(os.ServicePack.Replace("Service Pack ","SP"));
+            string version = build.ToString();
+
+            build.Clear();
+            build.Append(Sys.Settings.Default.Language["About.WinVersion.Using",version]).Append(' ');
+            build.Append(Sys.Settings.Default.Language[WindowsVersion.IsFullySupported() ? "About.WinVersion.Supported" : "About.WinVersion.Unsupported"]);
             
             AboutTextOS.Text = build.ToString();
         }

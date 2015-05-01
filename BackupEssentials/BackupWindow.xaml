@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:system="clr-namespace:BackupEssentials.Sys"
         xmlns:custom="clr-namespace:BackupEssentials.Controls"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         mc:Ignorable="d" x:Class="BackupEssentials.BackupWindow"
@@ -21,12 +22,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="LabelInfo" Content="Preparing backup..." HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFDDDDDD" FontSize="18"/>
+                <Label x:Name="LabelInfo" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFDDDDDD" FontSize="18"/>
                 <ProgressBar x:Name="ProgressBar" Margin="8,0" Grid.Row="1"/>
 
-                <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="8,12,8,0" HorizontalAlignment="Right">
-                    <Button x:Name="ButtonShowReport" Template="{StaticResource ButtonStyleDefault}" Content="Show report" IsEnabled="False" Margin="0,0,8,0" FontSize="16" Click="ButtonShowReportClick" Width="115"/>
-                    <Button x:Name="ButtonEnd" Template="{StaticResource ButtonStyleRedDefault}" Content="Cancel" FontSize="16" Click="ButtonEndClick" Width="85"/>
+                <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="8,12,8,0" HorizontalAlignment="Right" DataContext="{Binding Source={x:Static system:Settings.Default}}">
+                    <Button x:Name="ButtonShowReport" Template="{StaticResource ButtonStyleDefault}" Content="{Binding Language[BackupWindow.Button.ShowReport]}" IsEnabled="False" Margin="0,0,8,0" FontSize="16" Click="ButtonShowReportClick"/>
+                    <Button x:Name="ButtonEnd" Template="{StaticResource ButtonStyleRedDefault}" Content="{Binding Language[BackupWindow.Button.Cancel]}" FontSize="16" Click="ButtonEndClick"/>
                 </WrapPanel>
             </Grid>
         </DockPanel>

@@ -55,7 +55,7 @@ namespace BackupEssentials{
                     if (parser.HasFlag("nohide"))window.WindowState = WindowState.Normal;
                     window.Show();
                 }
-                else throw new ArgumentException("Backup could not begin, destination is empty. Program arguments: "+string.Join(" ",args.Args));
+                else throw new ArgumentException(Sys.Settings.Default.Language["General.App.DestinationMissing",string.Join(" ",args.Args)]);
             }
             else if (parser.HasFlag("runcompat")){
                 MainWindow window = new MainWindow();
