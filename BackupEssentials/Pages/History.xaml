@@ -14,7 +14,7 @@
         <sys:Double x:Key="EntryListItemHeight">46</sys:Double>
     </Page.Resources>
 
-    <Grid>
+    <Grid Margin="0,0,0,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>

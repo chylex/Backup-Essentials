@@ -39,7 +39,6 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="2"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="16"/>
             </Grid.RowDefinitions>
             
             <Rectangle StrokeThickness="0" VerticalAlignment="Center" Height="2">
