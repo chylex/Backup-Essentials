@@ -52,5 +52,9 @@ namespace BackupEssentials.Utils{
 
             return list.ToArray();
         }
+
+        public override string ToString(){
+            return string.Join(" ",Args);
+        }
     }
 }

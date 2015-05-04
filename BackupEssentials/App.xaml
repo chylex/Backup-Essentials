@@ -5,9 +5,7 @@
     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
     x:Class="BackupEssentials.App"
-    Startup="StartApp"
-    DispatcherUnhandledException="HandleException"
-    ShutdownMode="OnMainWindowClose">
+    Startup="StartApp" DispatcherUnhandledException="HandleException" ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <ResourceDictionary>
             <sys:String x:Key="PathButtonClose">M7,0 L9,0 9,7 16,7 16,9 9,9 9,16 7,16 7,9 0,9 0,7 7,7 z</sys:String>

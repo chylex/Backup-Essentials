@@ -34,7 +34,7 @@ namespace BackupEssentials{
             
             if (parser.HasFlag("runshell"))RunShell(parser);
             else if (parser.HasFlag("runcompat"))RunCompatWindow(parser);
-            else RunMainWindow(parser);
+            else RunMainWindow();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace BackupEssentials{
                 if (parser.HasFlag("nohide"))window.WindowState = WindowState.Normal;
                 window.Show();
             }
-            else throw new ArgumentException(Sys.Settings.Default.Language["General.App.DestinationMissing",string.Join(" ",args.Args)]);
+            else throw new ArgumentException(Sys.Settings.Default.Language["General.App.DestinationMissing",string.Join(" ",parser.ToString())]);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace BackupEssentials{
         /// <summary>
         /// Runs the program without any special settings. Checks for already running process of the program, if there is one it moves it to foreground, if not it shows a new window.
         /// </summary>
-        private void RunMainWindow(ProgramArgsParser parser){
+        private void RunMainWindow(){
             Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
 
             if (running.Length > 1){

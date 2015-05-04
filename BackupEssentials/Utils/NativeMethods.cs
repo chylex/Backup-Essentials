@@ -6,5 +6,7 @@ namespace BackupEssentials.Utils{
         [DllImport("USER32.DLL")]
         [return: MarshalAs(UnmanagedType.Bool)]
         protected internal static extern bool SetForegroundWindow(IntPtr hwnd);
+
+        private NativeMethods(){}
     }
 }

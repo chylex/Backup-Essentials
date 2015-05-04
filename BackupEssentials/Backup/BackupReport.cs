@@ -67,7 +67,7 @@ namespace BackupEssentials.Backup{
             return Report;
         }
 
-        public class Builder{
+        internal class Builder{
             private StringBuilder Build = new StringBuilder(256);
 
             public void Add(IOAction action, IOType type, string path){
@@ -117,7 +117,7 @@ namespace BackupEssentials.Backup{
             }
         }
 
-        public static class Constants{
+        internal static class Constants{
             public const string Source = "SRC";
             public const string Destination = "DEST";
             public const string Date = "DT";
