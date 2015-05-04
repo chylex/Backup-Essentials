@@ -2,6 +2,7 @@
 using BackupEssentials.Backup.Data;
 using BackupEssentials.Controls;
 using BackupEssentials.Pages;
+using BackupEssentials.Utils;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -114,7 +115,7 @@ namespace BackupEssentials{
             if (DropData == null && e.Data.GetDataPresent(DataFormats.FileDrop)){
                 DropData = e.Data.GetData(DataFormats.FileDrop) as string[];
                 DropOverlayLabel.Visibility = Visibility.Visible;
-                App.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
+                NativeMethods.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
             }
             else e.Effects = DragDropEffects.None;
 

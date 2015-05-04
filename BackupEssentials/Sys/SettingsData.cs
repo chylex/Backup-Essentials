@@ -1,15 +1,16 @@
 ﻿using BackupEssentials.Data;
 using BackupEssentials.Sys.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BackupEssentials.Sys{
     public static class SettingsData{
-        public static T FindObj<T>(this T[] array, Func<T,bool> checkFunc){
+        public static T FindObj<T>(this IEnumerable<T> array, Func<T,bool> checkFunc){
             return array.First(checkFunc);
         }
 
-        public static T FindObj<T>(this T[] array, Func<T,bool> checkFunc, Func<T,bool> defaultFunc){
+        public static T FindObj<T>(this IEnumerable<T> array, Func<T,bool> checkFunc, Func<T,bool> defaultFunc){
             T val = array.FirstOrDefault(checkFunc);
             return val == null && defaultFunc != null ? array.First(defaultFunc) : val; // cannot use ??
         }
@@ -21,7 +22,7 @@ namespace BackupEssentials.Sys{
             new Language("cs","Czech (Čeština)")
         };
 
-        public static Language[] LanguageList { get { return _languageList; } }
+        public static IEnumerable<Language> LanguageList { get { return _languageList; } }
 
         // Date format
 
@@ -41,7 +42,7 @@ namespace BackupEssentials.Sys{
             new DateFormat("yyyy-dd-MM hh:mm tt")
         };
 
-        public static DateFormat[] DateFormatList { get { return _dateFormatList; } }
+        public static IEnumerable<DateFormat> DateFormatList { get { return _dateFormatList; } }
 
         // Backup window close time
 
@@ -53,7 +54,7 @@ namespace BackupEssentials.Sys{
             new DisplaySetting<int>(-1,"Settings.Option.WindowClose.Never")
         };
 
-        public static DisplaySetting<int>[] WindowCloseList { get { return _windowCloseList; } }
+        public static IEnumerable<DisplaySetting<int>> WindowCloseList { get { return _windowCloseList; } }
 
         // History entry count
 
@@ -68,6 +69,6 @@ namespace BackupEssentials.Sys{
             new DisplaySetting<int>(-1,"Settings.Option.ReportsKept.All")
         };
 
-        public static DisplaySetting<int>[] HistoryKeptList { get { return _historyKeptList; } }
+        public static IEnumerable<DisplaySetting<int>> HistoryKeptList { get { return _historyKeptList; } }
     }
 }

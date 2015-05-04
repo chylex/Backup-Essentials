@@ -27,10 +27,10 @@ namespace BackupEssentials.Sys{
         public void SetToDefault(){
             Data.PauseObservation = true;
 
-            Language = SettingsData.LanguageList[0];
+            Language = SettingsData.LanguageList.FindObj(var => true);
             ExplorerIntegration = true;
             ExplorerLabel = "Backup Essentials";
-            DateFormat = SettingsData.DateFormatList[0];
+            DateFormat = SettingsData.DateFormatList.FindObj(var => true);
             WindowCloseTime = SettingsData.WindowCloseList.FindObj(var => var.Value == 10);
             HistoryEntriesKept = SettingsData.HistoryKeptList.FindObj(var => var.Value == 500);
             SaveHistoryWithNoEntries = false;

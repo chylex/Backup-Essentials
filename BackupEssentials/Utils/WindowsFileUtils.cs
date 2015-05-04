@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace BackupEssentials.Utils{
-    class WindowsFileUtils{
+    static class WindowsFileUtils{
         private static readonly string InvalidChars = @"<>:/\|?*"+'"';
 
         public static string ReplaceInvalidFileCharacters(string filename, char replacement){

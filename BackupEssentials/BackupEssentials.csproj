@@ -137,6 +137,7 @@
     <Compile Include="Sys\UI\DateFormat.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\KeyEqualityComparer.cs" />
+    <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\NumberSerialization.cs" />
     <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\SafeDictionary.cs" />

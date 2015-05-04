@@ -28,14 +28,13 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickSelectDirectory(object sender, RoutedEventArgs e){
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = Sys.Settings.Default.Language["BackupEdit.Button.DirectorySelect.DialogTitle"];
-            dialog.ShowDialog();
+            using(FolderBrowserDialog dialog = new FolderBrowserDialog()){
+                dialog.Description = Sys.Settings.Default.Language["BackupEdit.Button.DirectorySelect.DialogTitle"];
+                dialog.ShowDialog();
 
-            string path = dialog.SelectedPath;
-            if (path != null)TextBoxDirectory.Text = EditLocation.Directory = path;
-
-            dialog.Dispose();
+                string path = dialog.SelectedPath;
+                if (path != null)TextBoxDirectory.Text = EditLocation.Directory = path;
+            }
         }
 
         private void ClickSave(object sender, RoutedEventArgs e){
