@@ -23,7 +23,7 @@
             <TextBlock Margin="6,2"><Run Text="Before you start backing up important files and folders, click "/><Bold><Run Text="Backup"/></Bold><Run Text=" in the menu and setup the locations where the files will be stored. Once that is done, there are two ways you can initiate a backup:"/></TextBlock>
         </WrapPanel>
 
-        <Grid Margin="6,12,6,0">
+        <Grid Margin="6,12,6,0" SnapsToDevicePixels="True" UseLayoutRounding="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="12"/>
@@ -33,9 +33,7 @@
             <WrapPanel Orientation="Vertical" UseLayoutRounding="True">
                 <TextBlock Style="{StaticResource TextBlockSubTitle}"><Run Text="1. Context menu"/></TextBlock>
                 <TextBlock Margin="6,2"><Run Text="Simply right-click a file or a folder, select Backup Essentials and choose the backup destination."/></TextBlock>
-                <Border Width="358" Height="136" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="134" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
+                <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="306" Height="134" Margin="0,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock x:Name="TextBlockContextMenuWarning" Margin="6,2" FontSize="12" Foreground="#FFDDDDDD" Opacity="0"><Run Text="Warning: Expanding menu is only available on Windows 7 and newer, your system will only show the Backup Essentials item. If you click it, you will be able to select the backup destination."/></TextBlock>
             </WrapPanel>
 
@@ -43,9 +41,7 @@
                 <TextBlock Style="{StaticResource TextBlockSubTitle}"><Run Text="2. Drag and Drop"/></TextBlock>
                 <TextBlock Margin="6,2"><Run Text="Select one or more files or folders, and drag them into this window. This requires the program to be running."/></TextBlock>
 
-                <Border Width="358" Height="252" Margin="6,4" BorderBrush="#FFACACAC" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="/BackupEssentials;component/Resources/Guide2.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="356" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
+                <Image Source="/BackupEssentials;component/Resources/Guide2.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="306" Height="230" Margin="0,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </WrapPanel>
         </Grid>
     </DockPanel>
