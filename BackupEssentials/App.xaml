@@ -18,7 +18,17 @@
             <sys:Double x:Key="HomePageWidth">636</sys:Double>
             <sys:Double x:Key="HomePageHeight">466</sys:Double>
             <SolidColorBrush x:Key="PageBackground">#FF2E2E2E</SolidColorBrush>
+
+            <Style x:Key="TextBlockTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
             
+            <Style x:Key="TextBlockSubTitle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+
             <Style x:Key="DockPanelStyleTitleBar" TargetType="{x:Type DockPanel}">
                 <Setter Property="LastChildFill" Value="False"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>

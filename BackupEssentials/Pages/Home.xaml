@@ -16,8 +16,8 @@
 
         <WrapPanel Orientation="Vertical" Background="#FF3E3E3E">
 			<WrapPanel.Resources>
-                <Storyboard x:Key="AnimationMouseOver" Duration="0:0:0.1">
-                    <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border" Duration="0:0:0.1" To="#FF494949"/>
+                <Storyboard x:Key="AnimationMouseOver" Duration="0:0:0.05">
+                    <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border" Duration="0:0:0.05" To="#FF494949"/>
                 </Storyboard>
 
                 <Storyboard x:Key="AnimationBase" Duration="0:0:0.1">

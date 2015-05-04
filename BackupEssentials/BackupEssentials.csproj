@@ -116,7 +116,7 @@
     <Compile Include="Pages\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\HomePages\BackupGuide.xaml.cs">
+    <Compile Include="Pages\HomeSub\BackupGuide.xaml.cs">
       <DependentUpon>BackupGuide.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IPageResetUI.cs" />
@@ -192,7 +192,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\HomePages\BackupGuide.xaml">
+    <Page Include="Pages\HomeSub\BackupGuide.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
