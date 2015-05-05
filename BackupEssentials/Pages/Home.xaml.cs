@@ -8,6 +8,7 @@ namespace BackupEssentials.Pages{
             InitializeComponent();
             HomePageFrame.Navigated += (sender2, args2) => { HomePageFrame.NavigationService.RemoveBackEntry(); };
             ChangeScreen(BackupGuide,new RoutedEventArgs());
+            BackupGuide.IsChecked = true;
         }
 
         private void ChangeScreen(object sender, RoutedEventArgs e){

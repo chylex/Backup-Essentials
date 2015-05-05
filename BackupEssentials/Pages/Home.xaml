@@ -10,8 +10,9 @@
 
 	<Grid SnapsToDevicePixels="True">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="128"/>
-			<ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="126"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
         <WrapPanel Orientation="Vertical" Background="#FF3E3E3E">
@@ -25,7 +26,7 @@
                 </Storyboard>
 
                 <Style TargetType="{x:Type RadioButton}">
-                    <Setter Property="Width" Value="128"/>
+                    <Setter Property="Width" Value="126"/>
 					<Setter Property="FontSize" Value="16"/>
                     <Setter Property="Template">
                         <Setter.Value>
@@ -88,12 +89,20 @@
 				</Style>
 			</WrapPanel.Resources>
             
-			<RadioButton x:Name="BackupGuide" Content="Backup guide" Checked="ChangeScreen"/>
-            <RadioButton Content="Drive backup" Checked="ChangeScreen"/>
+            <RadioButton x:Name="BackupGuide" Content="Backup guide" Checked="ChangeScreen"/>
+            <RadioButton x:Name="DriveBackup" Content="Drive backup" Checked="ChangeScreen"/>
             <RadioButton Content="History" Checked="ChangeScreen"/>
-            <RadioButton Content="Scheduled backups" Checked="ChangeScreen"/>
 		</WrapPanel>
 
-        <Frame x:Name="HomePageFrame" Margin="16,8" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Rectangle StrokeThickness="0" HorizontalAlignment="Center" Width="2" Grid.Column="1">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                    <GradientStop Color="#FF060606" Offset="0"/>
+                    <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Frame x:Name="HomePageFrame" Margin="16,8" Grid.Column="2" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
