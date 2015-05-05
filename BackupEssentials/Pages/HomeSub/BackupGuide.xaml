@@ -5,11 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignWidth="{StaticResource HomePageWidth}" d:DesignHeight="{StaticResource HomePageHeight}" Background="{StaticResource PageBackground}"
-	  Title="BackupGuide">
+	  Title="Backup guide">
 
     <DockPanel>
         <DockPanel.Resources>
-            
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="#FFDDDDDD"/>
                 <Setter Property="FontSize" Value="14"/>
@@ -19,8 +18,7 @@
 
         <WrapPanel Orientation="Vertical" DockPanel.Dock="Top">
             <TextBlock Style="{StaticResource TextBlockTitle}"><Run Text="Backup guide"/></TextBlock>
-
-            <TextBlock Margin="6,2"><Run Text="Before you start backing up important files and folders, click "/><Bold><Run Text="Backup"/></Bold><Run Text=" in the menu and setup the locations where the files will be stored. Once that is done, there are two ways you can initiate a backup:"/></TextBlock>
+            <TextBlock Margin="6,2"><Run Text="Before you start backing up important files and folders, click "/><Bold><Run Text="Backup"/></Bold><Run Text=" in the menu and create at least one destination folder, which will be referenced to as Location. Once that is done, there are two ways you can initiate a backup:"/></TextBlock>
         </WrapPanel>
 
         <Grid Margin="6,12,6,0" SnapsToDevicePixels="True" UseLayoutRounding="True">
@@ -32,7 +30,7 @@
 
             <WrapPanel Orientation="Vertical" UseLayoutRounding="True">
                 <TextBlock Style="{StaticResource TextBlockSubTitle}"><Run Text="1. Context menu"/></TextBlock>
-                <TextBlock Margin="6,2"><Run Text="Simply right-click a file or a folder, select Backup Essentials and choose the backup destination."/></TextBlock>
+                <TextBlock Margin="6,2"><Run Text="Simply right-click a file or a folder, select Backup Essentials and choose the Location. Multiple files will each run a separate backup."/></TextBlock>
                 <Image Source="/BackupEssentials;component/Resources/Guide1.png" RenderOptions.BitmapScalingMode="NearestNeighbor" Width="306" Height="134" Margin="0,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock x:Name="TextBlockContextMenuWarning" Margin="6,2" FontSize="12" Foreground="#FFDDDDDD" Opacity="0"><Run Text="Warning: Expanding menu is only available on Windows 7 and newer, your system will only show the Backup Essentials item. If you click it, you will be able to select the backup destination."/></TextBlock>
             </WrapPanel>

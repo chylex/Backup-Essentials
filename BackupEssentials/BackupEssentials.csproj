@@ -119,6 +119,9 @@
     <Compile Include="Pages\HomeSub\BackupGuide.xaml.cs">
       <DependentUpon>BackupGuide.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HomeSub\DriveBackup.xaml.cs">
+      <DependentUpon>DriveBackup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\IPageResetUI.cs" />
     <Compile Include="Pages\IPageShowData.cs" />
     <Compile Include="Pages\Home.xaml.cs">
@@ -193,6 +196,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\HomeSub\BackupGuide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomeSub\DriveBackup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

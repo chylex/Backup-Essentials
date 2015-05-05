@@ -1,0 +1,31 @@
+﻿<Page x:Class="BackupEssentials.Pages.HomeSub.DriveBackup"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignWidth="{StaticResource HomePageWidth}" d:DesignHeight="{StaticResource HomePageHeight}" Background="{StaticResource PageBackground}"
+	  Title="Drive backup">
+
+    <WrapPanel Orientation="Vertical">
+        <WrapPanel.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#FFDDDDDD"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+
+            <Style TargetType="Hyperlink">
+                <Setter Property="Foreground" Value="#FF77D4FF"></Setter>
+            </Style>
+        </WrapPanel.Resources>
+        
+        <TextBlock Style="{StaticResource TextBlockTitle}"><Run Text="Drive backup"/></TextBlock>
+        <TextBlock Margin="6,2"><Run Text="It is possible to backup entire drives. First, open "/><Hyperlink Click="OpenMyComputer">My Computer</Hyperlink><Run Text=". Then select the drive to backup and Drag and Drop it on this window. You will be able to choose the backup destination."/></TextBlock>
+        <TextBlock Margin="6,12,6,2"><Bold>Caution!</Bold></TextBlock>
+        <TextBlock Margin="6,0,6,2"><Run Text="By default, unlike regular backup, a drive backup will replace all files and folders in the destination! Make sure to create a separate folder for the contents of the drive, or modify the Location settings to manage the folders automatically (see below)."/></TextBlock>
+
+        <TextBlock Style="{StaticResource TextBlockSubTitle}" Margin="0,12,0,0">Using a central folder for all drives</TextBlock>
+        <TextBlock Margin="6,2"><Run Text="You can configure the Location to create a new folder for each drive. TODO"/></TextBlock>
+    </WrapPanel>
+</Page>
