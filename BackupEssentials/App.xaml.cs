@@ -77,7 +77,13 @@ namespace BackupEssentials{
         /// Runs the program without any special settings. Checks for already running process of the program, if there is one it moves it to foreground, if not it shows a new window.
         /// </summary>
         private void RunMainWindow(){
-            Process[] running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
+            Process[] running;
+            
+            try{
+                running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
+            }catch(InvalidOperationException e){
+                running = new Process[0];
+            }
 
             if (running.Length > 1){
                 int myId = Process.GetCurrentProcess().Id;
