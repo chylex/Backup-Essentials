@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BackupEssentials.Utils;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace BackupEssentials.Controls{
@@ -26,6 +28,8 @@ namespace BackupEssentials.Controls{
         }
 
         public override void OnApplyTemplate(){
+            if (!WindowsVersion.IsFullySupported())((Label)Template.FindName("label",this)).Effect = null;
+
             base.OnApplyTemplate();
 
             foreach(VisualStateGroup group in VisualStateManager.GetVisualStateGroups((FrameworkElement)Template.FindName("MainMenuButtonGrid",this))){

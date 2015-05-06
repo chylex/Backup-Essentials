@@ -113,16 +113,18 @@
                                                 <VisualState x:Name="Pressed"/>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-                                        <Grid x:Name="GridBackground" Height="Auto" Width="Auto">
+                                        
+                                        <Grid x:Name="GridBackground" Width="Auto" Height="Auto">
                                             <Grid.Background>
                                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                                     <GradientStop Color="#FF42B9F0"/>
                                                     <GradientStop Color="#FF1D6C8F" Offset="1"/>
                                                 </LinearGradientBrush>
                                             </Grid.Background>
-                                            <Label x:Name="label" Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Segoe UI">
+                                            
+                                            <Label x:Name="label" Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="25" FontWeight="Bold" FontFamily="Segoe UI" TextOptions.TextFormattingMode="Display" RenderOptions.BitmapScalingMode="NearestNeighbor" SnapsToDevicePixels="True" UseLayoutRounding="True">
                                                 <Label.Effect>
-                                                    <DropShadowEffect BlurRadius="2" Direction="270" ShadowDepth="0.5" Color="#FF072B3C"/>
+                                                    <DropShadowEffect BlurRadius="3" Direction="270" ShadowDepth="1" Color="#FF072B3C"/>
                                                 </Label.Effect>
                                             </Label>
                                         </Grid>
