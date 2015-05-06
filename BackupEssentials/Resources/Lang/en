@@ -131,7 +131,7 @@ About.License = Product license information
 
 About.WinVersion.Using = You are using $0
 About.WinVersion.Supported = (supported).
-About.WinVersion.Unsupported (not supported).
+About.WinVersion.Unsupported = (not supported).
 About.WinVersion.Unknown = (unknown)
 
 About.Support = Support:

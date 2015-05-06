@@ -134,9 +134,9 @@ namespace BackupEssentials.Backup{
                     case Source: return "Source";
                     case Destination: return "Destination";
                     case Date: return "Date";
-                    case EntriesAdded: return "Added";
-                    case EntriesUpdated: return "Updated";
-                    case EntriesDeleted: return "Deleted";
+                    case EntriesAdded: return "EntriesAdded";
+                    case EntriesUpdated: return "EntriesUpdated";
+                    case EntriesDeleted: return "EntriesDeleted";
                     default: return "";
                 }
             }
