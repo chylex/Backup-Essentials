@@ -67,9 +67,11 @@ namespace BackupEssentials{
         /// Runs a Windows XP/Vista compatibility window that do not have cascaded Explorer entries.
         /// </summary>
         private void RunCompatWindow(ProgramArgsParser parser){
-            MainWindow window = new MainWindow();
-            window.ShowPage(typeof(BackupDrop),new object[]{ parser.GetMultiValue("src"), null, true });
-            window.Show();
+            object[] data = new object[]{ parser.GetMultiValue("src"), null, true };
+
+            SplashScreen splash = new SplashScreen("Resources/SplashScreen.png");
+            splash.Show(false,false);
+            new MainWindow(splash,(window) => { window.ShowPage(typeof(BackupDrop),data); }).Show();
         }
 
         /// <summary>
@@ -103,7 +105,7 @@ namespace BackupEssentials{
 
             SplashScreen splash = new SplashScreen("Resources/SplashScreen.png");
             splash.Show(false,false);
-            new MainWindow(splash).Show();
+            new MainWindow(splash,(window) => { window.ShowPage(typeof(Home)); }).Show();
         }
 
         /// <summary>

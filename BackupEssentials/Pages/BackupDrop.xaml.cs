@@ -26,7 +26,7 @@ namespace BackupEssentials.Pages{
             PrevPageType = (Type)array[1];
             CompatMode = array.Length >= 3 && (bool)array[2];
 
-            if (CompatMode)ButtonCancel.Visibility = Visibility.Collapsed;
+            if (CompatMode)PrevPageType = typeof(Home);
         }
 
         private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){

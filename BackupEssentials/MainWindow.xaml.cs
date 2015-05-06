@@ -25,22 +25,21 @@ namespace BackupEssentials{
 
         private string[] DropData = null;
 
-        public MainWindow() : this(null){}
+        public MainWindow() : this(null,null){}
+        public MainWindow(SplashScreen splashScreen) : this(splashScreen,null){}
+        public MainWindow(Action<MainWindow> runOnLoad) : this(null,runOnLoad){}
 
-        public MainWindow(SplashScreen splashScreen){
+        public MainWindow(SplashScreen splashScreen, Action<MainWindow> runOnLoad){
             InitializeComponent();
             Instance = this;
             
             ContentFrame.Navigated += (sender2, args2) => { ContentFrame.NavigationService.RemoveBackEntry(); };
 
             Loaded += (sender, args) => {
+                DataStorage.SetupForSaving(true);
+                DataStorage.Load();
+                if (runOnLoad != null)runOnLoad(this);
                 if (splashScreen != null)splashScreen.Close(new TimeSpan());
-                
-                Dispatcher.BeginInvoke(DispatcherPriority.Loaded,new Action(() => {
-                    ShowPage(typeof(Home));
-                    DataStorage.SetupForSaving(true);
-                    DataStorage.Load();
-                }));
             };
 
             Closing += (sender, args) => {
