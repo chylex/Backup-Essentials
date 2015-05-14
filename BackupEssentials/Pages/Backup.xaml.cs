@@ -91,13 +91,16 @@ namespace BackupEssentials.Pages{
             int index = LocationsListView.SelectedIndex;
             List<object> list = new List<object>();
             foreach(object obj in LocationsListView.SelectedItems)list.Add(obj); // MS doesn't need generics apparently...
-            foreach(object item in list)DataStorage.BackupLocationList.Remove((BackupLocation)item);
 
-            if (index > 0)LocationsListView.SelectedIndex = index-1;
-            else if (LocationsListView.Items.Count > 0)LocationsListView.SelectedIndex = index;
+            if (MessageBox.Show(App.Window,Sys.Settings.Default.Language["Backup.Deletion.Confirmation.",list.Count,list.Count.ToString()],Sys.Settings.Default.Language["Backup.Deletion.Confirmation.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
+                foreach(object item in list)DataStorage.BackupLocationList.Remove((BackupLocation)item);
 
-            if (DataStorage.BackupLocationList.Count(loc => loc.ShouldRegister()) == 0)ExplorerIntegration.Remove();
-            else ExplorerIntegration.Refresh();
+                if (index > 0)LocationsListView.SelectedIndex = index-1;
+                else if (LocationsListView.Items.Count > 0)LocationsListView.SelectedIndex = index;
+
+                if (DataStorage.BackupLocationList.Count(loc => loc.ShouldRegister()) == 0)ExplorerIntegration.Remove();
+                else ExplorerIntegration.Refresh();
+            }
         }
 
         private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){
