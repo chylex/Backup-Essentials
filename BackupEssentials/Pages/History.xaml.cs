@@ -2,6 +2,8 @@
 using BackupEssentials.Backup.Data;
 using BackupEssentials.Backup.History;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +19,8 @@ namespace BackupEssentials.Pages{
         }
 
         private void ListViewSelectionChanged(object sender, SelectionChangedEventArgs e){
-            ButtonShowReport.IsEnabled = ButtonRemove.IsEnabled = HistoryListView.SelectedItems.Count == 1;
+            ButtonShowReport.IsEnabled = HistoryListView.SelectedItems.Count == 1;
+            ButtonRemove.IsEnabled = HistoryListView.SelectedItems.Count >= 1;
         }
 
         private void ClickShowReport(object sender, RoutedEventArgs e){
@@ -26,16 +29,21 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickRemove(object sender, RoutedEventArgs e){
-            HistoryEntry entry = HistoryListView.SelectedItem as HistoryEntry;
+            List<HistoryEntry> list = new List<HistoryEntry>(HistoryListView.SelectedItems.Count);
+            foreach(HistoryEntry entry in HistoryListView.SelectedItems)list.Add(entry);
 
-            if (entry != null && MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Confirmation"],Sys.Settings.Default.Language["History.Deletion.Confirmation.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
-                DataStorage.HistoryEntryList.Remove(entry);
+            if (list.Count > 0 && MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Confirmation.",list.Count,list.Count.ToString()],Sys.Settings.Default.Language["History.Deletion.Confirmation.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
+                foreach(HistoryEntry entry in list){
+                    try{
+                        File.Delete(Path.Combine(HistoryEntry.Directory,entry.Filename));
+                        DataStorage.HistoryEntryList.Remove(entry);
+                    }catch(Exception ex){
+                        App.LogException(ex);
 
-                try{
-                    File.Delete(Path.Combine(HistoryEntry.Directory,entry.Filename));
-                }catch(Exception ex){
-                    App.LogException(ex);
-                    MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Failure",ex.Message],Sys.Settings.Default.Language["History.Deletion.Failure.Title"],MessageBoxButton.OK,MessageBoxImage.Error);
+                        MessageBoxResult res = MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Failure.Line1",ex.Message]+Environment.NewLine+Sys.Settings.Default.Language["History.Deletion.Failure.Line2",ex.Message],Sys.Settings.Default.Language["History.Deletion.Failure.Title"],MessageBoxButton.YesNoCancel,MessageBoxImage.Error);
+                        if (res == MessageBoxResult.Cancel)break;
+                        else if (res == MessageBoxResult.Yes)DataStorage.HistoryEntryList.Remove(entry);
+                    }
                 }
             }
         }

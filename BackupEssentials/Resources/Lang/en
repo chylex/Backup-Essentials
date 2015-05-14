@@ -59,9 +59,11 @@ History.Button.Show = Show report
 History.Button.Remove = Remove
 
 History.Deletion.Confirmation.Title = Confirm deletion
-History.Deletion.Confirmation = Are you sure you want to delete the history entry? This action cannot be taken back.
+History.Deletion.Confirmation.1 = Are you sure you want to delete the history entry? This action cannot be taken back.
+History.Deletion.Confirmation.* = Are you sure you want to delete $0 history entries? This action cannot be taken back.
 History.Deletion.Failure.Title = Error deleting history entry
-History.Deletion.Failure = Failed deleting the entry file: $0
+History.Deletion.Failure.Line1 = Failed deleting the entry file: $0
+History.Deletion.Failure.Line2 = Do you want to remove it from the History menu regardless?
 
 History.Entry.Added = Added:
 History.Entry.Updated = Updated:
