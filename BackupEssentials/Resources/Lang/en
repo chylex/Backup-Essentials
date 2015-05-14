@@ -6,9 +6,9 @@
 # GENERAL #
 #=========#
 General.App.AlreadyRunning = The application is already running, but is not responding. Do you want to force close it?
-General.App.AlreadyRunning.Title = Application is already running
+General.App.AlreadyRunning.Title = Application Running
 General.App.CannotClose = Could not close the application: $0
-General.App.CannotClose.Title = Error closing application
+General.App.CannotClose.Title = Error Closing Application
 General.App.DestinationMissing = Backup could not begin, destination is empty. Program arguments: $0
 
 General.Storage.ErrorSaving = DataStorage was not initialized for saving!
@@ -25,11 +25,11 @@ General.UI.MenuButton.About = About
 #===============#
 Backup.Hint = Hint: Click and drag a location to move it.
 
-Backup.Button.Add = Add location
+Backup.Button.Add = Add Location
 Backup.Button.Edit = Edit
 Backup.Button.Remove = Remove
 
-Backup.Deletion.Confirmation.Title = Confirm deletion
+Backup.Deletion.Confirmation.Title = Confirm Deletion
 Backup.Deletion.Confirmation.1 = Are you sure you want to delete the Location? This action cannot be taken back.
 Backup.Deletion.Confirmation.* = Are you sure you want to delete $0 Locations? This action cannot be taken back.
 
@@ -56,20 +56,20 @@ BackupDrop.Button.Run = Backup
 BackupDrop.Button.Cancel = Cancel
 
 BackupDrop.DriveBackupWarning = When backing up a drive, the contents of $0 will match the contents of the drive, which means that any unwanted files and folders will be deleted. Do you want to proceed?
-BackupDrop.DriveBackupWarning.Title = Drive backup warning
+BackupDrop.DriveBackupWarning.Title = Drive Backup Warning
 
 #================#
 # PAGE - HISTORY #
 #================#
 History.Hint = Hint: Double-click an entry to show the report.
 
-History.Button.Show = Show report
+History.Button.Show = Show Report
 History.Button.Remove = Remove
 
-History.Deletion.Confirmation.Title = Confirm deletion
+History.Deletion.Confirmation.Title = Confirm Deletion
 History.Deletion.Confirmation.1 = Are you sure you want to delete the history entry? This action cannot be taken back.
 History.Deletion.Confirmation.* = Are you sure you want to delete $0 history entries? This action cannot be taken back.
-History.Deletion.Failure.Title = Error deleting history entry
+History.Deletion.Failure.Title = Error Deleting History Entry
 History.Deletion.Failure.Line1 = Failed deleting the entry file: $0
 History.Deletion.Failure.Line2 = Do you want to remove it from the History menu regardless?
 
@@ -82,13 +82,13 @@ History.Entry.Deleted = Deleted:
 #=================#
 Settings.Hint = Hint: Move your cursor over an option label to see a detailed description
 
-Settings.Button.Save = Save settings
+Settings.Button.Save = Save Settings
 Settings.Button.Cancel = Cancel
-Settings.Button.Reset = Reset to default
+Settings.Button.Reset = Reset to Default
 
-Settings.Message.ChangedWarning.Title = Changed settings
+Settings.Message.ChangedWarning.Title = Changed Settings
 Settings.Message.ChangedWarning = You have changed the settings, do you want to save them?
-Settings.Message.ResetWarning.Title = Reset settings
+Settings.Message.ResetWarning.Title = Reset Settings
 Settings.Message.ResetWarning = Are you sure? This action cannot be taken back!
 Settings.Message.HistoryWarning.Title = Caution!
 Settings.Message.HistoryWarning.PartOne.* = There are currently $0 history entries,
@@ -117,7 +117,7 @@ Settings.Check.Preload = Preload on Windows start
 Settings.Check.Preload.Tooltip = Loads the program silently when Windows starts. Tick this if the program loads too slowly.
 Settings.Check.ExplorerIntegration = Integrate with Windows Explorer
 Settings.Check.ExplorerIntegration.Tooltip = Allows right-clicking on files/folders and starting a backup from the context menu.
-Settings.Check.SaveEmptyReports = Save backup reporst with no file/folder changes
+Settings.Check.SaveEmptyReports = Save backup reports with no file/folder changes
 Settings.Check.SaveEmptyReports.Tooltip = If checked, backup reports that did not modify any files and folders are kept.
 
 Settings.Option.WindowClose.Immediately = Immediately
@@ -153,7 +153,7 @@ About.Twitter = Follow me on Twitter:
 #=================#
 # BACKUP - WINDOW #
 #=================#
-BackupWindow.Button.ShowReport = Show report
+BackupWindow.Button.ShowReport = Show Report
 BackupWindow.Button.Cancel = Cancel
 BackupWindow.Button.Close = Close
 
@@ -166,7 +166,7 @@ BackupWindow.Error.MultipleLocations = Cannot backup multiple locations in diffe
 BackupWindow.Error.HistoryGenFailed = History generation failed
 BackupWindow.Error.HistoryGenFailedNoTrace = History generation failed (unknown error)
 
-BackupWindow.HistoryGenWarning.Title = History entry is generating
+BackupWindow.HistoryGenWarning.Title = History Entry Is Generating
 BackupWindow.HistoryGenWarning = The history entry has not been generated yet, do you want to close the window anyways?
 
 #==================#
