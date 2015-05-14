@@ -112,105 +112,108 @@ Settings.Group.UserInterface = Uživatelské rozhraní
 Settings.Group.Advanced = Pokročilé
 Settings.Group.Backup = Záloha
 
-Settings.Label.Language = Language:
-Settings.Label.Language.Tooltip = Language of the user interface and backup reports.
-Settings.Label.DateFormat = Date Format:
-Settings.Label.DateFormat.Tooltip = The format of displayed dates. Warning: the option affects the History screen, but not existing reports.
-Settings.Label.Theme = Theme:
-Settings.Label.Theme.Tooltip = Color style of the user interface.
-Settings.Label.WindowClose = Close the backup window:
-Settings.Label.WindowClose.Tooltip = Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report.
-Settings.Label.ReportsKept = Backup reports kept:
-Settings.Label.ReportsKept.Tooltip = Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report.
-Settings.Label.ExplorerLabel = Windows Explorer label:
+Settings.Label.Language = Jazyk:
+Settings.Label.Language.Tooltip = Jazyk uživatelského rozhraní a výpisů záloh.
+Settings.Label.DateFormat = Formát data:
+Settings.Label.DateFormat.Tooltip = Formát zobrazených dat a časů. Pozor: existující výpisy záloh nebudou aktualizovány.
+Settings.Label.Theme = Vzhled:
+Settings.Label.Theme.Tooltip = Barevný vzhled uživatelského rozhraní.
+Settings.Label.WindowClose = Zavření okna zálohy:
+Settings.Label.WindowClose.Tooltip = Jak dlouhá doba uběhne, než se okno zálohy automaticky zavře po dokončení zálohy.&#x0a;Časovač se zobrazí v hlavním panelu Windows, a lze jej přerušit otevřením výpisu zálohy.
+Settings.Label.ReportsKept = Uchované výpisy záloh:
+Settings.Label.ReportsKept.Tooltip = Maximální počet výpisů záloh, které mohou být zachovány. Nové výpisy, které překročí limit, způsobí smazání nejstaršího výpisu.
+Settings.Label.ExplorerLabel = Popisek v kontextovém menu:
 Settings.Label.ExplorerLabel.Tooltip = 
 
-Settings.Check.Preload = Preload on Windows start
-Settings.Check.Preload.Tooltip = Loads the program silently when Windows starts. Tick this if the program loads too slowly.
-Settings.Check.ExplorerIntegration = Integrate with Windows Explorer
-Settings.Check.ExplorerIntegration.Tooltip = Allows right-clicking on files/folders and starting a backup from the context menu.
-Settings.Check.SaveEmptyReports = Save backup reports with no file/folder changes
-Settings.Check.SaveEmptyReports.Tooltip = If checked, backup reports that did not modify any files and folders are kept.
+Settings.Check.Preload = Načíst při startu systému
+Settings.Check.Preload.Tooltip = Načte program po startu Windows. Zaškrtněte tuto možnost, pokud se program načítá příliš dlouho.
+Settings.Check.ExplorerIntegration = Integrovat do Průzkumníka Windows
+Settings.Check.ExplorerIntegration.Tooltip = Umožní kliknout pravým tlačítkem myši na soubory/složky a zálohovat je přes kontextové menu.
+Settings.Check.SaveEmptyReports = Uložit výpisy záloh bez změn souborů/složek
+Settings.Check.SaveEmptyReports.Tooltip = Pokud je tato možnost zaškrtnuta, výpisy záloh které nezměnily žádné soubory ani složky jsou zachovány.
 
-Settings.Option.WindowClose.Immediately = Immediately
-Settings.Option.WindowClose.5 = After 5 seconds
-Settings.Option.WindowClose.10 = After 10 seconds
-Settings.Option.WindowClose.30 = After 30 seconds
-Settings.Option.WindowClose.Never = Never
+Settings.Option.WindowClose.Immediately = Okamžitě
+Settings.Option.WindowClose.5 = Za 5 sekund
+Settings.Option.WindowClose.10 = Za 10 sekund
+Settings.Option.WindowClose.30 = Za 30 sekund
+Settings.Option.WindowClose.Never = Nikdy
 
-Settings.Option.ReportsKept.None = None
-Settings.Option.ReportsKept.All = All
+Settings.Option.ReportsKept.None = Žádné
+Settings.Option.ReportsKept.All = Všechny
 
-Settings.Option.DateFormat.Detect = Detect ($0)
+Settings.Option.DateFormat.Detect = Automaticky ($0)
 
 #==============#
 # PAGE - ABOUT #
 #==============#
-About.Version = Version
-About.Version.Unknown = (unknown)
-About.Author = Designed and programmed by chylex.
-About.License = Product license information
+About.Version = Verze
+About.Version.Unknown = (neznáma)
+About.Author = Nadesignoval a naprogramoval chylex.
+About.License = Licenční ujednání (anglicky)
 
-About.WinVersion.Using = You are using $0
-About.WinVersion.Supported = (supported).
-About.WinVersion.Unsupported = (not supported).
-About.WinVersion.Unknown = (unknown)
+About.WinVersion.Using = Používáte $0
+About.WinVersion.Supported = (podporován).
+About.WinVersion.Unsupported = (nepodporován).
+About.WinVersion.Unknown = (neznámou verzi Windows)
 
-About.Support = Support:
-About.Support.Link = Issues on GitHub
-About.OfficialWebsite = Visit the official website:
-About.SourceCode = View the source code:
-About.Twitter = Follow me on Twitter:
+About.Support = Podpora:
+About.Support.Link = GitHub
+About.OfficialWebsite = Navštívit oficiální stránku:
+About.SourceCode = Otevřít zdrojový kód:
+About.Twitter = Sledujte mě na Twitteru:
 
 #=================#
 # BACKUP - WINDOW #
 #=================#
-BackupWindow.Button.ShowReport = Show Report
-BackupWindow.Button.Cancel = Cancel
-BackupWindow.Button.Close = Close
+BackupWindow.Button.ShowReport = Zobrazit výpis
+BackupWindow.Button.Cancel = Zrušit
+BackupWindow.Button.Close = Zavřít
 
-BackupWindow.Run.Preparing = Preparing backup...
-BackupWindow.Run.Processing = Processing the files and folders...
-BackupWindow.Run.Finished.* = Finished! Updated $0 files and folder.
-BackupWindow.Run.Finished.1 = Finished! Updated 1 file or folder.
+BackupWindow.Run.Preparing = Připravuji zálohu...
+BackupWindow.Run.Processing = Zpracovávám soubory a složky...
+BackupWindow.Run.Finished.* = Hotovo! Aktualizováno $0 souborů a složek.
+BackupWindow.Run.Finished.1 = Hotovo! Aktualizován 1 soubor nebo složka.
+BackupWindow.Run.Finished.2 = Hotovo! Aktualizovány 2 soubory a složky.
+BackupWindow.Run.Finished.3 = Hotovo! Aktualizovány 3 soubory a složky.
+BackupWindow.Run.Finished.4 = Hotovo! Aktualizovány 4 soubory a složky.
 
-BackupWindow.Error.MultipleLocations = Cannot backup multiple locations in different folders!
-BackupWindow.Error.HistoryGenFailed = History generation failed
-BackupWindow.Error.HistoryGenFailedNoTrace = History generation failed (unknown error)
+BackupWindow.Error.MultipleLocations = Nelze zálohovat zdroje z více složek najednou!
+BackupWindow.Error.HistoryGenFailed = Nepodařilo se vygenerovat výpis
+BackupWindow.Error.HistoryGenFailedNoTrace = Nepodařilo se vygenerovat výpis (neznámá chyba)
 
-BackupWindow.HistoryGenWarning.Title = History Entry Is Generating
-BackupWindow.HistoryGenWarning = The history entry has not been generated yet, do you want to close the window anyways?
+BackupWindow.HistoryGenWarning.Title = Výpis se generuje
+BackupWindow.HistoryGenWarning = Výpis zálohy se právě generuje, chcete i přesto okno zavřít?
 
 #==================#
 # BACKUP - REPORTS #
 #==================#
-Report.Fetching = Fetching report...
-Report.FetchError = Failed fetching report.
+Report.Fetching = Otevírám výpis...
+Report.FetchError = Nastala chyba při otevírání výpisu.
 
-Report.Title.PreparingBackup = = Preparing backup =
-Report.Title.FilesAndFolders = = Files and folders =
-Report.Title.StartingBackup = = Starting backup =
-Report.Title.BackupCanceled = = Backup canceled =
-Report.Title.BackupFailed = = Backup failed (out of attempts) =
-Report.Title.BackupFinished = = Backup finished =
+Report.Title.PreparingBackup = = Příprava zálohy =
+Report.Title.FilesAndFolders = = Soubory a složky =
+Report.Title.StartingBackup = = Začátek zálohy =
+Report.Title.BackupCanceled = = Záloha byla zrušena =
+Report.Title.BackupFailed = = Záloha se nezdařila =
+Report.Title.BackupFinished = = Záloha dokončena =
 
-Report.Title.Debug = = Caution =
-Report.Info.Debug = Backup Essentials is running in debug mode, all actions will be logged into the report but will not actually modify any files or folders!
+Report.Title.Debug = = Varování =
+Report.Info.Debug = Backup Essentials běží v módu ladění, všechny akce budou zaznamenány ale program nezmění žádné soubory ani složky!
 
-Report.Error.Canceled = Backup canceled.
-Report.Error.Failed = Backup failed: out of attempts.
+Report.Error.Canceled = Záloha zrušena.
+Report.Error.Failed = Záloha se nezdařila.
 
-Report.Label.Source = Source
-Report.Label.Destination = Destination
-Report.Label.Date = Date
-Report.Label.EntriesAdded = Added
-Report.Label.EntriesUpdated = Updated
-Report.Label.EntriesDeleted = Deleted
+Report.Label.Source = Zdroj
+Report.Label.Destination = Cíl
+Report.Label.Date = Datum
+Report.Label.EntriesAdded = Přidáno
+Report.Label.EntriesUpdated = Změněno
+Report.Label.EntriesDeleted = Smazáno
 
-Report.Name.Action.Added = Added
-Report.Name.Action.Updated = Updated
-Report.Name.Action.Deleted = Deleted
-Report.Name.Action.Unknown = (unknown action)
-Report.Name.Type.File = File
-Report.Name.Type.Directory = Folder
-Report.Name.Type.Unknown = (unknown type)
+Report.Name.Action.Added = Přidán/a
+Report.Name.Action.Updated = Změněn/a
+Report.Name.Action.Deleted = Smazán/a
+Report.Name.Action.Unknown = (neznámá akce)
+Report.Name.Type.File = soubor
+Report.Name.Type.Directory = složka
+Report.Name.Type.Unknown = (neznámý typ)

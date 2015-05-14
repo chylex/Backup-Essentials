@@ -159,7 +159,7 @@ BackupWindow.Button.Close = Close
 
 BackupWindow.Run.Preparing = Preparing backup...
 BackupWindow.Run.Processing = Processing the files and folders...
-BackupWindow.Run.Finished.* = Finished! Updated $0 files and folder.
+BackupWindow.Run.Finished.* = Finished! Updated $0 files and folders.
 BackupWindow.Run.Finished.1 = Finished! Updated 1 file or folder.
 
 BackupWindow.Error.MultipleLocations = Cannot backup multiple locations in different folders!
