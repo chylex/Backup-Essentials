@@ -2,16 +2,215 @@
 # English uses capitalized words for buttons, labels and titles, most other languages don't.
 # See multiple examples of user interface in your language to judge whether to use "Title Style" or "Sentence style" for these elements.
 
-#==============#
-# GENERAL - UI #
-#==============#
+#=========#
+# GENERAL #
+#=========#
+General.App.AlreadyRunning = Aplikace již běží, ale neodpovídá. Chcete vynutit její zastavení?
+General.App.AlreadyRunning.Title = Aplikace běží
+General.App.CannotClose = Nepodařilo se zastavit aplikaci: $0
+General.App.CannotClose.Title = Chyba při zastavení aplikace
+General.App.DestinationMissing = Záloha nemohla začít, nenalezen žádný cíl. Argumenty programu: $0
+
+General.Storage.ErrorSaving = Úložna dat nebyla inicializována pro ukládání!
+General.Storage.ErrorScheduledSaving = Úložna dat nebyla inicializována pro automatické ukládání!
+
 General.UI.MenuButton.Home = Domů
 General.UI.MenuButton.Backup = Zálohy
 General.UI.MenuButton.History = Historie
 General.UI.MenuButton.Settings = Nastavení
 General.UI.MenuButton.About = O programu
 
+#===============#
+# PAGE - BACKUP #
+#===============#
+Backup.Hint = Tip: Pro přesunutí lokace na ni klikněte a táhněte nahoru nebo dolů.
+
+Backup.Button.Add = Přidat lokaci
+Backup.Button.Edit = Editovat
+Backup.Button.Remove = Smazat
+
+Backup.Deletion.Confirmation.Title = Potvrdit smazání
+Backup.Deletion.Confirmation.1 = Opravdu chcete smazat lokaci? Tuto akci nelze vrátit zpět.
+Backup.Deletion.Confirmation.2 = Opravdu chcete smazat 2 lokace? Tuto akci nelze vrátit zpět.
+Backup.Deletion.Confirmation.3 = Opravdu chcete smazat 3 lokace? Tuto akci nelze vrátit zpět.
+Backup.Deletion.Confirmation.4 = Opravdu chcete smazat 4 lokace? Tuto akci nelze vrátit zpět.
+Backup.Deletion.Confirmation.* = Opravdu chcete smazat $0 lokací? Tuto akci nelze vrátit zpět.
+
+Backup.Location.UnknownName = (neznámý název)
+Backup.Location.UnknownDirectory = (neznámá složka)
+
+BackupEdit.Label.Name = Název:
+BackupEdit.Label.Directory = Cíl:
+BackupEdit.Label.AdvancedSettings = Zobrazit pokročilé možnosti
+
+BackupEdit.Button.DirectorySelect = Vybrat složku...
+BackupEdit.Button.DirectorySelect.DialogTitle = Vyberte cílovou složku pro tuto lokaci.
+BackupEdit.Button.Save = Uložit
+BackupEdit.Button.Cancel = Zrušit
+
+BackupEdit.SaveWarning.Title = Pozor!
+BackupEdit.SaveWarning.NameEmpty = Název lokace nesmí být prázdný.
+BackupEdit.SaveWarning.DirectoryEmpty = Není vybraná cílová složka, lokace nebude registrována dokud nebude problém opraven. Klikněte na Uložit znova pro potvrzení.
+BackupEdit.SaveWarning.DirectoryInvalid = Cílová složka neobsahuje validní cestu systému Windows, lokace nebude registrována dokud nebude problém opraven. Klikněte na Uložit znova pro potvrzení.
+BackupEdit.SaveWarning.DirectoryNotAbsolute = Cílová složka není absolutní, lokace nebude registrována dokud nebude problém opraven. Klikněte na Uložit znova pro potvrzení.
+BackupEdit.SaveWarning.DirectoryNotExists = Cílová složka neexistuje, bude vytvořena při spuštění první zálohy. Klikněte na Uložit znova pro potvrzení.
+
+BackupDrop.Button.Run = Zálohovat
+BackupDrop.Button.Cancel = Zrušit
+
+BackupDrop.DriveBackupWarning = Při zálohování celé jednotky bude obsah $0 přepsán aby odpovídal obsahu jednotky, všechny ostatní soubory a složky které se v této složce nachází budou smazány. Chcete pokračovat?
+BackupDrop.DriveBackupWarning.Title = Upozornění při záloze jednotky
+
+#================#
+# PAGE - HISTORY #
+#================#
+History.Hint = Tip: Dvojitým kliknutím na záznam se otevře výpis.
+
+History.Button.Show = Otevřít výpis
+History.Button.Remove = Smazat
+
+History.Deletion.Confirmation.Title = Potvrdit smazání
+History.Deletion.Confirmation.1 = Opravdu chcete smazat tento záznam? Tuto akci nelze vrátit zpět.
+History.Deletion.Confirmation.2 = Opravdu chcete smazat 2 záznamy? Tuto akci nelze vrátit zpět.
+History.Deletion.Confirmation.3 = Opravdu chcete smazat 3 záznamy? Tuto akci nelze vrátit zpět.
+History.Deletion.Confirmation.4 = Opravdu chcete smazat 4 záznamy? Tuto akci nelze vrátit zpět.
+History.Deletion.Confirmation.* = Opravdu chcete smazat $0 záznamů? Tuto akci nelze vrátit zpět.
+History.Deletion.Failure.Title = Chyba při mazání záznamu
+History.Deletion.Failure.Line1 = Nepodařilo se smazat soubor výpisu: $0
+History.Deletion.Failure.Line2 = Chcete jej i přesto smazat ze seznamu?
+
+History.Entry.Added = Přidáno:
+History.Entry.Updated = Změněno:
+History.Entry.Deleted = Smazáno:
+
 #=================#
 # PAGE - SETTINGS #
 #=================#
-Settings.Group.UI = Uživatelské rozhraní
+Settings.Hint = Tip: Přesuňte kurzor myši na popisek možnosti pro detailní popis
+
+Settings.Button.Save = Uložit nastavení
+Settings.Button.Cancel = Zrušit
+Settings.Button.Reset = Resetovat na původní hodnoty
+
+Settings.Message.ChangedWarning.Title = Nastavení změněno
+Settings.Message.ChangedWarning = Změnili jste nastavení, chcete jej ponechat?
+Settings.Message.ResetWarning.Title = Reset nastavení
+Settings.Message.ResetWarning = Jste si jisti? Tuto akci nelze vrátit zpět!
+Settings.Message.HistoryWarning.Title = Pozor!
+Settings.Message.HistoryWarning.PartOne.* = Existuje celkem $0 záznamů výpisů z předchozích záloh,
+Settings.Message.HistoryWarning.PartOne.1 = Existuje celkem 1 záznam výpisu z předchozí zálohy,
+Settings.Message.HistoryWarning.PartOne.2 = Existují celkem 2 záznamy výpisu z předchozích záloh,
+Settings.Message.HistoryWarning.PartOne.3 = Existují celkem 3 záznamy výpisu z předchozích záloh,
+Settings.Message.HistoryWarning.PartOne.4 = Existují celkem 4 záznamy výpisu z předchozích záloh,
+Settings.Message.HistoryWarning.PartTwo.* =  uložení nastavení smaže posledních $0 záznamů.
+Settings.Message.HistoryWarning.PartTwo.1 =  uložení nastavení tento záznam smaže.
+Settings.Message.HistoryWarning.PartTwo.2 =  uložení nastavení smaže poslední 2 záznamy.
+Settings.Message.HistoryWarning.PartTwo.3 =  uložení nastavení smaže poslední 3 záznamy.
+Settings.Message.HistoryWarning.PartTwo.4 =  uložení nastavení smaže poslední 4 záznamy.
+
+Settings.Group.UserInterface = Uživatelské rozhraní
+Settings.Group.Advanced = Pokročilé
+Settings.Group.Backup = Záloha
+
+Settings.Label.Language = Language:
+Settings.Label.Language.Tooltip = Language of the user interface and backup reports.
+Settings.Label.DateFormat = Date Format:
+Settings.Label.DateFormat.Tooltip = The format of displayed dates. Warning: the option affects the History screen, but not existing reports.
+Settings.Label.Theme = Theme:
+Settings.Label.Theme.Tooltip = Color style of the user interface.
+Settings.Label.WindowClose = Close the backup window:
+Settings.Label.WindowClose.Tooltip = Time it takes the backup window to automatically close after finishing the backup.&#x0a;The timer is shown in task bar and can be interrupted by opening the backup report.
+Settings.Label.ReportsKept = Backup reports kept:
+Settings.Label.ReportsKept.Tooltip = Amount of reports that can be stored at one point. New report that goes over the limit will delete the oldest report.
+Settings.Label.ExplorerLabel = Windows Explorer label:
+Settings.Label.ExplorerLabel.Tooltip = 
+
+Settings.Check.Preload = Preload on Windows start
+Settings.Check.Preload.Tooltip = Loads the program silently when Windows starts. Tick this if the program loads too slowly.
+Settings.Check.ExplorerIntegration = Integrate with Windows Explorer
+Settings.Check.ExplorerIntegration.Tooltip = Allows right-clicking on files/folders and starting a backup from the context menu.
+Settings.Check.SaveEmptyReports = Save backup reports with no file/folder changes
+Settings.Check.SaveEmptyReports.Tooltip = If checked, backup reports that did not modify any files and folders are kept.
+
+Settings.Option.WindowClose.Immediately = Immediately
+Settings.Option.WindowClose.5 = After 5 seconds
+Settings.Option.WindowClose.10 = After 10 seconds
+Settings.Option.WindowClose.30 = After 30 seconds
+Settings.Option.WindowClose.Never = Never
+
+Settings.Option.ReportsKept.None = None
+Settings.Option.ReportsKept.All = All
+
+Settings.Option.DateFormat.Detect = Detect ($0)
+
+#==============#
+# PAGE - ABOUT #
+#==============#
+About.Version = Version
+About.Version.Unknown = (unknown)
+About.Author = Designed and programmed by chylex.
+About.License = Product license information
+
+About.WinVersion.Using = You are using $0
+About.WinVersion.Supported = (supported).
+About.WinVersion.Unsupported = (not supported).
+About.WinVersion.Unknown = (unknown)
+
+About.Support = Support:
+About.Support.Link = Issues on GitHub
+About.OfficialWebsite = Visit the official website:
+About.SourceCode = View the source code:
+About.Twitter = Follow me on Twitter:
+
+#=================#
+# BACKUP - WINDOW #
+#=================#
+BackupWindow.Button.ShowReport = Show Report
+BackupWindow.Button.Cancel = Cancel
+BackupWindow.Button.Close = Close
+
+BackupWindow.Run.Preparing = Preparing backup...
+BackupWindow.Run.Processing = Processing the files and folders...
+BackupWindow.Run.Finished.* = Finished! Updated $0 files and folder.
+BackupWindow.Run.Finished.1 = Finished! Updated 1 file or folder.
+
+BackupWindow.Error.MultipleLocations = Cannot backup multiple locations in different folders!
+BackupWindow.Error.HistoryGenFailed = History generation failed
+BackupWindow.Error.HistoryGenFailedNoTrace = History generation failed (unknown error)
+
+BackupWindow.HistoryGenWarning.Title = History Entry Is Generating
+BackupWindow.HistoryGenWarning = The history entry has not been generated yet, do you want to close the window anyways?
+
+#==================#
+# BACKUP - REPORTS #
+#==================#
+Report.Fetching = Fetching report...
+Report.FetchError = Failed fetching report.
+
+Report.Title.PreparingBackup = = Preparing backup =
+Report.Title.FilesAndFolders = = Files and folders =
+Report.Title.StartingBackup = = Starting backup =
+Report.Title.BackupCanceled = = Backup canceled =
+Report.Title.BackupFailed = = Backup failed (out of attempts) =
+Report.Title.BackupFinished = = Backup finished =
+
+Report.Title.Debug = = Caution =
+Report.Info.Debug = Backup Essentials is running in debug mode, all actions will be logged into the report but will not actually modify any files or folders!
+
+Report.Error.Canceled = Backup canceled.
+Report.Error.Failed = Backup failed: out of attempts.
+
+Report.Label.Source = Source
+Report.Label.Destination = Destination
+Report.Label.Date = Date
+Report.Label.EntriesAdded = Added
+Report.Label.EntriesUpdated = Updated
+Report.Label.EntriesDeleted = Deleted
+
+Report.Name.Action.Added = Added
+Report.Name.Action.Updated = Updated
+Report.Name.Action.Deleted = Deleted
+Report.Name.Action.Unknown = (unknown action)
+Report.Name.Type.File = File
+Report.Name.Type.Directory = Folder
+Report.Name.Type.Unknown = (unknown type)

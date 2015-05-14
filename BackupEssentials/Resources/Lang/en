@@ -23,7 +23,7 @@ General.UI.MenuButton.About = About
 #===============#
 # PAGE - BACKUP #
 #===============#
-Backup.Hint = Hint: Click and drag a location to move it.
+Backup.Hint = Hint: Click and drag a Location up or down to move it.
 
 Backup.Button.Add = Add Location
 Backup.Button.Edit = Edit
@@ -47,7 +47,7 @@ BackupEdit.Button.Cancel = Cancel
 
 BackupEdit.SaveWarning.Title = Caution!
 BackupEdit.SaveWarning.NameEmpty = Location name cannot be empty.
-BackupEdit.SaveWarning.DirectoryEmpty = Selected directory is empty, it will not be registered until the issue is fixed. Click Save again to confirm.
+BackupEdit.SaveWarning.DirectoryEmpty = No directory selected, it will not be registered until the issue is fixed. Click Save again to confirm.
 BackupEdit.SaveWarning.DirectoryInvalid = Selected directory is not a valid Windows path, it will not be registered until the issue is fixed. Click Save again to confirm.
 BackupEdit.SaveWarning.DirectoryNotAbsolute = Selected directory is not an absolute path, it will not be registered until the issue is fixed. Click Save again to confirm.
 BackupEdit.SaveWarning.DirectoryNotExists = Selected directory does not exist, it will be created when a first backup is made. Click Save again to confirm.
