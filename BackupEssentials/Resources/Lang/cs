@@ -1,3 +1,7 @@
+# WARNING
+# English uses capitalized words for buttons, labels and titles, most other languages don't.
+# See multiple examples of user interface in your language to judge whether to use "Title Style" or "Sentence style" for these elements.
+
 #==============#
 # GENERAL - UI #
 #==============#
