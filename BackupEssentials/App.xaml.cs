@@ -81,7 +81,7 @@ namespace BackupEssentials{
             
             try{
                 running = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location));
-            }catch(InvalidOperationException e){
+            }catch(InvalidOperationException){
                 running = new Process[0];
             }
 
@@ -118,7 +118,7 @@ namespace BackupEssentials{
         /// </summary>
         private void HandleException(object sender, DispatcherUnhandledExceptionEventArgs e){
             LogException(e.Exception);
-
+            MessageBox.Show("Exception caught: "+e.Exception);
             // TODO
         }
 
