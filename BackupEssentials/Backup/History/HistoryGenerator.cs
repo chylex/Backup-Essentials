@@ -2,9 +2,11 @@
 using BackupEssentials.Sys;
 using BackupEssentials.Utils;
 using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 
 namespace BackupEssentials.Backup.History{
     class HistoryGenerator{
@@ -29,8 +31,8 @@ namespace BackupEssentials.Backup.History{
                 args.Result = null;
                 Tuple<BackupRunInfo,BackupReport> data = (Tuple<BackupRunInfo,BackupReport>)args.Argument;
 
-                DataStorage.SetupForSaving(false);
                 DataStorage.Load(DataStorage.Type.History);
+                DataStorage.SetupForSaving(false);
 
                 HistoryEntry entry = new HistoryEntry(){
                     LocationName = data.Item1.Name,
@@ -46,10 +48,21 @@ namespace BackupEssentials.Backup.History{
 
                 if (!Directory.Exists(HistoryEntry.Directory))Directory.CreateDirectory(HistoryEntry.Directory);
 
-                string filename = WindowsFileUtils.ReplaceInvalidFileCharacters(entry.LocationName,'_')+'_'+entry.BackupTime.ToString("yyyy-MM-dd_HH-mm-ss",CultureInfo.InvariantCulture)+".log";
-                if (FileUtils.WriteFileCompressed(Path.Combine(HistoryEntry.Directory,filename),FileMode.Create,data.Item2.UnparsedReport))entry.Filename = filename;
+                string fileStart = WindowsFileUtils.ReplaceInvalidFileCharacters(entry.LocationName,'_')+'_'+entry.BackupTime.ToString("yyyy-MM-dd_HH-mm-ss",CultureInfo.InvariantCulture)+"_";
+                int sub = 0;
 
-                DataStorage.Save(true);
+                while(entry.Filename.Length == 0){
+                    string filename = fileStart+sub+".log";
+
+                    if (FileUtils.WriteFileCompressed(Path.Combine(HistoryEntry.Directory,filename),FileMode.CreateNew,data.Item2.UnparsedReport))entry.Filename = filename;
+                    else ++sub;
+                }
+
+                while(true){
+                    if (worker.CancellationPending || DataStorage.Save(true).Contains(DataStorage.Type.History))break; // TODO fix
+                    else Thread.Sleep(475);
+                }
+
                 args.Result = "";
             };
             

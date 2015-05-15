@@ -43,6 +43,7 @@ namespace BackupEssentials{
                     if (MessageBox.Show(App.Window,Settings.Default.Language["BackupWindow.HistoryGenWarning"],Settings.Default.Language["BackupWindow.HistoryGenWarning.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) != MessageBoxResult.Yes){
                         args.Cancel = true;
                     }
+                    else HistoryGenWorker.CancelAsync();
                 }
             };
         }
