@@ -36,8 +36,8 @@ namespace BackupEssentials{
             ContentFrame.Navigated += (sender2, args2) => { ContentFrame.NavigationService.RemoveBackEntry(); };
 
             Loaded += (sender, args) => {
-                DataStorage.SetupForSaving(true);
                 DataStorage.Load();
+                DataStorage.SetupForSaving(true);
                 if (runOnLoad != null)runOnLoad(this);
                 if (splashScreen != null)splashScreen.Close(new TimeSpan());
             };
@@ -47,7 +47,7 @@ namespace BackupEssentials{
                 if (switchHandler != null && switchHandler.OnSwitch())args.Cancel = true;
             };
 
-            Closed += (sender, args) => {
+            App.Current.Exit += (sender, args) => {
                 DataStorage.Save(true);
                 ExplorerIntegration.Refresh(true);
             };

@@ -17,7 +17,13 @@ namespace BackupEssentials.Backup.Data{
         private static ScheduledUpdate SaveTimer;
         private static bool IsSetupForSaving = false;
 
+        private static readonly ReadOnlyCollection<Type> EmptyList = new ReadOnlyCollection<Type>(new List<Type>());
+
         private static Dictionary<Type,bool> LoadedData = new Dictionary<Type,bool>();
+
+        static DataStorage(){
+            foreach(Type type in Enum.GetValues(typeof(Type)))LoadedData[type] = false;
+        }
 
         public static readonly ObservableCollection<BackupLocation> BackupLocationList = new ObservableCollection<BackupLocation>(new List<BackupLocation>(8));
         public static readonly ChangeTracker BackupLocationListTracker = new ChangeTracker();
@@ -40,10 +46,6 @@ namespace BackupEssentials.Backup.Data{
 
             BackupLocationList.CollectionChanged += Tracker(BackupLocationListTracker,scheduled);
             HistoryEntryList.CollectionChanged += Tracker(HistoryEntryListTracker,scheduled);
-
-            foreach(Type type in Enum.GetValues(typeof(Type))){
-                LoadedData[type] = false;
-            }
             
             if (scheduled){
                 SaveTimer = ScheduledUpdate.Forever(10,() => {
@@ -82,34 +84,40 @@ namespace BackupEssentials.Backup.Data{
             }
         }
 
-        public static void Save(){
-            Save(false);
+        public static IList<Type> Save(){
+            return Save(false);
         }
 
-        public static void Save(bool force){
+        public static IList<Type> Save(bool force){
             if (!IsSetupForSaving)throw new NotSupportedException(Settings.Default.Language["General.Storage.ErrorSaving"]);
             else if (SaveTimer == null && !force)throw new NotSupportedException(Settings.Default.Language["General.Storage.ErrorScheduledSaving"]);
 
             if (!force){
                 SaveTimer.NeedsUpdate = true;
-                return;
+                return EmptyList;
             }
 
-            if (BackupLocationListTracker.Changed && LoadedData[Type.Locations]){
-                BackupLocationListTracker.Changed = false;
+            List<Type> saved = new List<Type>();
 
-                FileUtils.WriteFile("DS.Locations.dat",FileMode.Create,(writer) => {
+            if (BackupLocationListTracker.Changed && LoadedData[Type.Locations]){
+                if (FileUtils.WriteFile("DS.Locations.dat",FileMode.Create,(writer) => {
                     foreach(BackupLocation loc in BackupLocationList)writer.WriteLine(StringDictionarySerializer.ToString(loc));
-                });
+                })){
+                    BackupLocationListTracker.Changed = false;
+                    saved.Add(Type.Locations);
+                }
             }
 
             if (HistoryEntryListTracker.Changed && LoadedData[Type.History]){
-                HistoryEntryListTracker.Changed = false;
-
-                FileUtils.WriteFile("DS.History.dat",FileMode.Create,(writer) => {
+                if (FileUtils.WriteFile("DS.History.dat",FileMode.Create,(writer) => {
                     foreach(HistoryEntry entry in HistoryEntryList)writer.WriteLine(StringDictionarySerializer.ToString(entry));
-                });
+                })){
+                    HistoryEntryListTracker.Changed = false;
+                    saved.Add(Type.History);
+                }
             }
+
+            return saved;
         }
     }
 }
