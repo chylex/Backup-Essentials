@@ -33,9 +33,13 @@ namespace BackupEssentials.Pages{
             foreach(HistoryEntry entry in HistoryListView.SelectedItems)list.Add(entry);
 
             if (list.Count > 0 && MessageBox.Show(App.Window,Sys.Settings.Default.Language["History.Deletion.Confirmation.",list.Count,list.Count.ToString()],Sys.Settings.Default.Language["History.Deletion.Confirmation.Title"],MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes){
+                int index = HistoryListView.SelectedIndex;
+
                 foreach(HistoryEntry entry in list){
                     try{
-                        File.Delete(Path.Combine(HistoryEntry.Directory,entry.Filename));
+                        string path = Path.Combine(HistoryEntry.Directory,entry.Filename);
+                        if (File.Exists(path))File.Delete(path);
+
                         DataStorage.HistoryEntryList.Remove(entry);
                     }catch(Exception ex){
                         App.LogException(ex);
@@ -45,6 +49,9 @@ namespace BackupEssentials.Pages{
                         else if (res == MessageBoxResult.Yes)DataStorage.HistoryEntryList.Remove(entry);
                     }
                 }
+
+                if (index > 0)HistoryListView.SelectedIndex = index-1;
+                else if (HistoryListView.Items.Count > 0)HistoryListView.SelectedIndex = index;
             }
         }
 
