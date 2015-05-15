@@ -10,7 +10,7 @@ namespace BackupEssentials.Utils{
             if (!File.Exists(filename))return false;
 
             try{
-                using(FileStream fileStream = new FileStream(filename,mode)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Read,FileShare.Read)){
                     using(StreamReader reader = new StreamReader(fileStream)){
                         string line;
 
@@ -23,14 +23,13 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
-                App.LogException(e);
                 return false;
             }
         }
 
         public static bool WriteFile(string filename, FileMode mode, Action<StreamWriter> writeAction){
             try{
-                using(FileStream fileStream = new FileStream(filename,mode)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write)){
                     using(StreamWriter writer = new StreamWriter(fileStream)){
                         writeAction.Invoke(writer);
                     }
@@ -39,7 +38,6 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
-                App.LogException(e);
                 return false;
             }
         }
@@ -50,7 +48,7 @@ namespace BackupEssentials.Utils{
             try{
                 string data;
 
-                using(FileStream fileStream = new FileStream(filename,mode)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Read,FileShare.Read)){
                     using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Decompress)){
                         using(StreamReader reader = new StreamReader(compressed)){
                             data = reader.ReadToEnd();
@@ -61,14 +59,13 @@ namespace BackupEssentials.Utils{
                 return data;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
-                App.LogException(e);
                 return null;
             }
         }
 
         public static bool WriteFileCompressed(string filename, FileMode mode, string data){
             try{
-                using(FileStream fileStream = new FileStream(filename,mode)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write)){
                     using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Compress)){
                         byte[] bytes = Encoding.UTF8.GetBytes(data);
                         compressed.Write(bytes,0,bytes.Length);
@@ -78,7 +75,6 @@ namespace BackupEssentials.Utils{
                 return true;
             }catch(Exception e){
                 Debug.WriteLine(e.ToString());
-                App.LogException(e);
                 return false;
             }
         }
