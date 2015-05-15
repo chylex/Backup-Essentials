@@ -23,9 +23,8 @@
 
         <DockPanel x:Name="TitleBar" Style="{StaticResource DockPanelStyleTitleBar}" MouseLeftButtonDown="TitleBarLeftButtonDown">
             <Image DockPanel.Dock="Left" Source="/BackupEssentials;component/Resources/Icon.ico" Margin="7,4,4,2" Width="24" Height="24"/>
-            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="#FFBBBBBB" FontSize="18" Margin="0,2,0,0">
-                Backup Essentials
-            </TextBlock> <!-- TODO -->
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="#FFBBBBBB" FontSize="18" Margin="0,2,0,0">Backup Essentials</TextBlock>
+            
             <WrapPanel Style="{StaticResource WrapPanelStyleTitleBar}" Width="120" DockPanel.Dock="Right">
                 <custom:ButtonTitleBar x:Name="ButtonWindowClose" CXPathData="{StaticResource PathButtonClose}" CXPathWidth="16" CXPathHeight="16" CXPathMargin="0,2,0,0" CXPathRotation="-45" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowCloseClick"/>
 				<custom:ButtonTitleBar x:Name="ButtonWindowToggle" CXPathData="{StaticResource PathButtonMaximized}" CXPathWidth="14" CXPathHeight="14" CXPathMargin="0,3,0,0" HorizontalContentAlignment="Center" Style="{DynamicResource ButtonStyleTitleBar}" Click="ButtonWindowToggleClick"/>

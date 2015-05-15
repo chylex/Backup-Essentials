@@ -23,7 +23,7 @@ namespace BackupEssentials{
         private new Rect RestoreBounds = new Rect();
         private bool IsMaximized = false;
 
-        private string[] DropData = null;
+        private object DropData = null;
 
         public MainWindow() : this(null,null){}
         public MainWindow(SplashScreen splashScreen) : this(splashScreen,null){}
@@ -111,6 +111,14 @@ namespace BackupEssentials{
         }
 
         private void OnDragEnter(object sender, DragEventArgs e){
+            IPageDragDrop dragDropOverride = ContentFrame.Content as IPageDragDrop;
+
+            if (DropData == null && dragDropOverride != null){
+                DropData = dragDropOverride.DragEnter(e);
+                e.Handled = true;
+                return;
+            }
+
             if (DropData == null && e.Data.GetDataPresent(DataFormats.FileDrop)){
                 DropData = e.Data.GetData(DataFormats.FileDrop) as string[];
                 DropOverlayLabel.Visibility = Visibility.Visible;
@@ -122,14 +130,23 @@ namespace BackupEssentials{
         }
 
         private void OnDragLeave(object sender, DragEventArgs e){
+            IPageDragDrop dragDropOverride = ContentFrame.Content as IPageDragDrop;
+            if (dragDropOverride != null)dragDropOverride.DragExit(e);
+
             DropData = null;
             DropOverlayLabel.Visibility = Visibility.Hidden;
         }
 
         private void OnDragDrop(object sender, DragEventArgs e){
             if (DropData != null){
-                DropOverlayLabel.Visibility = Visibility.Hidden;
-                ShowPage(typeof(BackupDrop),new object[]{ DropData, ContentFrame.Content == null ? null : (ContentFrame.Content as Page).GetType() });
+                IPageDragDrop dragDropOverride = ContentFrame.Content as IPageDragDrop;
+
+                if (dragDropOverride != null)dragDropOverride.DragDrop(e,DropData);
+                else{
+                    DropOverlayLabel.Visibility = Visibility.Hidden;
+                    ShowPage(typeof(BackupDrop),new object[]{ DropData, ContentFrame.Content == null ? null : (ContentFrame.Content as Page).GetType() });
+                }
+
                 DropData = null;
             }
         }

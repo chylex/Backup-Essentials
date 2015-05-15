@@ -123,6 +123,7 @@
     <Compile Include="Pages\HomeSub\DriveBackup.xaml.cs">
       <DependentUpon>DriveBackup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IPageDragDrop.cs" />
     <Compile Include="Pages\IPageResetUI.cs" />
     <Compile Include="Pages\IPageShowData.cs" />
     <Compile Include="Pages\Home.xaml.cs">
