@@ -36,6 +36,8 @@ Backup.Deletion.Confirmation.* = Are you sure you want to delete $0 Locations? T
 Backup.Location.UnknownName = (unknown)
 Backup.Location.UnknownDirectory = (unknown)
 
+BackupEdit.Hint = Hint: Drag and Drop a folder on the window to select it.
+
 BackupEdit.Label.Name = Name:
 BackupEdit.Label.Directory = Directory:
 BackupEdit.Label.AdvancedSettings = Show advanced settings

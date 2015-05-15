@@ -39,6 +39,8 @@ Backup.Deletion.Confirmation.* = Opravdu chcete smazat $0 lokací? Tuto akci nel
 Backup.Location.UnknownName = (neznámý název)
 Backup.Location.UnknownDirectory = (neznámá složka)
 
+BackupEdit.Hint = Hint: Cílovou složku lze vybrat i přetažením složky z průzkumníka Windows na toto okno.
+
 BackupEdit.Label.Name = Název:
 BackupEdit.Label.Directory = Cíl:
 BackupEdit.Label.AdvancedSettings = Zobrazit pokročilé možnosti

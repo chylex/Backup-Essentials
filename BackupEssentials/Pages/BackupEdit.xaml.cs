@@ -2,14 +2,14 @@
 using BackupEssentials.Backup.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 
 namespace BackupEssentials.Pages{
-    public partial class BackupEdit : Page, IPageShowData{
+    public partial class BackupEdit : Page, IPageShowData, IPageDragDrop{
         public BackupLocation EditLocation { get; private set; }
         public BackupLocation TargetLocation { get; private set; }
 
         private string LastWarningDirectory;
+        private string TempDragDirectory;
 
         public BackupEdit(){
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace BackupEssentials.Pages{
         }
 
         private void ClickSelectDirectory(object sender, RoutedEventArgs e){
-            using(FolderBrowserDialog dialog = new FolderBrowserDialog()){
+            using(System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog()){
                 dialog.Description = Sys.Settings.Default.Language["BackupEdit.Button.DirectorySelect.DialogTitle"];
                 dialog.ShowDialog();
 
@@ -40,7 +40,7 @@ namespace BackupEssentials.Pages{
         private void ClickSave(object sender, RoutedEventArgs e){
             if (EditLocation.Name.Length == 0){
                 VisualStateManager.GoToState(TextBoxName,"Invalid",true);
-                System.Windows.MessageBox.Show(App.Window,Sys.Settings.Default.Language["BackupEdit.SaveWarning.NameEmpty"],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show(App.Window,Sys.Settings.Default.Language["BackupEdit.SaveWarning.NameEmpty"],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace BackupEssentials.Pages{
                 if (warning.Length != 0){
                     VisualStateManager.GoToState(TextBoxDirectory,"Invalid",true);
                     LastWarningDirectory = EditLocation.Directory;
-                    System.Windows.MessageBox.Show(App.Window,Sys.Settings.Default.Language[warning],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
+                    MessageBox.Show(App.Window,Sys.Settings.Default.Language[warning],Sys.Settings.Default.Language["BackupEdit.SaveWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Warning);
                     return;
                 }
             }
@@ -70,6 +70,25 @@ namespace BackupEssentials.Pages{
 
         private void ClickCancel(object sender, RoutedEventArgs e){
             MainWindow.Instance.ShowPage(typeof(Backup));
+        }
+
+        object IPageDragDrop.DragEnter(DragEventArgs e){
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)){
+                string[] data = e.Data.GetData(DataFormats.FileDrop) as string[];
+                TempDragDirectory = TextBoxDirectory.Text;
+                TextBoxDirectory.Text = data[0];
+                return data;
+            }
+            else return null;
+        }
+
+        void IPageDragDrop.DragExit(DragEventArgs e){
+            TextBoxDirectory.Text = TempDragDirectory;
+        }
+
+        void IPageDragDrop.DragDrop(DragEventArgs e, object data){
+            TempDragDirectory = null;
+            TextBoxDirectory.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }
 }
