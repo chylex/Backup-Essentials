@@ -31,9 +31,6 @@ namespace BackupEssentials.Backup.History{
                 args.Result = null;
                 Tuple<BackupRunInfo,BackupReport> data = (Tuple<BackupRunInfo,BackupReport>)args.Argument;
 
-                DataStorage.Load(DataStorage.Type.History);
-                DataStorage.SetupForSaving(false);
-
                 HistoryEntry entry = new HistoryEntry(){
                     LocationName = data.Item1.Name,
                     BackupTime = DateTime.Now,
@@ -41,10 +38,6 @@ namespace BackupEssentials.Backup.History{
                     EntriesUpdated = data.Item2.TryFindValue(BackupReport.Constants.EntriesUpdated,0),
                     EntriesDeleted = data.Item2.TryFindValue(BackupReport.Constants.EntriesDeleted,0)
                 };
-
-                DataStorage.HistoryEntryList.Insert(0,entry);
-
-                HistoryUtils.TryRemoveOldEntries();
 
                 if (!Directory.Exists(HistoryEntry.Directory))Directory.CreateDirectory(HistoryEntry.Directory);
 
@@ -59,8 +52,16 @@ namespace BackupEssentials.Backup.History{
                 }
 
                 while(true){
-                    if (worker.CancellationPending || DataStorage.Save(true).Contains(DataStorage.Type.History))break; // TODO fix
-                    else Thread.Sleep(475);
+                    if (worker.CancellationPending)break;
+
+                    DataStorage.Load(DataStorage.Type.History);
+                    DataStorage.SetupForSaving(false);
+                    DataStorage.HistoryEntryList.Insert(0,entry);
+                    HistoryUtils.TryRemoveOldEntries();
+
+                    if (DataStorage.Save(true).Contains(DataStorage.Type.History))break;
+                    
+                    Thread.Sleep(475);
                 }
 
                 args.Result = "";
