@@ -136,6 +136,8 @@ namespace BackupEssentials{
                 using(StreamWriter writer = new StreamWriter(fileStream)){
                     writer.Write("[");
                     writer.Write(Sys.Settings.Default.DateFormat.ParseDate(DateTime.Now));
+                    writer.Write("][");
+                    writer.Write(Process.GetCurrentProcess().Id);
                     writer.Write("] ");
                     writer.WriteLine(data);
                 }
