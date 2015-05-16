@@ -63,6 +63,7 @@ namespace BackupEssentials.Backup.Data{
         public static void Load(params Type[] types){
             if (ShouldLoad(types,Type.Locations)){
                 LoadedData[Type.Locations] = true;
+                BackupLocationList.Clear();
 
                 FileUtils.ReadFile("DS.Locations.dat",FileMode.Open,(line) => {
                     if (line.Length == 0)return;
@@ -74,6 +75,7 @@ namespace BackupEssentials.Backup.Data{
 
             if (ShouldLoad(types,Type.History)){
                 LoadedData[Type.History] = true;
+                HistoryEntryList.Clear();
 
                 FileUtils.ReadFile("DS.History.dat",FileMode.Open,(line) => {
                     if (line.Length == 0)return;

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace BackupEssentials.Backup.History{
     class HistoryGenerator{
@@ -51,15 +52,25 @@ namespace BackupEssentials.Backup.History{
                     else ++sub;
                 }
 
+                FileLock flock = new FileLock("DS.History.Lock");
+
                 while(true){
                     if (worker.CancellationPending)break;
+
+                    if (!flock.IsLocked && !flock.TryLock()){
+                        Thread.Sleep(50);
+                        continue;
+                    }
 
                     DataStorage.Load(DataStorage.Type.History);
                     DataStorage.SetupForSaving(false);
                     DataStorage.HistoryEntryList.Insert(0,entry);
-                    HistoryUtils.TryRemoveOldEntries();
+                    List<HistoryEntry> oldEntries = HistoryUtils.RemoveOldEntriesFromList();
 
-                    if (DataStorage.Save(true).Contains(DataStorage.Type.History))break;
+                    if (DataStorage.Save(true).Contains(DataStorage.Type.History) && flock.ReleaseLock()){
+                        HistoryUtils.RemoveEntryFiles(oldEntries);
+                        break;
+                    }
                     
                     Thread.Sleep(475);
                 }

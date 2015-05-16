@@ -29,7 +29,7 @@ namespace BackupEssentials.Utils{
 
         public static bool WriteFile(string filename, FileMode mode, Action<StreamWriter> writeAction){
             try{
-                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write,FileShare.Read)){
                     using(StreamWriter writer = new StreamWriter(fileStream)){
                         writeAction.Invoke(writer);
                     }
@@ -65,7 +65,7 @@ namespace BackupEssentials.Utils{
 
         public static bool WriteFileCompressed(string filename, FileMode mode, string data){
             try{
-                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write)){
+                using(FileStream fileStream = new FileStream(filename,mode,FileAccess.Write,FileShare.Read)){
                     using(GZipStream compressed = new GZipStream(fileStream,CompressionMode.Compress)){
                         byte[] bytes = Encoding.UTF8.GetBytes(data);
                         compressed.Write(bytes,0,bytes.Length);

@@ -94,7 +94,8 @@ namespace BackupEssentials.Pages{
             }
 
             if (PropertiesChanged["HistoryEntriesKept"]){
-                HistoryUtils.TryRemoveOldEntries();
+                HistoryUtils.RemoveEntryFiles(HistoryUtils.RemoveOldEntriesFromList());
+                DataStorage.Save(true);
             }
 
             foreach(string key in new List<string>(PropertiesChanged.Keys))PropertiesChanged[key] = false;

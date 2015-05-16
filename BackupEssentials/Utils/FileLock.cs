@@ -6,7 +6,7 @@ namespace BackupEssentials.Utils{
         private static readonly int processID = Process.GetCurrentProcess().Id;
 
         private readonly string FileName;
-        private bool IsLocked;
+        public bool IsLocked { get; private set; }
 
         public FileLock(string lockFileName){
             this.FileName = lockFileName;
