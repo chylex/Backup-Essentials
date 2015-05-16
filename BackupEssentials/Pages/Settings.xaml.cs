@@ -1,10 +1,12 @@
 ﻿using BackupEssentials.Backup.Data;
 using BackupEssentials.Backup.History;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace BackupEssentials.Pages{
     public partial class Settings : Page, IPageShowData, IPageSwitchHandler{
@@ -105,7 +107,15 @@ namespace BackupEssentials.Pages{
             int kept = AppSettings.HistoryEntriesKept.Value, existing = DataStorage.HistoryEntryList.Count;
 
             if (kept != -1 && kept < existing){
-                MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString(CultureInfo.CurrentCulture)]+AppSettings.Language["Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString(CultureInfo.CurrentCulture)],AppSettings.Language["Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = new TimeSpan(0,0,0,0,10);
+
+                timer.Tick += (sender2, args2) => {
+                    MessageBox.Show(App.Window,AppSettings.Language["Settings.Message.HistoryWarning.PartOne.",existing,existing.ToString(CultureInfo.CurrentCulture)]+AppSettings.Language["Settings.Message.HistoryWarning.PartTwo.",existing-kept,(existing-kept).ToString(CultureInfo.CurrentCulture)],AppSettings.Language["Settings.Message.HistoryWarning.Title"],MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                    timer.Stop();
+                };
+
+                timer.Start();
             }
         }
     }
