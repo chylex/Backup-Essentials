@@ -123,7 +123,7 @@ namespace BackupEssentials{
         }
 
         public static void LogException(Exception e){
-            using(FileStream fileStream = new FileStream("exceptions.log",FileMode.Append)){
+            using(FileStream fileStream = new FileStream("exceptions.log",FileMode.Append,FileAccess.Write,FileShare.ReadWrite)){
                 using(StreamWriter writer = new StreamWriter(fileStream)){
                     writer.WriteLine(e.ToString());
                     writer.WriteLine();
@@ -132,7 +132,7 @@ namespace BackupEssentials{
         }
 
         public static void LogInfo(string data){
-            using(FileStream fileStream = new FileStream("run.log",FileMode.Append)){
+            using(FileStream fileStream = new FileStream("run.log",FileMode.Append,FileAccess.Write,FileShare.ReadWrite)){
                 using(StreamWriter writer = new StreamWriter(fileStream)){
                     writer.Write("[");
                     writer.Write(Sys.Settings.Default.DateFormat.ParseDate(DateTime.Now));
