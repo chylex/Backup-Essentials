@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:system="clr-namespace:BackupEssentials.Sys"
       xmlns:backup="clr-namespace:BackupEssentials.Backup"
@@ -50,11 +51,31 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
 
-                                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Left" PreviewMouseLeftButtonDown="ListStartDragging">
+                                    <Grid Width="740" Height="{StaticResource LocationListItemHeight}" Background="#00000000" SnapsToDevicePixels="True" HorizontalAlignment="Left" PreviewMouseLeftButtonDown="ListItemClick">
                                         <TextBlock Foreground="#FFDDDDDD" Text="{Binding Name}" VerticalAlignment="Top" FontSize="20"/>
-                                        <TextBlock Foreground="#FFCCCCCC" Text="{Binding Directory}" VerticalAlignment="Bottom" FontSize="16"/>
+                                        <DockPanel>
+                                            <TextBlock Name="Directory" Foreground="#FFCCCCCC" Text="{Binding Directory}" Margin="0,0,4,0" VerticalAlignment="Bottom" FontSize="16"/>
+                                            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="22" Height="19" SnapsToDevicePixels="True" Visibility="{Binding LayoutDirectoryCautionVisibility}" ToolTip="{Binding LayoutDirectoryCautionTooltip}">
+                                                <ed:RegularPolygon InnerRadius="1" PointCount="3" StrokeMiterLimit="1" StrokeLineJoin="Round" Fill="#FFD6D6D6" Stroke="#FF1D1D1D" StrokeThickness="2"/>
+                                                <Rectangle Height="6" StrokeThickness="0" VerticalAlignment="Top" Width="2" HorizontalAlignment="Center" RadiusY="0.5" RadiusX="0.5" Margin="0,7,0,0">
+                                                    <Rectangle.Fill>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="#FF6A0000" Offset="1"/>
+                                                            <GradientStop Color="#FF9B0000"/>
+                                                        </LinearGradientBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <Rectangle Fill="#FF680000" Height="2" StrokeThickness="0" VerticalAlignment="Bottom" Width="2" HorizontalAlignment="Center" Margin="0,0,0,3" RadiusX="0.5" RadiusY="0.5"/>
+                                            </Grid>
+                                        </DockPanel>
                                     </Grid>
                                 </Border>
+                                
+                                <ControlTemplate.Triggers>
+                                    <Trigger SourceName="Directory" Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter TargetName="Directory" Property="Margin" Value="0"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

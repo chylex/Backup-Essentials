@@ -23,7 +23,7 @@ General.UI.MenuButton.About = O programu
 #===============#
 # PAGE - BACKUP #
 #===============#
-Backup.Hint = Tip: Pro přesunutí lokace na ni klikněte a táhněte nahoru nebo dolů.
+Backup.Hint = Tip: Pro přesunutí lokace na ni klikněte a táhněte nahoru nebo dolů, pro editaci na ni klikněte dvakrát.
 
 Backup.Button.Add = Přidat lokaci
 Backup.Button.Edit = Editovat
@@ -38,6 +38,11 @@ Backup.Deletion.Confirmation.* = Opravdu chcete smazat $0 lokací? Tuto akci nel
 
 Backup.Location.UnknownName = (neznámý název)
 Backup.Location.UnknownDirectory = (neznámá složka)
+
+Backup.Location.Caution.Empty = Chyba: Lokaci není přiřazena žádná cílová složka.
+Backup.Location.Caution.Invalid = Chyba: Cílová složka není validní cesta systému Windows.
+Backup.Location.Caution.NotAbsolute = Chyba: Cílová složka není absolutní.
+Backup.Location.Caution.NotExists = Upozornění: Cílová složka neexistuje, bude vytvořena při spuštění první zálohy.
 
 BackupEdit.Hint = Hint: Cílovou složku lze vybrat i přetažením složky z průzkumníka Windows na toto okno.
 

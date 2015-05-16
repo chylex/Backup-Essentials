@@ -23,7 +23,7 @@ General.UI.MenuButton.About = About
 #===============#
 # PAGE - BACKUP #
 #===============#
-Backup.Hint = Hint: Click and drag a Location up or down to move it.
+Backup.Hint = Hint: Click and drag a Location up or down to move it, double-click to edit.
 
 Backup.Button.Add = Add Location
 Backup.Button.Edit = Edit
@@ -35,6 +35,11 @@ Backup.Deletion.Confirmation.* = Are you sure you want to delete $0 Locations? T
 
 Backup.Location.UnknownName = (unknown)
 Backup.Location.UnknownDirectory = (unknown)
+
+Backup.Location.Caution.Empty = Error: No directory assigned to the Location.
+Backup.Location.Caution.Invalid = Error: Directory is not a valid Windows path.
+Backup.Location.Caution.NotAbsolute = Error: Directory is not an absolute path.
+Backup.Location.Caution.NotExists = Caution: Directory does not exist, it will be created when a first backup is made.
 
 BackupEdit.Hint = Hint: Drag and Drop a folder on the window to select it.
 

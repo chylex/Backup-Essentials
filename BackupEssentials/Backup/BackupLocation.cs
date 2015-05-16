@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace BackupEssentials.Backup{
     public class BackupLocation : StringDictionarySerializer.IObjectToDictionary{
@@ -16,7 +17,21 @@ namespace BackupEssentials.Backup{
             set { _name = NameValidation.Replace(value,""); }
         }
 
-        public string Directory { get; set; } // TODO mark non-existent directories with red font in Backup screen
+        public string Directory { get; set; }
+
+        public Visibility LayoutDirectoryCautionVisibility { get { return GetDirectoryStatus() == DirectoryStatus.Ok ? Visibility.Collapsed : Visibility.Visible; } }
+
+        public string LayoutDirectoryCautionTooltip {
+            get {
+                switch(GetDirectoryStatus()){
+                    case DirectoryStatus.Empty: return Settings.Default.Language["Backup.Location.Caution.Empty"];
+                    case DirectoryStatus.Invalid: return Settings.Default.Language["Backup.Location.Caution.Invalid"];
+                    case DirectoryStatus.NotAbsolute: return Settings.Default.Language["Backup.Location.Caution.NotAbsolute"];
+                    case DirectoryStatus.NotExists: return Settings.Default.Language["Backup.Location.Caution.NotExists"];
+                    default: return null;
+                }
+            }
+        }
 
         public BackupLocation(){
             Name = "";

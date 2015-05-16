@@ -26,10 +26,12 @@ namespace BackupEssentials.Pages{
             LocationsListView.Items.Refresh();
 
             int count = DataStorage.BackupLocationList.Count;
-            if (count > 0 && DataStorage.BackupLocationList[count-1].Name.Length == 0)DataStorage.BackupLocationList.RemoveAt(count-1);
+            while(count > 0 && DataStorage.BackupLocationList[count-1].Name.Length == 0)DataStorage.BackupLocationList.RemoveAt(count-1);
         }
 
-        private void ListStartDragging(object sender, MouseButtonEventArgs e){
+        private void ListItemClick(object sender, MouseButtonEventArgs e){
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2 && ButtonLocationEdit.IsEnabled)LocationEdit(sender,null); // safe to use null in this case
+
             if ((Keyboard.Modifiers & ~ModifierKeys.Control & ~ModifierKeys.Shift) != Keyboard.Modifiers)return;
 
             DispatcherTimer timer = new DispatcherTimer();
