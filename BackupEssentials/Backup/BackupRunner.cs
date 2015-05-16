@@ -154,7 +154,7 @@ namespace BackupEssentials.Backup{
                 actions.Add(new IOActionEntry(){ Type = IOType.File, Action = IOAction.Replace, RelativePath = intersecting });
             }
 
-            actions.Sort((entry1, entry2) => {
+            actions.Sort((entry1, entry2) => { // TODO store dirs and files separately, idiot
                 if (entry1.Type == IOType.Directory && entry2.Type == IOType.File)return -1;
                 else if (entry2.Type == IOType.Directory && entry1.Type == IOType.File)return 1;
                 else return 0;

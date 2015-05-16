@@ -16,7 +16,7 @@ namespace BackupEssentials.Backup{
             set { _name = NameValidation.Replace(value,""); }
         }
 
-        public string Directory { get; set; }
+        public string Directory { get; set; } // TODO mark non-existent directories with red font in Backup screen
 
         public BackupLocation(){
             Name = "";
