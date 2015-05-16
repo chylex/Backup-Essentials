@@ -130,5 +130,16 @@ namespace BackupEssentials{
                 }
             }
         }
+
+        public static void LogInfo(string data){
+            using(FileStream fileStream = new FileStream("run.log",FileMode.Append)){
+                using(StreamWriter writer = new StreamWriter(fileStream)){
+                    writer.Write("[");
+                    writer.Write(Sys.Settings.Default.DateFormat.ParseDate(DateTime.Now));
+                    writer.Write("] ");
+                    writer.WriteLine(data);
+                }
+            }
+        }
     }
 }
