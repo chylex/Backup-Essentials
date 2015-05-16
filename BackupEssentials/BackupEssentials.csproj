@@ -140,6 +140,7 @@
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sys\UI\DateFormat.cs" />
+    <Compile Include="Utils\FileLock.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\KeyEqualityComparer.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
