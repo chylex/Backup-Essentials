@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace BackupEssentials.Utils{
+namespace BackupEssentials.Utils.Collections{
     class ObservableDictionary<TKey,TValue> : Dictionary<TKey,TValue>, INotifyPropertyChanged{
         public event PropertyChangedEventHandler PropertyChanged;
         public bool PauseObservation = false;

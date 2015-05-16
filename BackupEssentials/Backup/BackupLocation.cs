@@ -1,7 +1,6 @@
 ﻿using BackupEssentials.Sys;
-using BackupEssentials.Utils;
+using BackupEssentials.Utils.Collections;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;

@@ -1,13 +1,11 @@
 ﻿using BackupEssentials.Backup.Data;
-using BackupEssentials.Sys;
-using BackupEssentials.Utils;
+using BackupEssentials.Utils.IO;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using System.Collections.Generic;
 
 namespace BackupEssentials.Backup.History{
     class HistoryGenerator{

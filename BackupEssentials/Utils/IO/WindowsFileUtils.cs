@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BackupEssentials.Utils{
+namespace BackupEssentials.Utils.IO{
     static class WindowsFileUtils{
         private static readonly string InvalidChars = @"<>:/\|?*"+'"';
 

@@ -140,17 +140,17 @@
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sys\UI\DateFormat.cs" />
-    <Compile Include="Utils\FileLock.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
-    <Compile Include="Utils\KeyEqualityComparer.cs" />
+    <Compile Include="Utils\IO\FileLock.cs" />
+    <Compile Include="Utils\IO\FileUtils.cs" />
+    <Compile Include="Utils\Collections\KeyEqualityComparer.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\NumberSerialization.cs" />
-    <Compile Include="Utils\ObservableDictionary.cs" />
-    <Compile Include="Utils\SafeDictionary.cs" />
-    <Compile Include="Utils\StringDictionarySerializer.cs" />
+    <Compile Include="Utils\Collections\ObservableDictionary.cs" />
+    <Compile Include="Utils\Collections\SafeDictionary.cs" />
+    <Compile Include="Utils\Collections\StringDictionarySerializer.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
-    <Compile Include="Utils\WindowsFileUtils.cs" />
+    <Compile Include="Utils\IO\WindowsFileUtils.cs" />
     <Compile Include="Utils\WindowsVersion.cs" />
     <Compile Include="Utils\WpfExtensions.cs" />
     <Page Include="BackupReportWindow.xaml">

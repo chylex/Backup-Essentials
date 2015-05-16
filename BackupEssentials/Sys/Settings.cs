@@ -1,6 +1,8 @@
 ﻿using BackupEssentials.Data;
 using BackupEssentials.Sys.UI;
 using BackupEssentials.Utils;
+using BackupEssentials.Utils.Collections;
+using BackupEssentials.Utils.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;

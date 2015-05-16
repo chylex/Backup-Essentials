@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace BackupEssentials.Utils{
+namespace BackupEssentials.Utils.IO{
     static class FileUtils{
         public static bool ReadFile(string filename, FileMode mode, Action<string> lineAction){
             if (!File.Exists(filename))return false;

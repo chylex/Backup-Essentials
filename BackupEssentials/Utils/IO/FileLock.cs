@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace BackupEssentials.Utils{
+namespace BackupEssentials.Utils.IO{
     class FileLock{
         private static readonly int processID = Process.GetCurrentProcess().Id;
 

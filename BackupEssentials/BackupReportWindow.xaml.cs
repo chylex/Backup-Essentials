@@ -1,12 +1,10 @@
 ﻿using BackupEssentials.Backup;
 using BackupEssentials.Backup.History;
 using BackupEssentials.Sys;
-using BackupEssentials.Utils;
+using BackupEssentials.Utils.IO;
 using System;
-using System.ComponentModel;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
