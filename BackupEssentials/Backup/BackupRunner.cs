@@ -139,21 +139,29 @@ namespace BackupEssentials.Backup{
             // Generate the IO actions
             Profiler.Start("Runner - action gen");
 
-            List<IOActionEntry> actions = new List<IOActionEntry>();
+            List<IOActionEntry> actions = new List<IOActionEntry>(srcEntries.Count);
             KeyEqualityComparer<string,IOEntry> keyComparer = new KeyEqualityComparer<string,IOEntry>();
             
             IEnumerable<KeyValuePair<string,IOEntry>> ioDeleted = dstEntries.Except(srcEntries,keyComparer);
             IEnumerable<KeyValuePair<string,IOEntry>> ioAdded = srcEntries.Except(dstEntries,keyComparer);
             IEnumerable<string> ioIntersecting = srcEntries.Keys.Intersect(dstEntries.Keys);
             
+            Profiler.Start("Runner - action gen - deleted");
+
             foreach(KeyValuePair<string,IOEntry> deleted in ioDeleted){
                 if (!ignoreRoot && deleted.Key.IndexOf(Path.DirectorySeparatorChar) == -1)continue; // ignore everything in root folder
                 actions.Add(new IOActionEntry(){ Type = deleted.Value.Type, Action = IOAction.Delete, RelativePath = deleted.Key });
             }
+            
+            Profiler.End("Runner - action gen - deleted");
+            Profiler.Start("Runner - action gen - added");
 
             foreach(KeyValuePair<string,IOEntry> added in ioAdded){
                 actions.Add(new IOActionEntry(){ Type = added.Value.Type, Action = IOAction.Create, RelativePath = added.Key });
             }
+
+            Profiler.End("Runner - action gen - added");
+            Profiler.Start("Runner - action gen - intersecting");
 
             foreach(string intersecting in ioIntersecting){
                 IOEntry srcEntry = srcEntries[intersecting];
@@ -165,11 +173,12 @@ namespace BackupEssentials.Backup{
                 if (srcFileInfo.Length == dstFileInfo.Length && srcFileInfo.LastWriteTime == dstFileInfo.LastWriteTime)continue;
                 actions.Add(new IOActionEntry(){ Type = IOType.File, Action = IOAction.Replace, RelativePath = intersecting });
             }
-
+            
+            Profiler.End("Runner - action gen - intersecting");
             Profiler.End("Runner - action gen");
             Profiler.Start("Runner - action sort");
 
-            actions.Sort((entry1, entry2) => { // TODO store dirs and files separately, idiot
+            actions.Sort((entry1, entry2) => {
                 if (entry1.Type == IOType.Directory && entry2.Type == IOType.File)return -1;
                 else if (entry2.Type == IOType.Directory && entry1.Type == IOType.File)return 1;
                 else return 0;
@@ -297,7 +306,7 @@ namespace BackupEssentials.Backup{
             }
         }
 
-        private class IOEntry{
+        private struct IOEntry{
             public IOType Type;
             public string AbsolutePath;
 
@@ -306,7 +315,7 @@ namespace BackupEssentials.Backup{
             }
         }
 
-        private class IOActionEntry{
+        private struct IOActionEntry{
             private string _relativePath;
 
             public IOType Type;
