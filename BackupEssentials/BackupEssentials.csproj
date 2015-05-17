@@ -148,6 +148,7 @@
     <Compile Include="Utils\Collections\ObservableDictionary.cs" />
     <Compile Include="Utils\Collections\SafeDictionary.cs" />
     <Compile Include="Utils\Collections\StringDictionarySerializer.cs" />
+    <Compile Include="Utils\Profiler.cs" />
     <Compile Include="Utils\ProgramArgsParser.cs" />
     <Compile Include="Utils\ScheduledUpdate.cs" />
     <Compile Include="Utils\IO\WindowsFileUtils.cs" />
