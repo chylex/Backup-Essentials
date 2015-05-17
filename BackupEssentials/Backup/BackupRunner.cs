@@ -125,7 +125,10 @@ namespace BackupEssentials.Backup{
                 string entryName = entry.Remove(0,destFolderLen);
 
                 if (ignoreRoot || rootSrcEntries.Remove(entryName)){
-                    if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory)){
+                    FileAttributes attributes = File.GetAttributes(entry);
+                    if (attributes.HasFlag(FileAttributes.System))continue;
+
+                    if (attributes.HasFlag(FileAttributes.Directory)){
                         dstEntries.Add(entryName,new IOEntry(){ Type = IOType.Directory, AbsolutePath = entry });
                         foreach(string dir in GetNonSystemDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                         foreach(string file in Directory.GetFiles(entry,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
