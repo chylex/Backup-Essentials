@@ -58,7 +58,7 @@ namespace BackupEssentials.Backup{
                     srcParent = src[0];
 
                     List<string> newSrc = new List<string>();
-                    foreach(string dir in GetVisibleDirectories(src[0],"*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],dir));
+                    foreach(string dir in GetNonSystemDirectories(src[0],"*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],dir));
                     foreach(string file in Directory.GetFiles(src[0],"*.*",SearchOption.TopDirectoryOnly))newSrc.Add(Path.Combine(src[0],file));
                     src = newSrc.ToArray();
 
@@ -86,14 +86,17 @@ namespace BackupEssentials.Backup{
             for(int a = 0; a < src.Length; a++){
                 string srcEntry = src[a];
 
-                if (File.GetAttributes(srcEntry).HasFlag(FileAttributes.Directory)){
+                FileAttributes attributes = File.GetAttributes(srcEntry);
+                if (attributes.HasFlag(FileAttributes.System))continue;
+
+                if (attributes.HasFlag(FileAttributes.Directory)){
                     int srcLen = srcParent.Length+1;
                     string dname = srcEntry.Remove(0,srcLen);
 
                     rootSrcEntries.Add(dname);
                     srcEntries.Add(dname,new IOEntry(){ Type = IOType.Directory, AbsolutePath = srcEntry });
 
-                    foreach(string dir in GetVisibleDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                    foreach(string dir in GetNonSystemDirectories(srcEntry,"*",SearchOption.AllDirectories))srcEntries.Add(dir.Remove(0,srcLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                     foreach(string file in Directory.GetFiles(srcEntry,"*.*",SearchOption.AllDirectories))srcEntries.Add(file.Remove(0,srcLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
                 }
                 else{
@@ -119,7 +122,7 @@ namespace BackupEssentials.Backup{
                 if (ignoreRoot || rootSrcEntries.Remove(entryName)){
                     if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory)){
                         dstEntries.Add(entryName,new IOEntry(){ Type = IOType.Directory, AbsolutePath = entry });
-                        foreach(string dir in GetVisibleDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
+                        foreach(string dir in GetNonSystemDirectories(entry,"*",SearchOption.AllDirectories))dstEntries.Add(dir.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.Directory, AbsolutePath = dir });
                         foreach(string file in Directory.GetFiles(entry,"*.*",SearchOption.AllDirectories))dstEntries.Add(file.Remove(0,destFolderLen),new IOEntry(){ Type = IOType.File, AbsolutePath = file });
                     }
                     else dstEntries.Add(entryName,new IOEntry(){ Type = IOType.File, AbsolutePath = entry });
@@ -234,6 +237,8 @@ namespace BackupEssentials.Backup{
                         else if (entry.Action == IOAction.Replace){
                             if (DEBUG)reportBuilder.Add("[D] Replacing file: "+Path.Combine(srcParent,entry.RelativePath)+" --> "+Path.Combine(destFolder,entry.RelativePath));
                             else File.Copy(Path.Combine(srcParent,entry.RelativePath),Path.Combine(destFolder,entry.RelativePath),true);
+                            App.LogInfo("[D] Replacing file: "+Path.Combine(srcParent,entry.RelativePath)+" --> "+Path.Combine(destFolder,entry.RelativePath));
+                            File.Copy(Path.Combine(srcParent,entry.RelativePath),Path.Combine(destFolder,entry.RelativePath),true);
                         }
                         
                         indexesToRemove.Add(index-indexesToRemove.Count); // goes from 0 to actions.Count, removing each index will move the structure
@@ -242,6 +247,7 @@ namespace BackupEssentials.Backup{
                         worker.ReportProgress((int)Math.Ceiling(((totalActions-actions.Count+indexesToRemove.Count)*100D)/totalActions));
                         if (worker.CancellationPending)break;
                     }catch(Exception exception){ // if an action failed, it will not be removed
+                        App.LogException(exception);
                         Debug.WriteLine("Failed: "+entry.ToString());
                         Debug.WriteLine(exception.Message);
                         // TODO handle special exceptions (security etc)
@@ -266,11 +272,14 @@ namespace BackupEssentials.Backup{
 
             reportBuilder.Add("Report.Title.BackupFinished");
             e.Result = reportBuilder.Finish();
+            
+            Profiler.End("Runner - work");
+            Profiler.End("Runner");
         }
 
-        private static IEnumerable<string> GetVisibleDirectories(string path, string searchPattern, SearchOption searchOption){
+        private static IEnumerable<string> GetNonSystemDirectories(string path, string searchPattern, SearchOption searchOption){
             foreach(string dir in Directory.EnumerateDirectories(path,searchPattern,searchOption)){
-                if (!File.GetAttributes(dir).HasFlag(FileAttributes.Hidden))yield return dir;
+                if (!File.GetAttributes(dir).HasFlag(FileAttributes.System))yield return dir;
             }
         }
 
